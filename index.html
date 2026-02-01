@@ -37,6 +37,14 @@
   <!-- Google AdSense Placeholder (Replace with your CA-PUB ID) -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
     crossorigin="anonymous"></script>
+  <script>
+    window.addEventListener('error', function (e) {
+      const root = document.getElementById('root');
+      const err = e.error || e.message;
+      root.innerHTML += '<div style="position:fixed;top:0;left:0;z-index:9999;background:white;color:red;padding:20px;width:100%;border-bottom:2px solid red;"><h1>Global Error:</h1><pre>' + err + '</pre></div>';
+      console.error('Global error:', e);
+    });
+  </script>
 </head>
 
 <body>

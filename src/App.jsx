@@ -1621,15 +1621,25 @@ const DailyHealthTools = () => {
   const [currentPage, setCurrentPage] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
-  const [lang, setLang] = useState(localStorage.getItem('lang') || 'en');
 
-  const t = translations[lang];
+  // Safe Language Initialization
+  const getInitialLang = () => {
+    const saved = localStorage.getItem('lang');
+    if (saved && translations[saved]) return saved;
+    return 'en';
+  };
+
+  const [lang, setLang] = useState(getInitialLang());
+
+  const t = translations[lang] || translations['en']; // Fallback safety
 
   useEffect(() => {
     localStorage.setItem('lang', lang);
-    document.documentElement.dir = t.dir;
+    if (t?.dir) {
+      document.documentElement.dir = t.dir;
+    }
     document.documentElement.lang = lang;
-  }, [lang, t.dir]);
+  }, [lang, t]);
 
   useEffect(() => {
     document.documentElement.classList.add('dark');

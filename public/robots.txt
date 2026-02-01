@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://daily-health-tools.com/sitemap.xml

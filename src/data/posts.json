@@ -1,0 +1,57 @@
+{
+    "en": [
+        {
+            "id": "benefits-of-hydration-1769979000000",
+            "title": "The Science of Hydration: Why Water is Your Ultimate Performance Enhancer",
+            "date": "2026-02-01",
+            "category": "Nutrition",
+            "excerpt": "Discover how proper hydration impacts your energy, brain function, and overall health with these science-backed insights.",
+            "content": "## Introduction\n\nHydration is more than just drinking water when you're thirsty. It's a fundamental biological requirement that affects every cell in your body. From maintaining body temperature to lubricating joints, water is the silent hero of human physiology.\n\n## The Role of Water in Body Systems\n\n1. **Brain Function**: Even mild dehydration (1-3% of body weight) can impair many aspects of brain function.\n2. **Physical Performance**: Staying hydrated is crucial for maintaining stamina and power during exercise.\n3. **Digestive Health**: Proper water intake prevents constipation and helps flush out toxins.\n\n## Frequently Asked Questions (FAQ)\n\n**How much water should I drink daily?**\nWhile the '8 glasses a day' rule is common, individual needs vary based on weight, activity level, and climate. Use our Water Intake Calculator for a personalized recommendation.\n\n**Can I drink too much water?**\nYes, hyponatremia is a rare but serious condition where blood sodium levels drop too low due to excessive water intake.\n\n## Sources & References\n\n- Harvard Health Publishing - The importance of staying hydrated (https://www.health.harvard.edu/staying-healthy/the-importance-of-staying-hydrated)\n- Mayo Clinic - Water: How much should you drink every day? (https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/water/art-20044256)",
+            "keywords": [
+                "hydration",
+                "health",
+                "water intake",
+                "performance"
+            ],
+            "faq": [
+                {
+                    "question": "Does coffee count towards hydration?",
+                    "answer": "Yes, while caffeine has a mild diuretic effect, researchers have found that caffeinated drinks still contribute to your daily fluid intake."
+                },
+                {
+                    "question": "What are the first signs of dehydration?",
+                    "answer": "Dark yellow urine, thirst, dizziness, and fatigue are common early indicators."
+                }
+            ]
+        }
+    ],
+    "ar": [
+        {
+            "id": "benefits-of-hydration-ar-1",
+            "title": "علم الترطيب: لماذا الماء هو المعزز النهائي لأدائك",
+            "date": "2026-02-01",
+            "category": "التغذية",
+            "excerpt": "اكتشف كيف يؤثر الترطيب السليم على طاقتك ووظائف دماغك وصحتك العامة من خلال هذه الرؤى المستندة إلى العلم.",
+            "content": "## مقدمة\n\nالترطيب هو أكثر من مجرد شرب الماء عندما تشعر بالعطش. إنه مطلب بيولوجي أساسي يؤثر على كل خلية في جسمك. من الحفاظ على درجة حرارة الجسم إلى تزييت المفاصل ، يعد الماء البطل الصامت لفيزيولوجيا الإنسان.\n\n## دور الماء في أنظمة الجسم\n\n1. **وظيفة الدماغ**: حتى الجفاف الخفيف (1-3٪ من وزن الجسم) يمكن أن يضعف العديد من جوانب وظائف الدماغ.\n2. **الأداء البدني**: يعد البقاء رطباً أمراً بالغ الأهمية للحفاظ على القدرة على التحمل والقوة أثناء التمرين.\n3. **الصحة الهضمية**: تناول الماء الكافي يمنع الإمساك ويساعد على طرد السموم.\n\n## الأسئلة الشائعة (FAQ)\n\n**ما هي كمية الماء التي يجب أن أشربها يومياً؟**\nبينما تعد قاعدة '8 أكواب في اليوم' شائعة ، إلا أن الاحتياجات الفردية تختلف بناءً على الوزن ومستوى النشاط والمناخ. استخدم حاسبة شرب الماء لدينا للحصول على توصية مخصصة.\n\n**هل يمكنني شرب الكثير من الماء؟**\nنعم ، نقص صوديوم الدم هو حالة نادرة ولكنها خطيرة حيث تنخفض مستويات الصوديوم في الدم بشكل منخفض جداً بسبب الإفراط في تناول الماء.\n\n## المصادر والمراجع\n\n- منشورات هارفارد الصحية - أهمية البقاء رطباً (https://www.health.harvard.edu/staying-healthy/the-importance-of-staying-hydrated)\n- مايو كلينك - الماء: ما هي الكمية التي يجب أن تشربها كل يوم؟ (https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/water/art-20044256)",
+            "keywords": [
+                "الترطيب",
+                "الصحة",
+                "شرب الماء",
+                "الأداء"
+            ],
+            "faq": [
+                {
+                    "question": "هل القهوة تحتسب ضمن الترطيب؟",
+                    "answer": "نعم ، بينما يمتلك الكافيين تأثيراً مدراً للبول خفيفاً ، وجد الباحثون أن المشروبات التي تحتوي على الكافيين لا تزال تساهم في تناول السوائل اليومي."
+                },
+                {
+                    "question": "ما هي أولى علامات الجفاف؟",
+                    "answer": "البول الأصفر الداكن والعطش والدوخة والتعب هي مؤشرات مبكرة شائعة."
+                }
+            ]
+        }
+    ],
+    "fr": [],
+    "de": [],
+    "es": []
+}

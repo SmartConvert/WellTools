@@ -210,7 +210,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, t }) => (
             }}
             className="px-8 py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
           >
-            {t.get_started}
+            {t.explore_tools}
           </button>
           <button
             onClick={() => setCurrentPage('blog')}

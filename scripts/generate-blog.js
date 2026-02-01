@@ -15,7 +15,7 @@ if (!API_KEY) {
 }
 
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 const categories = ["Nutrition", "Fitness", "Mental Health", "Sleep", "Longevity", "Biohacking"];
 

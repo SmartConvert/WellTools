@@ -15,7 +15,30 @@ if (!API_KEY) {
 }
 
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+// List of models to try in order of preference
+const MODELS_TO_TRY = [
+    "gemini-1.5-flash",
+    "gemini-1.5-flash-latest",
+    "gemini-1.5-pro",
+    "gemini-1.5-pro-latest",
+    "gemini-1.0-pro",
+    "gemini-pro"
+];
+
+async function getWorkingModel(genAI) {
+    for (const modelName of MODELS_TO_TRY) {
+        try {
+            const model = genAI.getGenerativeModel({ model: modelName });
+            // Test the model with a minimal prompt to see if it exists/is accessible
+            await model.generateContent("Test");
+            console.log(`Selected working model: ${modelName}`);
+            return model;
+        } catch (error) {
+            console.warn(`Model ${modelName} failed or not found. Trying next...`);
+        }
+    }
+    throw new Error("No suitable Gemini model found or API Key is invalid.");
+}
 
 const categories = ["Nutrition", "Fitness", "Mental Health", "Sleep", "Longevity", "Biohacking"];
 
@@ -69,6 +92,7 @@ async function generatePost() {
   `;
 
     try {
+        const model = await getWorkingModel(genAI);
         const result = await model.generateContent(prompt);
         const response = await result.response;
         let text = response.text();

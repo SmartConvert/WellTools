@@ -328,12 +328,16 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
               className="group cursor-pointer relative bg-white dark:bg-gray-800 rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700 mx-auto max-w-7xl"
             >
               <div className="flex flex-col lg:flex-row">
-                <div className="lg:w-1/2 h-64 lg:h-[400px] relative overflow-hidden">
-                  <img
-                    src={latestPost.image}
-                    alt={latestPost.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
+                <div className="lg:w-1/2 h-64 lg:h-[400px] relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                  {latestPost.image ? (
+                    <img
+                      src={latestPost.image}
+                      alt={latestPost.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 animate-fade-in"
+                    />
+                  ) : (
+                    <BookOpen className="w-16 h-16 text-gray-300 dark:text-gray-600 animate-pulse" />
+                  )}
                   <div className="absolute top-6 left-6">
                     <span className="px-4 py-2 bg-emerald-500 text-white rounded-lg font-bold text-sm shadow-lg">
                       {t.featured_post}

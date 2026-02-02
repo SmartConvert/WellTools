@@ -2270,8 +2270,6 @@ const DailyHealthTools = () => {
         lang={lang}
         setLang={setLang}
         t={t}
-        theme={theme}
-        toggleTheme={toggleTheme}
       />
 
       <main className="min-h-[80vh]">

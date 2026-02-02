@@ -9,47 +9,59 @@ import ToolInfoSection from './components/ToolInfoSection';
 
 const BMICalculatorPage = React.lazy(() => import('./components/BMICalculatorPage'));
 const MealPlannerPage = React.lazy(() => import('./components/MealPlannerPage'));
-
-
-
-
-
-
+import ToolHero from './components/ToolHero';
 
 const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLang, t }) => (
   <nav className="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 shadow-sm transition-colors duration-300">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex justify-between items-center h-16">
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => setCurrentPage('home')}>
-          <div className="w-10 h-10 bg-linear-to-br from-emerald-400 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg">
-            <Heart className="w-6 h-6 text-white" fill="white" />
+    <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div className="flex justify-between items-center h-20">
+        {/* Left side: Logo and Desktop Nav */}
+        <div className="flex items-center gap-8">
+          <div onClick={() => setCurrentPage('home')} className="flex items-center gap-2.5 cursor-pointer group">
+            <div className="w-10 h-10 bg-linear-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+              <Heart className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-2xl font-black bg-linear-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
+              WellTools
+            </span>
           </div>
-          <span className="text-2xl font-black bg-linear-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent tracking-tight">
-            WellTools
-          </span>
+
+          <div className="hidden lg:flex items-center gap-5">
+            <button onClick={() => setCurrentPage('home')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
+              {t.nav_home}
+            </button>
+
+            {/* Individually listed Tools */}
+            <div className="flex items-center gap-1 border-x border-gray-100 dark:border-gray-800 px-3">
+              {[
+                { id: 'bmi', short: 'BMI' },
+                { id: 'calories', short: 'Cal' },
+                { id: 'water', short: 'H2O' },
+                { id: 'ideal-weight', short: 'IBW' },
+                { id: 'sleep', short: 'Sleep' },
+                { id: 'body-fat', short: 'Fat' }
+              ].map(tool => (
+                <button
+                  key={tool.id}
+                  onClick={() => setCurrentPage(tool.id)}
+                  className="text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors text-[10px] font-black uppercase tracking-tighter px-2 py-1.5 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20"
+                >
+                  {tool.short}
+                </button>
+              ))}
+            </div>
+
+            <button onClick={() => setCurrentPage('meal-planner')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
+              {t.meal_planner_title}
+            </button>
+            <button onClick={() => setCurrentPage('blog')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
+              {t.nav_blog}
+            </button>
+          </div>
         </div>
 
-        <div className="hidden lg:flex items-center gap-6">
-          <button onClick={() => setCurrentPage('home')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
-            {t.nav_home}
-          </button>
-          <button onClick={() => { const el = document.getElementById('tools-grid'); el?.scrollIntoView({ behavior: 'smooth' }); }} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
-            {t.nav_apps}
-          </button>
-
-          <button onClick={() => setCurrentPage('meal-planner')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
-            {t.meal_planner_title}
-          </button>
-          <button onClick={() => setCurrentPage('blog')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
-            {t.nav_blog}
-          </button>
-          <button onClick={() => setCurrentPage('about')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
-            {t.nav_about}
-          </button>
-        </div>
-
-        <div className="flex items-center gap-2">
-          {/* Language Selector */}
+        {/* Right side: Language and Toggle */}
+        <div className="flex items-center gap-4">
           <div className="relative group">
             <button
               aria-label="Change Language"
@@ -89,9 +101,25 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
           <button onClick={() => { setCurrentPage('home'); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
             {t.nav_home}
           </button>
-          <button onClick={() => { const el = document.getElementById('tools-grid'); el?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
-            {t.nav_apps}
-          </button>
+
+          <div className="grid grid-cols-3 gap-2 py-2 border-y border-gray-100 dark:border-gray-800">
+            {[
+              { id: 'bmi', name: 'BMI' },
+              { id: 'calories', name: 'Cal' },
+              { id: 'water', name: 'H2O' },
+              { id: 'ideal-weight', name: 'IBW' },
+              { id: 'sleep', name: 'Sleep' },
+              { id: 'body-fat', name: 'Fat' }
+            ].map(tool => (
+              <button
+                key={tool.id}
+                onClick={() => { setCurrentPage(tool.id); setMobileMenuOpen(false); }}
+                className="text-center py-2 text-[10px] font-black text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 rounded-lg"
+              >
+                {tool.name}
+              </button>
+            ))}
+          </div>
 
           <button onClick={() => { setCurrentPage('meal-planner'); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
             {t.meal_planner_title}
@@ -232,8 +260,8 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
           </div>
         </div>
 
-        {/* Latest Blog Post Feature */}
-        {latestPost && (
+        {/* Latest Blog Posts Feature - 2 Posts */}
+        {currentLangPosts && currentLangPosts.length > 0 && (
           <div className="mb-16 lg:mb-24 animate-fade-in opacity-0" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
             <div className="flex items-center justify-between mb-8 px-4">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
@@ -248,58 +276,54 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
               </button>
             </div>
 
-            <div
-              onClick={() => {
-                setSelectedPost(latestPost);
-                setCurrentPage('blog-post');
-              }}
-              className="group cursor-pointer relative bg-white dark:bg-gray-800 rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700 mx-auto max-w-7xl"
-            >
-              <div className="flex flex-col lg:flex-row">
-                <div className="lg:w-1/2 h-64 lg:h-[400px] relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                  {latestPost.image && !imageError ? (
-                    <img
-                      src={latestPost.image}
-                      alt={latestPost.title}
-                      loading="lazy"
-                      onError={() => setImageError(true)}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 animate-fade-in"
-                    />
-                  ) : (
-                    <BookOpen className="w-16 h-16 text-gray-300 dark:text-gray-600 animate-pulse" />
-                  )}
-                  <div className="absolute top-6 left-6">
-                    <span className="px-4 py-2 bg-emerald-500 text-white rounded-lg font-bold text-sm shadow-lg">
-                      {t.featured_post}
-                    </span>
+            {/* Grid of 2 Latest Posts */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+              {currentLangPosts.slice(0, 2).map((post, index) => (
+                <div
+                  key={post.id}
+                  onClick={() => {
+                    setSelectedPost(post);
+                    setCurrentPage('blog-post');
+                  }}
+                  className="group cursor-pointer relative bg-white dark:bg-gray-800 rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700"
+                >
+                  <div className="h-48 md:h-56 relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                    {post.image && !imageError ? (
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        loading="lazy"
+                        onError={() => setImageError(true)}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 animate-fade-in"
+                      />
+                    ) : (
+                      <BookOpen className="w-12 h-12 text-gray-300 dark:text-gray-600 animate-pulse" />
+                    )}
+                    {index === 0 && (
+                      <div className="absolute top-4 left-4">
+                        <span className="px-3 py-1.5 bg-emerald-500 text-white rounded-lg font-bold text-xs shadow-lg">
+                          {t.featured_post}
+                        </span>
+                      </div>
+                    )}
                   </div>
-                </div>
-                <div className="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
-                  <div className="flex items-center gap-4 text-emerald-600 dark:text-emerald-400 font-bold text-sm mb-4">
-                    <Calendar className="w-4 h-4" />
-                    {latestPost.date}
-                  </div>
-                  <h3 className="text-3xl lg:text-4xl font-black text-gray-900 dark:text-white mb-6 leading-tight group-hover:text-emerald-500 transition-colors">
-                    {latestPost.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-lg mb-8 line-clamp-2 md:line-clamp-3 leading-relaxed">
-                    {latestPost.excerpt}
-                  </p>
-                  <div className="flex flex-wrap items-center gap-6">
-                    <button className="px-6 py-3 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold shadow-lg group-hover:shadow-emerald-500/25 transition-all flex items-center gap-2">
-                      {t.read_more} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                    <div className="flex -space-x-2">
-                      {[1, 2, 3].map((i) => (
-                        <div key={i} className={`w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden`}>
-                          <img src={`https://i.pravatar.cc/100?u=${i + 10}`} alt="user" loading="lazy" />
-                        </div>
-                      ))}
-                      <div className="pl-4 text-sm text-gray-500 dark:text-gray-400 font-medium">+1.2k views</div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 text-emerald-600 dark:text-emerald-400 font-bold text-xs mb-3">
+                      <Calendar className="w-4 h-4" />
+                      {post.date}
                     </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-emerald-500 transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base mb-4 line-clamp-2 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                    <button className="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm group-hover:gap-3 transition-all">
+                      {t.read_more} <ChevronRight className="w-4 h-4" />
+                    </button>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         )}
@@ -360,476 +384,484 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
 
 
 
-const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeight, calAge, setCalAge, calGender, setCalGender, calActivity, setCalActivity, calculateCalories, calResult, setCurrentPage, t }) => (
+const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeight, calAge, setCalAge, calGender, setCalGender, calActivity, setCalActivity, calculateCalories, calResult, setCurrentPage, t, lang }) => (
   <div className="pt-24 pb-16 px-4">
-    <div className="max-w-3xl mx-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-16 h-16 bg-linear-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg">
-            <Activity className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.calories_calc}</h1>
-        </div>
+    <div className="max-w-7xl mx-auto">
+      <ToolHero toolId="calories" lang={lang} />
 
-        <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
-          {t.calories_desc}
-        </p>
-
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.weight} ({t.unit_kg})</label>
-              <input
-                type="number"
-                value={calWeight}
-                onChange={(e) => setCalWeight(e.target.value)}
-                placeholder="70"
-                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg"
-              />
+      <div className="max-w-3xl mx-auto">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-16 h-16 bg-linear-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg">
+              <Activity className="w-8 h-8 text-white" />
             </div>
-
-            <div>
-              <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.height} ({t.unit_cm})</label>
-              <input
-                type="number"
-                value={calHeight}
-                onChange={(e) => setCalHeight(e.target.value)}
-                placeholder="175"
-                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg"
-              />
-            </div>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.calories_calc}</h1>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.age}</label>
-              <input
-                type="number"
-                value={calAge}
-                onChange={(e) => setCalAge(e.target.value)}
-                placeholder="25"
-                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg"
-              />
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.weight} ({t.unit_kg})</label>
+                <input
+                  type="number"
+                  value={calWeight}
+                  onChange={(e) => setCalWeight(e.target.value)}
+                  placeholder="70"
+                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg"
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.height} ({t.unit_cm})</label>
+                <input
+                  type="number"
+                  value={calHeight}
+                  onChange={(e) => setCalHeight(e.target.value)}
+                  placeholder="175"
+                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.age}</label>
+                <input
+                  type="number"
+                  value={calAge}
+                  onChange={(e) => setCalAge(e.target.value)}
+                  placeholder="25"
+                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg"
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.gender}</label>
+                <select
+                  value={calGender}
+                  onChange={(e) => setCalGender(e.target.value)}
+                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg"
+                >
+                  <option value="male">{t.male}</option>
+                  <option value="female">{t.female}</option>
+                </select>
+              </div>
             </div>
 
             <div>
-              <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.gender}</label>
+              <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.activity_level}</label>
               <select
-                value={calGender}
-                onChange={(e) => setCalGender(e.target.value)}
+                value={calActivity}
+                onChange={(e) => setCalActivity(e.target.value)}
                 className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg"
               >
-                <option value="male">{t.male}</option>
-                <option value="female">{t.female}</option>
+                <option value="sedentary">{t.activity_sedentary}</option>
+                <option value="light">{t.activity_light}</option>
+                <option value="moderate">{t.activity_moderate}</option>
+                <option value="active">{t.activity_active}</option>
+                <option value="veryActive">{t.activity_very_active}</option>
               </select>
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.activity_level}</label>
-            <select
-              value={calActivity}
-              onChange={(e) => setCalActivity(e.target.value)}
-              className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg"
-            >
-              <option value="sedentary">{t.activity_sedentary}</option>
-              <option value="light">{t.activity_light}</option>
-              <option value="moderate">{t.activity_moderate}</option>
-              <option value="active">{t.activity_active}</option>
-              <option value="veryActive">{t.activity_very_active}</option>
-            </select>
-          </div>
-
-          <button
-            onClick={calculateCalories}
-            className="w-full py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-          >
-            {t.calculate}
-          </button>
-        </div>
-
-        {calResult && (
-          <div id="calories-result" className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 animate-scale-in relative">
-            <div className="p-6 bg-linear-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-2xl border-2 border-blue-200 dark:border-blue-800 text-center shadow-lg hover:scale-105 transition-all">
-              <p className="text-gray-600 dark:text-gray-400 font-bold mb-2">{t.maintain_weight}</p>
-              <p className="text-3xl font-black text-blue-600 dark:text-blue-400">{calResult.maintain}</p>
-              <p className="text-sm font-semibold text-gray-500">{t.calories_day}</p>
-            </div>
-            <div className="p-6 bg-linear-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/20 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 text-center shadow-lg hover:scale-105 transition-all">
-              <p className="text-gray-600 dark:text-gray-400 font-bold mb-2">{t.weight_loss}</p>
-              <p className="text-3xl font-black text-emerald-600 dark:text-emerald-400">{calResult.loss}</p>
-              <p className="text-sm font-semibold text-gray-500">{t.calories_day}</p>
-            </div>
-            <div className="p-6 bg-rose-50 to-rose-100 dark:from-rose-900/20 dark:to-rose-800/20 rounded-2xl border-2 border-rose-200 dark:border-rose-800 text-center shadow-lg hover:scale-105 transition-all">
-              <p className="text-gray-600 dark:text-gray-400 font-bold mb-2">{t.weight_gain}</p>
-              <p className="text-3xl font-black text-rose-600 dark:text-rose-400">{calResult.gain}</p>
-              <p className="text-sm font-semibold text-gray-500">{t.calories_day}</p>
             </div>
 
             <button
-              onClick={() => setCurrentPage('meal-planner')}
-              className="md:col-span-3 mt-4 p-4 bg-emerald-600 text-white rounded-2xl font-black text-lg shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 animate-pulse-slow"
+              onClick={calculateCalories}
+              className="w-full py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
             >
-              <Utensils className="w-6 h-6" />
-              {t.meal_planner_title}
+              {t.calculate}
             </button>
           </div>
-        )}
 
-        <ToolInfoSection toolId="calories" t={t} />
-
-        <AdComponent slot="calories_bottom" />
-      </div>
-
-      <button
-        onClick={() => setCurrentPage('home')}
-        className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
-      >
-        {t.back_to_home}
-      </button>
-    </div>
-  </div>
-);
-
-const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWaterActivity, calculateWater, waterResult, setCurrentPage, t }) => (
-  <div className="pt-24 pb-16 px-4">
-    <div className="max-w-3xl mx-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-16 h-16 bg-linear-to-br from-blue-400 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg">
-            <Droplet className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.water_calc}</h1>
-        </div>
-
-        <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
-          {t.water_desc}
-        </p>
-
-        <div className="space-y-6">
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.weight} ({t.unit_kg})</label>
-            <input
-              type="number"
-              value={waterWeight}
-              onChange={(e) => setWaterWeight(e.target.value)}
-              placeholder="70"
-              className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors text-lg"
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.activity_level}</label>
-            <select
-              value={waterActivity}
-              onChange={(e) => setWaterActivity(e.target.value)}
-              className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors text-lg"
-            >
-              <option value="low">{t.activity_low}</option>
-              <option value="moderate">{t.activity_moderate}</option>
-              <option value="high">{t.activity_high}</option>
-            </select>
-          </div>
-
-          <button
-            onClick={calculateWater}
-            className="w-full py-4 bg-linear-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
-          >
-            {t.calculate}
-          </button>
-        </div>
-
-        {waterResult && (
-          <div id="water-result" className="mt-8 p-8 bg-linear-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl border-2 border-blue-200 dark:border-blue-800 animate-scale-in">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
-            <div className="flex items-center justify-center gap-4">
-              <Droplet className="w-12 h-12 text-blue-500" fill="currentColor" />
-              <p className="text-5xl font-black text-blue-600 dark:text-blue-400">{waterResult} {t.unit_liter}</p>
-            </div>
-          </div>
-        )}
-
-        <ToolInfoSection toolId="water" t={t} />
-
-        <AdComponent slot="water_bottom" />
-      </div>
-
-      <button
-        onClick={() => setCurrentPage('home')}
-        className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
-      >
-        {t.back_to_home}
-      </button>
-    </div>
-  </div>
-);
-
-const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGender, calculateIdealWeight, idealResult, setCurrentPage, t }) => (
-  <div className="pt-24 pb-16 px-4">
-    <div className="max-w-3xl mx-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-16 h-16 bg-linear-to-br from-rose-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg">
-            <Scale className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.ideal_weight}</h1>
-        </div>
-
-        <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
-          {t.ideal_weight_desc}
-        </p>
-
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.height} ({t.unit_cm})</label>
-              <input
-                type="number"
-                value={idealHeight}
-                onChange={(e) => setIdealHeight(e.target.value)}
-                placeholder="175"
-                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-rose-500 focus:outline-none transition-colors text-lg"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.gender}</label>
-              <select
-                value={idealGender}
-                onChange={(e) => setIdealGender(e.target.value)}
-                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-rose-500 focus:outline-none transition-colors text-lg"
-              >
-                <option value="male">{t.male}</option>
-                <option value="female">{t.female}</option>
-              </select>
-            </div>
-          </div>
-
-          <button
-            onClick={calculateIdealWeight}
-            className="w-full py-4 bg-linear-to-r from-rose-500 to-pink-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
-          >
-            {t.calculate}
-          </button>
-        </div>
-
-        {idealResult && (
-          <div id="ideal-weight-result" className="mt-8 p-8 bg-linear-to-br from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 rounded-2xl border-2 border-rose-200 dark:border-rose-800 animate-scale-in">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
-            <div className="space-y-4">
-              <p className="text-5xl font-black text-rose-600 dark:text-rose-400 text-center">{idealResult.ideal} <span className="text-2xl">{t.unit_kg}</span></p>
-              <div className="flex gap-4">
-                <div className="flex-1 p-4 bg-white/50 dark:bg-gray-800/50 rounded-xl">
-                  <p className="text-xs text-gray-500 uppercase font-bold mb-1">Min</p>
-                  <p className="text-xl font-bold text-gray-700 dark:text-gray-200">{idealResult.min} {t.unit_kg}</p>
-                </div>
-                <div className="flex-1 p-4 bg-white/50 dark:bg-gray-800/50 rounded-xl">
-                  <p className="text-xs text-gray-500 uppercase font-bold mb-1">Max</p>
-                  <p className="text-xl font-bold text-gray-700 dark:text-gray-200">{idealResult.max} {t.unit_kg}</p>
-                </div>
+          {calResult && (
+            <div id="calories-result" className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 animate-scale-in relative">
+              <div className="p-6 bg-linear-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-2xl border-2 border-blue-200 dark:border-blue-800 text-center shadow-lg hover:scale-105 transition-all">
+                <p className="text-gray-600 dark:text-gray-400 font-bold mb-2">{t.maintain_weight}</p>
+                <p className="text-3xl font-black text-blue-600 dark:text-blue-400">{calResult.maintain}</p>
+                <p className="text-sm font-semibold text-gray-500">{t.calories_day}</p>
               </div>
+              <div className="p-6 bg-linear-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/20 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 text-center shadow-lg hover:scale-105 transition-all">
+                <p className="text-gray-600 dark:text-gray-400 font-bold mb-2">{t.weight_loss}</p>
+                <p className="text-3xl font-black text-emerald-600 dark:text-emerald-400">{calResult.loss}</p>
+                <p className="text-sm font-semibold text-gray-500">{t.calories_day}</p>
+              </div>
+              <div className="p-6 bg-rose-50 to-rose-100 dark:from-rose-900/20 dark:to-rose-800/20 rounded-2xl border-2 border-rose-200 dark:border-rose-800 text-center shadow-lg hover:scale-105 transition-all">
+                <p className="text-gray-600 dark:text-gray-400 font-bold mb-2">{t.weight_gain}</p>
+                <p className="text-3xl font-black text-rose-600 dark:text-rose-400">{calResult.gain}</p>
+                <p className="text-sm font-semibold text-gray-500">{t.calories_day}</p>
+              </div>
+
+              <button
+                onClick={() => setCurrentPage('meal-planner')}
+                className="md:col-span-3 mt-4 p-4 bg-emerald-600 text-white rounded-2xl font-black text-lg shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 animate-pulse-slow"
+              >
+                <Utensils className="w-6 h-6" />
+                {t.meal_planner_title}
+              </button>
             </div>
-          </div>
-        )}
+          )}
 
-        <ToolInfoSection toolId="ideal_weight" t={t} />
+          <ToolInfoSection toolId="calories" lang={lang} />
 
-        <AdComponent slot="ideal_weight_bottom" />
+          <AdComponent slot="calories_bottom" />
+        </div>
+
+        <button
+          onClick={() => setCurrentPage('home')}
+          className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
+        >
+          {t.back_to_home}
+        </button>
       </div>
-
-      <button
-        onClick={() => setCurrentPage('home')}
-        className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
-      >
-        {t.back_to_home}
-      </button>
     </div>
   </div>
 );
 
-const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResult, setCurrentPage, t }) => (
+const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWaterActivity, calculateWater, waterResult, setCurrentPage, t, lang }) => (
   <div className="pt-24 pb-16 px-4">
-    <div className="max-w-3xl mx-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-16 h-16 bg-linear-to-br from-violet-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
-            <Moon className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.sleep_calc}</h1>
-        </div>
+    <div className="max-w-7xl mx-auto">
+      <ToolHero toolId="water" lang={lang} />
 
-        <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
-          {t.sleep_desc}
-        </p>
-
-        <div className="space-y-6">
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.age}</label>
-            <input
-              type="number"
-              value={sleepAge}
-              onChange={(e) => setSleepAge(e.target.value)}
-              placeholder="30"
-              className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-violet-500 focus:outline-none transition-colors text-lg"
-            />
+      <div className="max-w-3xl mx-auto">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-16 h-16 bg-linear-to-br from-blue-400 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg">
+              <Droplet className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.water_calc}</h1>
           </div>
 
-          <button
-            onClick={calculateSleep}
-            className="w-full py-4 bg-linear-to-r from-violet-500 to-purple-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
-          >
-            {t.calculate}
-          </button>
-        </div>
-
-        {sleepResult && (
-          <div id="sleep-result" className="mt-8 p-8 bg-linear-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-2xl border-2 border-violet-200 dark:border-violet-800 animate-scale-in">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
-            <p className="text-4xl font-black text-violet-600 dark:text-violet-400 text-center">{sleepResult}</p>
-          </div>
-        )}
-
-        <ToolInfoSection toolId="sleep" t={t} />
-
-        <AdComponent slot="sleep_bottom" />
-      </div>
-
-      <button
-        onClick={() => setCurrentPage('home')}
-        className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
-      >
-        {t.back_to_home}
-      </button>
-    </div>
-  </div>
-);
-
-const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, bfAge, setBfAge, bfGender, setBfGender, bfNeck, setBfNeck, bfWaist, setBfWaist, bfHip, setBfHip, calculateBodyFat, bfResult, setCurrentPage, t }) => (
-  <div className="pt-24 pb-16 px-4">
-    <div className="max-w-3xl mx-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-16 h-16 bg-linear-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center shadow-lg">
-            <Percent className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.body_fat_calc}</h1>
-        </div>
-
-        <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
-          {t.body_fat_desc}
-        </p>
-
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-6">
             <div>
               <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.weight} ({t.unit_kg})</label>
               <input
                 type="number"
-                value={bfWeight}
-                onChange={(e) => setBfWeight(e.target.value)}
+                value={waterWeight}
+                onChange={(e) => setWaterWeight(e.target.value)}
                 placeholder="70"
-                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-orange-500 focus:outline-none transition-colors"
+                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors text-lg"
               />
             </div>
+
             <div>
-              <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.height} ({t.unit_cm})</label>
-              <input
-                type="number"
-                value={bfHeight}
-                onChange={(e) => setBfHeight(e.target.value)}
-                placeholder="175"
-                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-orange-500 focus:outline-none transition-colors"
-              />
+              <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.activity_level}</label>
+              <select
+                value={waterActivity}
+                onChange={(e) => setWaterActivity(e.target.value)}
+                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors text-lg"
+              >
+                <option value="low">{t.activity_low}</option>
+                <option value="moderate">{t.activity_moderate}</option>
+                <option value="high">{t.activity_high}</option>
+              </select>
             </div>
+
+            <button
+              onClick={calculateWater}
+              className="w-full py-4 bg-linear-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+            >
+              {t.calculate}
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {waterResult && (
+            <div id="water-result" className="mt-8 p-8 bg-linear-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl border-2 border-blue-200 dark:border-blue-800 animate-scale-in">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
+              <div className="flex items-center justify-center gap-4">
+                <Droplet className="w-12 h-12 text-blue-500" fill="currentColor" />
+                <p className="text-5xl font-black text-blue-600 dark:text-blue-400">{waterResult} {t.unit_liter}</p>
+              </div>
+            </div>
+          )}
+
+          <ToolInfoSection toolId="water" lang={lang} />
+
+          <AdComponent slot="water_bottom" />
+        </div>
+
+        <button
+          onClick={() => setCurrentPage('home')}
+          className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
+        >
+          {t.back_to_home}
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
+const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGender, calculateIdealWeight, idealResult, setCurrentPage, t, lang }) => (
+  <div className="pt-24 pb-16 px-4">
+    <div className="max-w-7xl mx-auto">
+      <ToolHero toolId="ideal-weight" lang={lang} />
+
+      <div className="max-w-3xl mx-auto">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-16 h-16 bg-linear-to-br from-rose-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg">
+              <Scale className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.ideal_weight}</h1>
+          </div>
+
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.height} ({t.unit_cm})</label>
+                <input
+                  type="number"
+                  value={idealHeight}
+                  onChange={(e) => setIdealHeight(e.target.value)}
+                  placeholder="175"
+                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-rose-500 focus:outline-none transition-colors text-lg"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.gender}</label>
+                <select
+                  value={idealGender}
+                  onChange={(e) => setIdealGender(e.target.value)}
+                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-rose-500 focus:outline-none transition-colors text-lg"
+                >
+                  <option value="male">{t.male}</option>
+                  <option value="female">{t.female}</option>
+                </select>
+              </div>
+            </div>
+
+            <button
+              onClick={calculateIdealWeight}
+              className="w-full py-4 bg-linear-to-r from-rose-500 to-pink-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+            >
+              {t.calculate}
+            </button>
+          </div>
+
+          {idealResult && (
+            <div id="ideal-weight-result" className="mt-8 p-8 bg-linear-to-br from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 rounded-2xl border-2 border-rose-200 dark:border-rose-800 animate-scale-in">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
+              <div className="space-y-4">
+                <p className="text-5xl font-black text-rose-600 dark:text-rose-400 text-center">{idealResult.ideal} <span className="text-2xl">{t.unit_kg}</span></p>
+                <div className="flex gap-4">
+                  <div className="flex-1 p-4 bg-white/50 dark:bg-gray-800/50 rounded-xl">
+                    <p className="text-xs text-gray-500 uppercase font-bold mb-1">Min</p>
+                    <p className="text-xl font-bold text-gray-700 dark:text-gray-200">{idealResult.min} {t.unit_kg}</p>
+                  </div>
+                  <div className="flex-1 p-4 bg-white/50 dark:bg-gray-800/50 rounded-xl">
+                    <p className="text-xs text-gray-500 uppercase font-bold mb-1">Max</p>
+                    <p className="text-xl font-bold text-gray-700 dark:text-gray-200">{idealResult.max} {t.unit_kg}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <ToolInfoSection toolId="ideal-weight" lang={lang} />
+
+          <AdComponent slot="ideal_weight_bottom" />
+        </div>
+
+        <button
+          onClick={() => setCurrentPage('home')}
+          className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
+        >
+          {t.back_to_home}
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
+const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResult, setCurrentPage, t, lang }) => (
+  <div className="pt-24 pb-16 px-4">
+    <div className="max-w-7xl mx-auto">
+      <ToolHero toolId="sleep" lang={lang} />
+
+      <div className="max-w-3xl mx-auto">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-16 h-16 bg-linear-to-br from-violet-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
+              <Moon className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.sleep_calc}</h1>
+          </div>
+
+          <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
+            {t.sleep_desc}
+          </p>
+
+          <div className="space-y-6">
             <div>
               <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.age}</label>
               <input
                 type="number"
-                value={bfAge}
-                onChange={(e) => setBfAge(e.target.value)}
-                placeholder="25"
-                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-orange-500 focus:outline-none transition-colors"
+                value={sleepAge}
+                onChange={(e) => setSleepAge(e.target.value)}
+                placeholder="30"
+                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-violet-500 focus:outline-none transition-colors text-lg"
               />
             </div>
-            <div>
-              <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.gender}</label>
-              <select
-                value={bfGender}
-                onChange={(e) => setBfGender(e.target.value)}
-                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-orange-500 focus:outline-none transition-colors"
-              >
-                <option value="male">{t.male}</option>
-                <option value="female">{t.female}</option>
-              </select>
-            </div>
+
+            <button
+              onClick={calculateSleep}
+              className="w-full py-4 bg-linear-to-r from-violet-500 to-purple-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+            >
+              {t.calculate}
+            </button>
           </div>
 
-          <div className="bg-blue-50 dark:bg-blue-900/10 border-2 border-blue-200 dark:border-blue-800 rounded-2xl p-6">
-            <h3 className="font-bold text-gray-800 dark:text-white mb-4 text-lg">{t.measurements} ({t.unit_cm})</h3>
-            <div className="space-y-4">
+          {sleepResult && (
+            <div id="sleep-result" className="mt-8 p-8 bg-linear-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-2xl border-2 border-violet-200 dark:border-violet-800 animate-scale-in">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
+              <p className="text-4xl font-black text-violet-600 dark:text-violet-400 text-center">{sleepResult}</p>
+            </div>
+          )}
+
+          <ToolInfoSection toolId="sleep" lang={lang} />
+
+          <AdComponent slot="sleep_bottom" />
+        </div>
+
+        <button
+          onClick={() => setCurrentPage('home')}
+          className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
+        >
+          {t.back_to_home}
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
+const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, bfAge, setBfAge, bfGender, setBfGender, bfNeck, setBfNeck, bfWaist, setBfWaist, bfHip, setBfHip, calculateBodyFat, bfResult, setCurrentPage, t, lang }) => (
+  <div className="pt-24 pb-16 px-4">
+    <div className="max-w-7xl mx-auto">
+      <ToolHero toolId="body-fat" lang={lang} />
+
+      <div className="max-w-3xl mx-auto">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-16 h-16 bg-linear-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center shadow-lg">
+              <Percent className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.body_fat_calc}</h1>
+          </div>
+
+          <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
+            {t.body_fat_desc}
+          </p>
+
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.neck}</label>
+                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.weight} ({t.unit_kg})</label>
                 <input
                   type="number"
-                  value={bfNeck}
-                  onChange={(e) => setBfNeck(e.target.value)}
-                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                  value={bfWeight}
+                  onChange={(e) => setBfWeight(e.target.value)}
+                  placeholder="70"
+                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-orange-500 focus:outline-none transition-colors"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.waist}</label>
+                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.height} ({t.unit_cm})</label>
                 <input
                   type="number"
-                  value={bfWaist}
-                  onChange={(e) => setBfWaist(e.target.value)}
-                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                  value={bfHeight}
+                  onChange={(e) => setBfHeight(e.target.value)}
+                  placeholder="175"
+                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-orange-500 focus:outline-none transition-colors"
                 />
               </div>
-              {bfGender === 'female' && (
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.age}</label>
+                <input
+                  type="number"
+                  value={bfAge}
+                  onChange={(e) => setBfAge(e.target.value)}
+                  placeholder="25"
+                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-orange-500 focus:outline-none transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.gender}</label>
+                <select
+                  value={bfGender}
+                  onChange={(e) => setBfGender(e.target.value)}
+                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-orange-500 focus:outline-none transition-colors"
+                >
+                  <option value="male">{t.male}</option>
+                  <option value="female">{t.female}</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="bg-blue-50 dark:bg-blue-900/10 border-2 border-blue-200 dark:border-blue-800 rounded-2xl p-6">
+              <h3 className="font-bold text-gray-800 dark:text-white mb-4 text-lg">{t.measurements} ({t.unit_cm})</h3>
+              <div className="space-y-4">
                 <div>
-                  <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.hip}</label>
+                  <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.neck}</label>
                   <input
                     type="number"
-                    value={bfHip}
-                    onChange={(e) => setBfHip(e.target.value)}
+                    value={bfNeck}
+                    onChange={(e) => setBfNeck(e.target.value)}
                     className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
                   />
                 </div>
-              )}
+                <div>
+                  <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.waist}</label>
+                  <input
+                    type="number"
+                    value={bfWaist}
+                    onChange={(e) => setBfWaist(e.target.value)}
+                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                  />
+                </div>
+                {bfGender === 'female' && (
+                  <div>
+                    <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.hip}</label>
+                    <input
+                      type="number"
+                      value={bfHip}
+                      onChange={(e) => setBfHip(e.target.value)}
+                      className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
+
+            <button
+              onClick={calculateBodyFat}
+              className="w-full py-4 bg-linear-to-r from-orange-500 to-red-500 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+            >
+              {t.calculate}
+            </button>
           </div>
 
-          <button
-            onClick={calculateBodyFat}
-            className="w-full py-4 bg-linear-to-r from-orange-500 to-red-500 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
-          >
-            {t.calculate}
-          </button>
+          {bfResult && (
+            <div id="body-fat-result" className="mt-8 p-8 bg-linear-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-2xl border-2 border-orange-200 dark:border-orange-800 animate-scale-in">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
+              <div className="text-center p-6 bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
+                <p className="text-5xl font-black text-orange-600 dark:text-orange-400">{bfResult.bodyFat}%</p>
+                <p className={`text-2xl font-bold ${bfResult.color} mt-2`}>{bfResult.category}</p>
+              </div>
+            </div>
+          )}
+
+          <ToolInfoSection toolId="body_fat" lang={lang} />
+
+          <AdComponent slot="body_fat_bottom" />
         </div>
 
-        {bfResult && (
-          <div id="body-fat-result" className="mt-8 p-8 bg-linear-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-2xl border-2 border-orange-200 dark:border-orange-800 animate-scale-in">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
-            <div className="text-center p-6 bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
-              <p className="text-5xl font-black text-orange-600 dark:text-orange-400">{bfResult.bodyFat}%</p>
-              <p className={`text-2xl font-bold ${bfResult.color} mt-2`}>{bfResult.category}</p>
-            </div>
-          </div>
-        )}
-
-        <ToolInfoSection toolId="body_fat" t={t} />
-
-        <AdComponent slot="body_fat_bottom" />
+        <button
+          onClick={() => setCurrentPage('home')}
+          className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
+        >
+          {t.back_to_home}
+        </button>
       </div>
-
-      <button
-        onClick={() => setCurrentPage('home')}
-        className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
-      >
-        {t.back_to_home}
-      </button>
     </div>
   </div>
 );
@@ -2052,12 +2084,12 @@ const DailyHealthTools = () => {
       <main className="min-h-[80vh]">
         <Suspense fallback={<div className="flex justify-center items-center min-h-[400px]"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500"></div></div>}>
           {currentPage === 'home' && <HomePage setCurrentPage={setCurrentPage} setSelectedMealCategory={setSelectedMealCategory} setSelectedPost={setSelectedPost} lang={lang} t={t} />}
-          {currentPage === 'bmi' && <BMICalculatorPage bmiWeight={bmiWeight} setBmiWeight={setBmiWeight} bmiHeight={bmiHeight} setBmiHeight={setBmiHeight} calculateBMI={calculateBMI} bmiResult={bmiResult} setCurrentPage={setCurrentPage} t={t} />}
-          {currentPage === 'calories' && <CaloriesCalculatorPage calWeight={calWeight} setCalWeight={setCalWeight} calHeight={calHeight} setCalHeight={setCalHeight} calAge={calAge} setCalAge={setCalAge} calGender={calGender} setCalGender={setCalGender} calActivity={calActivity} setCalActivity={setCalActivity} calculateCalories={calculateCalories} calResult={calResult} setCurrentPage={setCurrentPage} t={t} />}
-          {currentPage === 'water' && <WaterCalculatorPage waterWeight={waterWeight} setWaterWeight={setWaterWeight} waterActivity={waterActivity} setWaterActivity={setWaterActivity} calculateWater={calculateWater} waterResult={waterResult} setCurrentPage={setCurrentPage} t={t} />}
-          {currentPage === 'ideal-weight' && <IdealWeightPage idealHeight={idealHeight} setIdealHeight={setIdealHeight} idealGender={idealGender} setIdealGender={setIdealGender} calculateIdealWeight={calculateIdealWeight} idealResult={idealResult} setCurrentPage={setCurrentPage} t={t} />}
-          {currentPage === 'sleep' && <SleepCalculatorPage sleepAge={sleepAge} setSleepAge={setSleepAge} calculateSleep={calculateSleep} sleepResult={sleepResult} setCurrentPage={setCurrentPage} t={t} />}
-          {currentPage === 'body-fat' && <BodyFatCalculatorPage bfWeight={bfWeight} setBfWeight={setBfWeight} bfHeight={bfHeight} setBfHeight={setBfHeight} bfAge={bfAge} setBfAge={setBfAge} bfGender={bfGender} setBfGender={setBfGender} bfNeck={bfNeck} setBfNeck={setBfNeck} bfWaist={bfWaist} setBfWaist={setBfWaist} bfHip={bfHip} setBfHip={setBfHip} calculateBodyFat={calculateBodyFat} bfResult={bfResult} setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'bmi' && <BMICalculatorPage bmiWeight={bmiWeight} setBmiWeight={setBmiWeight} bmiHeight={bmiHeight} setBmiHeight={setBmiHeight} calculateBMI={calculateBMI} bmiResult={bmiResult} setCurrentPage={setCurrentPage} t={t} lang={lang} />}
+          {currentPage === 'calories' && <CaloriesCalculatorPage calWeight={calWeight} setCalWeight={setCalWeight} calHeight={calHeight} setCalHeight={setCalHeight} calAge={calAge} setCalAge={setCalAge} calGender={calGender} setCalGender={setCalGender} calActivity={calActivity} setCalActivity={setCalActivity} calculateCalories={calculateCalories} calResult={calResult} setCurrentPage={setCurrentPage} t={t} lang={lang} />}
+          {currentPage === 'water' && <WaterCalculatorPage waterWeight={waterWeight} setWaterWeight={setWaterWeight} waterActivity={waterActivity} setWaterActivity={setWaterActivity} calculateWater={calculateWater} waterResult={waterResult} setCurrentPage={setCurrentPage} t={t} lang={lang} />}
+          {currentPage === 'ideal-weight' && <IdealWeightPage idealHeight={idealHeight} setIdealHeight={setIdealHeight} idealGender={idealGender} setIdealGender={setIdealGender} calculateIdealWeight={calculateIdealWeight} idealResult={idealResult} setCurrentPage={setCurrentPage} t={t} lang={lang} />}
+          {currentPage === 'sleep' && <SleepCalculatorPage sleepAge={sleepAge} setSleepAge={setSleepAge} calculateSleep={calculateSleep} sleepResult={sleepResult} setCurrentPage={setCurrentPage} t={t} lang={lang} />}
+          {currentPage === 'body-fat' && <BodyFatCalculatorPage bfWeight={bfWeight} setBfWeight={setBfWeight} bfHeight={bfHeight} setBfHeight={setBfHeight} bfAge={bfAge} setBfAge={setBfAge} bfGender={bfGender} setBfGender={setBfGender} bfNeck={bfNeck} setBfNeck={setBfNeck} bfWaist={bfWaist} setBfWaist={setBfWaist} bfHip={bfHip} setBfHip={bfHip} calculateBodyFat={calculateBodyFat} bfResult={bfResult} setCurrentPage={setCurrentPage} t={t} lang={lang} />}
           {currentPage === 'tracking' && <DailyTrackingPage trackingData={trackingData} newWeight={newWeight} setNewWeight={setNewWeight} addWeightEntry={addWeightEntry} newWater={newWater} setNewWater={setNewWater} addWaterEntry={addWaterEntry} newSleep={newSleep} setNewSleep={setNewSleep} addSleepEntry={addSleepEntry} deleteEntry={deleteEntry} setCurrentPage={setCurrentPage} t={t} />}
           {currentPage === 'meals' && <MealsPage selectedMealCategory={selectedMealCategory} setSelectedMealCategory={setSelectedMealCategory} t={t} />}
           {currentPage === 'about' && <AboutPage setCurrentPage={setCurrentPage} t={t} />}

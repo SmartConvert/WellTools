@@ -10,7 +10,7 @@ const AdComponent = ({ slot }) => {
     }, []);
 
     return (
-        <div className="my-8 w-full flex justify-center overflow-hidden min-h-[140px] md:min-h-[280px] bg-gray-800/20 rounded-2xl border border-dashed border-gray-700 flex-col items-center justify-center p-4">
+        <div className="my-8 w-full flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-800/50 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-700 min-h-[140px] md:min-h-[280px] p-4 overflow-hidden">
             <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-2 font-bold">Advertisement</p>
             {/* AdSense Unit Code */}
             <ins className="adsbygoogle"

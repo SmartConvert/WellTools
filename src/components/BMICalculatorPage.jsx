@@ -1,3 +1,7 @@
+import React from 'react';
+import { Calculator, Info } from 'lucide-react';
+import AdComponent from './AdComponent';
+import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 
 const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, calculateBMI, bmiResult, setCurrentPage, t, lang }) => (

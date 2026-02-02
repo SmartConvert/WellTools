@@ -138,9 +138,16 @@ export const translations = {
         expert_mental_title: 'Elena Rodriguez',
         expert_mental_role: 'Wellness Coach',
         expert_mental_bio: 'Specialist in holistic health and mindfulness, helping people achieve mental balance.',
-        weight_loss: 'Weight Loss',
         weight_gain: 'Weight Gain',
         calories_day: 'kcal/day',
+
+        bmi_advice_title: 'Health Advice',
+        bmi_status_suitable: 'Your weight is suitable for your height.',
+        bmi_status_not_suitable: 'Your weight is not optimal for your height.',
+        tip_underweight: 'Focus on nutrient-dense foods and strength training to build muscle mass safely.',
+        tip_normal: 'Maintain your healthy lifestyle with a balanced diet and regular physical activity.',
+        tip_overweight: 'Consider a modest calorie reduction and increasing aerobic exercise to reach a healthier weight.',
+        tip_obese: 'We recommend consulting a healthcare provider for a personalized weight management plan.',
 
         // SEO Tool Descriptions
         bmi_how_it_works: 'Understanding BMI: Our Body Mass Index calculator uses your height and weight to estimate body composition. It is a vital tool for screening weight categories (underweight, normal weight, overweight, and obesity) that may lead to health issues. The formula used is Weight(kg) / Height(m)², providing a standardized value recognized by health organizations globally.',
@@ -382,15 +389,16 @@ export const translations = {
         select_goal: 'اختر هدفك',
         goal_lose: 'خسارة الوزن',
         goal_maintain: 'الحفاظ على الوزن',
-        goal_gain: 'زيادة الوزن',
-        today_menu: 'قائمة الوجبات المقترحة لليوم',
-        breakfast: 'الفطور',
-        lunch: 'الغداء',
-        dinner: 'العشاء',
-        snack: 'سناك (وجبة خفيفة)',
-        generate_new: 'توليد خطة جديدة',
-        read_more: 'اقرأ المزيد',
+        weight_gain: 'زيادة الوزن',
         calories_goal: 'هدف السعرات',
+
+        bmi_advice_title: 'نصائح صحية',
+        bmi_status_suitable: 'وزنك مناسب لطولك.',
+        bmi_status_not_suitable: 'وزنك غير مثالي بالنسبة لطولك.',
+        tip_underweight: 'ركز على الأطعمة الغنية بالمغذيات وتمارين القوة لبناء الكتلة العضلية بأمان.',
+        tip_normal: 'حافظ على نمط حياتك الصحي من خلال نظام غذائي متوازن ونشاط بدني منتظم.',
+        tip_overweight: 'فكر في تقليل السعرات الحرارية بشكل بسيط وزيادة التمارين الهوائية للوصول إلى وزن صحي.',
+        tip_obese: 'نوصي باستشارة مقدم الرعاية الصحية للحصول على خطة شخصية لإدارة الوزن.',
         bowl_oatmeal_berries: 'وعاء الشوفان بالتوت الأزرق',
         grilled_chicken_salad: 'سلطة الدجاج المشوي مع الأفوكادو',
         steamed_fish_veggies: 'سمك مطهو على البخار مع الفاصوليا',
@@ -624,9 +632,16 @@ export const translations = {
         read_more: 'Lire la suite',
 
         maintain_weight: 'Maintenir le poids',
-        weight_loss: 'Perte de poids',
         weight_gain: 'Prise de poids',
         calories_day: 'kcal/jour',
+
+        bmi_advice_title: 'Conseils de santé',
+        bmi_status_suitable: 'Votre poids est adapté à votre taille.',
+        bmi_status_not_suitable: 'Votre poids n’est pas optimal pour votre taille.',
+        tip_underweight: 'Privilégiez les aliments riches en nutriments et le renforcement musculaire pour augmenter la masse musculaire en toute sécurité.',
+        tip_normal: 'Maintenez votre mode de vie sain avec une alimentation équilibrée et une activité physique régulière.',
+        tip_overweight: 'Envisagez une légère réduction calorique et une augmentation de l’exercice aérobique pour atteindre un poids plus sain.',
+        tip_obese: 'Nous vous recommandons de consulter un professionnel de la santé pour un plan personnalisé de gestion du poids.',
 
         // SEO Tool Descriptions
         bmi_how_it_works: 'Understanding BMI: Our Body Mass Index calculator uses your height and weight to estimate body composition.',
@@ -792,6 +807,14 @@ export const translations = {
         weight_loss: 'Gewichtsabnahme',
         weight_gain: 'Gewichtszunahme',
         calories_day: 'kcal/Tag',
+
+        bmi_advice_title: 'Gesundheitsberatung',
+        bmi_status_suitable: 'Ihr Gewicht ist für Ihre Körpergröße angemessen.',
+        bmi_status_not_suitable: 'Ihr Gewicht ist für Ihre Körpergröße nicht optimal.',
+        tip_underweight: 'Konzentrieren Sie sich auf nährstoffreiche Lebensmittel und Krafttraining, um sicher Muskelmasse aufzubauen.',
+        tip_normal: 'Behalten Sie Ihren gesunden Lebensstil mit einer ausgewogenen Ernährung und regelmäßiger körperlicher Aktivität bei.',
+        tip_overweight: 'Erwägen Sie eine moderate Kalorienreduzierung und mehr aerobes Training, um ein gesünderes Gewicht zu erreichen.',
+        tip_obese: 'Wir empfehlen, einen Arzt für einen personalisierten Gewichtsmanagementplan zu konsultieren.',
 
         // SEO Tool Descriptions
         bmi_how_it_works: 'Understanding BMI: Our Body Mass Index calculator uses your height and weight to estimate body composition.',

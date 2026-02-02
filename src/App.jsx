@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Calculator, Heart, Droplet, Globe, Scale, Apple, TrendingDown, Activity, Utensils, ChevronRight, Menu, X, Percent, TrendingUp, Calendar, BarChart3, LineChart as LineChartIcon, Plus, Trash2, BookOpen, ArrowLeft, ExternalLink, Moon, FileText } from 'lucide-react';
+import { Calculator, Heart, Droplet, Globe, Scale, Apple, TrendingDown, Activity, Utensils, ChevronRight, Menu, X, Percent, TrendingUp, Calendar, BarChart3, LineChart as LineChartIcon, Plus, Trash2, BookOpen, ArrowLeft, ExternalLink, Moon, Info } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import postsData from './data/posts.json';
 import { translations } from './translations';
-import { exportToPDF } from './utils/pdfExport';
 
 // Meal Data
 const mealCategories = {
@@ -499,19 +498,25 @@ const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, c
 
         {bmiResult && (
           <div id="bmi-result" className="mt-8 p-8 bg-linear-to-br from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-2xl border-2 border-cyan-200 dark:border-cyan-800 animate-scale-in">
-            <div className="flex justify-between items-start mb-4">
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center flex-1 ml-10">{t.result}:</h3>
-              <button
-                onClick={() => exportToPDF('bmi-result', `WellTools-BMI-${new Date().toISOString().split('T')[0]}.pdf`)}
-                className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 text-cyan-600 rounded-xl shadow-sm hover:shadow-md transition-all text-sm font-bold border border-cyan-100 dark:border-cyan-800"
-              >
-                <FileText className="w-4 h-4" />
-                {t.download_pdf}
-              </button>
-            </div>
-            <div className="space-y-3 text-center">
-              <p className="text-5xl font-black text-cyan-600 dark:text-cyan-400">{bmiResult.bmi}</p>
-              <p className={`text-2xl font-bold ${bmiResult.color}`}>{t[bmiResult.category]}</p>
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
+            <div className="space-y-6 text-center">
+              <div className="inline-block p-6 bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-cyan-100 dark:border-cyan-900">
+                <p className="text-5xl font-black text-cyan-600 dark:text-cyan-400">{bmiResult.bmi}</p>
+                <p className={`text-2xl font-bold ${bmiResult.color} mt-2`}>{t[bmiResult.category]}</p>
+              </div>
+
+              <div className="pt-6 border-t border-cyan-100 dark:border-cyan-900/50">
+                <h4 className="text-lg font-bold text-gray-800 dark:text-white mb-3 flex items-center justify-center gap-2">
+                  <Info className="w-5 h-5 text-cyan-500" />
+                  {t.bmi_advice_title}
+                </h4>
+                <p className={`text-lg font-semibold mb-4 ${bmiResult.suitable ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
+                  {bmiResult.suitable ? t.bmi_status_suitable : t.bmi_status_not_suitable}
+                </p>
+                <div className="bg-white/50 dark:bg-gray-800/50 p-6 rounded-2xl text-gray-700 dark:text-gray-300 leading-relaxed shadow-sm">
+                  {bmiResult.tip}
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -630,15 +635,6 @@ const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeig
 
         {calResult && (
           <div id="calories-result" className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 animate-scale-in relative">
-            <div className="md:col-span-3 flex justify-end mb-2">
-              <button
-                onClick={() => exportToPDF('calories-result', `WellTools-Calories-${new Date().toISOString().split('T')[0]}.pdf`)}
-                className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 text-emerald-600 rounded-xl shadow-sm hover:shadow-md transition-all text-sm font-bold border border-emerald-100 dark:border-emerald-800"
-              >
-                <FileText className="w-4 h-4" />
-                {t.download_pdf}
-              </button>
-            </div>
             <div className="p-6 bg-linear-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-2xl border-2 border-blue-200 dark:border-blue-800 text-center shadow-lg hover:scale-105 transition-all">
               <p className="text-gray-600 dark:text-gray-400 font-bold mb-2">{t.maintain_weight}</p>
               <p className="text-3xl font-black text-blue-600 dark:text-blue-400">{calResult.maintain}</p>
@@ -739,16 +735,7 @@ const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWa
 
         {waterResult && (
           <div id="water-result" className="mt-8 p-8 bg-linear-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl border-2 border-blue-200 dark:border-blue-800 animate-scale-in">
-            <div className="flex justify-between items-start mb-6">
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center flex-1 ml-10">{t.result}:</h3>
-              <button
-                onClick={() => exportToPDF('water-result', `WellTools-Water-${new Date().toISOString().split('T')[0]}.pdf`)}
-                className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 text-blue-600 rounded-xl shadow-sm hover:shadow-md transition-all text-sm font-bold border border-blue-100 dark:border-blue-800"
-              >
-                <FileText className="w-4 h-4" />
-                {t.download_pdf}
-              </button>
-            </div>
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
             <div className="flex items-center justify-center gap-4">
               <Droplet className="w-12 h-12 text-blue-500" fill="currentColor" />
               <p className="text-5xl font-black text-blue-600 dark:text-blue-400">{waterResult} {t.unit_liter}</p>
@@ -830,16 +817,7 @@ const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGen
 
         {idealResult && (
           <div id="ideal-weight-result" className="mt-8 p-8 bg-linear-to-br from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 rounded-2xl border-2 border-rose-200 dark:border-rose-800 animate-scale-in">
-            <div className="flex justify-between items-start mb-6">
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center flex-1 ml-10">{t.result}:</h3>
-              <button
-                onClick={() => exportToPDF('ideal-weight-result', `WellTools-IdealWeight-${new Date().toISOString().split('T')[0]}.pdf`)}
-                className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 text-rose-600 rounded-xl shadow-sm hover:shadow-md transition-all text-sm font-bold border border-rose-100 dark:border-rose-800"
-              >
-                <FileText className="w-4 h-4" />
-                {t.download_pdf}
-              </button>
-            </div>
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
             <div className="space-y-4">
               <p className="text-5xl font-black text-rose-600 dark:text-rose-400 text-center">{idealResult.ideal} <span className="text-2xl">{t.unit_kg}</span></p>
               <div className="flex gap-4">
@@ -917,16 +895,7 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
 
         {sleepResult && (
           <div id="sleep-result" className="mt-8 p-8 bg-linear-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-2xl border-2 border-violet-200 dark:border-violet-800 animate-scale-in">
-            <div className="flex justify-between items-start mb-6">
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center flex-1 ml-10">{t.result}:</h3>
-              <button
-                onClick={() => exportToPDF('sleep-result', `WellTools-Sleep-${new Date().toISOString().split('T')[0]}.pdf`)}
-                className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 text-violet-600 rounded-xl shadow-sm hover:shadow-md transition-all text-sm font-bold border border-violet-100 dark:border-violet-800"
-              >
-                <FileText className="w-4 h-4" />
-                {t.download_pdf}
-              </button>
-            </div>
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
             <p className="text-4xl font-black text-violet-600 dark:text-violet-400 text-center">{sleepResult}</p>
           </div>
         )}
@@ -1063,16 +1032,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
 
         {bfResult && (
           <div id="body-fat-result" className="mt-8 p-8 bg-linear-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-2xl border-2 border-orange-200 dark:border-orange-800 animate-scale-in">
-            <div className="flex justify-between items-start mb-6">
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center flex-1 ml-10">{t.result}:</h3>
-              <button
-                onClick={() => exportToPDF('body-fat-result', `WellTools-BodyFat-${new Date().toISOString().split('T')[0]}.pdf`)}
-                className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 text-orange-600 rounded-xl shadow-sm hover:shadow-md transition-all text-sm font-bold border border-orange-100 dark:border-orange-800"
-              >
-                <FileText className="w-4 h-4" />
-                {t.download_pdf}
-              </button>
-            </div>
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
             <div className="text-center p-6 bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
               <p className="text-5xl font-black text-orange-600 dark:text-orange-400">{bfResult.bodyFat}%</p>
               <p className={`text-2xl font-bold ${bfResult.color} mt-2`}>{bfResult.category}</p>
@@ -1858,13 +1818,6 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <button
-                onClick={() => exportToPDF('meal-plan-result', `WellTools-MealPlan-${new Date().toISOString().split('T')[0]}.pdf`)}
-                className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-900 text-emerald-600 rounded-2xl hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all font-bold border border-emerald-100 dark:border-emerald-800"
-              >
-                <FileText className="w-5 h-5" />
-                {t.download_pdf}
-              </button>
               <button className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 transition-all font-bold group/btn shadow-lg">
                 <Plus className="w-5 h-5 group-hover/btn:rotate-90 transition-transform" />
                 {t.generate_new}
@@ -2171,12 +2124,35 @@ const DailyHealthTools = () => {
 
     let category = '';
     let color = '';
-    if (bmi < 18.5) { category = t.cat_underweight; color = 'text-blue-600'; }
-    else if (bmi < 25) { category = t.cat_normal; color = 'text-green-600'; }
-    else if (bmi < 30) { category = t.cat_overweight; color = 'text-yellow-600'; }
-    else { category = t.cat_obese; color = 'text-red-600'; }
+    let suitable = false;
+    let tip = '';
 
-    setBmiResult({ bmi, category, color });
+    if (bmi < 18.5) {
+      category = 'cat_underweight';
+      color = 'text-blue-600';
+      suitable = false;
+      tip = t.tip_underweight;
+    }
+    else if (bmi < 25) {
+      category = 'cat_normal';
+      color = 'text-green-600';
+      suitable = true;
+      tip = t.tip_normal;
+    }
+    else if (bmi < 30) {
+      category = 'cat_overweight';
+      color = 'text-yellow-600';
+      suitable = false;
+      tip = t.tip_overweight;
+    }
+    else {
+      category = 'cat_obese';
+      color = 'text-red-600';
+      suitable = false;
+      tip = t.tip_obese;
+    }
+
+    setBmiResult({ bmi, category, color, suitable, tip });
   };
 
   const calculateCalories = () => {

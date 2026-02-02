@@ -206,7 +206,7 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
     )}
   </nav>
 );
-const HomePage = ({ setCurrentPage, setSelectedMealCategory, t }) => {
+const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, lang, t }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
     {

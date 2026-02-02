@@ -7,20 +7,19 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const POSTS_PATH = path.join(__dirname, "../src/data/posts.json");
 
 // API Key should be set in GitHub Secrets/Environment
-const API_KEY = process.env.PERPLEXITY_API_KEY ? process.env.PERPLEXITY_API_KEY.trim() : "";
+const API_KEY = process.env.OPENAI_API_KEY ? process.env.OPENAI_API_KEY.trim() : "";
 
 if (!API_KEY) {
-    console.error("Error: PERPLEXITY_API_KEY is not set.");
+    console.error("Error: OPENAI_API_KEY is not set.");
     process.exit(1);
 }
 
 const openai = new OpenAI({
-    apiKey: API_KEY,
-    baseURL: 'https://api.perplexity.ai',
+    apiKey: API_KEY
 });
 
-// List of models to try in order of preference
-const MODEL_NAME = "llama-3.1-sonar-small-128k-online";
+// OpenAI model
+const MODEL_NAME = "gpt-4o-mini";
 
 const categories = ["Nutrition", "Fitness", "Mental Health", "Sleep", "Longevity", "Biohacking"];
 

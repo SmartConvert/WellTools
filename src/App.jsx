@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { Calculator, Heart, Droplet, Globe, Scale, Apple, TrendingDown, Activity, Utensils, ChevronRight, Menu, X, Percent, TrendingUp, Calendar, BarChart3, LineChart as LineChartIcon, Plus, Trash2, BookOpen, ArrowLeft, ExternalLink, Moon, Info } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import postsData from './data/posts.json';
+import { translations } from './translations';
 import AdComponent from './components/AdComponent';
 import ToolInfoSection from './components/ToolInfoSection';
 

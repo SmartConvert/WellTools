@@ -57,47 +57,44 @@ async function generatePost() {
     Generate a high-quality, professional, and comprehensive health blog post for a website called "Daily Health Tools".
     The topic should be related to: ${category}.
     
-    CRITICAL REQUIREMENTS:
-    1. CONTENT LENGTH: The article must be a minimum of 1200 words. Provide deep, actionable insights.
-    2. SEO OPTIMIZATION: 
-       - Use a long, catchy, and high-search-volume primary title.
-       - Use multiple H2 and H3 subheadings containing keywords.
-       - Include 5-7 high-relevance keywords.
-    3. INTERNAL LINKS: Naturally integrate links to the following tools available on our site:
-       - BMI Calculator
-       - Calories Calculator
-       - Water Intake Calculator
-       - Ideal Weight Calculator
-       - Sleep Duration Calculator
-       - Body Fat Percentage Calculator
-       - Daily Health Tracking (Weight, Water, Sleep)
-       - Healthy Meal Suggestions
-       Use natural anchor text like "Check your [tool name] here". Note: Just use the tool name as text, do not generate actual <a> tags in the 'content' string as they are handled as text, but you can mention them in the prose.
-    4. MEDICAL SOURCES: Provide a list of 3-5 real medical sources or research papers (Title and URL) that support the article's claims.
-    5. FAQ SECTION: Include a FAQ section with at least 5 questions, focusing on "How-to" questions (e.g., "How can I improve my...").
-    6. PROFESSIONAL IMAGE: Provide a URL for a high-quality, professional medical/health photograph using the following format:
-       "https://image.pollinations.ai/prompt/[detailed_image_description]?width=1200&height=800&nologo=true"
-       The [detailed_image_description] should be a highly detailed, professional prompt in English (e.g., "professional_medical_photography_of_a_stuffed_healthy_salad_bowl_with_vibrant_colors_soft_lighting_8k_resolution").
-    
-    The output MUST be a valid JSON object with the following structure:
+    CRITICAL QUALITY & SEO RULES (20 CONDITIONS):
+    1. SOLVE A PROBLEM: The article must solve a real problem (e.g., "How much water drink for my weight?") instead of generic facts.
+    2. ONE TOPIC: Focus strictly on ONE specific subject per article.
+    3. LENGTH: Minimum of 1000-1200 words. Deep explanation required.
+    4. SIMPLIFIED ORIGINAL STYLE: Write in an original, easy-to-understand style. DO NOT copy existing medical sites.
+    5. KEYWORD IN TITLE: The primary long-tail keyword must be in the H1 title.
+    6. ENGAGING EXCERPT: The 'excerpt' must be a meta-description that encourages clicks.
+    7. STRUCTURE: Use H1 for title, and multiple H2 and H3 for subheadings.
+    8. IMAGE SEO: Provide a descriptive image prompt and a clear 'imageAlt' text.
+    9. MOBILE-FRIENDLY MARKDOWN: Keep paragraphs short and use lists for readability.
+    10. CLEAN DESIGN: (Metadata) Category must be precise.
+    11. TRUST PAGES: (Internal linking) Mention "About Us" or "Contact Us" if natural.
+    12. MEDICAL WARNING: Include a clear medical disclaimer at the VERY END of the content: "This content is for general information only and does not substitute for professional medical advice."
+    13. NO DIAGNOSIS: Never provide a diagnosis or medication. Always suggest consulting a doctor for symptoms.
+    14. REGULAR VALUE: Ensure the tone is consistent and high-quality.
+    15. LONG-TAIL KEYWORDS: Target specific, low-competition keywords (e.g., "healthy diet to lose weight in a week" instead of just "weight loss").
+    16. INTERNAL LINKING: Naturally mention and check the following tools:
+       - BMI Calculator, Calories Calculator, Water Intake Calculator, Ideal Weight Calculator, Sleep Duration Calculator, Body Fat Percentage Calculator, Daily Health Tracking, Healthy Meal Suggestions.
+    17. TRUSTED SOURCES: List 3-5 real sources (WHO, CDC, Mayo Clinic, etc.) with URLs.
+    18. CATCHY TITLES: Use click-worthy psychological triggers in the title.
+    19. FAQ SECTION: 5 "How-to" questions and answers.
+    20. IMAGE FILENAME PROMPT: Ensure the image prompt implies a professional, high-quality medical photo.
+
+    The output MUST be a valid JSON object:
     {
       "id": "unique-kebab-case-slug",
-      "title": "A long, SEO-optimized title with high impact",
+      "title": "Impactful long-tail SEO title",
       "date": "YYYY-MM-DD",
       "category": "${category}",
-      "image": "https://image.pollinations.ai/prompt/...&nologo=true",
-      "excerpt": "A short, engaging summary (max 150 chars) with keywords",
-      "content": "A very long (1200+ words), detailed article in Markdown. Use H2, H3 subheadings, bullet points, and bold text. Integrate internal tool mentions naturally.",
-      "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"],
-      "sources": ["Medical Study Title (https://pubmed.ncbi.nlm.nih.gov/...)", "CDC Guidelines (https://cdc.gov/...)"],
-      "faq": [
-        {"question": "How do I...?", "answer": "Detailed explanation..."},
-        {"question": "Why should I...?", "answer": "Scientific reason..."}
-      ]
+      "image": "https://image.pollinations.ai/prompt/[professional_photo_description]?width=1200&height=800&nologo=true",
+      "imageAlt": "Descriptive alt text for the image",
+      "excerpt": "Engaging 150-char meta description",
+      "content": "Full 1200+ word article in Markdown with H2/H3. Wrap with a medical disclaimer at the end.",
+      "keywords": ["specific-keyword-1", "long-tail-keyword-2", ...],
+      "sources": ["Medical Study/Source Title (https://...)"],
+      "faq": [{"question": "...", "answer": "..."}]
     }
-    
-    Ensure the content is scientifically accurate, helpful, and mirrors the tone of a professional medical publication but remains accessible to the general public.
-  `;
+    `;
 
     try {
         const model = await getWorkingModel(genAI);

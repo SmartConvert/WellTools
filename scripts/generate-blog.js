@@ -1,4 +1,4 @@
-import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from 'url';
@@ -7,19 +7,38 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const POSTS_PATH = path.join(__dirname, "../src/data/posts.json");
 
 // API Key should be set in GitHub Secrets/Environment
-const API_KEY = process.env.OPENAI_API_KEY ? process.env.OPENAI_API_KEY.trim() : "";
+const API_KEY = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : "";
 
 if (!API_KEY) {
-    console.error("Error: OPENAI_API_KEY is not set.");
+    console.error("Error: GEMINI_API_KEY is not set.");
     process.exit(1);
 }
 
-const openai = new OpenAI({
-    apiKey: API_KEY
-});
+const genAI = new GoogleGenerativeAI(API_KEY);
+// List of models to try in order of preference
+const MODELS_TO_TRY = [
+    "gemini-1.5-flash",
+    "gemini-1.5-flash-latest",
+    "gemini-1.5-pro",
+    "gemini-1.5-pro-latest",
+    "gemini-1.0-pro",
+    "gemini-pro"
+];
 
-// OpenAI model
-const MODEL_NAME = "gpt-4o-mini";
+async function getWorkingModel(genAI) {
+    for (const modelName of MODELS_TO_TRY) {
+        try {
+            const model = genAI.getGenerativeModel({ model: modelName });
+            // Test the model with a minimal prompt to see if it exists/is accessible
+            await model.generateContent("Test");
+            console.log(`Selected working model: ${modelName}`);
+            return model;
+        } catch (error) {
+            console.warn(`Model ${modelName} failed. Reason: ${error.message}`);
+        }
+    }
+    throw new Error("No suitable Gemini model found or API Key is invalid.");
+}
 
 const categories = ["Nutrition", "Fitness", "Mental Health", "Sleep", "Longevity", "Biohacking"];
 
@@ -73,21 +92,10 @@ async function generatePost() {
   `;
 
     try {
-        const response = await openai.chat.completions.create({
-            model: MODEL_NAME,
-            messages: [
-                {
-                    role: "system",
-                    content: "You are an expert medical writer and SEO specialist. You output strictly JSON."
-                },
-                {
-                    role: "user",
-                    content: prompt
-                }
-            ]
-        });
-
-        let text = response.choices[0].message.content;
+        const model = await getWorkingModel(genAI);
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        let text = response.text();
 
         // Clean potential markdown formatting from AI response
         if (text.startsWith("```json")) {
@@ -118,9 +126,6 @@ async function generatePost() {
         console.log(`Successfully generated and saved: ${newPost.title}`);
     } catch (error) {
         console.error("Failed to generate post:", error);
-        if (error.response) {
-            console.error(error.response.data);
-        }
         process.exit(1);
     }
 }

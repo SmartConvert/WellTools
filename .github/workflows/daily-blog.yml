@@ -24,7 +24,7 @@ jobs:
         
       - name: Generate Blog Post
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
         run: node scripts/generate-blog.js
         
       - name: Commit and Push changes

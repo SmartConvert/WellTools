@@ -36,9 +36,7 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
           <button onClick={() => { const el = document.getElementById('tools-grid'); el?.scrollIntoView({ behavior: 'smooth' }); }} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
             {t.nav_apps}
           </button>
-          <button onClick={() => setCurrentPage('tracking')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
-            {t.daily_tracking}
-          </button>
+
           <button onClick={() => setCurrentPage('meal-planner')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
             {t.meal_planner_title}
           </button>
@@ -94,9 +92,7 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
           <button onClick={() => { const el = document.getElementById('tools-grid'); el?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
             {t.nav_apps}
           </button>
-          <button onClick={() => { setCurrentPage('tracking'); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
-            {t.daily_tracking}
-          </button>
+
           <button onClick={() => { setCurrentPage('meal-planner'); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
             {t.meal_planner_title}
           </button>
@@ -138,22 +134,25 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
   }, [lang]);
   const slides = [
     {
-      image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=2670&q=80',
+      image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=2670&q=80',
       title: t.hero_title,
       accent: t.hero_title_accent,
-      subtitle: t.hero_subtitle
+      subtitle: t.hero_subtitle,
+      stats: { icon: '🥗', number: '100+', label: 'Healthy Recipes' }
     },
     {
-      image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=2670&q=80',
-      title: t.hero_title,
-      accent: t.hero_title_accent,
-      subtitle: t.hero_subtitle
+      image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=2670&q=80',
+      title: 'Track Your',
+      accent: 'Health Journey',
+      subtitle: 'Smart calculators to help you achieve your wellness goals',
+      stats: { icon: '🎯', number: '6+', label: 'Health Tools' }
     },
     {
-      image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=2670&q=80',
-      title: t.hero_title,
-      accent: t.hero_title_accent,
-      subtitle: t.hero_subtitle
+      image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=2670&q=80',
+      title: 'Personalized',
+      accent: 'Nutrition Plans',
+      subtitle: 'AI-powered meal suggestions tailored to your goals',
+      stats: { icon: '🍎', number: '50+', label: 'Food Categories' }
     }
   ];
 
@@ -334,26 +333,8 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
           ))}
         </div>
 
-
-        {/* Daily Tracking & Meals Feature Sections */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-12 lg:mb-20">
-          <div
-            onClick={() => setCurrentPage('tracking')}
-            className="group relative bg-linear-to-br from-orange-500 to-amber-600 p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] overflow-hidden cursor-pointer shadow-2xl hover:-translate-y-1 transition-all active:scale-95"
-          >
-            <div className="relative z-10">
-              <div className="text-5xl md:text-6xl lg:text-7xl mb-4 md:mb-6 transform group-hover:scale-110 transition-transform">
-                🥕
-              </div>
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3 md:mb-4">{t.daily_tracking}</h3>
-              <p className="text-orange-100 text-sm md:text-base lg:text-lg mb-6 md:mb-8 max-w-md leading-relaxed">{t.daily_tracking_desc}</p>
-              <div className="inline-flex items-center gap-2 md:gap-3 px-5 md:px-6 py-3 md:py-3 bg-white text-orange-600 rounded-xl font-bold hover:bg-orange-50 transition-colors text-sm md:text-base">
-                {t.open_dashboard} <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
-              </div>
-            </div>
-            <div className="absolute top-0 right-0 w-48 h-48 md:w-64 md:h-64 bg-white/20 blur-[80px] md:blur-[100px] -mr-24 md:-mr-32 -mt-24 md:-mt-32"></div>
-          </div>
-
+        {/* Meal Suggestions Feature Card */}
+        <div className="max-w-7xl mx-auto mb-12 lg:mb-20 px-4">
           <div
             onClick={() => setCurrentPage('meals')}
             className="group relative bg-linear-to-br from-green-600 to-emerald-700 p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] overflow-hidden cursor-pointer shadow-2xl hover:-translate-y-1 transition-all active:scale-95"
@@ -375,6 +356,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
     </div>
   );
 };
+
 
 
 

@@ -1884,6 +1884,61 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang }) => {
   );
 };
 
+const parseMarkdown = (text) => {
+  if (!text) return null;
+
+  const lines = text.split('\n');
+  return lines.map((line, i) => {
+    // Headers
+    if (line.startsWith('### ')) {
+      return <h3 key={i} className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4">{line.slice(4)}</h3>;
+    }
+    if (line.startsWith('## ')) {
+      return <h2 key={i} className="text-2xl font-black text-gray-900 dark:text-white mt-10 mb-6">{line.slice(3)}</h2>;
+    }
+    if (line.startsWith('# ')) {
+      return <h1 key={i} className="text-3xl font-black text-gray-900 dark:text-white mt-12 mb-8">{line.slice(2)}</h1>;
+    }
+
+    // Lists
+    if (line.trim().startsWith('- ') || line.trim().startsWith('* ')) {
+      return <li key={i} className="ml-6 list-disc text-gray-700 dark:text-gray-300 mb-2">{parseInlineMarkdown(line.trim().slice(2))}</li>;
+    }
+    if (/^\d+\.\s/.test(line.trim())) {
+      return <li key={i} className="ml-6 list-decimal text-gray-700 dark:text-gray-300 mb-2">{parseInlineMarkdown(line.trim().replace(/^\d+\.\s/, ''))}</li>;
+    }
+
+    // Empty lines
+    if (!line.trim()) return <div key={i} className="h-4" />;
+
+    // Regular paragraphs
+    return <p key={i} className="mb-4 leading-relaxed">{parseInlineMarkdown(line)}</p>;
+  });
+};
+
+const parseInlineMarkdown = (text) => {
+  if (typeof text !== 'string') return text;
+  // Bold: **text**
+  let parts = text.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i} className="font-bold text-gray-900 dark:text-white">{part.slice(2, -2)}</strong>;
+    }
+
+    // Links: [text](url)
+    const linkMatch = part.match(/\[(.*?)\]\((.*?)\)/);
+    if (linkMatch) {
+      return (
+        <a key={i} href={linkMatch[2]} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline font-medium">
+          {linkMatch[1]}
+        </a>
+      );
+    }
+
+    return part;
+  });
+};
+
 const BlogPostPage = ({ post, setCurrentPage, t }) => {
   if (!post) return null;
   return (
@@ -1903,13 +1958,14 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
           )}
           <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] mb-8 tracking-tight">{post.title}</h1>
         </header>
-        <article className="prose prose-lg prose-emerald dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 space-y-8 leading-relaxed">
-          {post.content.split('\n\n').map((para, i) => <p key={i}>{para}</p>)}
+        <article className="max-w-none text-gray-700 dark:text-gray-300" dir="ltr">
+          {parseMarkdown(post.content)}
         </article>
+
         {post.faq && post.faq.length > 0 && (
           <div className="mt-20 p-8 md:p-12 bg-slate-50 dark:bg-gray-800 rounded-[2.5rem] border border-slate-200 dark:border-gray-700">
             <h2 className="text-3xl font-black text-gray-800 dark:text-white mb-8">{t.faq_title}</h2>
-            <div className="space-y-6">
+            <div className="space-y-6" dir="ltr">
               {post.faq.map((item, i) => (
                 <div key={i} className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-gray-700">
                   <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">{item.question}</h3>

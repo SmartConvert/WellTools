@@ -12,14 +12,7 @@ const MealPlannerPage = React.lazy(() => import('./components/MealPlannerPage'))
 
 
 
-const tools = [
-  { id: 'bmi', name: 'BMI Calculator', icon: Calculator, color: 'from-cyan-400 to-blue-500', description: 'Calculate your Body Mass Index' },
-  { id: 'calories', name: 'Calories Calculator', icon: Activity, color: 'from-green-400 to-emerald-500', description: 'Find your daily calorie needs' },
-  { id: 'water', name: 'Water Intake', icon: Droplet, color: 'from-blue-400 to-cyan-500', description: 'How much water should you drink?' },
-  { id: 'ideal-weight', name: 'Ideal Weight', icon: Scale, color: 'from-purple-400 to-pink-500', description: 'Calculate your ideal body weight' },
-  { id: 'sleep', name: 'Sleep Duration', icon: Moon, color: 'from-indigo-400 to-purple-500', description: 'Recommended sleep hours by age' },
-  { id: 'body-fat', name: 'Body Fat %', icon: Percent, color: 'from-orange-400 to-red-500', description: 'Calculate body fat percentage' }
-];
+
 
 
 
@@ -40,9 +33,7 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
           <button onClick={() => setCurrentPage('home')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
             {t.nav_home}
           </button>
-          <button onClick={() => setCurrentPage('calculators')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
-            {t.nav_apps}
-          </button>
+
           <button onClick={() => setCurrentPage('tracking')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
             {t.daily_tracking}
           </button>
@@ -98,9 +89,7 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
           <button onClick={() => { setCurrentPage('home'); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
             {t.nav_home}
           </button>
-          <button onClick={() => { setCurrentPage('calculators'); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
-            {t.nav_apps}
-          </button>
+
           <button onClick={() => { setCurrentPage('tracking'); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
             {t.daily_tracking}
           </button>
@@ -206,15 +195,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                     {slide.subtitle}
                   </p>
                   <div className="flex flex-wrap gap-4">
-                    <button
-                      onClick={() => {
-                        const el = document.getElementById('tools-grid');
-                        el?.scrollIntoView({ behavior: 'smooth' });
-                      }}
-                      className="px-8 py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
-                    >
-                      {t.explore_tools}
-                    </button>
+
                     <button
                       onClick={() => setCurrentPage('blog')}
                       className="px-8 py-4 bg-white/10 backdrop-blur-md text-white border-2 border-white/20 rounded-2xl font-bold text-lg hover:bg-white/20 transition-all shadow-sm"
@@ -314,32 +295,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
 
         <AdComponent slot="home_top" />
 
-        {/* Tools Grid */}
-        <div id="tools-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12 lg:mb-20">
-          {[
-            { id: 'bmi', name: t.bmi_calc, icon: Calculator, color: 'from-cyan-400 to-blue-500', description: t.bmi_desc },
-            { id: 'calories', name: t.calories_calc, icon: Activity, color: 'from-emerald-400 to-teal-500', description: t.calories_desc },
-            { id: 'water', name: t.water_calc, icon: Droplet, color: 'from-blue-400 to-indigo-500', description: t.water_desc },
-            { id: 'ideal-weight', name: t.ideal_weight, icon: Scale, color: 'from-rose-400 to-pink-500', description: t.ideal_weight_desc },
-            { id: 'sleep', name: t.sleep_calc, icon: Moon, color: 'from-violet-400 to-purple-500', description: t.sleep_desc },
-            { id: 'body-fat', name: t.body_fat_calc, icon: Percent, color: 'from-orange-400 to-red-500', description: t.body_fat_desc }
-          ].map((tool) => (
-            <div
-              key={tool.id}
-              onClick={() => setCurrentPage(tool.id)}
-              className="group bg-white dark:bg-gray-800 p-8 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all cursor-pointer border border-gray-50 dark:border-gray-700 hover:-translate-y-2"
-            >
-              <div className={`w-16 h-16 bg-linear-to-br ${tool.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
-                <tool.icon className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-3">{tool.name}</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">{tool.description}</p>
-              <div className="flex items-center text-emerald-600 dark:text-emerald-400 font-bold gap-2">
-                {t.explore_tool} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          ))}
-        </div>
+
 
         {/* Daily Tracking & Meals Feature Sections */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-12 lg:mb-20">

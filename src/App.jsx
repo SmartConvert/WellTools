@@ -92,7 +92,7 @@ const AdComponent = ({ slot }) => {
       {/* AdSense Unit Code */}
       <ins className="adsbygoogle"
         style={{ display: 'block', width: '100%', textAlign: 'center', minHeight: '90px' }}
-        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+        data-ad-client="ca-pub-4160895122812433"
         data-ad-slot={slot}
         data-ad-format="auto"
         data-full-width-responsive="true"></ins>

@@ -87,11 +87,11 @@ const AdComponent = ({ slot }) => {
   }, []);
 
   return (
-    <div className="my-8 w-full flex justify-center overflow-hidden min-h-[100px] bg-gray-800/20 rounded-2xl border border-dashed border-gray-700 flex-col items-center justify-center p-4">
+    <div className="my-8 w-full flex justify-center overflow-hidden min-h-[140px] md:min-h-[280px] bg-gray-800/20 rounded-2xl border border-dashed border-gray-700 flex-col items-center justify-center p-4">
       <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-2 font-bold">Advertisement</p>
       {/* AdSense Unit Code */}
       <ins className="adsbygoogle"
-        style={{ display: 'block', width: '100%', textAlign: 'center' }}
+        style={{ display: 'block', width: '100%', textAlign: 'center', minHeight: '90px' }}
         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
         data-ad-slot={slot}
         data-ad-format="auto"
@@ -1558,8 +1558,8 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang }) => {
           {posts.map((post) => (
             <article key={post.id} className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col">
               {post.image && (
-                <div className="relative h-64 overflow-hidden">
-                  <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div className="relative h-64 overflow-hidden bg-gray-800">
+                  <img src={post.image} alt={post.imageAlt || post.title} loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
                 </div>
               )}
@@ -1603,8 +1603,8 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
         </button>
         <header className="mb-12">
           {post.image && (
-            <div className="w-full h-[400px] rounded-[2.5rem] overflow-hidden mb-10 shadow-2xl">
-              <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+            <div className="w-full h-[300px] md:h-[400px] rounded-[2.5rem] overflow-hidden mb-10 shadow-2xl bg-gray-800">
+              <img src={post.image} alt={post.imageAlt || post.title} decoding="async" className="w-full h-full object-cover" />
             </div>
           )}
           <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] mb-8 tracking-tight">{post.title}</h1>
@@ -1924,8 +1924,6 @@ const DailyHealthTools = () => {
   return (
     <div className="min-h-screen font-sans transition-colors duration-300 dark bg-gray-900 text-white">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
-        
         * {
           font-family: 'Plus Jakarta Sans', 'IBM Plex Sans Arabic', sans-serif;
         }

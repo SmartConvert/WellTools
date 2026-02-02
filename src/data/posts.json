@@ -82,7 +82,34 @@
             ]
         }
     ],
-    "fr": [],
+    "fr": [
+        {
+            "id": "intermittent-fasting-guide-fr-1770054780375",
+            "title": "Le jeûne intermittent : Guide du débutant sur les bienfaits et la sécurité",
+            "date": "2026-02-02",
+            "category": "Nutrition",
+            "excerpt": "Explorez la science derrière le jeûne intermittent. Apprenez les différentes méthodes, les bienfaits pour la gestion du poids et comment commencer en toute sécurité.",
+            "image": "https://image.pollinations.ai/prompt/professional_photography_of_healthy_breakfast_with_clock_representing_fasting_concept_soft_lighting_high_resolution?width=1200&height=800&nologo=true",
+            "imageAlt": "Petit déjeuner sain avec horloge pour le jeûne intermittent",
+            "content": "## Introduction\n\nLe jeûne intermittent (JI) a gagné une immense popularité en tant que moyen simple mais efficace de gérer son poids et d'améliorer sa santé métabolique. Contrairement aux régimes traditionnels qui se concentrent sur *ce que* vous mangez, le jeûne intermittent se concentre sur *quand* vous mangez.\n\n## Méthodes de jeûne courantes\n\n1. **La méthode 16/8** : Cela consiste à sauter le petit déjeuner et à limiter votre période d'alimentation quotidienne à 8 heures, par exemple de 13h à 21h. Ensuite, vous jeûnez pendant 16 heures.\n2. **Le régime 5:2** : Avec cette méthode, vous ne consommez que 500 à 600 calories deux jours non consécutifs par semaine, mais mangez normalement les 5 autres jours.\n3. **Eat Stop Eat** : Cela implique un jeûne de 24 heures, une ou deux fois par semaine.\n\n## Bienfaits pour la santé\n\n- **Perte de poids** : En réduisant la fenêtre d'alimentation, les utilisateurs consomment souvent naturellement moins de calories.\n- **Sensibilité à l'insuline** : Le jeûne peut aider à abaisser la glycémie.\n- **Réparation cellulaire** : Pendant le jeûne, le corps initie un processus de nettoyage appelé autophagie.\n\n## Est-ce sûr ?\n\nPour la plupart des adultes en bonne santé, le jeûne intermittent est sûr. Cependant, il ne convient pas à tout le monde. Les femmes enceintes ou les personnes ayant des antécédents de troubles de l'alimentation doivent consulter un médecin. Utilisez nos calculateurs d'IMC et de calories pour comprendre votre base de santé.\n\n## Questions fréquemment posées (FAQ)\n\n**Combien d'eau puis-je boire pendant le jeûne ?**\nVous devez rester bien hydraté. L'eau pure, le café noir et le thé non sucré sont autorisés.\n\n**Le jeûne provoque-t-il une perte de muscle ?**\nLa plupart des études montrent que le jeûne intermittent est similaire à la restriction calorique continue pour préserver la masse musculaire.\n\n## Sources et références\n\n- Mayo Clinic - Jeûne intermittent\n- Johns Hopkins Medicine - Qu'est-ce que le jeûne intermittent ?\n\nCe site fournit des informations générales sur la santé et ne remplace pas un avis médical professionnel.",
+            "keywords": [
+                "jeûne intermittent",
+                "perte de poids",
+                "santé",
+                "nutrition"
+            ],
+            "faq": [
+                {
+                    "question": "Le café rompt-il le jeûne ?",
+                    "answer": "Le café noir sans sucre ni lait ne rompt pas le jeûne."
+                },
+                {
+                    "question": "Puis-je faire de l'exercice en jeûnant ?",
+                    "answer": "Oui, de nombreuses personnes trouvent qu'elles peuvent s'entraîner efficacement pendant un jeûne."
+                }
+            ]
+        }
+    ],
     "de": [],
     "es": []
 }

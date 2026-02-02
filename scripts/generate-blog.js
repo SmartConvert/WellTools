@@ -15,14 +15,12 @@ if (!API_KEY) {
 }
 
 const genAI = new GoogleGenerativeAI(API_KEY);
-// List of models to try in order of preference
+// List of models to try in order of preference. Using more stable/recent names.
 const MODELS_TO_TRY = [
+    "gemini-2.0-flash",
     "gemini-1.5-flash",
-    "gemini-1.5-flash-latest",
     "gemini-1.5-pro",
-    "gemini-1.5-pro-latest",
-    "gemini-1.0-pro",
-    "gemini-pro"
+    "gemini-1.0-pro"
 ];
 
 async function getWorkingModel(genAI) {

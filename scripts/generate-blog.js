@@ -16,12 +16,12 @@ if (!API_KEY) {
 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
-// Prioritize stable models for automated tasks. 1.5-flash has better free tier availability.
+// Prioritize stable models for automated tasks. 
 const MODELS_TO_TRY = [
     "gemini-1.5-flash",
-    "gemini-1.5-flash-8b",
-    "gemini-2.0-flash",
-    "gemini-2.0-flash-lite"
+    "gemini-1.5-flash-latest",
+    "gemini-1.5-pro",
+    "gemini-1.5-pro-latest"
 ];
 
 async function getWorkingModel(genAI) {
@@ -40,12 +40,16 @@ async function getWorkingModel(genAI) {
             }
         } catch (error) {
             console.warn(`❌ Model ${modelName} failed. Reason: ${error.message}`);
-            // Wait 10 seconds before trying next model to give the API quota room to reset
-            console.log("Waiting 10 seconds before next attempt...");
-            await new Promise(resolve => setTimeout(resolve, 10000));
+
+            // If it's a rate limit error (429), wait longer
+            const isRateLimit = error.message.includes("429") || error.message.toLowerCase().includes("too many requests");
+            const waitTime = isRateLimit ? 30000 : 5000; // 30s for rate limit, 5s for others
+
+            console.log(`Waiting ${waitTime / 1000} seconds before next attempt...`);
+            await new Promise(resolve => setTimeout(resolve, waitTime));
         }
     }
-    throw new Error("All Gemini models failed. Quota might be fully exhausted.");
+    throw new Error("All Gemini models failed. Quota might be fully exhausted or service is down.");
 }
 
 const categories = ["Nutrition", "Fitness", "Mental Health", "Sleep", "Longevity", "Biohacking"];

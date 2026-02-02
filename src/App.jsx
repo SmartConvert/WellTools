@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { Calculator, Heart, Droplet, Globe, Scale, Apple, TrendingDown, Activity, Utensils, ChevronRight, Menu, X, Percent, TrendingUp, Calendar, BarChart3, LineChart as LineChartIcon, Plus, Trash2, BookOpen, ArrowLeft, ExternalLink, Moon, Info } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import postsData from './data/posts.json';
-import { translations } from './translations';
+import AdComponent from './components/AdComponent';
+import ToolInfoSection from './components/ToolInfoSection';
+
+const BMICalculatorPage = React.lazy(() => import('./components/BMICalculatorPage'));
 
 // Meal Data
 const mealCategories = {
@@ -77,70 +80,7 @@ const tools = [
   { id: 'body-fat', name: 'Body Fat %', icon: Percent, color: 'from-orange-400 to-red-500', description: 'Calculate body fat percentage' }
 ];
 
-const AdComponent = ({ slot }) => {
-  useEffect(() => {
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      console.error("AdSense error", e);
-    }
-  }, []);
 
-  return (
-    <div className="my-8 w-full flex justify-center overflow-hidden min-h-[140px] md:min-h-[280px] bg-gray-800/20 rounded-2xl border border-dashed border-gray-700 flex-col items-center justify-center p-4">
-      <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-2 font-bold">Advertisement</p>
-      {/* AdSense Unit Code */}
-      <ins className="adsbygoogle"
-        style={{ display: 'block', width: '100%', textAlign: 'center', minHeight: '90px' }}
-        data-ad-client="ca-pub-4160895122812433"
-        data-ad-slot={slot}
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-    </div>
-  );
-};
-
-const ToolInfoSection = ({ toolId, t }) => {
-  if (!t) return null;
-  return (
-    <div className="mt-12 space-y-8 animate-fade-in">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Definition Card */}
-        <div className="bg-white dark:bg-gray-800 p-8 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all">
-          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mb-6 text-blue-600 dark:text-blue-400">
-            <BookOpen className="w-6 h-6" />
-          </div>
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t.tool_info_definition}</h3>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-            {t[`${toolId}_definition`]}
-          </p>
-        </div>
-
-        {/* Usage Card */}
-        <div className="bg-white dark:bg-gray-800 p-8 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all">
-          <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl flex items-center justify-center mb-6 text-emerald-600 dark:text-emerald-400">
-            <Activity className="w-6 h-6" />
-          </div>
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t.tool_info_usage}</h3>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-            {t[`${toolId}_usage`]}
-          </p>
-        </div>
-
-        {/* Benefits Card */}
-        <div className="bg-white dark:bg-gray-800 p-8 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all">
-          <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center mb-6 text-purple-600 dark:text-purple-400">
-            <Heart className="w-6 h-6" />
-          </div>
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t.tool_info_benefits}</h3>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-            {t[`${toolId}_benefits`]}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLang, t }) => (
   <nav className="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 shadow-sm transition-colors duration-300">
@@ -309,6 +249,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
               <img
                 src={slide.image}
                 alt={slide.title}
+                loading={index === 0 ? "eager" : "lazy"}
                 className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-10000"
               />
               <div className="absolute inset-0 bg-linear-to-r from-gray-900/80 via-gray-900/40 to-transparent"></div>
@@ -387,6 +328,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                     <img
                       src={latestPost.image}
                       alt={latestPost.title}
+                      loading="lazy"
                       onError={() => setImageError(true)}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 animate-fade-in"
                     />
@@ -417,7 +359,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                     <div className="flex -space-x-2">
                       {[1, 2, 3].map((i) => (
                         <div key={i} className={`w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden`}>
-                          <img src={`https://i.pravatar.cc/100?u=${i + 10}`} alt="user" />
+                          <img src={`https://i.pravatar.cc/100?u=${i + 10}`} alt="user" loading="lazy" />
                         </div>
                       ))}
                       <div className="pl-4 text-sm text-gray-500 dark:text-gray-400 font-medium">+1.2k views</div>
@@ -499,91 +441,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
   );
 };
 
-const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, calculateBMI, bmiResult, setCurrentPage, t }) => (
-  <div className="pt-24 pb-16 px-4">
-    <div className="max-w-3xl mx-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-16 h-16 bg-linear-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
-            <Calculator className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.bmi_calc}</h1>
-        </div>
 
-        <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
-          {t.bmi_desc}
-        </p>
-
-        <div className="space-y-6">
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.weight} ({t.unit_kg})</label>
-            <input
-              type="number"
-              value={bmiWeight}
-              onChange={(e) => setBmiWeight(e.target.value)}
-              placeholder="70"
-              className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-cyan-500 focus:outline-none transition-colors text-lg"
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.height} ({t.unit_cm})</label>
-            <input
-              type="number"
-              value={bmiHeight}
-              onChange={(e) => setBmiHeight(e.target.value)}
-              placeholder="175"
-              className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-cyan-500 focus:outline-none transition-colors text-lg"
-            />
-          </div>
-
-          <button
-            onClick={calculateBMI}
-            className="w-full py-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-          >
-            {t.calculate}
-          </button>
-        </div>
-
-        {bmiResult && (
-          <div id="bmi-result" className="mt-8 p-8 bg-linear-to-br from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-2xl border-2 border-cyan-200 dark:border-cyan-800 animate-scale-in">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
-            <div className="space-y-6 text-center">
-              <div className="inline-block p-6 bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-cyan-100 dark:border-cyan-900">
-                <p className="text-5xl font-black text-cyan-600 dark:text-cyan-400">{bmiResult.bmi}</p>
-                <p className={`text-2xl font-bold ${bmiResult.color} mt-2`}>{t[bmiResult.category]}</p>
-              </div>
-
-              <div className="pt-6 border-t border-cyan-100 dark:border-cyan-900/50">
-                <h4 className="text-lg font-bold text-gray-800 dark:text-white mb-3 flex items-center justify-center gap-2">
-                  <Info className="w-5 h-5 text-cyan-500" />
-                  {t.bmi_advice_title}
-                </h4>
-                <p className={`text-lg font-semibold mb-4 ${bmiResult.suitable ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
-                  {bmiResult.suitable ? t.bmi_status_suitable : t.bmi_status_not_suitable}
-                </p>
-                <div className="bg-white/50 dark:bg-gray-800/50 p-6 rounded-2xl text-gray-700 dark:text-gray-300 leading-relaxed shadow-sm">
-                  {bmiResult.tip}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <ToolInfoSection toolId="bmi" t={t} />
-
-        <AdComponent slot="bmi_bottom" />
-      </div>
-
-      <button
-        onClick={() => setCurrentPage('home')}
-        className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
-      >
-        {t.back_to_home}
-      </button>
-    </div>
-  </div>
-);
 
 const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeight, calAge, setCalAge, calGender, setCalGender, calActivity, setCalActivity, calculateCalories, calResult, setCurrentPage, t }) => (
   <div className="pt-24 pb-16 px-4">
@@ -2395,23 +2253,25 @@ const DailyHealthTools = () => {
       />
 
       <main className="min-h-[80vh]">
-        {currentPage === 'home' && <HomePage setCurrentPage={setCurrentPage} setSelectedMealCategory={setSelectedMealCategory} setSelectedPost={setSelectedPost} lang={lang} t={t} />}
-        {currentPage === 'bmi' && <BMICalculatorPage bmiWeight={bmiWeight} setBmiWeight={setBmiWeight} bmiHeight={bmiHeight} setBmiHeight={setBmiHeight} calculateBMI={calculateBMI} bmiResult={bmiResult} setCurrentPage={setCurrentPage} t={t} />}
-        {currentPage === 'calories' && <CaloriesCalculatorPage calWeight={calWeight} setCalWeight={setCalWeight} calHeight={calHeight} setCalHeight={setCalHeight} calAge={calAge} setCalAge={setCalAge} calGender={calGender} setCalGender={setCalGender} calActivity={calActivity} setCalActivity={setCalActivity} calculateCalories={calculateCalories} calResult={calResult} setCurrentPage={setCurrentPage} t={t} />}
-        {currentPage === 'water' && <WaterCalculatorPage waterWeight={waterWeight} setWaterWeight={setWaterWeight} waterActivity={waterActivity} setWaterActivity={setWaterActivity} calculateWater={calculateWater} waterResult={waterResult} setCurrentPage={setCurrentPage} t={t} />}
-        {currentPage === 'ideal-weight' && <IdealWeightPage idealHeight={idealHeight} setIdealHeight={setIdealHeight} idealGender={idealGender} setIdealGender={setIdealGender} calculateIdealWeight={calculateIdealWeight} idealResult={idealResult} setCurrentPage={setCurrentPage} t={t} />}
-        {currentPage === 'sleep' && <SleepCalculatorPage sleepAge={sleepAge} setSleepAge={setSleepAge} calculateSleep={calculateSleep} sleepResult={sleepResult} setCurrentPage={setCurrentPage} t={t} />}
-        {currentPage === 'body-fat' && <BodyFatCalculatorPage bfWeight={bfWeight} setBfWeight={setBfWeight} bfHeight={bfHeight} setBfHeight={setBfHeight} bfAge={bfAge} setBfAge={setBfAge} bfGender={bfGender} setBfGender={setBfGender} bfNeck={bfNeck} setBfNeck={setBfNeck} bfWaist={bfWaist} setBfWaist={setBfWaist} bfHip={bfHip} setBfHip={setBfHip} calculateBodyFat={calculateBodyFat} bfResult={bfResult} setCurrentPage={setCurrentPage} t={t} />}
-        {currentPage === 'tracking' && <DailyTrackingPage trackingData={trackingData} newWeight={newWeight} setNewWeight={setNewWeight} addWeightEntry={addWeightEntry} newWater={newWater} setNewWater={setNewWater} addWaterEntry={addWaterEntry} newSleep={newSleep} setNewSleep={setNewSleep} addSleepEntry={addSleepEntry} deleteEntry={deleteEntry} setCurrentPage={setCurrentPage} t={t} />}
-        {currentPage === 'meals' && <MealsPage selectedMealCategory={selectedMealCategory} setSelectedMealCategory={setSelectedMealCategory} t={t} />}
-        {currentPage === 'about' && <AboutPage setCurrentPage={setCurrentPage} t={t} />}
-        {currentPage === 'terms-of-use' && <TermsOfUsePage setCurrentPage={setCurrentPage} t={t} />}
-        {currentPage === 'disclaimer' && <DisclaimerPage setCurrentPage={setCurrentPage} t={t} />}
-        {currentPage === 'privacy-policy' && <PrivacyPolicyPage setCurrentPage={setCurrentPage} t={t} />}
-        {currentPage === 'contact' && <ContactPage setCurrentPage={setCurrentPage} t={t} />}
-        {currentPage === 'blog' && <BlogPage setCurrentPage={setCurrentPage} setSelectedPost={setSelectedPost} t={t} lang={lang} />}
-        {currentPage === 'blog-post' && <BlogPostPage post={selectedPost} setCurrentPage={setCurrentPage} t={t} />}
-        {currentPage === 'meal-planner' && <MealPlannerPage t={t} setCurrentPage={setCurrentPage} calResult={calResult} />}
+        <Suspense fallback={<div className="flex justify-center items-center min-h-[400px]"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500"></div></div>}>
+          {currentPage === 'home' && <HomePage setCurrentPage={setCurrentPage} setSelectedMealCategory={setSelectedMealCategory} setSelectedPost={setSelectedPost} lang={lang} t={t} />}
+          {currentPage === 'bmi' && <BMICalculatorPage bmiWeight={bmiWeight} setBmiWeight={setBmiWeight} bmiHeight={bmiHeight} setBmiHeight={setBmiHeight} calculateBMI={calculateBMI} bmiResult={bmiResult} setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'calories' && <CaloriesCalculatorPage calWeight={calWeight} setCalWeight={setCalWeight} calHeight={calHeight} setCalHeight={setCalHeight} calAge={calAge} setCalAge={setCalAge} calGender={calGender} setCalGender={setCalGender} calActivity={calActivity} setCalActivity={setCalActivity} calculateCalories={calculateCalories} calResult={calResult} setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'water' && <WaterCalculatorPage waterWeight={waterWeight} setWaterWeight={setWaterWeight} waterActivity={waterActivity} setWaterActivity={setWaterActivity} calculateWater={calculateWater} waterResult={waterResult} setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'ideal-weight' && <IdealWeightPage idealHeight={idealHeight} setIdealHeight={setIdealHeight} idealGender={idealGender} setIdealGender={setIdealGender} calculateIdealWeight={calculateIdealWeight} idealResult={idealResult} setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'sleep' && <SleepCalculatorPage sleepAge={sleepAge} setSleepAge={setSleepAge} calculateSleep={calculateSleep} sleepResult={sleepResult} setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'body-fat' && <BodyFatCalculatorPage bfWeight={bfWeight} setBfWeight={setBfWeight} bfHeight={bfHeight} setBfHeight={setBfHeight} bfAge={bfAge} setBfAge={setBfAge} bfGender={bfGender} setBfGender={setBfGender} bfNeck={bfNeck} setBfNeck={setBfNeck} bfWaist={bfWaist} setBfWaist={setBfWaist} bfHip={bfHip} setBfHip={setBfHip} calculateBodyFat={calculateBodyFat} bfResult={bfResult} setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'tracking' && <DailyTrackingPage trackingData={trackingData} newWeight={newWeight} setNewWeight={setNewWeight} addWeightEntry={addWeightEntry} newWater={newWater} setNewWater={setNewWater} addWaterEntry={addWaterEntry} newSleep={newSleep} setNewSleep={setNewSleep} addSleepEntry={addSleepEntry} deleteEntry={deleteEntry} setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'meals' && <MealsPage selectedMealCategory={selectedMealCategory} setSelectedMealCategory={setSelectedMealCategory} t={t} />}
+          {currentPage === 'about' && <AboutPage setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'terms-of-use' && <TermsOfUsePage setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'disclaimer' && <DisclaimerPage setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'privacy-policy' && <PrivacyPolicyPage setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'contact' && <ContactPage setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'blog' && <BlogPage setCurrentPage={setCurrentPage} setSelectedPost={setSelectedPost} t={t} lang={lang} />}
+          {currentPage === 'blog-post' && <BlogPostPage post={selectedPost} setCurrentPage={setCurrentPage} t={t} />}
+          {currentPage === 'meal-planner' && <MealPlannerPage t={t} setCurrentPage={setCurrentPage} calResult={calResult} />}
+        </Suspense>
       </main>
 
       {/* Footer */}

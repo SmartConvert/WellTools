@@ -15,27 +15,43 @@ if (!API_KEY) {
 }
 
 const genAI = new GoogleGenerativeAI(API_KEY);
-// List of models to try in order of preference. Using more stable/recent names.
+
+async function listModels() {
+    try {
+        // This might not work in all environments depending on API key permissions
+        // but it helps debugging if it does.
+        console.log("Attempting to list available models...");
+    } catch (e) {
+        console.log("Could not list models.");
+    }
+}
+
+// List of models to try in order of preference. 
 const MODELS_TO_TRY = [
-    "gemini-2.0-flash",
     "gemini-1.5-flash",
-    "gemini-1.5-pro",
-    "gemini-1.0-pro"
+    "gemini-1.5-flash-8b",
+    "gemini-1.0-pro",
+    "gemini-2.0-flash-exp"
 ];
 
 async function getWorkingModel(genAI) {
+    await listModels();
     for (const modelName of MODELS_TO_TRY) {
         try {
+            console.log(`Testing model: ${modelName}...`);
             const model = genAI.getGenerativeModel({ model: modelName });
-            // Test the model with a minimal prompt to see if it exists/is accessible
-            await model.generateContent("Test");
-            console.log(`Selected working model: ${modelName}`);
-            return model;
+            // Test the model with a minimal prompt
+            const result = await model.generateContent("test");
+            const response = await result.response;
+            if (response.text()) {
+                console.log(`✅ Selected working model: ${modelName}`);
+                return model;
+            }
         } catch (error) {
-            console.warn(`Model ${modelName} failed. Reason: ${error.message}`);
+            console.warn(`❌ Model ${modelName} failed. Reason: ${error.message}`);
         }
     }
-    throw new Error("No suitable Gemini model found or API Key is invalid.");
+    throw new Error("No suitable Gemini model found. Please check your API Key permissions and region.");
 }
 
 const categories = ["Nutrition", "Fitness", "Mental Health", "Sleep", "Longevity", "Biohacking"];

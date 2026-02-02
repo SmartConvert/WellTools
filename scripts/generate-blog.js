@@ -20,7 +20,7 @@ const openai = new OpenAI({
 });
 
 // List of models to try in order of preference
-const MODEL_NAME = "llama-3.1-sonar-large-128k-online";
+const MODEL_NAME = "llama-3.1-sonar-small-128k-online";
 
 const categories = ["Nutrition", "Fitness", "Mental Health", "Sleep", "Longevity", "Biohacking"];
 

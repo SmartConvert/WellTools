@@ -301,36 +301,36 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-12 lg:mb-20">
           <div
             onClick={() => setCurrentPage('tracking')}
-            className="group relative bg-linear-to-br from-orange-500 to-amber-600 p-10 rounded-[3rem] overflow-hidden cursor-pointer shadow-2xl hover:-translate-y-1 transition-all"
+            className="group relative bg-linear-to-br from-orange-500 to-amber-600 p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] overflow-hidden cursor-pointer shadow-2xl hover:-translate-y-1 transition-all active:scale-95"
           >
             <div className="relative z-10">
-              <div className="text-6xl mb-6 transform group-hover:scale-110 transition-transform">
+              <div className="text-5xl md:text-6xl lg:text-7xl mb-4 md:mb-6 transform group-hover:scale-110 transition-transform">
                 🥕
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">{t.daily_tracking}</h3>
-              <p className="text-orange-100 text-base md:text-lg mb-8 max-w-md">{t.daily_tracking_desc}</p>
-              <div className="inline-flex items-center gap-3 px-6 py-3 bg-white text-orange-600 rounded-xl font-bold hover:bg-orange-50 transition-colors">
-                {t.open_dashboard} <ChevronRight className="w-5 h-5" />
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3 md:mb-4">{t.daily_tracking}</h3>
+              <p className="text-orange-100 text-sm md:text-base lg:text-lg mb-6 md:mb-8 max-w-md leading-relaxed">{t.daily_tracking_desc}</p>
+              <div className="inline-flex items-center gap-2 md:gap-3 px-5 md:px-6 py-3 md:py-3 bg-white text-orange-600 rounded-xl font-bold hover:bg-orange-50 transition-colors text-sm md:text-base">
+                {t.open_dashboard} <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
               </div>
             </div>
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 blur-[100px] -mr-32 -mt-32"></div>
+            <div className="absolute top-0 right-0 w-48 h-48 md:w-64 md:h-64 bg-white/20 blur-[80px] md:blur-[100px] -mr-24 md:-mr-32 -mt-24 md:-mt-32"></div>
           </div>
 
           <div
             onClick={() => setCurrentPage('meals')}
-            className="group relative bg-linear-to-br from-green-600 to-emerald-700 p-10 rounded-[3rem] overflow-hidden cursor-pointer shadow-2xl hover:-translate-y-1 transition-all"
+            className="group relative bg-linear-to-br from-green-600 to-emerald-700 p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] overflow-hidden cursor-pointer shadow-2xl hover:-translate-y-1 transition-all active:scale-95"
           >
             <div className="relative z-10">
-              <div className="text-6xl mb-6 transform group-hover:scale-110 transition-transform">
+              <div className="text-5xl md:text-6xl lg:text-7xl mb-4 md:mb-6 transform group-hover:scale-110 transition-transform">
                 🥗
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">{t.meal_suggestions}</h3>
-              <p className="text-green-100 text-base md:text-lg mb-8 max-w-md">{t.meal_suggestions_desc}</p>
-              <div className="inline-flex items-center gap-3 px-6 py-3 bg-white text-green-700 rounded-xl font-bold hover:bg-green-50 transition-colors">
-                {t.view_meal_plans} <ChevronRight className="w-5 h-5" />
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3 md:mb-4">{t.meal_suggestions}</h3>
+              <p className="text-green-100 text-sm md:text-base lg:text-lg mb-6 md:mb-8 max-w-md leading-relaxed">{t.meal_suggestions_desc}</p>
+              <div className="inline-flex items-center gap-2 md:gap-3 px-5 md:px-6 py-3 md:py-3 bg-white text-green-700 rounded-xl font-bold hover:bg-green-50 transition-colors text-sm md:text-base">
+                {t.view_meal_plans} <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
               </div>
             </div>
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 blur-[100px] -mr-32 -mt-32"></div>
+            <div className="absolute top-0 right-0 w-48 h-48 md:w-64 md:h-64 bg-white/20 blur-[80px] md:blur-[100px] -mr-24 md:-mr-32 -mt-24 md:-mt-32"></div>
           </div>
         </div>
       </div>

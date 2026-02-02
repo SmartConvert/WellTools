@@ -157,6 +157,34 @@ export const translations = {
         sleep_how_it_works: 'Optimal Rest: Quality sleep is as important for health as diet and exercise. This tool calculates recommended sleep duration based on age-specific guidelines from health experts, helping you understand the rest required for brain function, emotional health, and physical repair.',
         body_fat_how_it_works: 'Body Composition: Unlike BMI, body fat percentage measures the portion of your body that is fat versus lean mass (muscles, bones, etc.). Our tool uses the U.S. Navy Method (circumference-based) to provide a reliable estimate, helping you track fitness progress more accurately than weight alone.',
 
+        tool_info_definition: 'What is it?',
+        tool_info_usage: 'How to use?',
+        tool_info_benefits: 'What are the benefits?',
+
+        bmi_definition: 'Body Mass Index (BMI) is a measure that uses your height and weight to work out if your weight is healthy.',
+        bmi_usage: 'Enter your weight in kilograms and your height in centimeters. Click calculate to see your BMI score and category.',
+        bmi_benefits: 'Helps identify potential weight-related health risks and provides a baseline for tracking weight management progress.',
+
+        calories_definition: 'This tool calculates your Total Daily Energy Expenditure (TDEE) based on your basal metabolic rate and activity level.',
+        calories_usage: 'Provide your weight, height, age, gender, and activity level. The result shows calories needed for maintenance, loss, or gain.',
+        calories_benefits: 'Provides a personalized target for daily caloric intake, helping you manage weight effectively and plan balanced meals.',
+
+        water_definition: 'Calculates your recommended daily water intake based on your body weight and physical activity level.',
+        water_usage: 'Enter your weight and select your activity level. The tool will suggest the amount of water you should drink daily in liters.',
+        water_benefits: 'Ensures proper hydration, which is essential for energy levels, skin health, digestion, and overall physical performance.',
+
+        ideal_weight_definition: 'Estimates a healthy weight range based on your height and gender using established scientific formulas.',
+        ideal_weight_usage: 'Select your gender and enter your height in centimeters. The result provides a target weight and a healthy range.',
+        ideal_weight_benefits: 'Provides a realistic and healthy goal for weight management, helping you avoid extreme or unhealthy weight targets.',
+
+        sleep_definition: 'Determines the recommended amount of sleep you need based on your age group and lifestyle needs.',
+        sleep_usage: 'Simply enter your age. The tool will provide the optimal range of sleep hours for your specific age group.',
+        sleep_benefits: 'Improves cognitive function, mental health, immune system strength, and physical recovery through better sleep patterns.',
+
+        body_fat_definition: 'Estimates the percentage of total body mass that is composed of fat versus lean tissue (muscle, bone, etc.).',
+        body_fat_usage: 'Enter your weight, height, age, and body measurements (neck, waist, and hips for women). It uses the U.S. Navy Method.',
+        body_fat_benefits: 'Provides a more accurate picture of fitness and health than weight alone, as it distinguishes between muscle and fat.',
+
         tracking_subtitle: 'Track your health metrics and visualize your progress',
         history: 'History',
         add: 'Add',
@@ -436,6 +464,34 @@ export const translations = {
         sleep_how_it_works: 'الراحة المثالية: النوم الجيد لا يقل أهمية عن النظام الغذائي والتمارين الرياضية. تحسب هذه الأداة مدة النوم الموصى بها بناءً على إرشادات خبراء الصحة، مما يساعدك على فهم الراحة المطلوبة لوظائف الدماغ والصحة العاطفية والترميم البدني.',
         body_fat_how_it_works: 'تكوين الجسم: على عكس مؤشر كتلة الجسم، تقيس نسبة الدهون في الجسم الجزء من جسمك الذي يتكون من دهون مقابل الكتلة الخالية من الدهون (العضلات، العظام، إلخ). تستخدم أداتنا طريقة البحرية الأمريكية لتقديم تقدير موثوق، مما يساعدك على تتبع تقدم اللياقة البدنية بدقة أكبر من الوزن وحده.',
 
+        tool_info_definition: 'ما هي هذه الأداة؟',
+        tool_info_usage: 'كيفية الاستخدام؟',
+        tool_info_benefits: 'ماذا تستفيد منها؟',
+
+        bmi_definition: 'مؤشر كتلة الجسم (BMI) هو مقياس يستخدم طولك ووزنك لتحديد ما إذا كان وزنك صحياً.',
+        bmi_usage: 'أدخل وزنك بـ الكيلوجرام وطولك بـ السنتيمتر. اضغط على \'احسب\' لرؤية مؤشر كتلة جسمك وتصنيفه.',
+        bmi_benefits: 'يساعد في تحديد المخاطر الصحية المرتبطة بالوزن ويوفر نقطة بداية لتتبع التقدم في إدارة الوزن.',
+
+        calories_definition: 'تقوم هذه الأداة بحساب إجمالي الطاقة اليومية التي يستهلكها جسمك بناءً على معدل الأيض الأساسي ومستوى النشاط.',
+        calories_usage: 'أدخل وزنك وطولك وعمرك وجنسك ومستوى نشاطك. تظهر النتائج السعرات المطلوبة للحفاظ على الوزن أو فقدانه أو زيادته.',
+        calories_benefits: 'يوفر هدفاً مخصصاً للسعرات اليومية، مما يساعدك في إدارة وزنك بفعالية وتخطيط وجبات متوازنة.',
+
+        water_definition: 'تحسب كمية الماء اليومية الموصى بها بناءً على وزن جسمك ومستوى النشاط البدني.',
+        water_usage: 'أدخل وزنك واختر مستوى نشاطك. ستقترح الأداة كمية الماء التي يجب شربها يومياً باللتر.',
+        water_benefits: 'تضمن الترطيب المناسب الضروري لمستويات الطاقة، وصحة البشرة، والهضم، والأداء البدني العام.',
+
+        ideal_weight_definition: 'تقدر نطاق الوزن الصحي بناءً على طولك وجنسك باستخدام صيغ علمية معتمدة.',
+        ideal_weight_usage: 'اختر جنسك وأدخل طولك بالسنتيمتر. توفر النتيجة وزناً مستهدفاً ونطاقاً صحياً.',
+        ideal_weight_benefits: 'توفر هدفاً واقعياً وصحياً لإدارة الوزن، مما يساعدك على تجنب أهداف الوزن المتطرفة أو غير الصحية.',
+
+        sleep_definition: 'تحدد كمية النوم الموصى بها بناءً على فئتك العمرية واحتياجات نمط حياتك.',
+        sleep_usage: 'ببساطة أدخل عمرك. ستقدم الأداة النطاق الأمثل لساعات النوم المناسبة لعمرك.',
+        sleep_benefits: 'تحسن وظائف الدماغ، والصحة العقلية، وقوة جهاز المناعة، والتعافي البدني من خلال أنماط نوم أفضل.',
+
+        body_fat_definition: 'تقدر نسبة إجمالي كتلة الجسم المكونة من الدهون مقابل الأنسجة اللينة (العضلات، العظام، إلخ).',
+        body_fat_usage: 'أدخل وزنك وطولك وعمرك وقياسات الجسم (الرقبة، الخصر، والأرداف للنساء). تستخدم \'طريقة البحرية الأمريكية\'.',
+        body_fat_benefits: 'توفر صورة أكثر دقة للياقة والصحة من الوزن وحده، حيث تميز بين العضلات والدهون.',
+
         tracking_subtitle: 'تتبع مقاييسك الصحية وشاهد تقدمك',
         history: 'السجل',
         add: 'إضافة',
@@ -657,6 +713,34 @@ export const translations = {
         sleep_how_it_works: 'Optimal Rest: This tool calculates recommended sleep duration.',
         body_fat_how_it_works: 'Body Composition: Our tool uses the U.S. Navy Method to provide a reliable estimate.',
 
+        tool_info_definition: "Qu'est-ce que c'est ?",
+        tool_info_usage: 'Comment l\'utiliser ?',
+        tool_info_benefits: 'Quels sont les avantages ?',
+
+        bmi_definition: 'L\'Indice de Masse Corporelle (IMC) est une mesure qui utilise votre taille et votre poids pour déterminer si votre poids est sain.',
+        bmi_usage: 'Entrez votre poids en kilogrammes et votre taille en centimètres. Cliquez sur calculer pour voir votre score IMC et votre catégorie.',
+        bmi_benefits: 'Aide à identifier les risques potentiels pour la santé liés au poids et fournit une base pour suivre les progrès de la gestion du poids.',
+
+        calories_definition: 'Cet outil calcule votre Dépense Énergétique Totale Quotidienne (TDEE) en fonction de votre métabolisme de base et de votre niveau d\'activité.',
+        calories_usage: 'Indiquez votre poids, taille, âge, sexe et niveau d\'activité. Le résultat montre les calories nécessaires pour maintenir, perdre ou prendre du poids.',
+        calories_benefits: 'Fournit un objectif personnalisé pour l\'apport calorique quotidien, vous aidant à gérer votre poids efficacement et à planifier des repas équilibrés.',
+
+        water_definition: 'Calcule votre apport quotidien recommandé en eau en fonction de votre poids corporel et de votre niveau d\'activité physique.',
+        water_usage: 'Entrez votre poids et sélectionnez votre niveau d\'activité. L\'outil suggérera la quantité d\'eau que vous devriez boire quotidiennement en litres.',
+        water_benefits: 'Assure une bonne hydratation, essentielle pour les niveaux d\'énergie, la santé de la peau, la digestion et la performance physique globale.',
+
+        ideal_weight_definition: 'Estime une fourchette de poids santé basée sur votre taille et votre sexe en utilisant des formules scientifiques établies.',
+        ideal_weight_usage: 'Sélectionnez votre sexe et entrez votre taille en centimètres. Le résultat fournit un poids cible et une fourchette saine.',
+        ideal_weight_benefits: 'Fournit un objectif réaliste et sain pour la gestion du poids, vous aidant à éviter les objectifs de poids extrêmes ou malsains.',
+
+        sleep_definition: 'Détermine la quantité recommandée de sommeil dont vous avez besoin en fonction de votre tranche d\'âge et de vos besoins.',
+        sleep_usage: 'Entrez simplement votre âge. L\'outil fournira la plage optimale d\'heures de sommeil pour votre tranche d\'âge spécifique.',
+        sleep_benefits: 'Améliore la fonction cognitive, la santé mentale, la force du système immunitaire et la récupération physique grâce à de meilleurs modèles de sommeil.',
+
+        body_fat_definition: 'Estime le pourcentage de la masse corporelle totale composée de graisse par rapport aux tissus maigres (muscles, os, etc.).',
+        body_fat_usage: 'Entrez votre poids, taille, âge et mensurations (cou, taille et hanches pour les femmes). Il utilise la méthode de la marine américaine.',
+        body_fat_benefits: 'Fournit une image plus précise de la forme physique et de la santé que le poids seul, car il distingue le muscle de la graisse.',
+
         tracking_subtitle: 'Suivez vos indicateurs de santé et visualisez vos progrès',
         history: 'Historique',
         add: 'Ajouter',
@@ -833,6 +917,34 @@ export const translations = {
         sleep_how_it_works: 'Optimal Rest: This tool calculates recommended sleep duration.',
         body_fat_how_it_works: 'Body Composition: Our tool uses the U.S. Navy Method to provide a reliable estimate.',
 
+        tool_info_definition: 'Was ist das?',
+        tool_info_usage: 'Wie benutzt man es?',
+        tool_info_benefits: 'Was sind die Vorteile?',
+
+        bmi_definition: 'Der Body-Mass-Index (BMI) ist ein Maß, das Ihre Größe und Ihr Gewicht verwendet, um festzustellen, ob Ihr Gewicht gesund ist.',
+        bmi_usage: 'Geben Sie Ihr Gewicht in Kilogramm und Ihre Größe in Zentimetern ein. Klicken Sie auf Berechnen, um Ihren BMI-Wert und Ihre Kategorie zu sehen.',
+        bmi_benefits: 'Hilft bei der Identifizierung potenzieller gewichtsbedingter Gesundheitsrisiken und bietet eine Basis für die Verfolgung des Gewichtsmanagements.',
+
+        calories_definition: 'Dieses Tool berechnet Ihren täglichen Gesamtenergieumsatz (TDEE) basierend auf Ihrem Grundumsatz und Ihrem Aktivitätsniveau.',
+        calories_usage: 'Geben Sie Gewicht, Größe, Alter, Geschlecht und Aktivitätsniveau an. Das Ergebnis zeigt die benötigten Kalorien zum Halten, Abnehmen oder Zunehmen.',
+        calories_benefits: 'Bietet ein personalisiertes Ziel für die tägliche Kalorienaufnahme und hilft Ihnen, das Gewicht effektiv zu verwalten und ausgewogene Mahlzeiten zu planen.',
+
+        water_definition: 'Berechnet Ihre empfohlene tägliche Wasseraufnahme basierend auf Ihrem Körpergewicht und Ihrem körperlichen Aktivitätsniveau.',
+        water_usage: 'Geben Sie Ihr Gewicht ein und wählen Sie Ihr Aktivitätsniveau. Das Tool schlägt die Wassermenge vor, die Sie täglich in Litern trinken sollten.',
+        water_benefits: 'Sorgt für eine gute Flüssigkeitszufuhr, die für das Energieniveau, die Hautgesundheit, die Verdauung und die allgemeine körperliche Leistungsfähigkeit unerlässlich ist.',
+
+        ideal_weight_definition: 'Schätzt einen gesunden Gewichtsbereich basierend auf Ihrer Größe und Ihrem Geschlecht unter Verwendung etablierter wissenschaftlicher Formeln.',
+        ideal_weight_usage: 'Wählen Sie Ihr Geschlecht und geben Sie Ihre Größe in Zentimetern ein. Das Ergebnis liefert ein Zielgewicht und einen gesunden Bereich.',
+        ideal_weight_benefits: 'Bietet ein realistisches und gesundes Ziel für das Gewichtsmanagement und hilft Ihnen, extreme oder ungesunde Gewichtsziele zu vermeiden.',
+
+        sleep_definition: 'Bestimmt die empfohlene Schlafmenge, die Sie basierend auf Ihrer Altersgruppe und Ihren Lebensbedürfnissen benötigen.',
+        sleep_usage: 'Geben Sie einfach Ihr Alter ein. Das Tool liefert den optimalen Bereich der Schlafstunden für Ihre spezifische Altersgruppe.',
+        sleep_benefits: 'Verbessert die kognitive Funktion, die psychische Gesundheit, die Stärke des Immunsystems und die körperliche Erholung durch bessere Schlafmuster.',
+
+        body_fat_definition: 'Schätzt den Prozentsatz der gesamten Körpermasse, der aus Fett besteht, im Vergleich zu magerem Gewebe (Muskeln, Knochen usw.).',
+        body_fat_usage: 'Geben Sie Gewicht, Größe, Alter und Körpermaße ein (Hals, Taille und Hüften für Frauen). Es verwendet die US-Marine-Methode.',
+        body_fat_benefits: 'Bietet ein genaueres Bild von Fitness und Gesundheit als das Gewicht allein, da es zwischen Muskeln und Fett unterscheidet.',
+
         tracking_subtitle: 'Verfolgen Sie Ihre Gesundheitswerte und visualisieren Sie Ihren Fortschritt',
         history: 'Verlauf',
         add: 'Hinzufügen',
@@ -998,6 +1110,34 @@ export const translations = {
         ideal_weight_how_it_works: 'Target Weight Range: The Ideal Weight Calculator estimates a healthy weight range.',
         sleep_how_it_works: 'Optimal Rest: This tool calculates recommended sleep duration.',
         body_fat_how_it_works: 'Body Composition: Our tool uses the U.S. Navy Method to provide a reliable estimate.',
+
+        tool_info_definition: '¿Qué es?',
+        tool_info_usage: '¿Cómo usarlo?',
+        tool_info_benefits: '¿Cuáles son los beneficios?',
+
+        bmi_definition: 'El Índice de Masa Corporal (IMC) es una medida que utiliza tu altura y peso para determinar si tu peso es saludable.',
+        bmi_usage: 'Introduce tu peso en kilogramos y tu altura en centímetros. Haz clic en calcular para ver tu puntuación de IMC y categoría.',
+        bmi_benefits: 'Ayuda a identificar posibles riesgos de salud relacionados con el peso y proporciona una base para seguir el progreso del control de peso.',
+
+        calories_definition: 'Esta herramienta calcula tu Gasto Energético Total Diario (TDEE) basado en tu tasa metabólica basal y nivel de actividad.',
+        calories_usage: 'Proporciona tu peso, altura, edad, género y nivel de actividad. El resultado muestra las calorías necesarias para mantener, perder o ganar peso.',
+        calories_benefits: 'Proporciona un objetivo personalizado para la ingesta calórica diaria, ayudándote a controlar el peso de manera efectiva y planificar comidas equilibradas.',
+
+        water_definition: 'Calcula tu ingesta diaria recomendada de agua basada en tu peso corporal y nivel de actividad física.',
+        water_usage: 'Introduce tu peso y selecciona tu nivel de actividad. La herramienta sugerirá la cantidad de agua que debes beber diariamente en litros.',
+        water_benefits: 'Asegura una hidratación adecuada, esencial para los niveles de energía, la salud de la piel, la digestión y el rendimiento físico general.',
+
+        ideal_weight_definition: 'Estima un rango de peso saludable basado en tu altura y género utilizando fórmulas científicas establecidas.',
+        ideal_weight_usage: 'Selecciona tu género y introduce tu altura en centímetros. El resultado proporciona un peso objetivo y un rango saludable.',
+        ideal_weight_benefits: 'Proporciona un objetivo realista y saludable para el control de peso, ayudándote a evitar objetivos de peso extremos o poco saludables.',
+
+        sleep_definition: 'Determina la cantidad recomendada de sueño que necesitas según tu grupo de edad y necesidades de estilo de vida.',
+        sleep_usage: 'Simplemente introduce tu edad. La herramienta proporcionará el rango óptimo de horas de sueño para tu grupo de edad específico.',
+        sleep_benefits: 'Mejora la función cognitiva, la salud mental, la fortaleza del sistema inmunológico y la recuperación física a través de mejores patrones de sueño.',
+
+        body_fat_definition: 'Estima el porcentaje de masa corporal total que se compone de grasa frente a tejido magro (músculo, hueso, etc.).',
+        body_fat_usage: 'Introduce tu peso, altura, edad y medidas corporales (cuello, cintura y caderas para mujeres). Utiliza el Método de la Marina de los EE. UU.',
+        body_fat_benefits: 'Proporciona una imagen más precisa de la aptitud física y la salud que el peso solo, ya que distingue entre músculo y grasa.',
 
         tracking_subtitle: 'Sigue tus métricas de salud y visualiza tu progreso',
 

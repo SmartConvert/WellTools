@@ -1510,15 +1510,15 @@ const ContactPage = ({ setCurrentPage, t }) => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-gray-900 dark:text-gray-100 font-bold mb-2">{t.your_email}</label>
-              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com" className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg" />
+              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com" className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-emerald-500 focus:outline-none transition-colors text-lg" />
             </div>
             <div>
               <label className="block text-gray-900 dark:text-gray-100 font-bold mb-2">{t.subject}</label>
-              <input type="text" required value={subject} onChange={(e) => setSubject(e.target.value)} placeholder={t.subject} className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg" />
+              <input type="text" required value={subject} onChange={(e) => setSubject(e.target.value)} placeholder={t.subject} className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-emerald-500 focus:outline-none transition-colors text-lg" />
             </div>
             <div>
               <label className="block text-gray-900 dark:text-gray-100 font-bold mb-2">{t.message}</label>
-              <textarea required value={message} onChange={(e) => setMessage(e.target.value)} placeholder={t.message} rows="5" className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg resize-none"></textarea>
+              <textarea required value={message} onChange={(e) => setMessage(e.target.value)} placeholder={t.message} rows="5" className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-emerald-500 focus:outline-none transition-colors text-lg resize-none"></textarea>
             </div>
             <button type="submit" disabled={isSubmitting} className={`w-full py-4 text-white rounded-xl font-bold text-lg shadow-lg transform transition-all duration-300 ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-linear-to-r from-emerald-500 to-teal-600 hover:shadow-xl hover:-translate-y-1'}`}>
               {isSubmitting ? t.sending : t.send_message}

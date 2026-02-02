@@ -98,6 +98,9 @@ export const translations = {
         meal_suggestions_desc: 'Nutrition plans for your specific goals.',
 
         maintain_weight: 'Maintain Weight',
+        latest_blog_title: 'Latest from our Blog',
+        read_more: 'Read More',
+        featured_post: 'Featured Story',
         weight_loss: 'Weight Loss',
         weight_gain: 'Weight Gain',
         calories_day: 'kcal/day',
@@ -333,6 +336,9 @@ export const translations = {
         meal_suggestions_desc: 'خطط تغذية لأهدافك المحددة.',
 
         maintain_weight: 'الحفاظ على الوزن',
+        latest_blog_title: 'أحدث المقالات من مدونتنا',
+        read_more: 'اقرأ المزيد',
+        featured_post: 'قصة مختارة',
         weight_loss: 'خسارة الوزن',
         weight_gain: 'زيادة الوزن',
         calories_day: 'سعرة/يوم',

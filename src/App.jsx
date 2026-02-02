@@ -236,11 +236,15 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, t }) => {
     return () => clearInterval(timer);
   }, [slides.length]);
 
+  // Get the latest blog post for current language or fallback to English
+  const currentLangPosts = (postsData[lang] && postsData[lang].length > 0) ? postsData[lang] : (postsData['en'] || []);
+  const latestPost = currentLangPosts[0];
+
   return (
     <div className="pt-20 pb-16 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Modern Hero Carousel */}
-        <div className="relative h-[500px] md:h-[600px] rounded-[3rem] overflow-hidden mb-12 lg:mb-20 shadow-2xl animate-fade-in group">
+        <div className="relative h-[500px] md:h-[600px] rounded-[3rem] overflow-hidden mb-12 lg:mb-16 shadow-2xl animate-fade-in group">
           {/* Slides */}
           {slides.map((slide, index) => (
             <div
@@ -299,6 +303,72 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, t }) => {
             ))}
           </div>
         </div>
+
+        {/* Latest Blog Post Feature */}
+        {latestPost && (
+          <div className="mb-16 lg:mb-24 animate-fade-in opacity-0" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
+            <div className="flex items-center justify-between mb-8 px-4">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+                <BookOpen className="w-8 h-8 text-emerald-500" />
+                {t.latest_blog_title}
+              </h2>
+              <button
+                onClick={() => setCurrentPage('blog')}
+                className="hidden md:flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold hover:gap-3 transition-all"
+              >
+                {t.nav_blog} <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div
+              onClick={() => {
+                setSelectedPost(latestPost);
+                setCurrentPage('blog-post');
+              }}
+              className="group cursor-pointer relative bg-white dark:bg-gray-800 rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700 mx-auto max-w-7xl"
+            >
+              <div className="flex flex-col lg:flex-row">
+                <div className="lg:w-1/2 h-64 lg:h-[400px] relative overflow-hidden">
+                  <img
+                    src={latestPost.image}
+                    alt={latestPost.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute top-6 left-6">
+                    <span className="px-4 py-2 bg-emerald-500 text-white rounded-lg font-bold text-sm shadow-lg">
+                      {t.featured_post}
+                    </span>
+                  </div>
+                </div>
+                <div className="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
+                  <div className="flex items-center gap-4 text-emerald-600 dark:text-emerald-400 font-bold text-sm mb-4">
+                    <Calendar className="w-4 h-4" />
+                    {latestPost.date}
+                  </div>
+                  <h3 className="text-3xl lg:text-4xl font-black text-gray-900 dark:text-white mb-6 leading-tight group-hover:text-emerald-500 transition-colors">
+                    {latestPost.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-lg mb-8 line-clamp-2 md:line-clamp-3 leading-relaxed">
+                    {latestPost.excerpt}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-6">
+                    <button className="px-6 py-3 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold shadow-lg group-hover:shadow-emerald-500/25 transition-all flex items-center gap-2">
+                      {t.read_more} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                    <div className="flex -space-x-2">
+                      {[1, 2, 3].map((i) => (
+                        <div key={i} className={`w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden`}>
+                          <img src={`https://i.pravatar.cc/100?u=${i + 10}`} alt="user" />
+                        </div>
+                      ))}
+                      <div className="pl-4 text-sm text-gray-500 dark:text-gray-400 font-medium">+1.2k views</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         <AdComponent slot="home_top" />
 
@@ -2048,7 +2118,7 @@ const DailyHealthTools = () => {
       />
 
       <main className="min-h-[80vh]">
-        {currentPage === 'home' && <HomePage setCurrentPage={setCurrentPage} setSelectedMealCategory={setSelectedMealCategory} t={t} />}
+        {currentPage === 'home' && <HomePage setCurrentPage={setCurrentPage} setSelectedMealCategory={setSelectedMealCategory} setSelectedPost={setSelectedPost} lang={lang} t={t} />}
         {currentPage === 'bmi' && <BMICalculatorPage bmiWeight={bmiWeight} setBmiWeight={setBmiWeight} bmiHeight={bmiHeight} setBmiHeight={setBmiHeight} calculateBMI={calculateBMI} bmiResult={bmiResult} setCurrentPage={setCurrentPage} t={t} />}
         {currentPage === 'calories' && <CaloriesCalculatorPage calWeight={calWeight} setCalWeight={setCalWeight} calHeight={calHeight} setCalHeight={setCalHeight} calAge={calAge} setCalAge={setCalAge} calGender={calGender} setCalGender={setCalGender} calActivity={calActivity} setCalActivity={setCalActivity} calculateCalories={calculateCalories} calResult={calResult} setCurrentPage={setCurrentPage} t={t} />}
         {currentPage === 'water' && <WaterCalculatorPage waterWeight={waterWeight} setWaterWeight={setWaterWeight} waterActivity={waterActivity} setWaterActivity={setWaterActivity} calculateWater={calculateWater} waterResult={waterResult} setCurrentPage={setCurrentPage} t={t} />}

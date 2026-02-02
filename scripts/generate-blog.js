@@ -85,8 +85,7 @@ async function generatePost() {
                     role: "user",
                     content: prompt
                 }
-            ],
-            response_format: { type: "json_object" } // Enforce JSON if supported, otherwise prompt does it
+            ]
         });
 
         let text = response.choices[0].message.content;

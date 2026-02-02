@@ -109,7 +109,7 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
             <Heart className="w-6 h-6 text-white" fill="white" />
           </div>
           <span className="text-2xl font-black bg-linear-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent tracking-tight">
-            Daily Health Tools
+            WellTools
           </span>
         </div>
 
@@ -1987,7 +1987,7 @@ const DailyHealthTools = () => {
             <div className="w-10 h-10 bg-linear-to-br from-emerald-400 to-cyan-500 rounded-xl flex items-center justify-center">
               <Heart className="w-6 h-6 text-white" fill="white" />
             </div>
-            <span className="text-xl font-bold">Daily Health Tools</span>
+            <span className="text-xl font-bold">WellTools</span>
           </div>
           <p className="text-gray-300 mb-8 max-w-lg mx-auto leading-relaxed">{t.footer_desc}</p>
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-8">
@@ -1998,7 +1998,7 @@ const DailyHealthTools = () => {
             <button onClick={() => setCurrentPage('privacy-policy')} className="text-gray-300 hover:text-emerald-400 transition-colors font-medium">{t.privacy}</button>
             <button onClick={() => setCurrentPage('contact')} className="text-gray-300 hover:text-emerald-400 transition-colors font-medium">{t.contact}</button>
           </div>
-          <p className="text-gray-400 text-sm font-medium">© {new Date().getFullYear()} Daily Health Tools. {t.all_rights}</p>
+          <p className="text-gray-400 text-sm font-medium">© {new Date().getFullYear()} WellTools. {t.all_rights}</p>
           <p className="text-gray-400 text-xs mt-2 max-w-2xl mx-auto leading-relaxed opacity-80">{t.footer_medical_disclaimer}</p>
         </div>
       </footer>

@@ -1,4 +1,4 @@
-# Daily Health Tools Enhanced
+# WellTools - Health Calculators & Daily Tracking
 
 A comprehensive React-based health and wellness application featuring calculators, daily tracking, and meal suggestions.
 

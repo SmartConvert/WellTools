@@ -54,7 +54,7 @@ async function generatePost() {
     const category = categories[Math.floor(Math.random() * categories.length)];
 
     const prompt = `
-    Generate a high-quality, professional, and comprehensive health blog post for a website called "Daily Health Tools".
+    Generate a high-quality, professional, and comprehensive health blog post for a website called "WellTools".
     The topic should be related to: ${category}.
     
     CRITICAL PROJECT RULES (FROM CONFIG):

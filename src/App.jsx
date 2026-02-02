@@ -379,7 +379,7 @@ const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, c
         onClick={() => setCurrentPage('home')}
         className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
       >
-        ← {t.back_to_home}
+        {t.back_to_home}
       </button>
     </div>
   </div>
@@ -511,7 +511,7 @@ const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeig
         onClick={() => setCurrentPage('home')}
         className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
       >
-        ← {t.back_to_home}
+        {t.back_to_home}
       </button>
     </div>
   </div>
@@ -593,7 +593,7 @@ const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWa
         onClick={() => setCurrentPage('home')}
         className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
       >
-        ← {t.back_to_home}
+        {t.back_to_home}
       </button>
     </div>
   </div>
@@ -684,7 +684,7 @@ const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGen
         onClick={() => setCurrentPage('home')}
         className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
       >
-        ← {t.back_to_home}
+        {t.back_to_home}
       </button>
     </div>
   </div>
@@ -750,7 +750,7 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
         onClick={() => setCurrentPage('home')}
         className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
       >
-        ← {t.back_to_home}
+        {t.back_to_home}
       </button>
     </div>
   </div>
@@ -890,7 +890,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
         onClick={() => setCurrentPage('home')}
         className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
       >
-        ← {t.back_to_home}
+        {t.back_to_home}
       </button>
     </div>
   </div>
@@ -1212,10 +1212,10 @@ const DailyTrackingPage = ({ trackingData, newWeight, setNewWeight, addWeightEnt
           onClick={() => setCurrentPage('home')}
           className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
         >
-          ← {t.back_to_home}
+          {t.back_to_home}
         </button>
       </div>
-    </div >
+    </div>
   );
 };
 
@@ -1389,7 +1389,7 @@ const AboutPage = ({ setCurrentPage, t }) => (
         onClick={() => setCurrentPage('home')}
         className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
       >
-        ← {t.back_to_home}
+        {t.back_to_home}
       </button>
     </div>
   </div>
@@ -1414,7 +1414,7 @@ const TermsOfUsePage = ({ setCurrentPage, t }) => (
         onClick={() => setCurrentPage('home')}
         className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
       >
-        ← {t.back_to_home}
+        {t.back_to_home}
       </button>
     </div>
   </div>
@@ -1437,7 +1437,7 @@ const DisclaimerPage = ({ setCurrentPage, t }) => (
         onClick={() => setCurrentPage('home')}
         className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
       >
-        ← {t.back_to_home}
+        {t.back_to_home}
       </button>
     </div>
   </div>
@@ -1460,7 +1460,7 @@ const PrivacyPolicyPage = ({ setCurrentPage, t }) => (
         onClick={() => setCurrentPage('home')}
         className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
       >
-        ← {t.back_to_home}
+        {t.back_to_home}
       </button>
     </div>
   </div>
@@ -1533,7 +1533,7 @@ const ContactPage = ({ setCurrentPage, t }) => {
           </form>
         </div>
         <button onClick={() => setCurrentPage('home')} className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700">
-          ← {t.back_to_home}
+          {t.back_to_home}
         </button>
       </div>
     </div>

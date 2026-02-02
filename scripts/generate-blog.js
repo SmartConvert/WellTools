@@ -34,7 +34,7 @@ async function getWorkingModel(genAI) {
             console.log(`Selected working model: ${modelName}`);
             return model;
         } catch (error) {
-            console.warn(`Model ${modelName} failed or not found. Trying next...`);
+            console.warn(`Model ${modelName} failed. Reason: ${error.message}`);
         }
     }
     throw new Error("No suitable Gemini model found or API Key is invalid.");

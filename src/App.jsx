@@ -256,6 +256,9 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imageError, setImageError] = useState(false);
 
+  // Safety check for translations
+  if (!t) return <div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500"></div></div>;
+
   useEffect(() => {
     setImageError(false);
   }, [lang]);

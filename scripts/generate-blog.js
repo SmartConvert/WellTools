@@ -16,40 +16,15 @@ if (!API_KEY) {
 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
-async function listModels() {
-    try {
-        console.log("Fetching available models from API...");
-        // Use fetch to get models directly for definitive debugging
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1/models?key=${API_KEY}`);
-        const data = await response.json();
-
-        if (data.models) {
-            console.log("Available models found:");
-            data.models.forEach(m => console.log(` - ${m.name}`));
-        } else if (data.error) {
-            console.error("API Error listing models:", data.error.message);
-            // Fallback to v1beta check
-            const responseBeta = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`);
-            const dataBeta = await responseBeta.json();
-            if (dataBeta.models) {
-                console.log("Available models (v1beta):");
-                dataBeta.models.forEach(m => console.log(` - ${m.name}`));
-            }
-        }
-    } catch (e) {
-        console.log("Fetch failed. Using fallback testing.");
-    }
-}
-
-// List of models to try. We'll use the short names.
+// List of models discovered in logs
 const MODELS_TO_TRY = [
+    "gemini-2.0-flash",
+    "gemini-2.0-flash-lite",
     "gemini-1.5-flash",
-    "gemini-1.5-pro",
     "gemini-1.0-pro"
 ];
 
 async function getWorkingModel(genAI) {
-    await listModels();
     for (const modelName of MODELS_TO_TRY) {
         try {
             console.log(`Testing model: ${modelName}...`);

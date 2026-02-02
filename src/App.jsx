@@ -367,6 +367,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, t }) => {
         </div>
       </div>
     </div>
+  );
 };
 
 const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, calculateBMI, bmiResult, setCurrentPage, t }) => (

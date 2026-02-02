@@ -33,7 +33,9 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
           <button onClick={() => setCurrentPage('home')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
             {t.nav_home}
           </button>
-
+          <button onClick={() => { const el = document.getElementById('tools-grid'); el?.scrollIntoView({ behavior: 'smooth' }); }} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
+            {t.nav_apps}
+          </button>
           <button onClick={() => setCurrentPage('tracking')} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
             {t.daily_tracking}
           </button>
@@ -89,7 +91,9 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
           <button onClick={() => { setCurrentPage('home'); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
             {t.nav_home}
           </button>
-
+          <button onClick={() => { const el = document.getElementById('tools-grid'); el?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
+            {t.nav_apps}
+          </button>
           <button onClick={() => { setCurrentPage('tracking'); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
             {t.daily_tracking}
           </button>
@@ -195,7 +199,15 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                     {slide.subtitle}
                   </p>
                   <div className="flex flex-wrap gap-4">
-
+                    <button
+                      onClick={() => {
+                        const el = document.getElementById('tools-grid');
+                        el?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="px-8 py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
+                    >
+                      {t.explore_tools}
+                    </button>
                     <button
                       onClick={() => setCurrentPage('blog')}
                       className="px-8 py-4 bg-white/10 backdrop-blur-md text-white border-2 border-white/20 rounded-2xl font-bold text-lg hover:bg-white/20 transition-all shadow-sm"
@@ -295,6 +307,32 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
 
         <AdComponent slot="home_top" />
 
+        {/* Tools Grid with Fruit/Veg Theme */}
+        <div id="tools-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 mb-12 lg:mb-20">
+          {[
+            { id: 'bmi', emoji: '🥑', color: 'from-lime-400 to-green-500', name: t.bmi_calc, description: t.bmi_desc },
+            { id: 'calories', emoji: '🍎', color: 'from-red-400 to-rose-500', name: t.calories_calc, description: t.calories_desc },
+            { id: 'water', emoji: '💧', color: 'from-blue-400 to-cyan-500', name: t.water_calc, description: t.water_desc },
+            { id: 'ideal-weight', emoji: '🍐', color: 'from-yellow-400 to-amber-500', name: t.ideal_weight, description: t.ideal_weight_desc },
+            { id: 'sleep', emoji: '🍇', color: 'from-purple-400 to-violet-500', name: t.sleep_calc, description: t.sleep_desc },
+            { id: 'body-fat', emoji: '🍊', color: 'from-orange-400 to-orange-600', name: t.body_fat_calc, description: t.body_fat_desc }
+          ].map((tool) => (
+            <div
+              key={tool.id}
+              onClick={() => setCurrentPage(tool.id)}
+              className="group bg-white dark:bg-gray-800 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all cursor-pointer border border-gray-50 dark:border-gray-700 hover:-translate-y-2 active:scale-95"
+            >
+              <div className={`text-5xl md:text-6xl mb-4 md:mb-6 transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-300`}>
+                {tool.emoji}
+              </div>
+              <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-800 dark:text-white mb-2 md:mb-3">{tool.name}</h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4 md:mb-6 leading-relaxed text-sm md:text-base">{tool.description}</p>
+              <div className={`inline-flex items-center bg-linear-to-r ${tool.color} text-white px-4 md:px-5 py-2 md:py-2.5 rounded-xl font-bold gap-2 shadow-lg group-hover:shadow-xl transition-all text-sm md:text-base`}>
+                {t.explore_tool} <ChevronRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </div>
+          ))}
+        </div>
 
 
         {/* Daily Tracking & Meals Feature Sections */}

@@ -208,6 +208,11 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
 );
 const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, lang, t }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [lang]);
   const slides = [
     {
       image: '/images/hero_fitness.png',
@@ -329,10 +334,11 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
             >
               <div className="flex flex-col lg:flex-row">
                 <div className="lg:w-1/2 h-64 lg:h-[400px] relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                  {latestPost.image ? (
+                  {latestPost.image && !imageError ? (
                     <img
                       src={latestPost.image}
                       alt={latestPost.title}
+                      onError={() => setImageError(true)}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 animate-fade-in"
                     />
                   ) : (
@@ -1944,6 +1950,7 @@ const parseInlineMarkdown = (text) => {
 };
 
 const BlogPostPage = ({ post, setCurrentPage, t }) => {
+  const [imageError, setImageError] = useState(false);
   if (!post) return null;
   return (
     <div className="bg-white dark:bg-gray-900 pt-24 pb-16 px-4">
@@ -1956,8 +1963,18 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
         </button>
         <header className="mb-12">
           {post.image && (
-            <div className="w-full h-[300px] md:h-[400px] rounded-[2.5rem] overflow-hidden mb-10 shadow-2xl bg-gray-800">
-              <img src={post.image} alt={post.imageAlt || post.title} decoding="async" className="w-full h-full object-cover" />
+            <div className="w-full h-[300px] md:h-[400px] rounded-[2.5rem] overflow-hidden mb-10 shadow-2xl bg-gray-800 flex items-center justify-center">
+              {!imageError ? (
+                <img
+                  src={post.image}
+                  alt={post.imageAlt || post.title}
+                  onError={() => setImageError(true)}
+                  decoding="async"
+                  className="w-full h-full object-cover animate-fade-in"
+                />
+              ) : (
+                <BookOpen className="w-24 h-24 text-gray-600" />
+              )}
             </div>
           )}
           <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] mb-8 tracking-tight">{post.title}</h1>

@@ -2309,7 +2309,6 @@ const DailyHealthTools = () => {
             <button onClick={() => setCurrentPage('disclaimer')} className="text-gray-300 hover:text-emerald-400 transition-colors font-medium">{t.disclaimer}</button>
             <button onClick={() => setCurrentPage('privacy-policy')} className="text-gray-300 hover:text-emerald-400 transition-colors font-medium">{t.privacy}</button>
             <button onClick={() => setCurrentPage('contact')} className="text-gray-300 hover:text-emerald-400 transition-colors font-medium">{t.contact}</button>
-            <a href="/sitemap.xml" className="text-gray-300 hover:text-emerald-400 transition-colors font-medium">Sitemap</a>
           </div>
           <p className="text-gray-400 text-sm font-medium">© {new Date().getFullYear()} WellTools. {t.all_rights}</p>
           <p className="text-gray-400 text-xs mt-2 max-w-2xl mx-auto leading-relaxed opacity-80">{t.footer_medical_disclaimer}</p>

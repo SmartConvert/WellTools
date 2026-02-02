@@ -18,20 +18,34 @@ const genAI = new GoogleGenerativeAI(API_KEY);
 
 async function listModels() {
     try {
-        // This might not work in all environments depending on API key permissions
-        // but it helps debugging if it does.
-        console.log("Attempting to list available models...");
+        console.log("Fetching available models from API...");
+        // Use fetch to get models directly for definitive debugging
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1/models?key=${API_KEY}`);
+        const data = await response.json();
+
+        if (data.models) {
+            console.log("Available models found:");
+            data.models.forEach(m => console.log(` - ${m.name}`));
+        } else if (data.error) {
+            console.error("API Error listing models:", data.error.message);
+            // Fallback to v1beta check
+            const responseBeta = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`);
+            const dataBeta = await responseBeta.json();
+            if (dataBeta.models) {
+                console.log("Available models (v1beta):");
+                dataBeta.models.forEach(m => console.log(` - ${m.name}`));
+            }
+        }
     } catch (e) {
-        console.log("Could not list models.");
+        console.log("Fetch failed. Using fallback testing.");
     }
 }
 
-// List of models to try in order of preference. 
+// List of models to try. We'll use the short names.
 const MODELS_TO_TRY = [
     "gemini-1.5-flash",
-    "gemini-1.5-flash-8b",
-    "gemini-1.0-pro",
-    "gemini-2.0-flash-exp"
+    "gemini-1.5-pro",
+    "gemini-1.0-pro"
 ];
 
 async function getWorkingModel(genAI) {
@@ -39,8 +53,8 @@ async function getWorkingModel(genAI) {
     for (const modelName of MODELS_TO_TRY) {
         try {
             console.log(`Testing model: ${modelName}...`);
+            // Explicitly try to get model
             const model = genAI.getGenerativeModel({ model: modelName });
-            // Test the model with a minimal prompt
             const result = await model.generateContent("test");
             const response = await result.response;
             if (response.text()) {
@@ -51,7 +65,7 @@ async function getWorkingModel(genAI) {
             console.warn(`❌ Model ${modelName} failed. Reason: ${error.message}`);
         }
     }
-    throw new Error("No suitable Gemini model found. Please check your API Key permissions and region.");
+    throw new Error("No suitable Gemini model found. Please check your API Key and billing status.");
 }
 
 const categories = ["Nutrition", "Fitness", "Mental Health", "Sleep", "Longevity", "Biohacking"];

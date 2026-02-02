@@ -16,12 +16,12 @@ if (!API_KEY) {
 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
-// List of models discovered in logs
+// List of models discovered in logs, prioritizing 'lite' versions for better quota availability
 const MODELS_TO_TRY = [
-    "gemini-2.0-flash",
     "gemini-2.0-flash-lite",
+    "gemini-2.5-flash-lite",
     "gemini-1.5-flash",
-    "gemini-1.0-pro"
+    "gemini-2.0-flash"
 ];
 
 async function getWorkingModel(genAI) {
@@ -30,17 +30,22 @@ async function getWorkingModel(genAI) {
             console.log(`Testing model: ${modelName}...`);
             // Explicitly try to get model
             const model = genAI.getGenerativeModel({ model: modelName });
-            const result = await model.generateContent("test");
+
+            // Minimal test prompt
+            const result = await model.generateContent("hi");
             const response = await result.response;
+
             if (response.text()) {
                 console.log(`✅ Selected working model: ${modelName}`);
                 return model;
             }
         } catch (error) {
             console.warn(`❌ Model ${modelName} failed. Reason: ${error.message}`);
+            // Wait 2 seconds before trying next model to avoid hitting rate limits too fast
+            await new Promise(resolve => setTimeout(resolve, 2000));
         }
     }
-    throw new Error("No suitable Gemini model found. Please check your API Key and billing status.");
+    throw new Error("No suitable Gemini model found. You might have exceeded ALL your quotas for today. Please wait a while or check Google AI Studio.");
 }
 
 const categories = ["Nutrition", "Fitness", "Mental Health", "Sleep", "Longevity", "Biohacking"];

@@ -216,7 +216,7 @@ export const translations = {
         disclaimer: 'Disclaimer',
         privacy: 'Privacy Policy',
         all_rights: 'All rights reserved.',
-        footer_medical_disclaimer: 'This website provides general health information and does not replace professional medical advice. Please consult with a healthcare professional before starting any new health program.',
+        footer_medical_disclaimer: 'This website provides general health information and does not replace professional medical advice.',
 
         terms_intro: 'By accessing and using Daily Health Tools, you agree to comply with and be bound by the following terms and conditions of use.',
         terms_usage_title: '1. Use of Tools',
@@ -457,7 +457,7 @@ export const translations = {
         disclaimer: 'إخلاء المسؤولية',
         privacy: 'سياسة الخصوصية',
         all_rights: 'جميع الحقوق محفوظة.',
-        footer_medical_disclaimer: 'يوفر هذا الموقع معلومات صحية عامة ولا يحل محل النصيحة الطبية المهنية. يرجى استشارة متخصص رعاية صحية قبل البدء في أي برنامج صحي جديد.',
+        footer_medical_disclaimer: 'يوفر هذا الموقع معلومات صحية عامة ولا يحل محل النصيحة الطبية المهنية.',
 
         terms_intro: 'بدخولك واستخدامك لأدوات الصحة اليومية، فإنك توافق على الالتزام بشروط وأحكام الاستخدام التالية.',
         terms_usage_title: '1. استخدام الأدوات',
@@ -627,7 +627,7 @@ export const translations = {
         disclaimer: 'Clause de non-responsabilité',
         privacy: 'Politique de confidentialité',
         all_rights: 'Tous droits réservés.',
-        footer_medical_disclaimer: 'Ce site web fournit des informations générales sur la santé et ne remplace pas l\'avis d\'un professionnel de la santé. Veuillez consulter un professionnel de la santé avant de commencer tout nouveau programme de santé.',
+        footer_medical_disclaimer: 'Ce site web fournit des informations générales sur la santé et ne remplace pas l\'avis d\'un professionnel de la santé.',
 
         terms_intro: 'En accédant et en utilisant Daily Health Tools, vous acceptez de vous conformer et d\'être lié par les conditions d\'utilisation suivantes.',
         terms_usage_title: '1. Utilisation des outils',
@@ -752,7 +752,8 @@ export const translations = {
         open_dashboard: 'Dashboard öffnen',
         view_meal_plans: 'Mahlzeitenpläne anzeigen',
         read_blog: 'Unseren Blog lesen',
-        explore_tool: 'Tool erkunden'
+        explore_tool: 'Tool erkunden',
+        footer_medical_disclaimer: 'Diese Website bietet allgemeine Gesundheitsinformationen und ersetzt nicht die professionelle medizinische Beratung.'
     },
     es: {
         dir: 'ltr',
@@ -843,6 +844,7 @@ export const translations = {
         open_dashboard: 'Abrir tablero',
         view_meal_plans: 'Ver planes de comidas',
         read_blog: 'Leer nuestro blog',
-        explore_tool: 'Explorar herramienta'
+        explore_tool: 'Explorar herramienta',
+        footer_medical_disclaimer: 'Este sitio web proporciona información de salud general y no reemplaza el asesoramiento médico profesional.'
     }
 };

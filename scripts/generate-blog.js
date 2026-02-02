@@ -57,28 +57,20 @@ async function generatePost() {
     Generate a high-quality, professional, and comprehensive health blog post for a website called "Daily Health Tools".
     The topic should be related to: ${category}.
     
-    CRITICAL QUALITY & SEO RULES (20 CONDITIONS):
-    1. SOLVE A PROBLEM: The article must solve a real problem (e.g., "How much water drink for my weight?") instead of generic facts.
-    2. ONE TOPIC: Focus strictly on ONE specific subject per article.
-    3. LENGTH: Minimum of 1000-1200 words. Deep explanation required.
-    4. SIMPLIFIED ORIGINAL STYLE: Write in an original, easy-to-understand style. DO NOT copy existing medical sites.
-    5. KEYWORD IN TITLE: The primary long-tail keyword must be in the H1 title.
-    6. ENGAGING EXCERPT: The 'excerpt' must be a meta-description that encourages clicks.
-    7. STRUCTURE: Use H1 for title, and multiple H2 and H3 for subheadings.
-    8. IMAGE SEO: Provide a descriptive image prompt and a clear 'imageAlt' text.
-    9. MOBILE-FRIENDLY MARKDOWN: Keep paragraphs short and use lists for readability.
-    10. CLEAN DESIGN: (Metadata) Category must be precise.
-    11. TRUST PAGES: (Internal linking) Mention "About Us" or "Contact Us" if natural.
-    12. MEDICAL WARNING: Include a clear medical disclaimer at the VERY END of the content: "This content is for general information only and does not substitute for professional medical advice."
-    13. NO DIAGNOSIS: Never provide a diagnosis or medication. Always suggest consulting a doctor for symptoms.
-    14. REGULAR VALUE: Ensure the tone is consistent and high-quality.
-    15. LONG-TAIL KEYWORDS: Target specific, low-competition keywords (e.g., "healthy diet to lose weight in a week" instead of just "weight loss").
-    16. INTERNAL LINKING: Naturally mention and check the following tools:
-       - BMI Calculator, Calories Calculator, Water Intake Calculator, Ideal Weight Calculator, Sleep Duration Calculator, Body Fat Percentage Calculator, Daily Health Tracking, Healthy Meal Suggestions.
-    17. TRUSTED SOURCES: List 3-5 real sources (WHO, CDC, Mayo Clinic, etc.) with URLs.
-    18. CATCHY TITLES: Use click-worthy psychological triggers in the title.
-    19. FAQ SECTION: 5 "How-to" questions and answers.
-    20. IMAGE FILENAME PROMPT: Ensure the image prompt implies a professional, high-quality medical photo.
+    CRITICAL PROJECT RULES (FROM CONFIG):
+    - CORE CONCEPT: Providing simple health calculators and daily meal suggestions without medical diagnosis or treatment.
+    - SOLVE PROBLEMS: Focus on solving daily user queries like "How much water?" or "What should I eat to lose weight?".
+    - ONE TOPIC: Strictly one specific subject per article.
+    - TONE: Simple, friendly, and non-medical.
+    - CONTENT LENGTH: 1200+ words of deep, original, and simplified explanation.
+    - NO DIAGNOSIS: Never provide a diagnosis or medication. Always suggest consulting a doctor for symptoms.
+    - MANDATORY NOTICE: Include this disclaimer ALONE at the end: "This website provides general health information and does not replace professional medical advice."
+    - STRUCTURE: Use H1 for title, and multiple H2 and H3 for subheadings.
+    - SEARCH-BASED TITLE: Use real search-based titles like "How much water should I drink per day?".
+    - INTERNAL LINKING: Naturally mention and check the following tools: BMI Calculator, Calories Calculator, Water Intake Calculator, Ideal Weight Calculator, Sleep Duration Calculator, Body Fat Percentage Calculator, Daily Health Tracking, Healthy Meal Suggestions.
+    - TRUSTED SOURCES: List 3-5 real sources (WHO, CDC, Mayo Clinic, etc.) with URLs.
+    - FAQ SECTION: Include 5 "How-to" questions.
+    - IMAGE SEO: Provide descriptive image prompt and 'imageAlt' text.
 
     The output MUST be a valid JSON object:
     {
@@ -87,11 +79,11 @@ async function generatePost() {
       "date": "YYYY-MM-DD",
       "category": "${category}",
       "image": "https://image.pollinations.ai/prompt/[professional_photo_description]?width=1200&height=800&nologo=true",
-      "imageAlt": "Descriptive alt text for the image",
+      "imageAlt": "SEO-friendly alt text",
       "excerpt": "Engaging 150-char meta description",
-      "content": "Full 1200+ word article in Markdown with H2/H3. Wrap with a medical disclaimer at the end.",
-      "keywords": ["specific-keyword-1", "long-tail-keyword-2", ...],
-      "sources": ["Medical Study/Source Title (https://...)"],
+      "content": "Detailed article in Markdown with H2/H3 subheadings. Wrap with the mandatory medical disclaimer.",
+      "keywords": ["specific-keyword-1", "long-tail-keyword-2"],
+      "sources": ["Source Title (https://...)"],
       "faq": [{"question": "...", "answer": "..."}]
     }
     `;

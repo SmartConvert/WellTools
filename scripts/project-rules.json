@@ -1,0 +1,108 @@
+{
+    "project_type": "Health Tools and Daily Meal Website",
+    "core_concept": "A website that provides simple health calculators and daily meal suggestions without medical diagnosis or treatment.",
+    "success_rules": [
+        {
+            "rule": "Clear niche focus",
+            "example": "Website focuses only on health calculators and daily meal suggestions."
+        },
+        {
+            "rule": "Solve daily user problems",
+            "example": "User searches for 'How many calories do I need?' and gets an instant result."
+        },
+        {
+            "rule": "Accurate and simple calculators",
+            "example": "BMI calculator returns a clear number and category (normal, overweight)."
+        },
+        {
+            "rule": "Each page provides result + explanation + advice",
+            "example": "BMI = 26, explanation of meaning, and general lifestyle tip."
+        },
+        {
+            "rule": "Meal suggestions must be simple and realistic",
+            "example": "Breakfast, lunch, dinner, and snack with common foods."
+        },
+        {
+            "rule": "Fast website performance",
+            "example": "Page loads in under 3 seconds."
+        },
+        {
+            "rule": "Mobile-friendly design",
+            "example": "Buttons are large and readable on smartphones."
+        },
+        {
+            "rule": "Clean and comfortable UI",
+            "example": "White background, readable font, no pop-ups."
+        },
+        {
+            "rule": "Trust pages are mandatory",
+            "example": "About Us, Privacy Policy, Contact Us, Medical Disclaimer."
+        },
+        {
+            "rule": "No medical diagnosis or medication advice",
+            "example": "Say 'Consult a doctor if symptoms persist' instead of naming drugs."
+        },
+        {
+            "rule": "Medical disclaimer on every page",
+            "example": "This website provides general information and does not replace professional medical advice."
+        },
+        {
+            "rule": "Use real search-based titles",
+            "example": "Title: 'How much water should I drink per day?'"
+        },
+        {
+            "rule": "One service per page",
+            "example": "One page for calorie calculator, one page for meal plan."
+        },
+        {
+            "rule": "Internal linking",
+            "example": "Water calculator links to meal suggestion page."
+        },
+        {
+            "rule": "Limited ad placement",
+            "example": "One ad at top and one in middle of page."
+        },
+        {
+            "rule": "Comply with AdSense policies",
+            "example": "Website has Privacy Policy and original content."
+        },
+        {
+            "rule": "Continuous content publishing",
+            "example": "Add two new pages every week."
+        },
+        {
+            "rule": "Improve old content regularly",
+            "example": "Rewrite unclear text and update meal plans."
+        },
+        {
+            "rule": "Track user search behavior",
+            "example": "Create new pages based on popular user queries."
+        },
+        {
+            "rule": "Patience before monetization results",
+            "example": "Expect growth after 3 to 6 months."
+        }
+    ],
+    "content_guidelines": {
+        "tone": "Simple, friendly, non-medical",
+        "prohibited": [
+            "diagnosis",
+            "treatment",
+            "medication"
+        ],
+        "mandatory_notice": "This website provides general health information and does not replace professional medical advice."
+    },
+    "monetization": {
+        "method": "Google AdSense",
+        "rules": [
+            "No excessive ads",
+            "No misleading content",
+            "Original and useful pages only"
+        ]
+    },
+    "performance_targets": {
+        "page_load_time": "< 3 seconds",
+        "mobile_usability": "Fully responsive",
+        "seo_focus": "Long-tail health and daily life queries"
+    }
+}

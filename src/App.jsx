@@ -149,7 +149,7 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
                 <button
                   key={l}
                   onClick={() => setLang(l)}
-                  className={`w-full text-left px-4 py-3 text-sm font-medium hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors flex items-center justify-between ${lang === l ? 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20' : 'text-gray-700 dark:text-gray-300'}`}
+                  className={`w-full text-left px-4 py-3 text-sm font-medium hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors flex items-center justify-between ${lang === l ? 'text-emerald-700 bg-emerald-50 dark:bg-emerald-900/20' : 'text-gray-800 dark:text-gray-200'}`}
                 >
                   <span className="uppercase font-bold">{l}</span>
                   {lang === l && <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>}
@@ -158,7 +158,11 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
             </div>
           </div>
 
-          <button className="lg:hidden p-2 text-gray-600 dark:text-gray-300" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button
+            className="lg:hidden p-2 text-gray-700 dark:text-gray-200"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={t.aria_menu_toggle}
+          >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
@@ -188,13 +192,13 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
           </button>
 
           <div className="pt-4 mt-4 border-t border-gray-100 dark:border-gray-800">
-            <p className="px-4 text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">{t.language}</p>
+            <p className="px-4 text-xs font-bold text-gray-600 dark:text-gray-300 uppercase tracking-widest mb-3">{t.language}</p>
             <div className="grid grid-cols-5 gap-2 px-4">
               {['en', 'ar', 'fr', 'de', 'es'].map((l) => (
                 <button
                   key={l}
                   onClick={() => { setLang(l); setMobileMenuOpen(false); }}
-                  className={`py-2 rounded-xl text-xs font-black uppercase transition-all border ${lang === l ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-gray-100 dark:border-gray-700'}`}
+                  className={`py-2 rounded-xl text-xs font-black uppercase transition-all border ${lang === l ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-700'}`}
                 >
                   {l}
                 </button>
@@ -1105,9 +1109,10 @@ const DailyTrackingPage = ({ trackingData, newWeight, setNewWeight, addWeightEnt
           </button>
           <button
             onClick={() => setActiveTab('weight')}
+            aria-label={t.weight}
             className={`px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'weight'
               ? 'bg-linear-to-r from-violet-500 to-purple-600 text-white shadow-lg'
-              : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-700'
+              : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-700'
               }`}
           >
             <Scale className="w-5 h-5 inline mr-2" />
@@ -1115,9 +1120,10 @@ const DailyTrackingPage = ({ trackingData, newWeight, setNewWeight, addWeightEnt
           </button>
           <button
             onClick={() => setActiveTab('water')}
+            aria-label={t.water_calc}
             className={`px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'water'
               ? 'bg-linear-to-r from-blue-500 to-cyan-600 text-white shadow-lg'
-              : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-700'
+              : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-700'
               }`}
           >
             <Droplet className="w-5 h-5 inline mr-2" />
@@ -1125,9 +1131,10 @@ const DailyTrackingPage = ({ trackingData, newWeight, setNewWeight, addWeightEnt
           </button>
           <button
             onClick={() => setActiveTab('sleep')}
+            aria-label={t.sleep_calc}
             className={`px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'sleep'
               ? 'bg-linear-to-r from-indigo-500 to-purple-600 text-white shadow-lg'
-              : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-700'
+              : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-700'
               }`}
           >
             <Moon className="w-5 h-5 inline mr-2" />
@@ -1197,7 +1204,7 @@ const DailyTrackingPage = ({ trackingData, newWeight, setNewWeight, addWeightEnt
               <div className="space-y-3">
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">{t.history}</h3>
                 {trackingData.weight.length === 0 ? (
-                  <p className="text-gray-500 text-center py-8">{t.no_entries}</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-center py-8">{t.no_entries}</p>
                 ) : (
                   <div className="space-y-2">
                     {[...trackingData.weight].reverse().slice(0, 10).map((entry, index) => (
@@ -1208,7 +1215,8 @@ const DailyTrackingPage = ({ trackingData, newWeight, setNewWeight, addWeightEnt
                         </div>
                         <button
                           onClick={() => deleteEntry('weight', trackingData.weight.length - 1 - index)}
-                          className="text-red-500 hover:text-red-700 transition-colors"
+                          className="text-red-600 hover:text-red-800 transition-colors p-2"
+                          aria-label={t.aria_delete_entry}
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
@@ -1271,7 +1279,7 @@ const DailyTrackingPage = ({ trackingData, newWeight, setNewWeight, addWeightEnt
               <div className="space-y-3">
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">{t.history}</h3>
                 {trackingData.water.length === 0 ? (
-                  <p className="text-gray-500 text-center py-8">{t.no_entries}</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-center py-8">{t.no_entries}</p>
                 ) : (
                   <div className="space-y-2">
                     {[...trackingData.water].reverse().slice(0, 10).map((entry, index) => (
@@ -1282,7 +1290,8 @@ const DailyTrackingPage = ({ trackingData, newWeight, setNewWeight, addWeightEnt
                         </div>
                         <button
                           onClick={() => deleteEntry('water', trackingData.water.length - 1 - index)}
-                          className="text-red-500 hover:text-red-700 transition-colors"
+                          className="text-red-600 hover:text-red-800 transition-colors p-2"
+                          aria-label={t.aria_delete_entry}
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
@@ -1352,7 +1361,7 @@ const DailyTrackingPage = ({ trackingData, newWeight, setNewWeight, addWeightEnt
               <div className="space-y-3">
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">{t.history}</h3>
                 {trackingData.sleep.length === 0 ? (
-                  <p className="text-gray-500 text-center py-8">{t.no_entries}</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-center py-8">{t.no_entries}</p>
                 ) : (
                   <div className="space-y-2">
                     {[...trackingData.sleep].reverse().slice(0, 10).map((entry, index) => (
@@ -1363,7 +1372,8 @@ const DailyTrackingPage = ({ trackingData, newWeight, setNewWeight, addWeightEnt
                         </div>
                         <button
                           onClick={() => deleteEntry('sleep', trackingData.sleep.length - 1 - index)}
-                          className="text-red-500 hover:text-red-700 transition-colors"
+                          className="text-red-600 hover:text-red-800 transition-colors p-2"
+                          aria-label={t.aria_delete_entry}
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
@@ -1972,7 +1982,11 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
   return (
     <div className="bg-white dark:bg-gray-900 pt-24 pb-16 px-4">
       <div className="max-w-4xl mx-auto">
-        <button onClick={() => setCurrentPage('blog')} className="mb-8 flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-emerald-600 font-bold transition-all group">
+        <button
+          onClick={() => setCurrentPage('blog')}
+          className="mb-8 flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-emerald-600 font-bold transition-all group"
+          aria-label={t.aria_back}
+        >
           <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded-xl group-hover:bg-emerald-50">
             <ArrowLeft className="w-5 h-5" />
           </div>

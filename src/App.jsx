@@ -145,19 +145,19 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
   }, [lang]);
   const slides = [
     {
-      image: '/images/hero_fitness.png',
+      image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=2670&q=80',
       title: t.hero_title,
       accent: t.hero_title_accent,
       subtitle: t.hero_subtitle
     },
     {
-      image: '/images/hero_nutrition.png',
+      image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=2670&q=80',
       title: t.hero_title,
       accent: t.hero_title_accent,
       subtitle: t.hero_subtitle
     },
     {
-      image: '/images/hero_wellness.png',
+      image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=2670&q=80',
       title: t.hero_title,
       accent: t.hero_title_accent,
       subtitle: t.hero_subtitle

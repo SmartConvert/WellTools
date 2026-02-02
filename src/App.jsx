@@ -301,32 +301,32 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-12 lg:mb-20">
           <div
             onClick={() => setCurrentPage('tracking')}
-            className="group relative bg-linear-to-br from-gray-900 to-slate-900 p-10 rounded-[3rem] overflow-hidden cursor-pointer shadow-2xl hover:-translate-y-1 transition-all"
+            className="group relative bg-linear-to-br from-orange-500 to-amber-600 p-10 rounded-[3rem] overflow-hidden cursor-pointer shadow-2xl hover:-translate-y-1 transition-all"
           >
             <div className="relative z-10">
-              <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6">
-                <TrendingUp className="w-8 h-8 text-emerald-400" />
+              <div className="text-6xl mb-6 transform group-hover:scale-110 transition-transform">
+                🥕
               </div>
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">{t.daily_tracking}</h3>
-              <p className="text-gray-400 text-base md:text-lg mb-8 max-w-md">{t.daily_tracking_desc}</p>
-              <div className="inline-flex items-center gap-3 px-6 py-3 bg-emerald-500 text-white rounded-xl font-bold hover:bg-emerald-400 transition-colors">
+              <p className="text-orange-100 text-base md:text-lg mb-8 max-w-md">{t.daily_tracking_desc}</p>
+              <div className="inline-flex items-center gap-3 px-6 py-3 bg-white text-orange-600 rounded-xl font-bold hover:bg-orange-50 transition-colors">
                 {t.open_dashboard} <ChevronRight className="w-5 h-5" />
               </div>
             </div>
-            <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/20 blur-[100px] -mr-32 -mt-32"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 blur-[100px] -mr-32 -mt-32"></div>
           </div>
 
           <div
             onClick={() => setCurrentPage('meals')}
-            className="group relative bg-linear-to-br from-emerald-600 to-teal-700 p-10 rounded-[3rem] overflow-hidden cursor-pointer shadow-2xl hover:-translate-y-1 transition-all"
+            className="group relative bg-linear-to-br from-green-600 to-emerald-700 p-10 rounded-[3rem] overflow-hidden cursor-pointer shadow-2xl hover:-translate-y-1 transition-all"
           >
             <div className="relative z-10">
-              <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6">
-                <Apple className="w-8 h-8 text-white" />
+              <div className="text-6xl mb-6 transform group-hover:scale-110 transition-transform">
+                🥗
               </div>
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">{t.meal_suggestions}</h3>
-              <p className="text-emerald-100 text-base md:text-lg mb-8 max-w-md">{t.meal_suggestions_desc}</p>
-              <div className="inline-flex items-center gap-3 px-6 py-3 bg-white text-emerald-700 rounded-xl font-bold hover:bg-emerald-50 transition-colors">
+              <p className="text-green-100 text-base md:text-lg mb-8 max-w-md">{t.meal_suggestions_desc}</p>
+              <div className="inline-flex items-center gap-3 px-6 py-3 bg-white text-green-700 rounded-xl font-bold hover:bg-green-50 transition-colors">
                 {t.view_meal_plans} <ChevronRight className="w-5 h-5" />
               </div>
             </div>

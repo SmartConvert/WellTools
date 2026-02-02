@@ -183,9 +183,24 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
           <button onClick={() => { setCurrentPage('blog'); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
             {t.nav_blog}
           </button>
-          <button onClick={() => { setCurrentPage('about'); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors">
+          <button onClick={() => { setCurrentPage('about'); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors font-semibold">
             {t.nav_about}
           </button>
+
+          <div className="pt-4 mt-4 border-t border-gray-100 dark:border-gray-800">
+            <p className="px-4 text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">{t.language}</p>
+            <div className="grid grid-cols-5 gap-2 px-4">
+              {['en', 'ar', 'fr', 'de', 'es'].map((l) => (
+                <button
+                  key={l}
+                  onClick={() => { setLang(l); setMobileMenuOpen(false); }}
+                  className={`py-2 rounded-xl text-xs font-black uppercase transition-all border ${lang === l ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-gray-100 dark:border-gray-700'}`}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     )}
@@ -195,9 +210,9 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, t }) => (
   <div className="pt-24 pb-16 px-4">
     <div className="max-w-7xl mx-auto">
       {/* Hero Section */}
-      <div className="text-center mb-20 animate-fade-in">
-        <h1 className="text-5xl md:text-7xl font-black text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">
-          {t.hero_title} <span className="bg-linear-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">{t.hero_title_accent}</span>
+      <div className="text-center mb-12 lg:mb-20 animate-fade-in">
+        <h1 className="text-4xl md:text-7xl font-black text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">
+          {t.hero_title} <br className="md:hidden" /><span className="bg-linear-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">{t.hero_title_accent}</span>
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed mb-10">
           {t.hero_subtitle}
@@ -224,7 +239,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, t }) => (
       <AdComponent slot="home_top" />
 
       {/* Tools Grid */}
-      <div id="tools-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+      <div id="tools-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12 lg:mb-20">
         {[
           { id: 'bmi', name: t.bmi_calc, icon: Calculator, color: 'from-cyan-400 to-blue-500', description: t.bmi_desc },
           { id: 'calories', name: t.calories_calc, icon: Activity, color: 'from-emerald-400 to-teal-500', description: t.calories_desc },
@@ -251,7 +266,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, t }) => (
       </div>
 
       {/* Daily Tracking & Meals Feature Sections */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-12 lg:mb-20">
         <div
           onClick={() => setCurrentPage('tracking')}
           className="group relative bg-linear-to-br from-gray-900 to-slate-900 p-10 rounded-[3rem] overflow-hidden cursor-pointer shadow-2xl hover:-translate-y-1 transition-all"
@@ -260,8 +275,8 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, t }) => (
             <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6">
               <TrendingUp className="w-8 h-8 text-emerald-400" />
             </div>
-            <h3 className="text-3xl font-bold text-white mb-4">{t.daily_tracking}</h3>
-            <p className="text-gray-400 text-lg mb-8 max-w-md">{t.daily_tracking_desc}</p>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">{t.daily_tracking}</h3>
+            <p className="text-gray-400 text-base md:text-lg mb-8 max-w-md">{t.daily_tracking_desc}</p>
             <div className="inline-flex items-center gap-3 px-6 py-3 bg-emerald-500 text-white rounded-xl font-bold hover:bg-emerald-400 transition-colors">
               {t.open_dashboard} <ChevronRight className="w-5 h-5" />
             </div>
@@ -277,8 +292,8 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, t }) => (
             <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6">
               <Apple className="w-8 h-8 text-white" />
             </div>
-            <h3 className="text-3xl font-bold text-white mb-4">{t.meal_suggestions}</h3>
-            <p className="text-emerald-100 text-lg mb-8 max-w-md">{t.meal_suggestions_desc}</p>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">{t.meal_suggestions}</h3>
+            <p className="text-emerald-100 text-base md:text-lg mb-8 max-w-md">{t.meal_suggestions_desc}</p>
             <div className="inline-flex items-center gap-3 px-6 py-3 bg-white text-emerald-700 rounded-xl font-bold hover:bg-emerald-50 transition-colors">
               {t.view_meal_plans} <ChevronRight className="w-5 h-5" />
             </div>

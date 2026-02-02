@@ -3,74 +3,14 @@ import { Calculator, Heart, Droplet, Globe, Scale, Apple, TrendingDown, Activity
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import postsData from './data/posts.json';
 import { translations } from './translations';
+import { mealCategories } from './data/meals';
 import AdComponent from './components/AdComponent';
 import ToolInfoSection from './components/ToolInfoSection';
 
 const BMICalculatorPage = React.lazy(() => import('./components/BMICalculatorPage'));
+const MealPlannerPage = React.lazy(() => import('./components/MealPlannerPage'));
 
-// Meal Data
-const mealCategories = {
-  weightLoss: {
-    title: 'about_meals_title',
-    icon: TrendingDown,
-    color: 'from-emerald-400 to-teal-500',
-    meals: [
-      { name: 'meal_chicken_salad', calories: 350, protein: '35g', carbs: '20g', fat: '12g' },
-      { name: 'meal_veggie_stir_fry', calories: 280, protein: '18g', carbs: '32g', fat: '8g' },
-      { name: 'meal_baked_salmon', calories: 400, protein: '38g', carbs: '15g', fat: '20g' },
-      { name: 'meal_yogurt_bowl', calories: 220, protein: '15g', carbs: '28g', fat: '5g' },
-      { name: 'meal_quinoa_bowl', calories: 320, protein: '14g', carbs: '48g', fat: '7g' }
-    ]
-  },
-  diabetes: {
-    title: 'diabetes_friendly_meals',
-    icon: Activity,
-    color: 'from-blue-400 to-indigo-500',
-    meals: [
-      { name: 'meal_lentil_soup', calories: 250, protein: '14g', carbs: '38g', fat: '4g', gi: 'Low' },
-      { name: 'meal_grilled_fish', calories: 320, protein: '35g', carbs: '12g', fat: '15g', gi: 'Low' },
-      { name: 'meal_chicken_cauliflower', calories: 290, protein: '32g', carbs: '18g', fat: '10g', gi: 'Low' },
-      { name: 'meal_egg_white_omelet', calories: 180, protein: '20g', carbs: '8g', fat: '7g', gi: 'Low' },
-      { name: 'meal_turkey_wraps', calories: 240, protein: '28g', carbs: '10g', fat: '9g', gi: 'Low' }
-    ]
-  },
-  bloodPressure: {
-    title: 'blood_pressure_friendly_meals',
-    icon: Heart,
-    color: 'from-rose-400 to-pink-500',
-    meals: [
-      { name: 'meal_oatmeal_banana', calories: 320, protein: '10g', sodium: '5mg', potassium: 'High' },
-      { name: 'meal_baked_chicken_potato', calories: 380, protein: '35g', sodium: '80mg', potassium: 'High' },
-      { name: 'meal_spinach_avocado', calories: 240, protein: '8g', sodium: '40mg', potassium: 'High' },
-      { name: 'meal_grilled_salmon_kale', calories: 410, protein: '38g', sodium: '95mg', potassium: 'High' },
-      { name: 'meal_bean_stew', calories: 280, protein: '15g', sodium: '120mg', potassium: 'High' }
-    ]
-  },
-  healthy: {
-    title: 'general_healthy_meals',
-    icon: Apple,
-    color: 'from-amber-400 to-orange-500',
-    meals: [
-      { name: 'meal_mediterranean_bowl', calories: 450, protein: '22g', carbs: '52g', fat: '18g' },
-      { name: 'meal_chicken_brown_rice', calories: 420, protein: '400g', carbs: '45g', fat: '8g' },
-      { name: 'meal_veggie_pasta', calories: 380, protein: '14g', carbs: '58g', fat: '12g' },
-      { name: 'meal_smoothie_bowl', calories: 340, protein: '12g', carbs: '54g', fat: '10g' },
-      { name: 'meal_tuna_sandwich', calories: 360, protein: '28g', carbs: '38g', fat: '10g' }
-    ]
-  },
-  weightGain: {
-    title: 'weight_gain_meals',
-    icon: Scale,
-    color: 'from-violet-400 to-purple-500',
-    meals: [
-      { name: 'meal_protein_pancakes', calories: 620, protein: '35g', carbs: '65g', fat: '22g' },
-      { name: 'meal_beef_rice_bowl', calories: 780, protein: '45g', carbs: '82g', fat: '28g' },
-      { name: 'meal_pasta_meat_sauce', calories: 720, protein: '38g', carbs: '88g', fat: '24g' },
-      { name: 'meal_chicken_avocado_wrap', calories: 680, protein: '42g', carbs: '54g', fat: '32g' },
-      { name: 'meal_mass_gainer', calories: 850, protein: '40g', carbs: '98g', fat: '30g' }
-    ]
-  }
-};
+
 
 const tools = [
   { id: 'bmi', name: 'BMI Calculator', icon: Calculator, color: 'from-cyan-400 to-blue-500', description: 'Calculate your Body Mass Index' },
@@ -1591,127 +1531,7 @@ const ContactPage = ({ setCurrentPage, t }) => {
   );
 };
 
-const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
-  const [goal, setGoal] = useState(calResult ? 'maintain' : 'maintain'); // prioritize maintain for safety
 
-  const getMealPlan = () => {
-    // Basic logic to simulate "AI" selection based on target categories
-    const plans = {
-      lose: {
-        total: 1500,
-        items: [
-          { type: t.breakfast, name: 'bowl_oatmeal_berries', calories: 350 },
-          { type: t.lunch, name: 'grilled_chicken_salad', calories: 450 },
-          { type: t.dinner, name: 'steamed_fish_veggies', calories: 400 },
-          { type: t.snack, name: 'handful_almonds', calories: 150 }
-        ]
-      },
-      maintain: {
-        total: 2000,
-        items: [
-          { type: t.breakfast, name: 'avocado_toast_eggs', calories: 450 },
-          { type: t.lunch, name: 'turkey_quinoa_bowl', calories: 550 },
-          { type: t.dinner, name: 'beef_stir_fry_rice', calories: 600 },
-          { type: t.snack, name: 'greek_yogurt_honey', calories: 250 }
-        ]
-      },
-      gain: {
-        total: 2800,
-        items: [
-          { type: t.breakfast, name: 'protein_pancakes_banana', calories: 700 },
-          { type: t.lunch, name: 'steak_sweet_potato', calories: 850 },
-          { type: t.dinner, name: 'pasta_bolognese_extra_cheese', calories: 800 },
-          { type: t.snack, name: 'peanut_butter_smoothie', calories: 450 }
-        ]
-      }
-    };
-    return plans[goal];
-  };
-
-  const currentPlan = getMealPlan();
-
-  return (
-    <div className="pt-24 pb-16 px-4">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-12 animate-fade-in">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <div className="w-16 h-16 bg-linear-to-br from-orange-400 to-rose-500 rounded-2xl flex items-center justify-center shadow-xl">
-              <Utensils className="w-8 h-8 text-white" />
-            </div>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
-            {t.meal_planner_title}
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            {t.meal_planner_desc}
-          </p>
-        </div>
-
-        {/* Goal Selection */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-          {[
-            { id: 'lose', label: t.goal_lose, icon: TrendingDown, color: 'emerald' },
-            { id: 'maintain', label: t.goal_maintain, icon: Activity, color: 'blue' },
-            { id: 'gain', label: t.goal_gain, icon: Scale, color: 'violet' }
-          ].map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setGoal(item.id)}
-              className={`p-6 rounded-2xl border-2 transition-all flex flex-col items-center gap-3 ${goal === item.id ? (item.id === 'lose' ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20' : item.id === 'maintain' ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-violet-500 bg-violet-50 dark:bg-violet-900/20') : 'border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 text-gray-400'}`}
-            >
-              <item.icon className={`w-8 h-8 ${goal === item.id ? (item.id === 'lose' ? 'text-emerald-500' : item.id === 'maintain' ? 'text-blue-500' : 'text-violet-500') : ''}`} />
-              <span className={`font-bold ${goal === item.id ? 'text-gray-900 dark:text-white' : ''}`}>{item.label}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Suggested Menu Card */}
-        <div id="meal-plan-result" className="bg-white dark:bg-gray-800 rounded-[2.5rem] p-8 md:p-12 shadow-2xl border border-gray-100 dark:border-gray-700 mb-12 animate-fade-in group hover:border-emerald-500/30 transition-all duration-500">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 pb-8 border-b border-gray-100 dark:border-gray-700">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1 tracking-tight">{t.today_menu}</h2>
-              <div className="flex items-center gap-2">
-                <span className="text-gray-500 text-sm font-medium">{t.calories_goal}:</span>
-                <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 rounded-full font-black text-sm">
-                  {currentPlan.total} kcal
-                </span>
-              </div>
-            </div>
-            <div className="flex flex-wrap items-center gap-3">
-              <button className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 transition-all font-bold group/btn shadow-lg">
-                <Plus className="w-5 h-5 group-hover/btn:rotate-90 transition-transform" />
-                {t.generate_new}
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            {currentPlan.items.map((meal, i) => (
-              <div key={i} className="flex items-center gap-6 p-6 rounded-3xl bg-gray-50/50 dark:bg-gray-900/30 hover:bg-white dark:hover:bg-gray-800 border-2 border-transparent hover:border-emerald-500/20 hover:shadow-xl transition-all duration-300">
-                <div className="w-14 h-14 bg-emerald-500 text-white rounded-2xl flex items-center justify-center font-black text-lg shadow-lg">
-                  {i + 1}
-                </div>
-                <div className="grow">
-                  <div className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-1">{meal.type}</div>
-                  <h3 className="text-xl font-bold text-gray-800 dark:text-white group-hover:text-emerald-600 transition-colors uppercase tracking-tight">{t[meal.name] || meal.name}</h3>
-                </div>
-                <div className="text-right">
-                  <div className="text-2xl font-black text-gray-900 dark:text-white">{meal.calories}</div>
-                  <div className="text-[10px] text-gray-400 font-black uppercase tracking-widest">KCAL</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <button onClick={() => setCurrentPage('home')} className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700 flex items-center gap-2 mx-auto md:mx-0">
-          <ArrowLeft className="w-5 h-5" />
-          {t.back_to_home}
-        </button>
-      </div>
-    </div>
-  );
-};
 
 const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang }) => {
   // Fallback to English if no posts in current language

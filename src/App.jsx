@@ -216,30 +216,24 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
               <div className="absolute inset-0 bg-linear-to-r from-gray-900/80 via-gray-900/40 to-transparent"></div>
               <div className="absolute inset-0 flex items-center px-8 md:px-16">
                 <div className="max-w-2xl">
-                  <h1 className="text-4xl md:text-7xl font-black text-white mb-6 tracking-tight leading-tight">
+                  <h1 className="text-3xl md:text-7xl font-black text-white mb-4 md:mb-6 tracking-tight leading-tight">
                     {slide.title} <br className="md:hidden" />
                     <span className="bg-linear-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
                       {slide.accent}
                     </span>
                   </h1>
-                  <p className="text-xl text-gray-200 max-w-xl leading-relaxed mb-10">
+                  <p className="text-lg md:text-xl text-gray-200 max-w-xl leading-relaxed mb-8 md:mb-10">
                     {slide.subtitle}
                   </p>
-                  <div className="flex flex-wrap gap-4">
+                  <div className="flex flex-wrap gap-3 md:gap-4">
                     <button
                       onClick={() => {
                         const el = document.getElementById('tools-grid');
                         el?.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="px-8 py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
+                      className="px-6 py-3 md:px-8 md:py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-base md:text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
                     >
                       {t.explore_tools}
-                    </button>
-                    <button
-                      onClick={() => setCurrentPage('blog')}
-                      className="px-8 py-4 bg-white/10 backdrop-blur-md text-white border-2 border-white/20 rounded-2xl font-bold text-lg hover:bg-white/20 transition-all shadow-sm"
-                    >
-                      {t.nav_blog}
                     </button>
                   </div>
                 </div>

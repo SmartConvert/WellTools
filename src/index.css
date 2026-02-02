@@ -4,6 +4,4 @@
 @source "./**/*.{js,jsx,ts,tsx}";
 @source "../daily-health-tools-enhanced (1).jsx";
 
-@variant dark (&:where(.dark, .dark *));
-
 /* Tailwind CSS v4 handles preflight and base styles automatically */

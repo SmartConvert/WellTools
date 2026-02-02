@@ -928,10 +928,26 @@ const DailyTrackingPage = ({ trackingData, newWeight, setNewWeight, addWeightEnt
         </div>
 
         <div className="flex gap-4 mb-8 overflow-x-auto pb-2">
-          <button
-            onClick={() => setActiveTab('weight')}
-            className={`px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'weight'
-              < Droplet className="w-5 h-5 inline mr-2" />
+          {t.nav_apps}
+        </button>
+        <button
+          onClick={() => setActiveTab('weight')}
+          className={`px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'weight'
+            ? 'bg-linear-to-r from-violet-500 to-purple-600 text-white shadow-lg'
+            : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-700'
+            }`}
+        >
+          <Scale className="w-5 h-5 inline mr-2" />
+          {t.weight}
+        </button>
+        <button
+          onClick={() => setActiveTab('water')}
+          className={`px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'water'
+            ? 'bg-linear-to-r from-blue-500 to-cyan-600 text-white shadow-lg'
+            : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-700'
+            }`}
+        >
+          <Droplet className="w-5 h-5 inline mr-2" />
           {t.water_calc}
         </button>
         <button

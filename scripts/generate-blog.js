@@ -114,11 +114,12 @@ async function generatePost() {
             console.log("Creating new posts file...");
         }
 
-        // Add new post to the beginning
-        posts.unshift(newPost);
+        // Add new post to the beginning of the "en" category
+        if (!posts.en) posts.en = [];
+        posts.en.unshift(newPost);
 
         // Save back to file
-        await fs.writeFile(POSTS_PATH, JSON.stringify(posts, null, 2));
+        await fs.writeFile(POSTS_PATH, JSON.stringify(posts, null, 4));
 
         console.log(`Successfully generated and saved: ${newPost.title}`);
     } catch (error) {

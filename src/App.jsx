@@ -502,11 +502,7 @@ const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, c
             <div className="flex justify-between items-start mb-4">
               <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center flex-1 ml-10">{t.result}:</h3>
               <button
-                onClick={() => {
-                  console.log('BMI Download Clicked');
-                  alert('Generating PDF... Please wait.');
-                  exportToPDF('bmi-result', `WellTools-BMI-${new Date().toISOString().split('T')[0]}.pdf`);
-                }}
+                onClick={() => exportToPDF('bmi-result', `WellTools-BMI-${new Date().toISOString().split('T')[0]}.pdf`)}
                 className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 text-cyan-600 rounded-xl shadow-sm hover:shadow-md transition-all text-sm font-bold border border-cyan-100 dark:border-cyan-800"
               >
                 <FileText className="w-4 h-4" />

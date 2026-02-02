@@ -7,7 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const POSTS_PATH = path.join(__dirname, "../src/data/posts.json");
 
 // API Key should be set in GitHub Secrets/Environment
-const API_KEY = process.env.GEMINI_API_KEY;
+const API_KEY = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : "";
 
 if (!API_KEY) {
     console.error("Error: GEMINI_API_KEY is not set.");

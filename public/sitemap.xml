@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://daily-health-tools.com/</loc>
+    <loc>https://welltools.pages.dev/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://daily-health-tools.com/calculators</loc>
+    <loc>https://welltools.pages.dev/calculators</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://daily-health-tools.com/tracking</loc>
+    <loc>https://welltools.pages.dev/tracking</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://daily-health-tools.com/blog</loc>
+    <loc>https://welltools.pages.dev/blog</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://daily-health-tools.com/about</loc>
+    <loc>https://welltools.pages.dev/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://daily-health-tools.com/contact</loc>
+    <loc>https://welltools.pages.dev/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <!-- Tools -->
   <url>
-    <loc>https://daily-health-tools.com/bmi</loc>
+    <loc>https://welltools.pages.dev/bmi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://daily-health-tools.com/calories</loc>
+    <loc>https://welltools.pages.dev/calories</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://daily-health-tools.com/water</loc>
+    <loc>https://welltools.pages.dev/water</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://daily-health-tools.com/ideal-weight</loc>
+    <loc>https://welltools.pages.dev/ideal-weight</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://daily-health-tools.com/sleep</loc>
+    <loc>https://welltools.pages.dev/sleep</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://daily-health-tools.com/body-fat</loc>
+    <loc>https://welltools.pages.dev/body-fat</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

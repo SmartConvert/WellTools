@@ -1,0 +1,187 @@
+{
+    "project_name": "WellTools Health Website",
+    "publishing_rate": "3 pages per week",
+    "total_pages": 30,
+    "topics": [
+        {
+            "id": 1,
+            "group": "health_calculators",
+            "title": "BMI Calculator",
+            "completed": false
+        },
+        {
+            "id": 2,
+            "group": "health_calculators",
+            "title": "Daily Calorie Needs Calculator",
+            "completed": false
+        },
+        {
+            "id": 3,
+            "group": "health_calculators",
+            "title": "Water Intake Calculator",
+            "completed": false
+        },
+        {
+            "id": 4,
+            "group": "health_calculators",
+            "title": "Ideal Weight Calculator",
+            "completed": false
+        },
+        {
+            "id": 5,
+            "group": "health_calculators",
+            "title": "Sleep Hours Calculator",
+            "completed": false
+        },
+        {
+            "id": 6,
+            "group": "health_calculators",
+            "title": "Protein Intake Calculator",
+            "completed": false
+        },
+        {
+            "id": 7,
+            "group": "health_calculators",
+            "title": "Fat Intake Calculator",
+            "completed": false
+        },
+        {
+            "id": 8,
+            "group": "health_calculators",
+            "title": "Carbohydrates Calculator",
+            "completed": false
+        },
+        {
+            "id": 9,
+            "group": "health_calculators",
+            "title": "BMR Calculator",
+            "completed": false
+        },
+        {
+            "id": 10,
+            "group": "health_calculators",
+            "title": "TDEE Calculator",
+            "completed": false
+        },
+        {
+            "id": 11,
+            "group": "meal_plans",
+            "title": "What should I eat today?",
+            "completed": false
+        },
+        {
+            "id": 12,
+            "group": "meal_plans",
+            "title": "Meal plan for weight loss",
+            "completed": false
+        },
+        {
+            "id": 13,
+            "group": "meal_plans",
+            "title": "Meal plan for weight gain",
+            "completed": false
+        },
+        {
+            "id": 14,
+            "group": "meal_plans",
+            "title": "Meal plan for diabetes",
+            "completed": false
+        },
+        {
+            "id": 15,
+            "group": "meal_plans",
+            "title": "Meal plan for high blood pressure",
+            "completed": false
+        },
+        {
+            "id": 16,
+            "group": "meal_plans",
+            "title": "Meal plan for cholesterol",
+            "completed": false
+        },
+        {
+            "id": 17,
+            "group": "meal_plans",
+            "title": "Meal plan for office workers",
+            "completed": false
+        },
+        {
+            "id": 18,
+            "group": "meal_plans",
+            "title": "Meal plan for students",
+            "completed": false
+        },
+        {
+            "id": 19,
+            "group": "meal_plans",
+            "title": "Cheap healthy meal plan",
+            "completed": false
+        },
+        {
+            "id": 20,
+            "group": "meal_plans",
+            "title": "Vegetarian daily meal plan",
+            "completed": false
+        },
+        {
+            "id": 21,
+            "group": "daily_health_topics",
+            "title": "How much water should I drink per day?",
+            "completed": false
+        },
+        {
+            "id": 22,
+            "group": "daily_health_topics",
+            "title": "How many calories do I need per day?",
+            "completed": false
+        },
+        {
+            "id": 23,
+            "group": "daily_health_topics",
+            "title": "Why do I feel tired all the time?",
+            "completed": false
+        },
+        {
+            "id": 24,
+            "group": "daily_health_topics",
+            "title": "How many hours should I sleep?",
+            "completed": false
+        },
+        {
+            "id": 25,
+            "group": "daily_health_topics",
+            "title": "Why am I gaining weight?",
+            "completed": false
+        },
+        {
+            "id": 26,
+            "group": "daily_health_topics",
+            "title": "How to lose weight safely",
+            "completed": false
+        },
+        {
+            "id": 27,
+            "group": "daily_health_topics",
+            "title": "How to reduce belly fat",
+            "completed": false
+        },
+        {
+            "id": 28,
+            "group": "daily_health_topics",
+            "title": "Best foods for energy",
+            "completed": false
+        },
+        {
+            "id": 29,
+            "group": "daily_health_topics",
+            "title": "Foods that help digestion",
+            "completed": false
+        },
+        {
+            "id": 30,
+            "group": "daily_health_topics",
+            "title": "Simple daily healthy routine",
+            "completed": false
+        }
+    ]
+}

@@ -1851,6 +1851,7 @@ const DailyHealthTools = () => {
   }, [lang, t]);
 
   // Sync selectedPost with URL and language
+  /*
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const postId = params.get('post');
@@ -1864,8 +1865,10 @@ const DailyHealthTools = () => {
       }
     }
   }, [lang]); // Run on mount/lang change (simple check)
+  */
 
   // When selectedPost changes, update URL
+  /*
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (selectedPost) {
@@ -1875,13 +1878,14 @@ const DailyHealthTools = () => {
     } else {
       params.delete('post');
     }
-
+    
     // Preserve lang param
     params.set('lang', lang);
-
+    
     const newUrl = `${window.location.pathname}?${params.toString()}`;
     window.history.replaceState(null, '', newUrl);
   }, [selectedPost, lang, currentPage]);
+  */
 
   // Sync post across languages (existing logic enhanced)
   useEffect(() => {

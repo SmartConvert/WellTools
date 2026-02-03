@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Utensils, TrendingDown, Activity, Scale, Info, Plus } from 'lucide-react';
+import { Utensils, TrendingDown, Activity, Scale as ScaleIcon, Info, Plus } from 'lucide-react';
 import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import { mealCategories } from '../data/meals';
@@ -96,7 +96,7 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
                     {[
                         { id: 'lose', label: t.goal_lose, icon: TrendingDown, color: 'emerald' },
                         { id: 'maintain', label: t.goal_maintain, icon: Activity, color: 'blue' },
-                        { id: 'gain', label: t.goal_gain, icon: Scale, color: 'violet' }
+                        { id: 'gain', label: t.goal_gain, icon: ScaleIcon, color: 'violet' }
                     ].map((item) => (
                         <button
                             key={item.id}

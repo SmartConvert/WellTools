@@ -1,7 +1,7 @@
 {
     "en": [
         {
-            "id": "intermittent-fasting-beginner-guide-1770054780375",
+            "id": "intermittent-fasting-1770054780375",
             "title": "Intermittent Fasting: A Beginner's Guide to Benefits and Safety",
             "date": "2026-02-02",
             "category": "Nutrition",
@@ -28,7 +28,7 @@
             ]
         },
         {
-            "id": "benefits-of-hydration-1769979000000",
+            "id": "science-hydration-1769979000000",
             "title": "The Science of Hydration: Why Water is Your Ultimate Performance Enhancer",
             "date": "2026-02-01",
             "category": "Nutrition",
@@ -56,7 +56,33 @@
     ],
     "ar": [
         {
-            "id": "benefits-of-hydration-ar-1",
+            "id": "intermittent-fasting-1770054780375",
+            "title": "الصيام المتقطع: دليل المبتدئين للفوائد والأمان",
+            "date": "2026-02-02",
+            "category": "التغذية",
+            "excerpt": "استكشف العلم وراء الصيام المتقطع. تعرف على الطرق المختلفة، وفوائد إدارة الوزن، وكيفية البدء بأمان.",
+            "image": "https://images.unsplash.com/photo-1543362906-acfc94d6b71f?auto=format&fit=crop&w=1200&q=80",
+            "imageAlt": "فطور صحي مع ساعة للصيام المتقطع",
+            "content": "## مقدمة\n\nاكتسب الصيام المتقطع (IF) شعبية هائلة كطريقة بسيطة وفعالة لإدارة الوزن وتحسين الصحة الأيضية. على عكس الأنظمة الغذائية التقليدية التي تركز على *ماذا* تأكل، يركز الصيام المتقطع على *متى* تأكل.\n\n## طرق الصيام الشائعة\n\n1. **طريقة 16/8**: تتضمن تخطي وجبة الإفطار وتقييد فترة الأكل اليومية بـ 8 ساعات، مثل من 1 مساءً إلى 9 مساءً. ثم تصوم لمدة 16 ساعة بينهما.\n2. **حمية 5:2**: مع هذه الطريقة، تستهلك فقط 500-600 سعرة حرارية في يومين غير متتاليين من الأسبوع، ولكن تأكل بشكل طبيعي في الأيام الخمسة الأخرى.\n3. **الأكل ثم التوقف ثم الأكل**: يتضمن ذلك صياماً لمدة 24 ساعة، مرة أو مرتين في الأسبوع.\n\n## الفوائد الصحية\n\n- **فقدان الوزن**: من خلال تقليل نافذة الأكل، غالباً ما يستهلك المستخدمون سعرات حرارية أقل بشكل طبيعي.\n- **حساسية الأنسولين**: يمكن أن يساعد الصيام في خفض مستويات السكر في الدم وتقليل مقاومة الأنسولين.\n- **الإصلاح الخلوي**: أثناء الصيام، يبدأ الجسم عملية \"إزالة النفايات\" الخلوية تسمى الالتهام الذاتي.\n\n## هل هو آمن؟\n\nبالنسبة لمعظم البالغين الأصحاء، يعد الصيام المتقطع آمناً وفعالاً. ومع ذلك، فهو ليس للجميع. يجب على النساء الحوامل أو الأشخاص الذين لديهم تاريخ من اضطرابات الأكل استشارة الطبيب أولاً. استخدم حاسبة BMI وحاسبة السعرات لدينا لفهم خط الأساس الصحي الخاص بك.\n\n## الأسئلة الشائعة (FAQ)\n\n**ما هي كمية الماء التي يمكنني شربها أثناء الصيام؟**\nيجب أن تبقى رطباً جيداً حتى أثناء الصيام. استخدم حاسبة شرب الماء لدينا للعثور على هدفك.\n\n**هل يسبب الصيام فقدان العضلات؟**\nتظهر معظم الدراسات أن الصيام المتقطع مشابه لتقييد السعرات الحرارية المستمر في الحفاظ على كتلة العضلات.\n\n## المصادر والمراجع\n\n- مايو كلينك - الصيام المتقطع\n- جونز هوبكنز ميديسن - الصيام المتقطع: ما هو وكيف يعمل؟\n\nيوفر هذا الموقع معلومات صحية عامة ولا يحل محل المشورة الطبية المهنية.",
+            "keywords": [
+                "الصيام المتقطع",
+                "فقدان الوزن",
+                "الصحة",
+                "التغذية"
+            ],
+            "faq": [
+                {
+                    "question": "هل القهوة تكسر الصيام؟",
+                    "answer": "القهوة السوداء بدون سكر أو حليب لا تكسر الصيام وقد تعزز بعض الفوائد."
+                },
+                {
+                    "question": "هل يمكنني ممارسة الرياضة أثناء الصيام؟",
+                    "answer": "نعم، يجد الكثير من الناس أنهم يستطيعون ممارسة الرياضة بفعالية أثناء الصيام."
+                }
+            ]
+        },
+        {
+            "id": "science-hydration-1769979000000",
             "title": "علم الترطيب: لماذا الماء هو المعزز النهائي لأدائك",
             "date": "2026-02-01",
             "category": "التغذية",
@@ -84,7 +110,7 @@
     ],
     "fr": [
         {
-            "id": "intermittent-fasting-guide-fr-1770054780375",
+            "id": "intermittent-fasting-1770054780375",
             "title": "Le jeûne intermittent : Guide du débutant sur les bienfaits et la sécurité",
             "date": "2026-02-02",
             "category": "Nutrition",
@@ -106,6 +132,32 @@
                 {
                     "question": "Puis-je faire de l'exercice en jeûnant ?",
                     "answer": "Oui, de nombreuses personnes trouvent qu'elles peuvent s'entraîner efficacement pendant un jeûne."
+                }
+            ]
+        },
+        {
+            "id": "science-hydration-1769979000000",
+            "title": "La science de l'hydratation : Pourquoi l'eau est votre ultime booster de performance",
+            "date": "2026-02-01",
+            "category": "Nutrition",
+            "excerpt": "Découvrez comment une hydratation adéquate impacte votre énergie, vos fonctions cérébrales et votre santé globale.",
+            "image": "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=1200&q=80",
+            "imageAlt": "Verre d'eau pure avec éclaboussure",
+            "content": "## Introduction\n\nL'hydratation est plus que de simples boire de l'eau quand on a soif. C'est une exigence biologique fondamentale qui affecte chaque cellule de votre corps.\n\n## Le rôle de l'eau dans les systèmes corporels\n\n1. **Fonction cérébrale** : Même une déshydratation légère peut altérer de nombreux aspects de la fonction cérébrale.\n2. **Performance physique** : Rester hydraté est crucial pour maintenir l'endurance.\n3. **Santé digestive** : Un apport adéquat en eau prévient la constipation.\n\n## Questions fréquemment posées (FAQ)\n\n**Combien d'eau dois-je boire quotidiennement ?**\nUtilisez notre calculateur d'apport en eau pour une recommandation personnalisée.\n\n**Puis-je boire trop d'eau ?**\nOui, l'hyponatrémie est une condition rare mais grave.\n\n## Sources & Références\n\n- Harvard Health Publishing - L'importance de rester hydraté\n- Mayo Clinic - Eau : Combien devriez-vous boire chaque jour ?",
+            "keywords": [
+                "hydratation",
+                "santé",
+                "apport en eau",
+                "performance"
+            ],
+            "faq": [
+                {
+                    "question": "Le café compte-t-il dans l'hydratation ?",
+                    "answer": "Oui, les boissons caféinées contribuent toujours à votre apport hydrique quotidien."
+                },
+                {
+                    "question": "Quels sont les premiers signes de déshydratation ?",
+                    "answer": "Une urine jaune foncé, la soif, des étourdissements et de la fatigue."
                 }
             ]
         }

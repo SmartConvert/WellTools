@@ -1850,13 +1850,47 @@ const DailyHealthTools = () => {
     document.documentElement.lang = lang;
   }, [lang, t]);
 
-  // Sync selectedPost when lang changes
+  // Sync selectedPost with URL and language
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('post');
+
+    // On Load: If URL has post ID, try to find and set it
+    if (postId && !selectedPost && postsData[lang]) {
+      const post = postsData[lang].find(p => p.id === postId);
+      if (post) {
+        setSelectedPost(post);
+        setCurrentPage('blog-post');
+      }
+    }
+  }, [lang]); // Run on mount/lang change (simple check)
+
+  // When selectedPost changes, update URL
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (selectedPost) {
+      params.set('post', selectedPost.id);
+      // Ensure we are on the blog post page if a post is selected
+      if (currentPage !== 'blog-post') setCurrentPage('blog-post');
+    } else {
+      params.delete('post');
+    }
+
+    // Preserve lang param
+    params.set('lang', lang);
+
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState(null, '', newUrl);
+  }, [selectedPost, lang, currentPage]);
+
+  // Sync post across languages (existing logic enhanced)
   useEffect(() => {
     if (selectedPost && postsData[lang]) {
-      // Try to find the same post by a slug-like part of the ID or title
       const baseId = selectedPost.id.split('-').slice(0, -1).join('-');
-      const translatedPost = postsData[lang].find(p => p.id.includes(baseId) || p.title === selectedPost.title);
-      if (translatedPost) {
+      // Try exact ID match first (if synchronized), then fuzzy
+      const translatedPost = postsData[lang].find(p => p.id === selectedPost.id || p.id.includes(baseId));
+
+      if (translatedPost && translatedPost.id !== selectedPost.id) {
         setSelectedPost(translatedPost);
       }
     }

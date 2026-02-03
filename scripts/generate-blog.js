@@ -32,22 +32,36 @@ const MODELS_TO_TRY = [
 
 async function getWorkingModel(genAI) {
     for (const modelName of MODELS_TO_TRY) {
-        try {
-            console.log(`Testing model: ${modelName}...`);
-            const model = genAI.getGenerativeModel({ model: modelName });
-            const result = await model.generateContent("hi");
-            const response = await result.response;
+        let retries = 0;
+        const MAX_RETRIES = 3;
 
-            if (response.text()) {
-                console.log(`✅ Selected working model: ${modelName}`);
-                return model;
+        while (retries <= MAX_RETRIES) {
+            try {
+                console.log(`Testing model: ${modelName} (Attempt ${retries + 1})...`);
+                const model = genAI.getGenerativeModel({ model: modelName });
+                const result = await model.generateContent("hi");
+                const response = await result.response;
+
+                if (response.text()) {
+                    console.log(`✅ Selected working model: ${modelName}`);
+                    return model;
+                }
+            } catch (error) {
+                console.warn(`❌ Model ${modelName} attempt ${retries + 1} failed. Reason: ${error.message}`);
+
+                const isRateLimit = error.message.includes("429") || error.message.toLowerCase().includes("too many requests") || error.message.includes("Quota exceeded");
+
+                if (isRateLimit && retries < MAX_RETRIES) {
+                    const waitTime = 20000 * (retries + 1); // Progressive backoff: 20s, 40s, 60s
+                    console.log(`⚠️ Rate limit hit. Waiting ${waitTime / 1000} seconds before retrying ${modelName}...`);
+                    await new Promise(resolve => setTimeout(resolve, waitTime));
+                    retries++;
+                } else {
+                    // If not rate limit, or max retries reached, break inner loop to try next model
+                    if (isRateLimit) console.log(`⏩ Skipping ${modelName} after max retries.`);
+                    break;
+                }
             }
-        } catch (error) {
-            console.warn(`❌ Model ${modelName} failed. Reason: ${error.message}`);
-            const isRateLimit = error.message.includes("429") || error.message.toLowerCase().includes("too many requests");
-            const waitTime = isRateLimit ? 30000 : 5000;
-            console.log(`Waiting ${waitTime / 1000} seconds before next attempt...`);
-            await new Promise(resolve => setTimeout(resolve, waitTime));
         }
     }
     throw new Error("All Gemini models failed.");

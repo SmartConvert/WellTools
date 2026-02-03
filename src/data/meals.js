@@ -1,4 +1,4 @@
-import { TrendingDown, Activity, Heart, Apple } from 'lucide-react';
+import { TrendingDown, Activity, Heart, Apple, Scale as ScaleIcon } from 'lucide-react';
 
 export const mealCategories = {
     weightLoss: {
@@ -51,7 +51,7 @@ export const mealCategories = {
     },
     weightGain: {
         title: 'food_recommendations_gain',
-        icon: Scale,
+        icon: ScaleIcon,
         color: 'from-violet-400 to-purple-500',
         meals: [
             { name: 'meal_protein_pancakes', calories: 650, protein: '45g', carbs: '80g', fat: '15g' },

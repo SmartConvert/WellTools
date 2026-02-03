@@ -5,19 +5,6 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-    window.onerror = function (message, source, lineno, colno, error) {
-      document.body.innerHTML = `
-        <div style="padding: 20px; font-family: sans-serif; background: #fff; color: #333;">
-          <h1 style="color: #e53e3e;">Application Error</h1>
-          <p style="font-size: 1.2em;"><strong>Message:</strong> ${message}</p>
-          <p><strong>Source:</strong> ${source}</p>
-          <p><strong>Line:</strong> ${lineno}:${colno}</p>
-          <pre style="background: #f7fafc; padding: 15px; border-radius: 5px; overflow-x: auto;">${error ? error.stack : 'No stack trace available'}</pre>
-        </div>
-      `;
-    };
-  </script>
 
   <!-- Primary Meta Tags -->
   <title>WellTools - Health Calculators, Daily Tracking & Fitness Tips</title>

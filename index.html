@@ -69,45 +69,151 @@
     }
   </script>
 
-  <!-- Performance & Ads -->
+  <!-- Performance & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
 
+  <!-- FOUC Prevention & Preloader Styles -->
+  <style>
+    /* Prevent Flash of Unstyled Content */
+    body {
+      visibility: hidden;
+      opacity: 0;
+      background-color: #f9fafb;
+      /* match light mode bg */
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    .dark body {
+      background-color: #111827;
+      /* match dark mode bg */
+    }
+
+    /* Modern Preloader Styles */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    }
+
+    .spinner {
+      width: 56px;
+      height: 56px;
+      border: 4px solid #10b981;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+    }
+
+    .preloader-text {
+      margin-top: 1.5rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      color: #10b981;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: .5;
+      }
+    }
+
+    /* Initial hidden state removed only via JS */
+    body.is-loaded {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4160895122812433"
     crossorigin="anonymous"></script>
 </head>
 
-<div id="root">
-  <!-- Static SEO Fallback: Visible to crawlers and users with JS disabled -->
-  <div id="seo-static-content" style="padding: 2rem; max-width: 800px; margin: 0 auto; font-family: sans-serif;">
-    <h1>WellTools - Free Professional Health & Fitness Calculators</h1>
-    <p>Discover a comprehensive suite of health tools designed to help you track and improve your well-being. Our
-      calculators provide science-backed insights for fitness, nutrition, and daily health management.</p>
-
-    <h2>Available Health Tools:</h2>
-    <ul>
-      <li><strong>BMI Calculator:</strong> Calculate your Body Mass Index and understand your weight category.</li>
-      <li><strong>Calorie Counter:</strong> Estimate your daily caloric needs for maintenance, weight loss, or weight
-        gain.</li>
-      <li><strong>Water Intake Tracker:</strong> Determine your optimal daily water consumption based on activity
-        levels.</li>
-      <li><strong>Ideal Weight Calculator:</strong> Find your healthy target weight range based on height and gender.
-      </li>
-      <li><strong>Sleep Calculator:</strong> Optimize your rest cycles for better recovery and energy.</li>
-      <li><strong>Body Fat Percentage:</strong> Use the Navy Method to estimate your body composition.</li>
-      <li><strong>Daily Tracking:</strong> Monitor your weight, water, and sleep progress over time.</li>
-    </ul>
-
-    <h2>Global Wellness Articles</h2>
-    <p>Stay informed with our daily blog posts covering the latest in health, exercise science, and mental well-being.
-    </p>
+<body class="bg-gray-50 dark:bg-gray-900 overflow-x-hidden">
+  <!-- Modern Preloader -->
+  <div id="preloader">
+    <div class="spinner"></div>
+    <div class="preloader-text">WellTools</div>
   </div>
-</div>
-<script type="module" src="/src/main.jsx"></script>
+
+  <script>
+    // Visibility handler for FOUC and Preloader
+    (function () {
+      const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      if (theme === 'dark') document.documentElement.classList.add('dark');
+
+      const showPage = () => {
+        const preloader = document.getElementById('preloader');
+        document.body.classList.add('is-loaded');
+        if (preloader) {
+          preloader.style.opacity = '0';
+          preloader.style.visibility = 'hidden';
+          setTimeout(() => preloader.remove(), 500);
+        }
+      };
+
+      // Show page after first paint or a fallback timeout to prevent infinite loading
+      window.addEventListener('load', showPage);
+      setTimeout(showPage, 3000); // Fallback at 3 seconds
+    })();
+  </script>
+
+  <div id="root">
+    <!-- Static SEO Fallback: Visible to crawlers and users with JS disabled -->
+    <div id="seo-static-content" style="padding: 2rem; max-width: 800px; margin: 0 auto; font-family: sans-serif;">
+      <h1>WellTools - Free Professional Health & Fitness Calculators</h1>
+      <p>Discover a comprehensive suite of health tools designed to help you track and improve your well-being. Our
+        calculators provide science-backed insights for fitness, nutrition, and daily health management.</p>
+
+      <h2>Available Health Tools:</h2>
+      <ul>
+        <li><strong>BMI Calculator:</strong> Calculate your Body Mass Index and understand your weight category.</li>
+        <li><strong>Calorie Counter:</strong> Estimate your daily caloric needs for maintenance, weight loss, or weight
+          gain.</li>
+        <li><strong>Water Intake Tracker:</strong> Determine your optimal daily water consumption based on activity
+          levels.</li>
+        <li><strong>Ideal Weight Calculator:</strong> Find your healthy target weight range based on height and gender.
+        </li>
+        <li><strong>Sleep Calculator:</strong> Optimize your rest cycles for better recovery and energy.</li>
+        <li><strong>Body Fat Percentage:</strong> Use the Navy Method to estimate your body composition.</li>
+        <li><strong>Daily Tracking:</strong> Monitor your weight, water, and sleep progress over time.</li>
+      </ul>
+
+      <h2>Global Wellness Articles</h2>
+      <p>Stay informed with our daily blog posts covering the latest in health, exercise science, and mental well-being.
+      </p>
+    </div>
+  </div>
+  <script type="module" src="/src/main.jsx"></script>
 </body>
 
 </html>

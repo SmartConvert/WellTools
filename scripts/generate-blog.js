@@ -18,10 +18,16 @@ if (!API_KEY) {
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 const MODELS_TO_TRY = [
+    "gemini-2.0-flash",
+    "gemini-2.0-flash-exp",
     "gemini-1.5-flash",
-    "gemini-1.5-flash-latest",
+    "gemini-1.5-flash-002",
+    "gemini-1.5-flash-001",
+    "gemini-1.5-flash-8b",
     "gemini-1.5-pro",
-    "gemini-1.5-pro-latest"
+    "gemini-1.5-pro-002",
+    "gemini-1.5-pro-001",
+    "gemini-pro"
 ];
 
 async function getWorkingModel(genAI) {

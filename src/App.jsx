@@ -62,27 +62,6 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
 
         {/* Right side: Language and Toggle */}
         <div className="flex items-center gap-4">
-          <div className="relative group">
-            <button
-              aria-label="Change Language"
-              className="flex items-center gap-2 p-2 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
-            >
-              <Globe className="w-5 h-5" />
-              <span className="text-sm font-bold uppercase">{lang}</span>
-            </button>
-            <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 overflow-hidden">
-              {['en', 'ar', 'fr', 'de', 'es'].map((l) => (
-                <button
-                  key={l}
-                  onClick={() => setLang(l)}
-                  className={`w-full text-left px-4 py-3 text-sm font-medium hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors flex items-center justify-between ${lang === l ? 'text-emerald-700 bg-emerald-50 dark:bg-emerald-900/20' : 'text-gray-800 dark:text-gray-200'}`}
-                >
-                  <span className="uppercase font-bold">{l}</span>
-                  {lang === l && <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>}
-                </button>
-              ))}
-            </div>
-          </div>
 
           <button
             className="lg:hidden p-2 text-gray-700 dark:text-gray-200"
@@ -199,7 +178,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
     <div className="pt-20 pb-16 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Modern Hero Carousel */}
-        <div className="relative h-[500px] md:h-[600px] rounded-[3rem] overflow-hidden mb-12 lg:mb-16 shadow-2xl animate-fade-in group">
+        <div className="relative h-[420px] md:h-[600px] rounded-[2rem] md:rounded-[3rem] overflow-hidden mb-12 lg:mb-16 shadow-2xl animate-fade-in group">
           {/* Slides */}
           {slides.map((slide, index) => (
             <div
@@ -216,13 +195,13 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
               <div className="absolute inset-0 bg-linear-to-r from-gray-900/80 via-gray-900/40 to-transparent"></div>
               <div className="absolute inset-0 flex items-center px-8 md:px-16">
                 <div className="max-w-2xl">
-                  <h1 className="text-3xl md:text-7xl font-black text-white mb-4 md:mb-6 tracking-tight leading-tight">
+                  <h1 className="text-2xl md:text-7xl font-black text-white mb-4 md:mb-6 tracking-tight leading-tight">
                     {slide.title} <br className="md:hidden" />
                     <span className="bg-linear-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
                       {slide.accent}
                     </span>
                   </h1>
-                  <p className="text-lg md:text-xl text-gray-200 max-w-xl leading-relaxed mb-8 md:mb-10">
+                  <p className="text-base md:text-xl text-gray-200 max-w-xl leading-relaxed mb-8 md:mb-10">
                     {slide.subtitle}
                   </p>
                   <div className="flex flex-wrap gap-3 md:gap-4">
@@ -231,7 +210,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                         const el = document.getElementById('tools-grid');
                         el?.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="px-6 py-3 md:px-8 md:py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-base md:text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
+                      className="px-5 py-2.5 md:px-8 md:py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-base md:text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
                     >
                       {t.explore_tools}
                     </button>
@@ -279,9 +258,9 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                     setSelectedPost(post);
                     setCurrentPage('blog-post');
                   }}
-                  className="group cursor-pointer relative bg-white dark:bg-gray-800 rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700"
+                  className="group cursor-pointer relative bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700"
                 >
-                  <div className="h-48 md:h-56 relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                  <div className="h-40 md:h-56 relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
                     {post.image && !imageError ? (
                       <img
                         src={post.image}
@@ -337,7 +316,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
             <div
               key={tool.id}
               onClick={() => setCurrentPage(tool.id)}
-              className="group bg-white dark:bg-gray-800 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all cursor-pointer border border-gray-50 dark:border-gray-700 hover:-translate-y-2 active:scale-95"
+              className="group bg-white dark:bg-gray-800 p-6 md:p-8 rounded-2xl md:rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all cursor-pointer border border-gray-50 dark:border-gray-700 hover:-translate-y-2 active:scale-95"
             >
               <div className={`text-5xl md:text-6xl mb-4 md:mb-6 transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-300`}>
                 {tool.emoji}

@@ -54,100 +54,118 @@ async function generatePost() {
         const data = await fs.readFile(TOPICS_PATH, "utf-8");
         topicsData = JSON.parse(data);
     } catch (e) {
-        console.error("Error: topics.json not found. Run initialize-topics.js first.");
+        console.error("Error: topics.json not found.");
         process.exit(1);
     }
 
     // 2. Select an uncompleted topic
     const availableTopics = topicsData.topics.filter(t => !t.completed);
     if (availableTopics.length === 0) {
-        console.log("🎉 All 30 topics completed! Nothing to generate.");
+        console.log("🎉 All topics completed!");
         return;
     }
 
-    const selectedTopic = availableTopics[0]; // Take the first one (following the plan's priority)
-    console.log(`🚀 Generating Article for: ${selectedTopic.title} (${selectedTopic.group})`);
+    const selectedTopic = availableTopics[0];
+    const baseId = `welltools-${selectedTopic.id}-${Date.now()}`;
+    const date = new Date().toISOString().split('T')[0];
 
-    const prompt = `
-    Generate a high-quality, professional health blog post for "WellTools".
-    
-    PRIMARY GOAL: 
-    Generate an SEO-friendly page focused on: "${selectedTopic.title}". 
-    Group: ${selectedTopic.group}.
+    console.log(`🚀 Generating Multi-language Articles for: ${selectedTopic.title}`);
 
-    GLOBAL RULES:
-    - LANGUAGE: English.
-    - TONE: Simple, friendly, and non-medical.
-    - NO DIAGNOSIS/TREATMENT: Strictly avoid diagnosing, treating, or suggesting medication.
-    - MANDATORY NOTICE: End the post with this exact disclaimer: "This content provides general health information and does not replace professional medical advice."
-    - READABILITY: Use Basic English (A2–B1) for high accessibility.
-    - WORD COUNT: Target 700 - 1500 words of original explanation.
-    
-    PAGE STRUCTURE:
-    1. H1 title (SEO-optimized and question-based).
-    2. Short introduction (Explain the tool/topic purpose in simple words).
-    3. Main content sections with H2 headings (Explanation, How to apply, Benefits for daily life).
-    4. Practical tips (H2).
-    5. Common mistakes (H2).
-    6. Internal links suggestion (Naturally mention: BMI Calculator, Calories Calculator, Water Intake Calculator, Ideal Weight Calculator, Sleep Hours Calculator).
-    7. Medical disclaimer (at the bottom).
+    const languages = [
+        { code: "en", name: "English", dir: "ltr" },
+        { code: "ar", name: "Arabic", dir: "rtl" },
+        { code: "fr", name: "French", dir: "ltr" }
+    ];
 
-    MONETIZATION:
-    - Content must be AdSense friendly (clean, valuable, original).
-    - Leave visual space for 2-3 ads.
-
-    OUTPUT FORMAT: Must be valid JSON
-    {
-      "id": "slug-id",
-      "title": "SEO Title",
-      "category": "${selectedTopic.group}",
-      "excerpt": "Short meta description",
-      "image": "https://image.pollinations.ai/prompt/[professional_photo_description]?width=1200&height=800&nologo=true",
-      "imageAlt": "Alt text",
-      "content": "Full Markdown article starting with H1",
-      "keywords": ["key1", "key2"],
-      "sources": ["Source (URL)"],
-      "faq": [{"question": "", "answer": ""}]
-    }
-    `;
-
+    let posts = {};
     try {
-        const model = await getWorkingModel(genAI);
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        let text = response.text();
-
-        if (text.startsWith("```json")) {
-            text = text.substring(7, text.length - 3).trim();
-        } else if (text.startsWith("```")) {
-            text = text.substring(3, text.length - 3).trim();
-        }
-
-        const newPost = JSON.parse(text);
-        newPost.date = new Date().toISOString().split('T')[0];
-        newPost.id = `welltools-${selectedTopic.id}-${Date.now()}`;
-
-        // 3. Save Post
-        let posts = {};
-        try {
-            const data = await fs.readFile(POSTS_PATH, "utf-8");
-            posts = JSON.parse(data);
-        } catch (e) { }
-
-        if (!posts.en) posts.en = [];
-        posts.en.unshift(newPost);
-        await fs.writeFile(POSTS_PATH, JSON.stringify(posts, null, 4));
-
-        // 4. Update topics.json
-        selectedTopic.completed = true;
-        selectedTopic.completedDate = newPost.date;
-        await fs.writeFile(TOPICS_PATH, JSON.stringify(topicsData, null, 4));
-
-        console.log(`✅ Successfully generated: ${newPost.title}`);
-    } catch (error) {
-        console.error("❌ Generation failed:", error);
-        process.exit(1);
+        const data = await fs.readFile(POSTS_PATH, "utf-8");
+        posts = JSON.parse(data);
+    } catch (e) {
+        posts = { en: [], ar: [], fr: [] };
     }
+
+    for (const lang of languages) {
+        console.log(`  📝 Generating ${lang.name} version...`);
+
+        const prompt = `
+        You are a world-class SEO expert and health content creator for "WellTools".
+        Generate a professional, high-quality blog post in ${lang.name}.
+
+        CORE TOPIC: "${selectedTopic.title}"
+        GROUP: ${selectedTopic.group}
+        LANGUAGE: ${lang.name}
+        DIRECTION: ${lang.dir}
+
+        SEO REQUIREMENTS:
+        - Identify 5 high-traffic keywords for this topic in ${lang.name} and use them naturally throughout the text.
+        - Create a compelling H1 title (Question-based or Listicle).
+        - Use H2 and H3 headings for logical structure.
+        - Strategic internal linking: Mention BMI Calculator, Calories Calculator, Water Intake Calculator, Ideal Weight Calculator, Sleep Hours Calculator naturally.
+        - Meta Description: 150-160 characters, highly clickable.
+
+        CONTENT RULES:
+        - TONE: Professional but accessible (Simple English/Arabic/French).
+        - NO MEDICAL ADVICE: Use "This content provides general health information and does not replace professional medical advice." faithfully.
+        - LENGTH: 800 - 1500 words.
+        - IMAGE: Use exactly this URL pattern: "https://image.pollinations.ai/prompt/[professional_photo_description_in_english]?width=1200&height=800&nologo=true"
+
+        OUTPUT FORMAT: Strictly valid JSON only.
+        {
+          "title": "SEO Optimized Title",
+          "category": "${selectedTopic.group}",
+          "excerpt": "Compelling Meta Description",
+          "image": "https://image.pollinations.ai/prompt/[english_description]?width=1200&height=800&nologo=true",
+          "imageAlt": "Descriptive Alt Text",
+          "content": "Full Markdown content starting with H1. Use proper H2/H3 breakdown.",
+          "keywords": ["key1", "key2", "key3", "key4", "key5"],
+          "faq": [{"question": "Q1?", "answer": "A1."}, {"question": "Q2?", "answer": "A2."}]
+        }
+        `;
+
+        try {
+            const model = await getWorkingModel(genAI);
+            const result = await model.generateContent(prompt);
+            const response = await result.response;
+            let text = response.text();
+
+            if (text.startsWith("```json")) {
+                text = text.substring(7, text.length - 3).trim();
+            } else if (text.startsWith("```")) {
+                text = text.substring(3, text.length - 3).trim();
+            }
+
+            const newContent = JSON.parse(text);
+            const postObj = {
+                id: baseId, // Shared ID for sync
+                ...newContent,
+                date: date
+            };
+
+            if (!posts[lang.code]) posts[lang.code] = [];
+            posts[lang.code].unshift(postObj);
+
+            console.log(`    ✅ Done: ${lang.name}`);
+
+            // Artificial delay to prevent rate limits
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+        } catch (error) {
+            console.error(`  ❌ Failed ${lang.name}:`, error.message);
+            // If one fails, we stop to avoid partial generation
+            process.exit(1);
+        }
+    }
+
+    // 3. Save All Posts
+    await fs.writeFile(POSTS_PATH, JSON.stringify(posts, null, 4));
+
+    // 4. Update Topics
+    selectedTopic.completed = true;
+    selectedTopic.completedDate = date;
+    await fs.writeFile(TOPICS_PATH, JSON.stringify(topicsData, null, 4));
+
+    console.log(`\n🎉 ALL VERSIONS SAVED SUCCESSFULLY!`);
 }
 
 generatePost();

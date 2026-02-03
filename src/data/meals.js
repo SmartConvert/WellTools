@@ -43,10 +43,22 @@ export const mealCategories = {
         color: 'from-amber-400 to-orange-500',
         meals: [
             { name: 'meal_mediterranean_bowl', calories: 450, protein: '22g', carbs: '52g', fat: '18g' },
-            { name: 'meal_chicken_brown_rice', calories: 420, protein: '400g', carbs: '45g', fat: '8g' },
+            { name: 'meal_chicken_brown_rice', calories: 420, protein: '40g', carbs: '45g', fat: '8g' },
             { name: 'meal_veggie_pasta', calories: 380, protein: '14g', carbs: '58g', fat: '12g' },
             { name: 'meal_smoothie_bowl', calories: 340, protein: '12g', carbs: '54g', fat: '10g' },
             { name: 'meal_tuna_sandwich', calories: 360, protein: '28g', carbs: '38g', fat: '10g' }
+        ]
+    },
+    weightGain: {
+        title: 'food_recommendations_gain',
+        icon: Scale,
+        color: 'from-violet-400 to-purple-500',
+        meals: [
+            { name: 'meal_protein_pancakes', calories: 650, protein: '45g', carbs: '80g', fat: '15g' },
+            { name: 'meal_beef_rice_bowl', calories: 820, protein: '55g', carbs: '90g', fat: '25g' },
+            { name: 'meal_pasta_meat_sauce', calories: 750, protein: '42g', carbs: '100g', fat: '20g' },
+            { name: 'meal_chicken_avocado_wrap', calories: 600, protein: '40g', carbs: '55g', fat: '28g' },
+            { name: 'meal_mass_gainer', calories: 550, protein: '35g', carbs: '70g', fat: '18g' }
         ]
     }
 };

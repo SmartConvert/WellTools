@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Utensils, TrendingDown, Activity, Scale, Info, Plus } from 'lucide-react';
 import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
@@ -39,41 +39,40 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
 
     const foodRecs = getFoodRecommendations(goal);
 
-    const getMealPlan = () => {
-        // Basic logic to simulate "AI" selection based on target categories
-        const plans = {
-            lose: {
-                total: 1500,
-                items: [
-                    { type: t.breakfast, name: 'bowl_oatmeal_berries', calories: 350 },
-                    { type: t.lunch, name: 'grilled_chicken_salad', calories: 450 },
-                    { type: t.dinner, name: 'steamed_fish_veggies', calories: 400 },
-                    { type: t.snack, name: 'handful_almonds', calories: 150 }
-                ]
-            },
-            maintain: {
-                total: 2000,
-                items: [
-                    { type: t.breakfast, name: 'avocado_toast_eggs', calories: 450 },
-                    { type: t.lunch, name: 'turkey_quinoa_bowl', calories: 550 },
-                    { type: t.dinner, name: 'beef_stir_fry_rice', calories: 600 },
-                    { type: t.snack, name: 'greek_yogurt_honey', calories: 250 }
-                ]
-            },
-            gain: {
-                total: 2800,
-                items: [
-                    { type: t.breakfast, name: 'protein_pancakes_banana', calories: 700 },
-                    { type: t.lunch, name: 'steak_sweet_potato', calories: 850 },
-                    { type: t.dinner, name: 'pasta_bolognese_extra_cheese', calories: 800 },
-                    { type: t.snack, name: 'peanut_butter_smoothie', calories: 450 }
-                ]
-            }
-        };
-        return plans[goal] || plans['maintain'];
-    };
+    const [currentPlan, setCurrentPlan] = useState({ total: 0, items: [] });
 
-    const currentPlan = getMealPlan();
+    const generateDynamicPlan = useCallback(() => {
+        const mapping = {
+            lose: 'weightLoss',
+            maintain: 'healthy',
+            gain: 'weightGain'
+        };
+
+        const categoryKey = mapping[goal] || 'healthy';
+        const category = mealCategories[categoryKey];
+        if (!category) return;
+
+        // Shuffle and pick 4 meals
+        const shuffled = [...category.meals].sort(() => 0.5 - Math.random());
+        const selected = shuffled.slice(0, 4);
+
+        const mealTypes = [t.breakfast, t.lunch, t.dinner, t.snack];
+        const planItems = selected.map((meal, i) => ({
+            ...meal,
+            type: mealTypes[i] || t.meal
+        }));
+
+        const totalCals = planItems.reduce((sum, item) => sum + item.calories, 0);
+
+        setCurrentPlan({
+            total: totalCals,
+            items: planItems
+        });
+    }, [goal, t]);
+
+    useEffect(() => {
+        generateDynamicPlan();
+    }, [goal, generateDynamicPlan]);
 
     return (
         <div className="pt-24 pb-16 px-4">
@@ -193,7 +192,10 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
                             </div>
                         </div>
                         <div className="flex flex-wrap items-center gap-3">
-                            <button className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 transition-all font-bold group/btn shadow-lg">
+                            <button
+                                onClick={generateDynamicPlan}
+                                className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 transition-all font-bold group/btn shadow-lg"
+                            >
                                 <Plus className="w-5 h-5 group-hover/btn:rotate-90 transition-transform" />
                                 {t.generate_new}
                             </button>

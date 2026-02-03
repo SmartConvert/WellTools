@@ -50,14 +50,20 @@ async function getWorkingModel(genAI) {
                 console.warn(`❌ Model ${modelName} attempt ${retries + 1} failed. Reason: ${error.message}`);
 
                 const isRateLimit = error.message.includes("429") || error.message.toLowerCase().includes("too many requests") || error.message.includes("Quota exceeded");
+                const is404 = error.message.includes("404") || error.message.toLowerCase().includes("not found");
 
                 if (isRateLimit && retries < MAX_RETRIES) {
-                    const waitTime = 20000 * (retries + 1); // Progressive backoff: 20s, 40s, 60s
+                    // Aggressive exponential backoff: 60s, 120s, 180s
+                    const waitTime = 60000 * (retries + 1);
                     console.log(`⚠️ Rate limit hit. Waiting ${waitTime / 1000} seconds before retrying ${modelName}...`);
                     await new Promise(resolve => setTimeout(resolve, waitTime));
                     retries++;
+                } else if (is404) {
+                    // Model doesn't exist, skip immediately
+                    console.log(`⏩ Model ${modelName} not found (404). Trying next model...`);
+                    break;
                 } else {
-                    // If not rate limit, or max retries reached, break inner loop to try next model
+                    // Other errors or max retries reached
                     if (isRateLimit) console.log(`⏩ Skipping ${modelName} after max retries.`);
                     break;
                 }

@@ -129,16 +129,31 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
     )}
   </nav>
 );
+
+const BlogImage = ({ src, alt, className }) => {
+  const [error, setError] = useState(false);
+  if (!src || error) {
+    return (
+      <div className={`flex items-center justify-center bg-gray-100 dark:bg-gray-800 ${className}`}>
+        <BookOpen className="w-12 h-12 text-gray-300 dark:text-gray-600 animate-pulse" />
+      </div>
+    );
+  }
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      onError={() => setError(true)}
+      className={className}
+    />
+  );
+};
 const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, lang, t }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [imageError, setImageError] = useState(false);
-
   // Safety check for translations
   if (!t) return <div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500"></div></div>;
 
-  useEffect(() => {
-    setImageError(false);
-  }, [lang]);
   const slides = [
     {
       image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=2670&q=80',
@@ -261,17 +276,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                   className="group cursor-pointer relative bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700"
                 >
                   <div className="h-40 md:h-56 relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                    {post.image && !imageError ? (
-                      <img
-                        src={post.image}
-                        alt={post.title}
-                        loading="lazy"
-                        onError={() => setImageError(true)}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 animate-fade-in"
-                      />
-                    ) : (
-                      <BookOpen className="w-12 h-12 text-gray-300 dark:text-gray-600 animate-pulse" />
-                    )}
+                    <BlogImage src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 animate-fade-in" />
                     {index === 0 && (
                       <div className="absolute top-4 left-4">
                         <span className="px-3 py-1.5 bg-emerald-500 text-white rounded-lg font-bold text-xs shadow-lg">
@@ -1610,8 +1615,8 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang }) => {
           {posts.map((post) => (
             <article key={post.id} className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col">
               {post.image && (
-                <div className="relative h-64 overflow-hidden bg-gray-800">
-                  <img src={post.image} alt={post.imageAlt || post.title} loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div className="relative h-64 overflow-hidden bg-gray-800 flex items-center justify-center">
+                  <BlogImage src={post.image} alt={post.imageAlt || post.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
                 </div>
               )}
@@ -1676,24 +1681,67 @@ const parseMarkdown = (text) => {
 
 const parseInlineMarkdown = (text) => {
   if (typeof text !== 'string') return text;
-  // Bold: **text**
-  let parts = text.split(/(\*\*.*?\*\*)/g);
-  return parts.map((part, i) => {
-    if (part.startsWith('**') && part.endsWith('**')) {
-      return <strong key={i} className="font-bold text-gray-900 dark:text-white">{part.slice(2, -2)}</strong>;
-    }
 
-    // Links: [text](url)
-    const linkMatch = part.match(/\[(.*?)\]\((.*?)\)/);
-    if (linkMatch) {
-      return (
-        <a key={i} href={linkMatch[2]} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline font-medium">
-          {linkMatch[1]}
-        </a>
-      );
-    }
+  // Handle Images FIRST: ![alt](url)
+  const parts = [];
+  let currentText = text;
+  const imgRegex = /!\[(.*?)\]\((.*?)\)/g;
+  let match;
+  let lastIdx = 0;
 
-    return part;
+  while ((match = imgRegex.exec(text)) !== null) {
+    if (match.index > lastIdx) {
+      parts.push(text.slice(lastIdx, match.index));
+    }
+    parts.push(
+      <img
+        key={`img-${match.index}`}
+        src={match[2]}
+        alt={match[1]}
+        className="max-w-full h-auto rounded-2xl my-6 shadow-lg block mx-auto bg-gray-100"
+        onError={(e) => { e.target.style.display = 'none'; }}
+      />
+    );
+    lastIdx = imgRegex.lastIdx;
+  }
+  if (lastIdx < text.length) {
+    parts.push(text.slice(lastIdx));
+  }
+
+  const result = parts.length > 0 ? parts : [text];
+
+  return result.flatMap((part, i) => {
+    if (typeof part !== 'string') return [part];
+
+    // Bold: **text**
+    const subParts = part.split(/(\*\*.*?\*\*)/g);
+    return subParts.flatMap((subPart, j) => {
+      if (subPart.startsWith('**') && subPart.endsWith('**')) {
+        return [<strong key={`${i}-${j}`} className="font-bold text-gray-900 dark:text-white">{subPart.slice(2, -2)}</strong>];
+      }
+
+      // Final Links: [text](url)
+      const linkRegex = /\[(.*?)\]\((.*?)\)/g;
+      const linkParts = [];
+      let lMatch;
+      let lLastIdx = 0;
+      while ((lMatch = linkRegex.exec(subPart)) !== null) {
+        if (lMatch.index > lLastIdx) {
+          linkParts.push(subPart.slice(lLastIdx, lMatch.index));
+        }
+        linkParts.push(
+          <a key={`link-${i}-${j}-${lMatch.index}`} href={lMatch[2]} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline font-medium">
+            {lMatch[1]}
+          </a>
+        );
+        lLastIdx = linkRegex.lastIdx;
+      }
+      if (lLastIdx < subPart.length) {
+        linkParts.push(subPart.slice(lLastIdx));
+      }
+
+      return linkParts.length > 0 ? linkParts : [subPart];
+    });
   });
 };
 
@@ -1716,29 +1764,23 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
         <header className="mb-12">
           {post.image && (
             <div className="w-full h-[300px] md:h-[400px] rounded-[2.5rem] overflow-hidden mb-10 shadow-2xl bg-gray-800 flex items-center justify-center">
-              {!imageError ? (
-                <img
-                  src={post.image}
-                  alt={post.imageAlt || post.title}
-                  onError={() => setImageError(true)}
-                  decoding="async"
-                  className="w-full h-full object-cover animate-fade-in"
-                />
-              ) : (
-                <BookOpen className="w-24 h-24 text-gray-600" />
-              )}
+              <BlogImage
+                src={post.image}
+                alt={post.imageAlt || post.title}
+                className="w-full h-full object-cover animate-fade-in"
+              />
             </div>
           )}
           <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] mb-8 tracking-tight">{post.title}</h1>
         </header>
-        <article className="max-w-none text-gray-700 dark:text-gray-300" dir="ltr">
+        <article className="max-w-none text-gray-700 dark:text-gray-300">
           {parseMarkdown(post.content)}
         </article>
 
         {post.faq && post.faq.length > 0 && (
           <div className="mt-20 p-8 md:p-12 bg-slate-50 dark:bg-gray-800 rounded-[2.5rem] border border-slate-200 dark:border-gray-700">
             <h2 className="text-3xl font-black text-gray-800 dark:text-white mb-8">{t.faq_title}</h2>
-            <div className="space-y-6" dir="ltr">
+            <div className="space-y-6">
               {post.faq.map((item, i) => (
                 <div key={i} className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-gray-700">
                   <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">{item.question}</h3>
@@ -1786,6 +1828,18 @@ const DailyHealthTools = () => {
     }
     document.documentElement.lang = lang;
   }, [lang, t]);
+
+  // Sync selectedPost when lang changes
+  useEffect(() => {
+    if (selectedPost && postsData[lang]) {
+      // Try to find the same post by a slug-like part of the ID or title
+      const baseId = selectedPost.id.split('-').slice(0, -1).join('-');
+      const translatedPost = postsData[lang].find(p => p.id.includes(baseId) || p.title === selectedPost.title);
+      if (translatedPost) {
+        setSelectedPost(translatedPost);
+      }
+    }
+  }, [lang]);
 
   // BMI Calculator State
   const [bmiWeight, setBmiWeight] = useState('');

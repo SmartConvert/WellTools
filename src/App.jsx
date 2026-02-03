@@ -643,12 +643,13 @@ const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGen
   </div>
 );
 
-const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResult, setCurrentPage, t, lang }) => (
+const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResult, sleepBedtime, setSleepBedtime, calculateSleepCycles, sleepWakeupTimes, setCurrentPage, t, lang }) => (
   <div className="pt-24 pb-16 px-4">
     <div className="max-w-7xl mx-auto">
       <ToolHero toolId="sleep" lang={lang} />
 
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto space-y-8">
+        {/* Recommendation by Age */}
         <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
           <div className="flex items-center gap-4 mb-8">
             <div className="w-16 h-16 bg-linear-to-br from-violet-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
@@ -687,19 +688,88 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
               <p className="text-4xl font-black text-violet-600 dark:text-violet-400 text-center">{sleepResult}</p>
             </div>
           )}
-
-          <ToolInfoSection toolId="sleep" lang={lang} />
-
-          <AdComponent slot="sleep_bottom" />
         </div>
 
-        <button
-          onClick={() => setCurrentPage('home')}
-          className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
-        >
-          {t.back_to_home}
-        </button>
+        {/* Sleep Cycle Calculator */}
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-12 bg-linear-to-br from-indigo-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+              <Clock className="w-6 h-6 text-white" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">{t.sleep_calc_cycles}</h2>
+          </div>
+
+          <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+            {t.sleep_cycles_desc}
+          </p>
+
+          <div className="space-y-6">
+            <div>
+              <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">{t.sleep_bedtime}</label>
+              <input
+                type="time"
+                value={sleepBedtime}
+                onChange={(e) => setSleepBedtime(e.target.value)}
+                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-indigo-500 focus:outline-none transition-colors text-xl font-bold"
+              />
+            </div>
+
+            <button
+              onClick={calculateSleepCycles}
+              className="w-full py-4 bg-linear-to-r from-indigo-500 to-blue-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+            >
+              {t.calculate}
+            </button>
+          </div>
+
+          {sleepWakeupTimes.length > 0 && (
+            <div className="mt-8 space-y-4">
+              <h3 className="text-xl font-bold text-gray-800 dark:text-white text-center mb-4">{t.sleep_wake_up}:</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {sleepWakeupTimes.map((time, idx) => (
+                  <div key={idx} className="p-6 bg-linear-to-br from-indigo-50 to-blue-50 dark:from-indigo-900/30 dark:to-blue-900/30 rounded-2xl border-2 border-indigo-100 dark:border-indigo-800 text-center transform hover:scale-105 transition-all">
+                    <p className="text-3xl font-black text-indigo-600 dark:text-indigo-400 mb-1">{time.time}</p>
+                    <p className="text-sm font-bold text-indigo-400 dark:text-indigo-500 uppercase tracking-wider">{time.hours} {t.hours}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Sleep Tips */}
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-12 h-12 bg-linear-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center shadow-lg">
+              <Sparkles className="w-6 h-6 text-white" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">{t.sleep_tips_title}</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[1, 2, 3, 4, 5].map((num) => (
+              <div key={num} className="flex gap-4 p-4 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-700 items-start">
+                <div className="w-8 h-8 shrink-0 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold shrink-0">
+                  {num}
+                </div>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed pt-1">
+                  {t[`tip_sleep_${num}`]}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <ToolInfoSection toolId="sleep" lang={lang} />
+        <AdComponent slot="sleep_bottom" />
       </div>
+
+      <button
+        onClick={() => setCurrentPage('home')}
+        className="mt-8 px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
+      >
+        {t.back_to_home}
+      </button>
     </div>
   </div>
 );
@@ -1742,6 +1812,8 @@ const DailyHealthTools = () => {
 
   // Sleep Calculator State
   const [sleepAge, setSleepAge] = useState('');
+  const [sleepBedtime, setSleepBedtime] = useState('22:00');
+  const [sleepWakeupTimes, setSleepWakeupTimes] = useState([]);
   const [sleepResult, setSleepResult] = useState(null);
 
   // Body Fat Calculator State
@@ -1886,6 +1958,28 @@ const DailyHealthTools = () => {
     else hours = `7-8 ${t.hours}`;
 
     setSleepResult(hours);
+  };
+
+  const calculateSleepCycles = () => {
+    if (!sleepBedtime) return;
+
+    const [hours, minutes] = sleepBedtime.split(':').map(Number);
+    const bedtime = new Date();
+    bedtime.setHours(hours, minutes, 0);
+
+    // Add 15 minutes for falling asleep
+    const startTime = new Date(bedtime.getTime() + 15 * 60000);
+
+    const cycles = [4, 5, 6]; // 90 min each: 6h, 7.5h, 9h
+    const times = cycles.map(cycle => {
+      const time = new Date(startTime.getTime() + cycle * 90 * 60000);
+      return {
+        time: time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }),
+        hours: (cycle * 90) / 60
+      };
+    });
+
+    setSleepWakeupTimes(times);
   };
 
   const calculateBodyFat = () => {
@@ -2061,7 +2155,7 @@ const DailyHealthTools = () => {
           {currentPage === 'calories' && <CaloriesCalculatorPage calWeight={calWeight} setCalWeight={setCalWeight} calHeight={calHeight} setCalHeight={setCalHeight} calAge={calAge} setCalAge={setCalAge} calGender={calGender} setCalGender={setCalGender} calActivity={calActivity} setCalActivity={setCalActivity} calculateCalories={calculateCalories} calResult={calResult} setCurrentPage={setCurrentPage} t={t} lang={lang} />}
           {currentPage === 'water' && <WaterCalculatorPage waterWeight={waterWeight} setWaterWeight={setWaterWeight} waterActivity={waterActivity} setWaterActivity={setWaterActivity} calculateWater={calculateWater} waterResult={waterResult} setCurrentPage={setCurrentPage} t={t} lang={lang} />}
           {currentPage === 'ideal-weight' && <IdealWeightPage idealHeight={idealHeight} setIdealHeight={setIdealHeight} idealGender={idealGender} setIdealGender={setIdealGender} calculateIdealWeight={calculateIdealWeight} idealResult={idealResult} setCurrentPage={setCurrentPage} t={t} lang={lang} />}
-          {currentPage === 'sleep' && <SleepCalculatorPage sleepAge={sleepAge} setSleepAge={setSleepAge} calculateSleep={calculateSleep} sleepResult={sleepResult} setCurrentPage={setCurrentPage} t={t} lang={lang} />}
+          {currentPage === 'sleep' && <SleepCalculatorPage sleepAge={sleepAge} setSleepAge={setSleepAge} calculateSleep={calculateSleep} sleepResult={sleepResult} sleepBedtime={sleepBedtime} setSleepBedtime={setSleepBedtime} calculateSleepCycles={calculateSleepCycles} sleepWakeupTimes={sleepWakeupTimes} setCurrentPage={setCurrentPage} t={t} lang={lang} />}
           {currentPage === 'body-fat' && <BodyFatCalculatorPage bfWeight={bfWeight} setBfWeight={setBfWeight} bfHeight={bfHeight} setBfHeight={setBfHeight} bfAge={bfAge} setBfAge={setBfAge} bfGender={bfGender} setBfGender={setBfGender} bfNeck={bfNeck} setBfNeck={setBfNeck} bfWaist={bfWaist} setBfWaist={setBfWaist} bfHip={bfHip} setBfHip={bfHip} calculateBodyFat={calculateBodyFat} bfResult={bfResult} setCurrentPage={setCurrentPage} t={t} lang={lang} />}
           {currentPage === 'tracking' && <DailyTrackingPage trackingData={trackingData} newWeight={newWeight} setNewWeight={setNewWeight} addWeightEntry={addWeightEntry} newWater={newWater} setNewWater={setNewWater} addWaterEntry={addWaterEntry} newSleep={newSleep} setNewSleep={setNewSleep} addSleepEntry={addSleepEntry} deleteEntry={deleteEntry} setCurrentPage={setCurrentPage} t={t} />}
           {currentPage === 'meals' && <MealsPage selectedMealCategory={selectedMealCategory} setSelectedMealCategory={setSelectedMealCategory} t={t} />}

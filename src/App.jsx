@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense } from 'react';
-import { Calculator, Heart, Droplet, Globe, Scale, Apple, TrendingDown, Activity, Utensils, ChevronRight, Menu, X, Percent, TrendingUp, Calendar, BarChart3, LineChart as LineChartIcon, Plus, Trash2, BookOpen, ArrowLeft, ExternalLink, Moon, Info, Clock, Sparkles } from 'lucide-react';
+import { Calculator, Heart, Droplet, Globe, Scale as ScaleIcon, Apple, TrendingDown, Activity, Utensils, ChevronRight, Menu, X, Percent, TrendingUp, Calendar, BarChart3, LineChart as LineChartIcon, Plus, Trash2, BookOpen, ArrowLeft, ExternalLink, Moon, Info, Clock, Sparkles } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import postsData from './data/posts.json';
 import { translations } from './translations';
@@ -596,7 +596,7 @@ const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGen
         <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
           <div className="flex items-center gap-4 mb-8">
             <div className="w-16 h-16 bg-linear-to-br from-rose-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg">
-              <Scale className="w-8 h-8 text-white" />
+              <ScaleIcon className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.ideal_weight}</h1>
           </div>

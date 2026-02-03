@@ -132,6 +132,21 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
 
 const BlogImage = ({ src, alt, className }) => {
   const [error, setError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+
+  useEffect(() => {
+    setError(false);
+    setRetryCount(0);
+  }, [src]);
+
+  const handleError = () => {
+    if (retryCount < 1) {
+      setRetryCount(prev => prev + 1);
+    } else {
+      setError(true);
+    }
+  };
+
   if (!src || error) {
     return (
       <div className={`flex items-center justify-center bg-gray-100 dark:bg-gray-800 ${className}`}>
@@ -139,12 +154,18 @@ const BlogImage = ({ src, alt, className }) => {
       </div>
     );
   }
+
+  // Use a proxy fallback on first failure to bypass potential referrer/blocking issues
+  const finalSrc = retryCount > 0
+    ? `https://images.weserv.nl/?url=${encodeURIComponent(src.replace(/^https?:\/\//, ''))}&w=800`
+    : src;
+
   return (
     <img
-      src={src}
+      src={finalSrc}
       alt={alt}
       loading="lazy"
-      onError={() => setError(true)}
+      onError={handleError}
       className={className}
     />
   );

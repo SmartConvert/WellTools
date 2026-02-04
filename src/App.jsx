@@ -142,7 +142,7 @@ const Footer = ({ setCurrentPage, t }) => (
         </div>
       </div>
       <div className="pt-8 border-t border-gray-100 dark:border-gray-900 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6">
-        <p className="text-gray-500 dark:text-gray-400 font-medium">© 2024 WellTools. Built for better health.</p>
+        <p className="text-gray-500 dark:text-gray-400 font-medium">© 2026 WellTools. Built for better health.</p>
         <div className="flex flex-wrap gap-4 md:gap-8 justify-center">
           <button onClick={() => { setCurrentPage('privacy'); window.scrollTo(0, 0); }} className="text-sm text-gray-400 hover:text-emerald-500 transition-colors font-bold uppercase tracking-widest">{t.privacy}</button>
           <button onClick={() => { setCurrentPage('terms'); window.scrollTo(0, 0); }} className="text-sm text-gray-400 hover:text-emerald-500 transition-colors font-bold uppercase tracking-widest">{t.terms}</button>

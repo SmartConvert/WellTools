@@ -35,33 +35,33 @@ const DailyTrackingPage = ({
                         onClick={() => setActiveTab('weight')}
                         aria-label={t.weight}
                         className={`px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'weight'
-                            ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg'
+                            ? 'bg-linear-to-r from-emerald-500 to-teal-600 text-white shadow-lg'
                             : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-700'
                             }`}
                     >
-                        <Scale className="w-5 h-5 inline mr-2" />
+                        <Scale className="w-5 h-5 inline me-2" />
                         {t.weight}
                     </button>
                     <button
                         onClick={() => setActiveTab('water')}
                         aria-label={t.water_calc}
                         className={`px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'water'
-                            ? 'bg-gradient-to-r from-blue-500 to-cyan-600 text-white shadow-lg'
+                            ? 'bg-linear-to-r from-blue-500 to-cyan-600 text-white shadow-lg'
                             : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-700'
                             }`}
                     >
-                        <Droplet className="w-5 h-5 inline mr-2" />
+                        <Droplet className="w-5 h-5 inline me-2" />
                         {t.water_calc}
                     </button>
                     <button
                         onClick={() => setActiveTab('sleep')}
                         aria-label={t.sleep_calc}
                         className={`px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'sleep'
-                            ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg'
+                            ? 'bg-linear-to-r from-indigo-500 to-purple-600 text-white shadow-lg'
                             : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-700'
                             }`}
                     >
-                        <Moon className="w-5 h-5 inline mr-2" />
+                        <Moon className="w-5 h-5 inline me-2" />
                         {t.sleep_calc}
                     </button>
                 </div>
@@ -85,9 +85,9 @@ const DailyTrackingPage = ({
                                 />
                                 <button
                                     onClick={addWeightEntry}
-                                    className="px-8 py-4 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
+                                    className="px-8 py-4 bg-linear-to-r from-violet-500 to-purple-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
                                 >
-                                    <Plus className="w-5 h-5 inline mr-2" />
+                                    <Plus className="w-5 h-5 inline me-2" />
                                     {t.add_entry}
                                 </button>
                             </div>
@@ -133,7 +133,7 @@ const DailyTrackingPage = ({
                                 ) : (
                                     <div className="space-y-2">
                                         {[...trackingData.weight].reverse().slice(0, 10).map((entry, index) => (
-                                            <div key={index} className="flex justify-between items-center p-4 bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-900/10 dark:to-purple-900/10 rounded-xl border border-violet-100 dark:border-violet-900/30">
+                                            <div key={index} className="flex justify-between items-center p-4 bg-linear-to-r from-violet-50 to-purple-50 dark:from-violet-900/10 dark:to-purple-900/10 rounded-xl border border-violet-100 dark:border-violet-900/30">
                                                 <div>
                                                     <p className="font-semibold text-gray-800 dark:text-white">{entry.value} {t.unit_kg}</p>
                                                     <p className="text-sm text-gray-600 dark:text-gray-400">{entry.date}</p>
@@ -173,9 +173,9 @@ const DailyTrackingPage = ({
                                 />
                                 <button
                                     onClick={addWaterEntry}
-                                    className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
+                                    className="px-8 py-4 bg-linear-to-r from-blue-500 to-cyan-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
                                 >
-                                    <Plus className="w-5 h-5 inline mr-2" />
+                                    <Plus className="w-5 h-5 inline me-2" />
                                     {t.add_entry}
                                 </button>
                             </div>
@@ -209,7 +209,7 @@ const DailyTrackingPage = ({
                                 ) : (
                                     <div className="space-y-2">
                                         {[...trackingData.water].reverse().slice(0, 10).map((entry, index) => (
-                                            <div key={index} className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/10 dark:to-cyan-900/10 rounded-xl border border-blue-100 dark:border-blue-900/30">
+                                            <div key={index} className="flex justify-between items-center p-4 bg-linear-to-r from-blue-50 to-cyan-50 dark:from-blue-900/10 dark:to-cyan-900/10 rounded-xl border border-blue-100 dark:border-blue-900/30">
                                                 <div>
                                                     <p className="font-semibold text-gray-800 dark:text-white">{entry.value} {t.liters}</p>
                                                     <p className="text-sm text-gray-600 dark:text-gray-400">{entry.date}</p>
@@ -249,9 +249,9 @@ const DailyTrackingPage = ({
                                 />
                                 <button
                                     onClick={addSleepEntry}
-                                    className="px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
+                                    className="px-8 py-4 bg-linear-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
                                 >
-                                    <Plus className="w-5 h-5 inline mr-2" />
+                                    <Plus className="w-5 h-5 inline me-2" />
                                     {t.add_entry}
                                 </button>
                             </div>
@@ -292,7 +292,7 @@ const DailyTrackingPage = ({
                                 ) : (
                                     <div className="space-y-2">
                                         {[...trackingData.sleep].reverse().slice(0, 10).map((entry, index) => (
-                                            <div key={index} className="flex justify-between items-center p-4 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/10 dark:to-purple-900/10 rounded-xl border border-indigo-100 dark:border-indigo-900/30">
+                                            <div key={index} className="flex justify-between items-center p-4 bg-linear-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/10 dark:to-purple-900/10 rounded-xl border border-indigo-100 dark:border-indigo-900/30">
                                                 <div>
                                                     <p className="font-semibold text-gray-800 dark:text-white">{entry.value} {t.hours}</p>
                                                     <p className="text-sm text-gray-600 dark:text-gray-400">{entry.date}</p>

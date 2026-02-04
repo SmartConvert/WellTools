@@ -12,7 +12,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
             <div className="max-w-3xl mx-auto">
                 <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
                     <div className="flex items-center gap-4 mb-8">
-                        <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="w-16 h-16 bg-linear-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center shadow-lg">
                             <Percent className="w-8 h-8 text-white" />
                         </div>
                         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.body_fat_calc}</h1>
@@ -114,14 +114,14 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
 
                         <button
                             onClick={calculateBodyFat}
-                            className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+                            className="w-full py-4 bg-linear-to-r from-orange-500 to-red-500 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
                         >
                             {t.calculate}
                         </button>
                     </div>
 
                     {bfResult && (
-                        <div id="body-fat-result" className="mt-8 p-8 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-2xl border-2 border-orange-200 dark:border-orange-800 animate-scale-in">
+                        <div id="body-fat-result" className="mt-8 p-8 bg-linear-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-2xl border-2 border-orange-200 dark:border-orange-800 animate-scale-in">
                             <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
                             <div className="text-center p-6 bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
                                 <p className="text-5xl font-black text-orange-600 dark:text-orange-400">{bfResult.bodyFat}%</p>

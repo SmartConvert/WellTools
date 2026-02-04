@@ -35,7 +35,7 @@ const ExpertPage = ({ setCurrentPage, t }) => (
             </div>
 
             {/* Trust Quote / CTA */}
-            <div className="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-[3rem] p-8 md:p-16 text-center text-white shadow-2xl mb-16 relative overflow-hidden group">
+            <div className="bg-linear-to-r from-emerald-600 to-teal-700 rounded-[3rem] p-8 md:p-16 text-center text-white shadow-2xl mb-16 relative overflow-hidden group">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                 <div className="relative z-10">
                     <h2 className="text-3xl font-black mb-6 tracking-tight">Built on Precision. Designed for Health.</h2>

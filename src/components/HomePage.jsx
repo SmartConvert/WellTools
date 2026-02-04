@@ -53,7 +53,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
         <div className="pt-20 pb-16 px-4">
             <div className="max-w-7xl mx-auto">
                 {/* Modern Hero Carousel */}
-                <div className="relative h-[420px] md:h-[600px] rounded-[2rem] md:rounded-[3rem] overflow-hidden mb-12 lg:mb-16 shadow-2xl animate-fade-in group">
+                <div className="relative h-[420px] md:h-[600px] rounded-4xl md:rounded-[3rem] overflow-hidden mb-12 lg:mb-16 shadow-2xl animate-fade-in group">
                     {slides.map((slide, index) => (
                         <div
                             key={index}
@@ -67,12 +67,12 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                                 loading={index === 0 ? "eager" : "lazy"}
                                 className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-10000"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"></div>
+                            <div className="absolute inset-0 bg-linear-to-r from-gray-900/80 via-gray-900/40 to-transparent"></div>
                             <div className="absolute inset-0 flex items-center px-8 md:px-16">
                                 <div className="max-w-2xl">
                                     <h1 className="text-2xl md:text-7xl font-black text-white mb-4 md:mb-6 tracking-tight leading-tight">
                                         {slide.title} <br className="md:hidden" />
-                                        <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                                        <span className="bg-linear-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
                                             {slide.accent}
                                         </span>
                                     </h1>
@@ -85,7 +85,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                                                 const el = document.getElementById('tools-grid');
                                                 el?.scrollIntoView({ behavior: 'smooth' });
                                             }}
-                                            className="px-5 py-2.5 md:px-8 md:py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-base md:text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
+                                            className="px-5 py-2.5 md:px-8 md:py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-base md:text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
                                         >
                                             {t.explore_tools}
                                         </button>
@@ -127,7 +127,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                                 onClick={() => setCurrentPage('blog')}
                                 className="hidden md:flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold hover:gap-3 transition-all"
                             >
-                                {t.nav_blog} <ChevronRight className="w-5 h-5" />
+                                {t.nav_blog} <ChevronRight className="w-5 h-5 rtl-mirror" />
                             </button>
                         </div>
 
@@ -144,7 +144,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                                 >
                                     <div className="h-40 md:h-56 relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
                                         <BlogImage src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div>
+                                        <div className="absolute inset-0 bg-linear-to-t from-gray-900/60 to-transparent"></div>
                                         <div className="absolute bottom-4 left-6">
                                             <span className="px-3 py-1 bg-emerald-500 text-white text-[10px] font-bold rounded-lg uppercase tracking-widest">{post.category}</span>
                                         </div>
@@ -153,7 +153,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                                         <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-emerald-500 transition-colors line-clamp-1">{post.title}</h3>
                                         <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base line-clamp-2 font-medium mb-4">{post.excerpt}</p>
                                         <div className="flex items-center text-emerald-600 dark:text-emerald-400 font-bold text-sm">
-                                            {t.read_article} <ChevronRight className="w-4 h-4 ml-1 group-hover:ml-2 transition-all" />
+                                            {t.read_article} <ChevronRight className="w-4 h-4 ms-1 group-hover:ms-2 transition-all" />
                                         </div>
                                     </div>
                                 </div>
@@ -180,13 +180,13 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                                 className="group cursor-pointer bg-white dark:bg-gray-800 p-8 md:p-10 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-50 dark:border-gray-700 relative overflow-hidden flex flex-col h-full"
                             >
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
-                                <div className={`w-16 h-16 bg-gradient-to-br ${tool.color} rounded-2xl flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                                <div className={`w-16 h-16 bg-linear-to-br ${tool.color} rounded-2xl flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                                     {React.cloneElement(tool.icon, { className: "w-8 h-8 text-white" })}
                                 </div>
                                 <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 group-hover:text-emerald-500 transition-colors tracking-tight">{tool.title}</h3>
                                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-medium grow mb-6">{tool.desc}</p>
                                 <div className="flex items-center text-emerald-600 dark:text-emerald-400 font-bold group-hover:gap-2 transition-all">
-                                    {t.explore_tool} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                    {t.explore_tool} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform rtl-mirror" />
                                 </div>
                             </div>
                         ))}

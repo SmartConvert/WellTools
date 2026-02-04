@@ -13,7 +13,7 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                 {/* Recommendation by Age */}
                 <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
                     <div className="flex items-center gap-4 mb-8">
-                        <div className="w-16 h-16 bg-gradient-to-br from-violet-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="w-16 h-16 bg-linear-to-br from-violet-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
                             <Moon className="w-8 h-8 text-white" />
                         </div>
                         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.sleep_calc}</h1>
@@ -34,14 +34,14 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
 
                         <button
                             onClick={calculateSleep}
-                            className="w-full py-4 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+                            className="w-full py-4 bg-linear-to-r from-violet-500 to-purple-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
                         >
                             {t.calculate}
                         </button>
                     </div>
 
                     {sleepResult && (
-                        <div id="sleep-result" className="mt-8 p-8 bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-2xl border-2 border-violet-200 dark:border-violet-800 animate-scale-in">
+                        <div id="sleep-result" className="mt-8 p-8 bg-linear-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-2xl border-2 border-violet-200 dark:border-violet-800 animate-scale-in">
                             <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
                             <p className="text-4xl font-black text-violet-600 dark:text-violet-400 text-center">{sleepResult}</p>
                         </div>
@@ -51,7 +51,7 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                 {/* Sleep Cycle Calculator */}
                 <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
                     <div className="flex items-center gap-4 mb-6">
-                        <div className="w-12 h-12 bg-gradient-to-br from-indigo-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <div className="w-12 h-12 bg-linear-to-br from-indigo-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
                             <Clock className="w-6 h-6 text-white" />
                         </div>
                         <h2 className="text-2xl font-bold text-gray-800 dark:text-white">{t.sleep_calc_cycles}</h2>
@@ -75,7 +75,7 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
 
                         <button
                             onClick={calculateSleepCycles}
-                            className="w-full py-4 bg-gradient-to-r from-indigo-500 to-blue-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+                            className="w-full py-4 bg-linear-to-r from-indigo-500 to-blue-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
                         >
                             {t.calculate}
                         </button>
@@ -86,7 +86,7 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                             <h3 className="text-xl font-bold text-gray-800 dark:text-white text-center mb-4">{t.sleep_wake_up}:</h3>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 {sleepWakeupTimes.map((time, idx) => (
-                                    <div key={idx} className="p-6 bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-900/30 dark:to-blue-900/30 rounded-2xl border-2 border-indigo-100 dark:border-indigo-800 text-center transform hover:scale-105 transition-all">
+                                    <div key={idx} className="p-6 bg-linear-to-br from-indigo-50 to-blue-50 dark:from-indigo-900/30 dark:to-blue-900/30 rounded-2xl border-2 border-indigo-100 dark:border-indigo-800 text-center transform hover:scale-105 transition-all">
                                         <p className="text-3xl font-black text-indigo-600 dark:text-indigo-400 mb-1">{time.time}</p>
                                         <p className="text-sm font-bold text-indigo-400 dark:text-indigo-500 uppercase tracking-wider">{time.hours} {t.hours}</p>
                                     </div>
@@ -99,7 +99,7 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                 {/* Sleep Tips */}
                 <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
                     <div className="flex items-center gap-4 mb-8">
-                        <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <div className="w-12 h-12 bg-linear-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center shadow-lg">
                             <Sparkles className="w-6 h-6 text-white" />
                         </div>
                         <h2 className="text-2xl font-bold text-gray-800 dark:text-white">{t.sleep_tips_title}</h2>

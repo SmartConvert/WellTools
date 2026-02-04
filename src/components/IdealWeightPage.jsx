@@ -12,7 +12,7 @@ const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGen
             <div className="max-w-3xl mx-auto">
                 <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
                     <div className="flex items-center gap-4 mb-8">
-                        <div className="w-16 h-16 bg-gradient-to-br from-rose-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="w-16 h-16 bg-linear-to-br from-rose-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg">
                             <ScaleIcon className="w-8 h-8 text-white" />
                         </div>
                         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.ideal_weight}</h1>
@@ -47,14 +47,14 @@ const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGen
 
                         <button
                             onClick={calculateIdealWeight}
-                            className="w-full py-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+                            className="w-full py-4 bg-linear-to-r from-rose-500 to-pink-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
                         >
                             {t.calculate}
                         </button>
                     </div>
 
                     {idealResult && (
-                        <div id="ideal-weight-result" className="mt-8 p-8 bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 rounded-2xl border-2 border-rose-200 dark:border-rose-800 animate-scale-in">
+                        <div id="ideal-weight-result" className="mt-8 p-8 bg-linear-to-br from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 rounded-2xl border-2 border-rose-200 dark:border-rose-800 animate-scale-in">
                             <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
                             <div className="space-y-4">
                                 <p className="text-5xl font-black text-rose-600 dark:text-rose-400 text-center">{idealResult.ideal} <span className="text-2xl">{t.unit_kg}</span></p>

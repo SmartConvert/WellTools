@@ -7,7 +7,6 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-arabic: "Montserrat", "Cairo", sans-serif;
     --font-sans: "Montserrat", "Inter", sans-serif;
 }
 
@@ -19,4 +18,21 @@
 
 html {
     scroll-behavior: smooth;
+}
+
+
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+
+    .backdrop-blur-xl,
+    .backdrop-blur-2xl,
+    .backdrop-blur-3xl {
+        backdrop-filter: blur(8px) !important;
+    }
+
+    .animate-ping {
+        animation: none !important;
+        /* Disable ping on mobile to save GPU */
+    }
 }

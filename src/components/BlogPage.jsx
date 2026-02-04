@@ -48,7 +48,7 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang }) => {
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16 animate-fade-in">
                     <div className="flex items-center justify-center gap-4 mb-6">
-                        <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-cyan-600 rounded-2xl flex items-center justify-center shadow-xl">
+                        <div className="w-16 h-16 bg-linear-to-br from-emerald-500 to-cyan-600 rounded-2xl flex items-center justify-center shadow-xl">
                             <BookOpen className="w-8 h-8 text-white" />
                         </div>
                     </div>
@@ -68,7 +68,7 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang }) => {
                             {post.image && (
                                 <div className="relative h-64 overflow-hidden bg-gray-800 flex items-center justify-center">
                                     <BlogImage src={post.image} alt={post.imageAlt || post.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                                    <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
                                 </div>
                             )}
                             <div className="p-8 grow">

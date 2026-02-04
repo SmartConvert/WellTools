@@ -27,7 +27,7 @@ const MealsPage = ({ selectedMealCategory, setSelectedMealCategory, t }) => {
                                     role="button"
                                     aria-label={`${t[category.title]} - ${t.view_meals}`}
                                 >
-                                    <div className={`w-16 h-16 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                                    <div className={`w-16 h-16 bg-linear-to-br ${category.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                                         <Icon className="w-8 h-8 text-white" />
                                     </div>
                                     <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-3">
@@ -55,7 +55,7 @@ const MealsPage = ({ selectedMealCategory, setSelectedMealCategory, t }) => {
 
                         <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 mb-8 border border-gray-50 dark:border-gray-700">
                             <div className="flex items-center gap-4 mb-8">
-                                <div className={`w-16 h-16 bg-gradient-to-br ${selectedCategory.color} rounded-2xl flex items-center justify-center shadow-lg`}>
+                                <div className={`w-16 h-16 bg-linear-to-br ${selectedCategory.color} rounded-2xl flex items-center justify-center shadow-lg`}>
                                     {React.createElement(selectedCategory.icon, { className: "w-8 h-8 text-white" })}
                                 </div>
                                 <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
@@ -67,7 +67,7 @@ const MealsPage = ({ selectedMealCategory, setSelectedMealCategory, t }) => {
                                 {selectedCategory.meals.map((meal, index) => (
                                     <div
                                         key={index}
-                                        className="p-6 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 rounded-2xl border-2 border-gray-100 dark:border-gray-700 hover:border-emerald-300 dark:hover:border-emerald-800 hover:shadow-lg transition-all duration-300"
+                                        className="p-6 bg-linear-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 rounded-2xl border-2 border-gray-100 dark:border-gray-700 hover:border-emerald-300 dark:hover:border-emerald-800 hover:shadow-lg transition-all duration-300"
                                     >
                                         <div className="flex items-start gap-3 mb-4">
                                             <Utensils className="w-6 h-6 text-emerald-600 dark:text-emerald-400 shrink-0 mt-1" />

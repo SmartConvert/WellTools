@@ -1,5 +1,5 @@
-import html2canvas from 'html2canvas';
-import { jsPDF } from 'jspdf';
+// Static imports removed to optimize initial bundle size
+// Libraries will be loaded dynamically when exportToPDF is called
 
 export const exportToPDF = async (elementId, filename = 'WellTools-Report.pdf') => {
     const element = document.getElementById(elementId);
@@ -11,7 +11,13 @@ export const exportToPDF = async (elementId, filename = 'WellTools-Report.pdf') 
     }
 
     try {
-        console.log(`[PDF Export] Starting capture for #${elementId} with modern color compatibility mode...`);
+        console.log(`[PDF Export] Loading libraries and starting capture for #${elementId}...`);
+
+        // Dynamic import to keep main bundle light
+        const [html2canvas, { jsPDF }] = await Promise.all([
+            import('html2canvas').then(m => m.default),
+            import('jspdf')
+        ]);
 
         // Fix for Tailwind 4 / modern CSS (oklch/oklab parsing error in html2canvas)
         const canvas = await html2canvas(element, {

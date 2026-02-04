@@ -8,4 +8,25 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-utils': ['lucide-react', 'recharts'],
+          'vendor-pdf': ['jspdf', 'html2canvas']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000,
+    cssCodeSplit: true,
+    sourcemap: false,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    }
+  }
 })

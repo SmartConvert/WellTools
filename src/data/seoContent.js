@@ -896,7 +896,7 @@ export const calculatorContent = {
                 { question: 'Is this as accurate as a DEXA scan?', answer: 'No, DEXA is the gold standard. However, the Navy Method is surprisingly accurate for a free, no-cost tool and is perfect for tracking relative progress.' }
             ]
         }
-    }
+    },
     'one-rep-max': {
         en: {
             hero_title: 'One-Rep Max (1RM) Calculator',

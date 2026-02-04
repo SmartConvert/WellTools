@@ -4,4 +4,19 @@
 @source "./**/*.{js,jsx,ts,tsx}";
 @source "../daily-health-tools-enhanced (1).jsx";
 
-/* Tailwind CSS v4 handles preflight and base styles automatically */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-arabic: "Montserrat", "Cairo", sans-serif;
+    --font-sans: "Montserrat", "Inter", sans-serif;
+}
+
+/* Base transitions for theme switching */
+* {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 300ms;
+}
+
+html {
+    scroll-behavior: smooth;
+}

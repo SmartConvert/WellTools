@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
-import { Heart, Menu, X } from 'lucide-react';
+import { Heart, Menu, X, Moon, Sun } from 'lucide-react';
 import { translations } from './translations';
 import AdComponent from './components/AdComponent';
 
@@ -24,7 +24,7 @@ const TermsOfUsePage = lazy(() => import('./components/LegalPages').then(m => ({
 const DisclaimerPage = lazy(() => import('./components/LegalPages').then(m => ({ default: m.DisclaimerPage })));
 const PrivacyPolicyPage = lazy(() => import('./components/LegalPages').then(m => ({ default: m.PrivacyPolicyPage })));
 
-const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLang, t }) => (
+const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLang, t, theme, setTheme }) => (
   <nav className="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 shadow-sm transition-colors duration-300">
     <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
       <div className="flex justify-between items-center h-20">
@@ -55,6 +55,22 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
         </div>
 
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
+            className="p-2 text-gray-700 dark:text-gray-200 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors md:hidden"
+            aria-label={t.language}
+          >
+            <Globe className="w-5 h-5" />
+          </button>
+
+          <button
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="p-2 text-gray-700 dark:text-gray-200 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            aria-label={theme === 'dark' ? t.light_mode : t.dark_mode}
+          >
+            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
+
           <div className="hidden md:flex bg-gray-100 dark:bg-gray-800 rounded-xl p-1 border border-gray-200 dark:border-gray-700">
             {['en', 'ar', 'fr', 'de', 'es'].map((l) => (
               <button
@@ -79,27 +95,42 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, lang, setLa
     </div>
 
     {mobileMenuOpen && (
-      <div className="lg:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 shadow-lg">
-        <div className="px-4 py-4 space-y-3">
-          <button onClick={() => { setCurrentPage('home'); setMobileMenuOpen(false); window.scrollTo(0, 0); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors font-semibold">
+      <div className="lg:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 shadow-lg animate-in slide-in-from-top duration-300">
+        <div className="px-4 py-6 space-y-4">
+          <button onClick={() => { setCurrentPage('home'); setMobileMenuOpen(false); window.scrollTo(0, 0); }} className="flex items-center gap-3 w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-2xl transition-all font-bold">
+            <Heart className="w-5 h-5 text-emerald-500" />
             {t.nav_home}
           </button>
-          <button onClick={() => { setCurrentPage('tracking'); setMobileMenuOpen(false); window.scrollTo(0, 0); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors font-semibold">
+          <button onClick={() => { setCurrentPage('tracking'); setMobileMenuOpen(false); window.scrollTo(0, 0); }} className="flex items-center gap-3 w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-2xl transition-all font-bold">
+            <Globe className="w-5 h-5 text-emerald-500" />
             {t.daily_tracking}
           </button>
-          <button onClick={() => { setCurrentPage('meal-planner'); setMobileMenuOpen(false); window.scrollTo(0, 0); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors font-semibold">
+          <button onClick={() => { setCurrentPage('meal-planner'); setMobileMenuOpen(false); window.scrollTo(0, 0); }} className="flex items-center gap-3 w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-2xl transition-all font-bold">
+            <Heart className="w-5 h-5 text-emerald-500" />
             {t.meal_planner_title}
           </button>
-          <button onClick={() => { setCurrentPage('blog'); setMobileMenuOpen(false); window.scrollTo(0, 0); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors font-semibold">
+          <button onClick={() => { setCurrentPage('blog'); setMobileMenuOpen(false); window.scrollTo(0, 0); }} className="flex items-center gap-3 w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-2xl transition-all font-bold">
+            <Heart className="w-5 h-5 text-emerald-500" />
             {t.nav_blog}
           </button>
-          <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
-            <div className="grid grid-cols-5 gap-2 px-4 pb-4">
+
+          <div className="pt-6 border-t border-gray-100 dark:border-gray-800">
+            <div className="flex items-center justify-between px-4 mb-4">
+              <span className="text-sm font-bold text-gray-500">{t.dark_mode}</span>
+              <button
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                className="p-3 bg-gray-100 dark:bg-gray-800 rounded-2xl text-gray-700 dark:text-gray-200 transition-all active:scale-95"
+              >
+                {theme === 'dark' ? <Sun className="w-6 h-6 text-amber-500" /> : <Moon className="w-6 h-6 text-blue-500" />}
+              </button>
+            </div>
+
+            <div className="grid grid-cols-5 gap-2">
               {['en', 'ar', 'fr', 'de', 'es'].map((l) => (
                 <button
                   key={l}
                   onClick={() => { setLang(l); setMobileMenuOpen(false); }}
-                  className={`py-2 rounded-xl text-xs font-black uppercase transition-all border ${lang === l ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-100 dark:border-gray-700'}`}
+                  className={`py-3 rounded-xl text-xs font-black uppercase transition-all border ${lang === l ? 'bg-emerald-600 text-white border-emerald-600 shadow-lg' : 'bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-100 dark:border-gray-700'}`}
                 >
                   {l}
                 </button>
@@ -168,6 +199,21 @@ const DailyHealthTools = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const [activeTab, setActiveTab] = useState('weight');
+
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
 
   const getInitialLang = () => {
     const params = new URLSearchParams(window.location.search);
@@ -367,8 +413,8 @@ const DailyHealthTools = () => {
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${lang === 'ar' ? 'font-arabic' : 'font-sans'}`}>
-      <NavBar setCurrentPage={setCurrentPage} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} lang={lang} setLang={setLang} t={t} />
+    <div className={`min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300 ${lang === 'ar' ? 'font-arabic' : 'font-sans'}`}>
+      <NavBar setCurrentPage={setCurrentPage} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} lang={lang} setLang={setLang} t={t} theme={theme} setTheme={setTheme} />
       <main className="min-h-[calc(100-80px)]">
         <Suspense fallback={<LoadingSpinner />}>
           {renderPage()}

@@ -172,7 +172,7 @@ async function generatePost() {
         5. Main Content: (400-700 words) deep dive into ${selectedTopic.title}.
         6. List or Steps: Practical actionable information.
         7. Tips: 3-5 quick wellness tips related to the topic.
-        8. FAQ: 3 frequent questions and concise answers.
+        8. FAQ: 5 frequent and high-volume questions that people actually search for or ask on health forums about this niche (Real-world search intent).
         9. Internal Links: Create a bulleted list (vertical) of 3-4 links to relevant WellTools health tools.
            STRICT URL FORMAT:
            - BMI Calculator: [BMI Calculator](/?page=bmi)
@@ -194,7 +194,7 @@ async function generatePost() {
           "imageAlt": "Alt focus for SEO",
           "content": "Full content in Markdown starting from H1. Ensure clear headings and a professional layout.",
           "keywords": ["key1", "key2", "key3", "key4", "key5"],
-          "faq": [{"question": "Q1?", "answer": "A1."}, {"question": "Q2?", "answer": "A2."}, {"question": "Q3?", "answer": "A3."}],
+          "faq": [{"question": "Real Search Question 1?", "answer": "Concise answer 1."}, {"question": "Real Search Question 2?", "answer": "Concise answer 2."}, {"question": "Real Search Question 3?", "answer": "Concise answer 3."}, {"question": "Real Search Question 4?", "answer": "Concise answer 4."}, {"question": "Real Search Question 5?", "answer": "Concise answer 5."}],
           "sources": [{"title": "Source 1 Name", "url": "https://source1.com"}, {"title": "Source 2 Name", "url": "https://source2.com"}]
         }
         `;

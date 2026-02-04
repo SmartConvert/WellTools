@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
-import { Heart, Menu, X, Moon, Sun } from 'lucide-react';
+import { Heart, Menu, X, Moon, Sun, Globe } from 'lucide-react';
 import { translations } from './translations';
 import AdComponent from './components/AdComponent';
 

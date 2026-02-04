@@ -15,7 +15,7 @@ const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, c
                         <div className="w-16 h-16 bg-linear-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
                             <Calculator className="w-8 h-8 text-white" />
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.bmi_calc}</h1>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.bmi_calc}</h2>
                     </div>
 
                     <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">

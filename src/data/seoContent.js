@@ -3,15 +3,19 @@ export const calculatorContent = {
     bmi: {
         en: {
             hero_title: 'BMI Calculator',
-            hero_subtitle: 'Calculate your Body Mass Index instantly and understand your weight status',
+            hero_subtitle: 'Calculate your Body Mass Index.',
             hero_emoji: '🥑',
             hero_color: 'from-lime-400 to-green-500',
+            related_tools: [
+                { id: 'calories', name: 'Calorie Calculator' },
+                { id: 'ideal-weight', name: 'Ideal Weight' }
+            ],
 
-            seo_what_title: 'What is BMI (Body Mass Index)?',
-            seo_what_content: 'Body Mass Index (BMI) is a widely-used health metric that estimates body fat based on height and weight. It provides a simple numeric measure that helps categorize whether you are underweight, normal weight, overweight, or obese. While BMI doesn\'t directly measure body fat, it serves as a reliable screening tool for potential health risks associated with weight.',
+            seo_what_title: 'What is BMI Calculator?',
+            seo_what_content: 'This BMI Calculator is a simple tool that estimates body fat based on height and weight. It helps categorize whether you are underweight, normal weight, overweight, or obese.',
 
-            seo_why_title: 'Why is BMI Important?',
-            seo_why_content: 'Understanding your BMI is crucial for maintaining optimal health. A BMI outside the healthy range may indicate increased risk for conditions such as heart disease, diabetes, high blood pressure, and certain cancers. Regular BMI monitoring helps track your fitness progress and guides lifestyle decisions regarding nutrition and exercise.',
+            seo_why_title: 'Why Use a BMI Calculator?',
+            seo_why_content: 'Using a BMI Calculator is crucial for screening weight categories that may lead to health problems. Regular checks help track your fitness progress.',
 
             seo_how_title: 'How to Use This BMI Calculator',
             seo_how_steps: [
@@ -135,16 +139,20 @@ export const calculatorContent = {
     // I'll add all other calculators in the same format...
     calories: {
         en: {
-            hero_title: 'Calories Calculator',
-            hero_subtitle: 'Discover your daily calorie needs for your health goals',
-            hero_emoji: '🍎',
-            hero_color: 'from-red-400 to-rose-500',
+            hero_title: 'Calorie Calculator',
+            hero_subtitle: 'Estimate daily calories for weight maintenance, loss, or gain.',
+            hero_emoji: '🔥',
+            hero_color: 'from-orange-400 to-red-500',
+            related_tools: [
+                { id: 'bmi', name: 'BMI Calculator' },
+                { id: 'water', name: 'Water Intake Calculator' }
+            ],
 
-            seo_what_title: 'What are Calories and Daily Calorie Needs?',
-            seo_what_content: 'Calories are units of energy your body uses for all activities, from breathing to exercising. Your daily calorie needs depend on factors like age, gender, weight, height, and activity level. Understanding your caloric requirements is essential for weight management, whether you want to lose, gain, or maintain weight.',
+            seo_what_title: 'What is a Calorie Calculator?',
+            seo_what_content: 'A Calorie Calculator estimates the number of calories you need to consume daily to maintain, lose, or gain weight based on your BMR and activity level.',
 
-            seo_why_title: 'Why Calculate Your Daily Calories?',
-            seo_why_content: 'Knowing your calorie needs helps you create an effective nutrition plan. Consuming too many calories leads to weight gain, while too few can slow metabolism and cause nutrient deficiencies. Our calculator uses scientifically-proven formulas like the Mifflin-St Jeor equation to provide accurate estimates for optimal health.',
+            seo_why_title: 'Why Track Calories?',
+            seo_why_content: 'Tracking calories helps you manage your weight effectively. Whether your goal is weight loss or muscle gain, knowing your daily energy expenditure is key.',
 
             seo_how_title: 'How to Use the Calorie Calculator',
             seo_how_steps: [
@@ -255,9 +263,13 @@ export const calculatorContent = {
     water: {
         en: {
             hero_title: 'Water Intake Calculator',
-            hero_subtitle: 'Discover how much water you should drink daily based on your body and activity',
+            hero_subtitle: 'Calculate your daily hydration needs.',
             hero_emoji: '💧',
             hero_color: 'from-blue-400 to-cyan-500',
+            related_tools: [
+                { id: 'calories', name: 'Calorie Calculator' },
+                { id: 'sleep', name: 'Sleep Calculator' }
+            ],
             seo_what_title: 'The Importance of Hydration',
             seo_what_content: 'Water is essential for nearly every bodily function, from regulating temperature to lubricating joints and transporting nutrients. Proper hydration is the foundation of energy, focus, and overall vitality.',
             seo_why_title: 'Why Calculate Your Water Needs?',
@@ -311,9 +323,13 @@ export const calculatorContent = {
     'ideal-weight': {
         en: {
             hero_title: 'Ideal Weight Calculator',
-            hero_subtitle: 'Find your medically recommended healthy weight range',
+            hero_subtitle: 'Find your healthy weight range.',
             hero_emoji: '🍐',
             hero_color: 'from-yellow-400 to-amber-500',
+            related_tools: [
+                { id: 'bmi', name: 'BMI Calculator' },
+                { id: 'body-fat', name: 'Body Fat Calculator' }
+            ],
             seo_what_title: 'What is Ideal Body Weight?',
             seo_what_content: 'Ideal Body Weight (IBW) provides a healthy target based on height and gender using clinical formulas like Devine and Robinson.',
             seo_why_title: 'Purpose of Calculation',
@@ -342,10 +358,14 @@ export const calculatorContent = {
     },
     sleep: {
         en: {
-            hero_title: 'Sleep Duration Calculator',
-            hero_subtitle: 'Optimize your rest by calculating the best wake-up and sleep times',
+            hero_title: 'Sleep Calculator',
+            hero_subtitle: 'Calculate optimal wake and sleep times.',
             hero_emoji: '🍇',
             hero_color: 'from-purple-400 to-violet-500',
+            related_tools: [
+                { id: 'water', name: 'Water Intake Calculator' },
+                { id: 'calories', name: 'Calorie Calculator' }
+            ],
             seo_what_title: 'The Science of Sleep',
             seo_what_content: 'Sleep occurs in cycles. Waking up at the end of a cycle makes you feel refreshed, while waking up mid-cycle causes grogginess.',
             seo_why_title: 'Better Sleep, Better Life',
@@ -375,9 +395,13 @@ export const calculatorContent = {
     'body-fat': {
         en: {
             hero_title: 'Body Fat Calculator',
-            hero_subtitle: 'Estimate your body fat percentage and fitness category',
+            hero_subtitle: 'Estimate your body fat percentage.',
             hero_emoji: '🍊',
             hero_color: 'from-orange-400 to-orange-600',
+            related_tools: [
+                { id: 'bmi', name: 'BMI Calculator' },
+                { id: 'ideal-weight', name: 'Ideal Weight Calculator' }
+            ],
             seo_what_title: 'Understanding Body Fat',
             seo_what_content: 'Body fat percentage is the total mass of fat divided by total body mass. It is a better indicator of fitness than weight alone.',
             seo_why_title: 'Why Measure?',

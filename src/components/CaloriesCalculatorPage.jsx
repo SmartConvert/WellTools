@@ -15,7 +15,7 @@ const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeig
                         <div className="w-16 h-16 bg-linear-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg">
                             <Activity className="w-8 h-8 text-white" />
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.calories_calc}</h1>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.calories_calc}</h2>
                     </div>
 
                     <div className="space-y-6">

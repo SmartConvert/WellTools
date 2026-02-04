@@ -173,7 +173,7 @@ async function generatePost() {
         6. List or Steps: Practical actionable information.
         7. Tips: 3-5 quick wellness tips related to the topic.
         8. FAQ: 3 frequent questions and concise answers.
-        9. Internal Links: Suggest natural context for linking to other WellTools health tools. 
+        9. Internal Links: Create a bulleted list (vertical) of 3-4 links to relevant WellTools health tools.
            STRICT URL FORMAT:
            - BMI Calculator: [BMI Calculator](/?page=bmi)
            - Calorie Counter: [Calorie Counter](/?page=calories)

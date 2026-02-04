@@ -152,7 +152,7 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
                             <span className="w-8 h-8 bg-emerald-500 text-white rounded-lg flex items-center justify-center text-sm">#</span>
                             {t.sources_title}
                         </h2>
-                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <ul className="flex flex-col gap-3">
                             {post.sources.map((source, i) => (
                                 <li key={i}>
                                     <a

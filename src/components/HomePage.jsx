@@ -4,7 +4,7 @@ import postsData from '../data/posts.json';
 import { BlogImage } from './BlogPage';
 import AdComponent from './AdComponent';
 
-const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, lang, t }) => {
+const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const slides = [
@@ -38,7 +38,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
         return () => clearInterval(timer);
     }, [slides.length]);
 
-    const currentLangPosts = (postsData[lang] && postsData[lang].length > 0) ? postsData[lang] : (postsData['en'] || []);
+    const currentLangPosts = postsData['en'] || [];
 
     const tools = [
         { id: 'bmi', icon: <Scale className="w-8 h-8" />, title: t.bmi_calc, desc: t.bmi_desc, color: 'from-emerald-400 to-teal-500' },
@@ -127,7 +127,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                                 onClick={() => setCurrentPage('blog')}
                                 className="hidden md:flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold hover:gap-3 transition-all"
                             >
-                                {t.nav_blog} <ChevronRight className="w-5 h-5 rtl-mirror" />
+                                {t.nav_blog} <ChevronRight className="w-5 h-5" />
                             </button>
                         </div>
 
@@ -186,7 +186,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, la
                                 <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 group-hover:text-emerald-500 transition-colors tracking-tight">{tool.title}</h3>
                                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-medium grow mb-6">{tool.desc}</p>
                                 <div className="flex items-center text-emerald-600 dark:text-emerald-400 font-bold group-hover:gap-2 transition-all">
-                                    {t.explore_tool} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform rtl-mirror" />
+                                    {t.explore_tool} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </div>
                             </div>
                         ))}

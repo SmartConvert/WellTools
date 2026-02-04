@@ -4,10 +4,10 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 
-const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, bfAge, setBfAge, bfGender, setBfGender, bfNeck, setBfNeck, bfWaist, setBfWaist, bfHip, setBfHip, calculateBodyFat, bfResult, setCurrentPage, t, lang }) => (
+const BodyFatCalculatorPage = ({ bfWeight, setBmiWeight, bfHeight, setBfHeight, bfAge, setBfAge, bfGender, setBfGender, bfNeck, setBfNeck, bfWaist, setBfWaist, bfHip, setBfHip, calculateBodyFat, bfResult, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
-            <ToolHero toolId="body-fat" lang={lang} />
+            <ToolHero toolId="body-fat" />
 
             <div className="max-w-3xl mx-auto">
                 <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
@@ -130,7 +130,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                         </div>
                     )}
 
-                    <ToolInfoSection toolId="body-fat" lang={lang} />
+                    <ToolInfoSection toolId="body-fat" />
 
                     <AdComponent slot="body_fat_bottom" />
                 </div>

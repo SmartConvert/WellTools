@@ -4,10 +4,10 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 
-const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, calculateBMI, bmiResult, setCurrentPage, t, lang }) => (
+const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, calculateBMI, bmiResult, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
-            <ToolHero toolId="bmi" lang={lang} />
+            <ToolHero toolId="bmi" />
 
             <div className="max-w-3xl mx-auto">
                 <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
@@ -78,7 +78,7 @@ const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, c
                         </div>
                     )}
 
-                    <ToolInfoSection toolId="bmi" lang={lang} />
+                    <ToolInfoSection toolId="bmi" />
 
                     <AdComponent slot="bmi_bottom" />
                 </div>

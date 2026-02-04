@@ -2,8 +2,8 @@ import React from 'react';
 import { Activity, ArrowRightCircle, Sparkles, Lightbulb, HelpCircle } from 'lucide-react';
 import { calculatorContent } from '../data/seoContent';
 
-const ToolInfoSection = ({ toolId, lang }) => {
-    const content = calculatorContent[toolId]?.[lang] || calculatorContent[toolId]?.['en'];
+const ToolInfoSection = ({ toolId }) => {
+    const content = calculatorContent[toolId]?.['en'];
     if (!content) return null;
 
     return (
@@ -72,7 +72,7 @@ const ToolInfoSection = ({ toolId, lang }) => {
             {content.seo_faqs?.length > 0 && (
                 <section className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-[3.5rem] shadow-2xl border border-gray-50 dark:border-gray-700">
                     <h3 className="text-3xl font-black text-gray-900 dark:text-white mb-10 text-center">
-                        {lang === 'ar' ? 'الأسئلة الشائعة' : (lang === 'fr' ? 'Questions Fréquemment Posées' : 'Frequently Asked Questions')}
+                        Frequently Asked Questions
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {content.seo_faqs.map((faq, i) => (

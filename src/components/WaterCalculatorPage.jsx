@@ -4,10 +4,10 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 
-const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWaterActivity, calculateWater, waterResult, setCurrentPage, t, lang }) => (
+const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWaterActivity, calculateWater, waterResult, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
-            <ToolHero toolId="water" lang={lang} />
+            <ToolHero toolId="water" />
 
             <div className="max-w-3xl mx-auto">
                 <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
@@ -63,7 +63,7 @@ const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWa
                         </div>
                     )}
 
-                    <ToolInfoSection toolId="water" lang={lang} />
+                    <ToolInfoSection toolId="water" />
 
                     <AdComponent slot="water_bottom" />
                 </div>

@@ -4,10 +4,10 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 
-const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResult, sleepBedtime, setSleepBedtime, calculateSleepCycles, sleepWakeupTimes, setCurrentPage, t, lang }) => (
+const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResult, sleepBedtime, setSleepBedtime, calculateSleepCycles, sleepWakeupTimes, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
-            <ToolHero toolId="sleep" lang={lang} />
+            <ToolHero toolId="sleep" />
 
             <div className="max-w-3xl mx-auto space-y-8">
                 {/* Recommendation by Age */}
@@ -119,7 +119,7 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                     </div>
                 </div>
 
-                <ToolInfoSection toolId="sleep" lang={lang} />
+                <ToolInfoSection toolId="sleep" />
                 <AdComponent slot="sleep_bottom" />
             </div>
 

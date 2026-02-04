@@ -40,8 +40,8 @@ const BlogImage = ({ src, alt, className }) => {
     );
 };
 
-const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang }) => {
-    const posts = (postsData[lang] && postsData[lang].length > 0) ? postsData[lang] : (postsData['en'] || []);
+const BlogPage = ({ setCurrentPage, setSelectedPost, t }) => {
+    const posts = postsData['en'] || [];
 
     return (
         <div className="pt-24 pb-16 px-4">

@@ -174,7 +174,8 @@ async function generatePost() {
         7. Tips: 3-5 quick wellness tips related to the topic.
         8. FAQ: 3 frequent questions and concise answers.
         9. Internal Links: Suggest natural context for linking to other WellTools calculators (BMI, Calories, Water, Ideal Weight).
-        10. Medical Disclaimer: Mandatory section at the end.
+        10. Medical Sources: List 2-4 reputable medical or scientific sources (e.g., Mayo Clinic, NIH, WHO) with actual URLs.
+        11. Medical Disclaimer: Mandatory section at the end.
 
         OUTPUT FORMAT: Strictly valid JSON.
         {
@@ -185,7 +186,8 @@ async function generatePost() {
           "imageAlt": "Alt focus for SEO",
           "content": "Full content in Markdown starting from H1. Ensure clear headings and a professional layout.",
           "keywords": ["key1", "key2", "key3", "key4", "key5"],
-          "faq": [{"question": "Q1?", "answer": "A1."}, {"question": "Q2?", "answer": "A2."}, {"question": "Q3?", "answer": "A3."}]
+          "faq": [{"question": "Q1?", "answer": "A1."}, {"question": "Q2?", "answer": "A2."}, {"question": "Q3?", "answer": "A3."}],
+          "sources": [{"title": "Source 1 Name", "url": "https://source1.com"}, {"title": "Source 2 Name", "url": "https://source2.com"}]
         }
         `;
 

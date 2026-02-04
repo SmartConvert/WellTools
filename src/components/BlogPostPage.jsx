@@ -146,6 +146,32 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
                     </div>
                 )}
 
+                {post.sources && post.sources.length > 0 && (
+                    <div className="mt-12 p-8 md:p-10 bg-emerald-50/30 dark:bg-emerald-900/10 rounded-[2.5rem] border border-emerald-100 dark:border-emerald-900/30">
+                        <h2 className="text-2xl font-black text-emerald-900 dark:text-emerald-400 mb-6 flex items-center gap-3">
+                            <span className="w-8 h-8 bg-emerald-500 text-white rounded-lg flex items-center justify-center text-sm">#</span>
+                            {t.sources_title}
+                        </h2>
+                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {post.sources.map((source, i) => (
+                                <li key={i}>
+                                    <a
+                                        href={source.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-2xl border border-emerald-50 dark:border-emerald-900/20 hover:border-emerald-500 transition-all group"
+                                    >
+                                        <div className="w-2 h-2 rounded-full bg-emerald-400 group-hover:scale-150 transition-transform" />
+                                        <span className="text-gray-700 dark:text-gray-300 font-semibold group-hover:text-emerald-600 transition-colors line-clamp-1">
+                                            {source.title}
+                                        </span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
                 <AdComponent slot="blog_post_bottom" />
             </div>
         </div>

@@ -296,7 +296,7 @@ export const translations = {
         read_article: 'Read Article',
         back_to_blog: 'Back to Blog',
         faq_title: 'Frequently Asked Questions',
-        sources_title: 'Sources & References',
+        sources_title: 'Medical Sources & References',
         no_posts: 'No articles published yet.',
 
         // Footer & Legal
@@ -344,6 +344,7 @@ export const translations = {
         light_mode: 'الوضع المضيء',
         latest_blog_title: 'أحدث مقالاتنا',
         read_article: 'اقرأ المقال',
+        sources_title: 'المصادر والمراجع الطبية',
         explore_tools: 'استكشف الأدوات',
         explore_tool: 'استكشف الأداة',
     },
@@ -366,6 +367,7 @@ export const translations = {
         light_mode: 'Mode Clair',
         latest_blog_title: 'Derniers Articles',
         read_article: 'Lire l\'Article',
+        sources_title: 'Sources et Références Médicales',
         explore_tools: 'Explorer les Outils',
         explore_tool: 'Explorer l\'Outil',
     }

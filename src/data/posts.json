@@ -1,6 +1,37 @@
 {
     "en": [
         {
+            "id": "welltools-2-1770215056268",
+            "title": "Daily Calorie Needs Calculator: Estimate Your Personalized Calorie Intake",
+            "category": "health_calculators",
+            "excerpt": "Discover your daily calorie needs with our free calculator. Learn how to use BMR formulas and activity levels to estimate calories for weight maintenance, loss, or gain. Start today!",
+            "image": "https://image.pollinations.ai/prompt/professional photo of a diverse group of healthy adults using a digital calorie calculator app on tablets, fresh vegetables and fitness tracker in background, clean modern kitchen setting?width=1200&height=800&nologo=true",
+            "imageAlt": "Daily calorie needs calculator for personalized health tracking",
+            "content": "# Daily Calorie Needs Calculator\n\nUnderstanding your daily calorie needs helps support healthy lifestyle choices. This calculator uses established formulas to estimate the calories your body requires based on age, sex, weight, height, and activity level[1][3][7].\n\nMany people seek tools like this to plan meals or set wellness goals. Factors such as basal metabolic rate (BMR) and physical activity determine your total daily energy expenditure (TDEE). BMR represents calories burned at rest for basic functions like breathing and circulation[1][8]. By multiplying BMR by an activity factor, you get a TDEE estimate to maintain current weight[2][3].\n\nThis informational tool draws from formulas like Harris-Benedict and Mifflin-St Jeor, widely used for approximations[1][3]. Results serve as a starting point; individual needs vary[4][5].\n\n## How Daily Calorie Needs Calculators Work\n\nDaily calorie needs calculators first compute BMR, then adjust for activity. Common BMR formulas include:\n\n- **Harris-Benedict for men**: BMR = 66.5 + (13.75 × weight in kg) + (5.003 × height in cm) - (6.75 × age)[1]\n- **Harris-Benedict for women**: BMR = 655.1 + (9.563 × weight in kg) + (1.850 × height in cm) - (4.676 × age)[1]\n- **Mifflin-St Jeor** (often most accurate): Variations exist, but similar structure applies[3][7]\n\nNext, multiply BMR by an activity factor to find TDEE[1][2][3]:\n\n| Activity Level | Multiplier | Description |\n|---------------|------------|-------------|\n| Sedentary | 1.2 | Little or no exercise[1][2] |\n| Lightly Active | 1.375 | Light exercise 1-3 days/week[1][2] |\n| Moderately Active | 1.55 | Moderate exercise 3-5 days/week[1][2] |\n| Very Active | 1.725 | Hard exercise 6-7 days/week[1][2] |\n| Super Active | 1.9 | Very hard exercise or physical job[2] |\n\nFor example, a sedentary person with 1500 BMR needs about 1800 calories daily (1500 × 1.2)[1].\n\nAdjust TDEE for goals: subtract 300-500 calories for gradual weight loss or add for gain[3][6]. One pound equals roughly 3500 calories, so a 500-calorie daily deficit targets 1 pound weekly[3].\n\nTools like the DRI Calculator also factor in macronutrients and BMI alongside calories[5]. These estimates help track intake but are not exact due to metabolism variations[4][6].\n\n## Steps to Calculate Your Daily Calorie Needs\n\n1. Measure weight in kg, height in cm, and note age and sex.\n2. Calculate BMR using a formula like Harris-Benedict[1][7].\n3. Select your activity level and multiply BMR by the factor[1][2].\n4. Adjust for goals: maintain TDEE, reduce for loss, increase for gain[3][6].\n5. Track intake and activity; refine based on progress[4].\n\n## Quick Tips for Managing Calorie Intake\n\n- Track meals using apps to match estimated needs.\n- Balance macronutrients: carbs 45-65% of calories, protein 10-35%, fats 20-35%[2].\n- Stay hydrated; water supports metabolism.\n- Combine with activity like walking to boost TDEE naturally.\n- Reassess every few weeks as habits change.\n\n## Frequently Asked Questions\n\n**What factors affect daily calorie needs?**  \nAge, sex, weight, height, and activity level primarily influence calculations via BMR and TDEE formulas[1][3][5].\n\n**How accurate are calorie calculators?**  \nThey provide estimates; Mifflin-St Jeor is often reliable, but real needs vary by metabolism and body composition[3][6].\n\n**Can I use this for weight loss?**  \nSubtract 300-500 calories from TDEE for gradual loss, aiming for sustainable changes[3][6].\n\n## Related WellTools Calculators\n\nExplore more tools for wellness: [BMI Calculator](link-to-bmi) to assess body composition, [Calorie Burned Calculator](link-to-calories) for exercise tracking, [Water Intake Calculator](link-to-water) for hydration needs, and [Ideal Weight Calculator](link-to-ideal-weight) for goal setting.\n\n## Medical Disclaimer\n\nThis calculator offers general information only and is not a substitute for professional medical advice. Consult a healthcare provider for personalized guidance, especially with health conditions. WellTools does not diagnose or treat medical issues.",
+            "keywords": [
+                "daily calorie needs calculator",
+                "calorie calculator",
+                "BMR calculator",
+                "TDEE calculator",
+                "calorie needs estimator"
+            ],
+            "faq": [
+                {
+                    "question": "What is BMR and how does it relate to daily calories?",
+                    "answer": "BMR is calories burned at rest. Multiply by activity factor for TDEE, your daily needs[1][3]."
+                },
+                {
+                    "question": "How do I adjust calories for weight loss?",
+                    "answer": "Reduce TDEE by 300-500 calories daily for gradual loss of 0.3-0.5 kg/week[3][6]."
+                },
+                {
+                    "question": "Which BMR formula is best?",
+                    "answer": "Mifflin-St Jeor is often most accurate; Harris-Benedict is common[1][3]."
+                }
+            ],
+            "date": "2026-02-04"
+        },
+        {
             "id": "welltools-1-1770214162708",
             "title": "What Is a BMI Calculator and How Can It Transform Your Health Journey?",
             "category": "health_calculators",
@@ -95,6 +126,37 @@
     ],
     "ar": [
         {
+            "id": "welltools-2-1770215056268",
+            "title": "حاسبة احتياجات السعرات الحرارية اليومية | احسب سعراتك بدقة مع WellTools",
+            "category": "health_calculators",
+            "excerpt": "اكتشف احتياجاتك اليومية من السعرات الحرارية باستخدام حاسبة WellTools الدقيقة. تعرف على العوامل المؤثرة وكيفية الحفاظ على وزن صحي. أداة مجانية موثوقة لتحسين نمط حياتك.",
+            "image": "https://image.pollinations.ai/prompt/professional photo of a healthy person using a calorie calculator app on phone with fresh fruits and vegetables in background?width=1200&height=800&nologo=true",
+            "imageAlt": "حاسبة احتياجات السعرات الحرارية اليومية",
+            "content": "<div dir=\"rtl\" style=\"font-family: 'Simplified Arabic', Arial, sans-serif; line-height: 1.6;\">\n\n# حاسبة احتياجات السعرات الحرارية اليومية\n\n## المقدمة\n\nهل تسعى للحفاظ على وزن صحي أو تحسين لياقتك البدنية؟ حاسبة احتياجات السعرات الحرارية اليومية هي أداة بسيطة تساعدك في معرفة الكمية اليومية المناسبة من السعرات الحرارية بناءً على بياناتك الشخصية. السعرات الحرارية هي الوحدة التي تقيس الطاقة الموجودة في الطعام، وفهم احتياجاتك منها يساعد في تنظيم النظام الغذائي بشكل أفضل.\n\nتختلف الاحتياجات حسب العمر والجنس والوزن والطول ومستوى النشاط. هذه الحاسبة تستخدم معادلات علمية معروفة لتقديم تقديرات دقيقة، مما يجعلها خطوة أولى مفيدة نحو نمط حياة متوازن. استخدمها لتحديد هدفك اليومي سواء لفقدان الوزن أو زيادته أو الحفاظ عليه.[1][2]\n\n## كيف تعمل حاسبة احتياجات السعرات الحرارية؟\n\nتعتمد الحاسبة على حساب **معدل الأيض الأساسي (BMR)**، وهو عدد السعرات التي يحتاجها الجسم للوظائف الحيوية أثناء الراحة، مثل التنفس وضربات القلب. ثم تضرب هذه القيمة في معامل النشاط اليومي للحصول على الإجمالي.\n\n### الخطوات الأساسية في الحساب:\n1. أدخل **الوزن** بالكيلوغرام.\n2. أدخل **الطول** بالسنتيمتر.\n3. حدد **العمر** بالسنوات.\n4. اختر **الجنس** (ذكر أو أنثى).\n5. حدد **مستوى النشاط** (قليل، متوسط، عالي، أو رياضي).\n\nبعد ذلك، تقدم الحاسبة النتيجة: سعرات للحفاظ على الوزن، أو تعديلها لفقدان أو زيادة الوزن بنسبة آمنة (500 سعرة يومياً تقريباً لكل كيلوغرام أسبوعياً).[1]\n\n## العوامل المؤثرة في احتياجات السعرات الحرارية\n\nتتأثر احتياجاتك بعدة عوامل:\n- **العمر**: ينخفض معدل الأيض مع التقدم في العمر.\n- **الجنس**: الرجال عادة يحتاجون سعرات أكثر بسبب الكتلة العضلية.\n- **الوزن والطول**: الأجسام الأكبر تحتاج طاقة أكثر.\n- **النشاط البدني**: الرياضيون يحتاجون سعرات إضافية.\n- **الهرمونات والصحة العامة**: قد تؤثر بعض الحالات، لكن استشر متخصصاً دائماً.\n\nمثال: شخص وزن 70 كجم، طول 170 سم، عمر 30 عاماً، نشاط متوسط، قد يحتاج حوالي 2500 سعرة يومياً للحفاظ على وزنه.[2]\n\n## خطوات استخدام الحاسبة عملياً\n\n- **الخطوة 1**: قم بقياس وزنك وطولك بدقة.\n- **الخطوة 2**: حدد مستوى نشاطك اليومي بدقة (مثل: قليل إذا كنت تجلس معظم اليوم).\n- **الخطوة 3**: أدخل البيانات في الحاسبة على موقع WellTools.\n- **الخطوة 4**: راجع النتيجة وقارنها باستهلاكك الحالي.\n- **الخطوة 5**: تابع تغييراتك أسبوعياً وعدل حسب الحاجة.\n\nهذه الخطوات تجعل العملية سهلة وبسيطة.[3]\n\n## نصائح سريعة لإدارة السعرات الحرارية\n\n- ركز على الأطعمة الغنية بالمغذيات مثل الخضروات والفواكه والحبوب الكاملة.\n- تابع استهلاكك باستخدام تطبيقات موثوقة.\n- زد من النشاط البدني تدريجياً لزيادة حرق السعرات.\n- اشرب كميات كافية من الماء لدعم الأيض.\n- استشر أخصائي تغذية لتخصيص خطتك.\n\n## أسئلة شائعة\n\n**كيف أعرف إذا كانت الحاسبة دقيقة؟** الحاسبة تعتمد على معادلات علمية قياسية، لكنها تقدير عام. للدقة الأعلى، استشر متخصصاً.[1]\n\n**هل يمكنني استخدامها لفقدان الوزن؟** نعم، قلل 500 سعرة يومياً لفقدان نصف كيلو أسبوعياً بطريقة آمنة.[2]\n\n**ما الفرق بين BMR وTDEE؟** BMR هو الأيض الأساسي، وTDEE هو الإجمالي مع النشاط.[3]\n\n## روابط داخلية مفيدة\n\nاكتشف المزيد مع حاسبات WellTools الأخرى: [حاسبة مؤشر كتلة الجسم (BMI)](link-to-bmi)، [حاسبة السعرات في الطعام](link-to-calories)، [حاسبة كمية الماء اليومية](link-to-water)، [حاسبة الوزن المثالي](link-to-ideal-weight).\n\n## تنويه طبي هام\n\nهذه المعلومات لأغراض تعليمية فقط ولا تشكل نصيحة طبية أو تشخيصاً. استشر دائماً طبيباً أو أخصائي تغذية قبل اتباع أي تغييرات في نظامك الغذائي أو الرياضي.[4]\n\n</div>",
+            "keywords": [
+                "حاسبة سعرات حرارية",
+                "احتياجات سعرات يومية",
+                "حساب السعرات الحرارية",
+                "معدل أيض أساسي",
+                "حاسبة تغذية"
+            ],
+            "faq": [
+                {
+                    "question": "كيف أعرف إذا كانت الحاسبة دقيقة؟",
+                    "answer": "تعتمد على معادلات علمية، لكنها تقدير عام. استشر متخصصاً للدقة."
+                },
+                {
+                    "question": "هل يمكنني استخدامها لفقدان الوزن؟",
+                    "answer": "نعم، قلل 500 سعرة يومياً لفقدان آمن."
+                },
+                {
+                    "question": "ما الفرق بين BMR وTDEE؟",
+                    "answer": "BMR أساسي، TDEE إجمالي مع النشاط."
+                }
+            ],
+            "date": "2026-02-04"
+        },
+        {
             "id": "welltools-1-1770214162708",
             "title": "كيف تحسب مؤشر كتلة الجسم بدقة؟ دليل شامل لـ BMI Calculator",
             "category": "health_calculators",
@@ -187,6 +249,37 @@
         }
     ],
     "fr": [
+        {
+            "id": "welltools-2-1770215056268",
+            "title": "Calculateur Besoins Caloriques Journaliers : Estimez Vos Calories Quotidiennes",
+            "category": "health_calculators",
+            "excerpt": "Découvrez notre calculateur de besoins caloriques journaliers gratuit. Calculez précisément vos calories quotidiennes selon âge, poids, taille et activité pour maintenir ou ajuster votre poids. Outil simple et fiable pour une alimentation équilibrée.",
+            "image": "https://image.pollinations.ai/prompt/professional photo of a healthy person using a calorie calculator app on smartphone with fresh fruits and vegetables in background?width=1200&height=800&nologo=true",
+            "imageAlt": "Calculateur besoins caloriques journaliers avec alimentation saine",
+            "content": "# Calculateur Besoins Caloriques Journaliers : Estimez Vos Calories Quotidiennes\n\nComprendre vos **besoins caloriques journaliers** est essentiel pour adopter une alimentation adaptée à votre mode de vie. Que vous souhaitiez maintenir votre poids, en perdre ou en gagner, cet outil vous aide à estimer la quantité de calories nécessaire chaque jour. Basé sur des formules reconnues comme le métabolisme de base (MB) multiplié par votre niveau d'activité, le calculateur prend en compte votre âge, sexe, poids, taille et activité physique[1][2][3].\n\nPourquoi est-ce important ? Votre corps dépense de l'énergie pour ses fonctions vitales (respiration, digestion) et vos activités quotidiennes. Un équilibre entre calories consommées et dépensées favorise un poids stable. Par exemple, les femmes ont en moyenne besoin de 2000-2200 kcal et les hommes de 2500-2700 kcal, mais cela varie individuellement[5][7]. Utilisez notre calculateur pour une estimation personnalisée et planifiez vos repas en conséquence[1][4]. Cet outil informatif vous guide vers des choix nutritionnels éclairés, sans remplacer un avis professionnel.\n\n## Comment Fonctionne le Calculateur de Besoins Caloriques ?\n\nLe **calcul des besoins caloriques** repose sur des équations scientifiques. D'abord, on détermine le **métabolisme de base (MB)**, l'énergie minimale pour les fonctions vitales au repos.\n\n**Pour les femmes** : MB = (9,247 × poids en kg) + (3,098 × taille en cm) – (4,33 × âge) + 447,593[3].\n**Pour les hommes** : MB = (13,397 × poids en kg) + (4,799 × taille en cm) – (5,677 × âge) + 88,362[3].\n\nEnsuite, multipliez par un coefficient d'activité (NAP ou PAL) : 1,2 pour sédentaire, jusqu'à 1,9 pour très actif[3][4]. Cela donne les **dépenses énergétiques journalières (DEJ)**[1][5].\n\nExemple : Une femme de 30 ans, 75 kg, 172 cm, activité modérée (coefficient 1,55) a un MB d'environ 1500 kcal, soit 2325 kcal/jour[2]. Ajustez pour vos objectifs : -500 kcal pour perdre du poids, +500 pour en gagner[1][4].\n\nRenseignez vos données dans notre outil pour un résultat instantané. Il intègre aussi l'effet thermique des aliments (environ 10% des calories)[5].\n\n## Étapes pour Utiliser le Calculateur\n\n- **Indiquez vos informations personnelles** : âge, sexe, poids (kg), taille (cm)[1][2].\n- **Sélectionnez votre niveau d'activité** : sédentaire, léger, modéré, actif, très actif[3][4].\n- **Choisissez un objectif** : maintenir, perdre ou gagner du poids[1][4].\n- **Obtenez votre estimation** : calories quotidiennes recommandées.\n- **Ajustez votre alimentation** : répartissez en repas équilibrés.\n\nCes étapes simples rendent l'outil accessible à tous[1][6].\n\n## Conseils Pratiques pour Gérer Vos Calories\n\n- Suivez vos apports sur une semaine pour observer les tendances.\n- Privilégiez des aliments riches en nutriments : légumes, protéines maigres, grains entiers.\n- Associez à une activité physique régulière pour optimiser les résultats.\n- Consultez notre [calculateur d'IMC](link-bmi) pour évaluer votre indice de masse corporelle.\n- Utilisez le [calculateur d'hydratation](link-water) pour vos besoins en eau quotidiens.\n\n## FAQ\n\n**Combien de calories par jour en moyenne ?**  \nEn moyenne, 2000-2200 kcal pour les femmes et 2500-2700 pour les hommes, selon l'activité[5][7].\n\n**Le calculateur est-il précis ?**  \nIl offre une estimation basée sur des formules validées, mais varie selon les individus[1][3].\n\n**Comment perdre du poids avec ces données ?**  \nRéduisez de 300-500 kcal/jour par rapport à votre DEJ, en maintenant l'équilibre nutritionnel[1][4].\n\nDécouvrez aussi notre [calculateur de poids idéal](link-ideal-weight) ou [compteur de calories](link-calories) pour une approche complète.\n\n## Avertissement Médical\n\nCet outil est informatif et ne constitue pas un conseil médical personnalisé. Consultez un professionnel de santé pour des recommandations adaptées à votre situation.",
+            "keywords": [
+                "calculateur besoins caloriques",
+                "calories par jour",
+                "besoins caloriques journaliers",
+                "métabolisme de base",
+                "calculateur calories gratuit"
+            ],
+            "faq": [
+                {
+                    "question": "Combien de calories par jour en moyenne ?",
+                    "answer": "En moyenne, 2000-2200 kcal pour les femmes et 2500-2700 pour les hommes, selon l'activité[5][7]."
+                },
+                {
+                    "question": "Le calculateur est-il précis ?",
+                    "answer": "Il offre une estimation basée sur des formules validées, mais varie selon les individus[1][3]."
+                },
+                {
+                    "question": "Comment perdre du poids avec ces données ?",
+                    "answer": "Réduisez de 300-500 kcal/jour par rapport à votre DEJ, en maintenant l'équilibre nutritionnel[1][4]."
+                }
+            ],
+            "date": "2026-02-04"
+        },
         {
             "id": "welltools-1-1770214162708",
             "title": "Comment Calculer Son IMC en 2026 ? Guide Complet avec Calculateur Gratuit",

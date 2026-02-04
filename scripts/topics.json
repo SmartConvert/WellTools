@@ -14,7 +14,8 @@
             "id": 2,
             "group": "health_calculators",
             "title": "Daily Calorie Needs Calculator",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-04"
         },
         {
             "id": 3,

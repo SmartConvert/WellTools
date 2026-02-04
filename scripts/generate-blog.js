@@ -34,37 +34,74 @@ const MODELS_TO_TRY = [
 async function getWorkingModel(genAI) {
     if (!genAI) throw new Error("Gemini AI not initialized.");
     for (const modelName of MODELS_TO_TRY) {
-        // ... (existing retry logic remains same)
+        let retries = 0;
+        const MAX_RETRIES = 3;
+
+        while (retries <= MAX_RETRIES) {
+            try {
+                console.log(`Testing model: ${modelName} (Attempt ${retries + 1})...`);
+                const model = genAI.getGenerativeModel({ model: modelName });
+                const result = await model.generateContent("hi");
+                const response = await result.response;
+
+                if (response.text()) {
+                    console.log(`✅ Selected working model: ${modelName}`);
+                    return model;
+                }
+            } catch (error) {
+                console.warn(`❌ Model ${modelName} attempt ${retries + 1} failed. Reason: ${error.message}`);
+
+                const isRateLimit = error.message.includes("429") || error.message.toLowerCase().includes("too many requests") || error.message.includes("Quota exceeded");
+                const is404 = error.message.includes("404") || error.message.toLowerCase().includes("not found");
+
+                if (isRateLimit && retries < MAX_RETRIES) {
+                    const waitTime = 60000 * (retries + 1);
+                    console.log(`⚠️ Rate limit hit. Waiting ${waitTime / 1000} seconds before retrying ${modelName}...`);
+                    await new Promise(resolve => setTimeout(resolve, waitTime));
+                    retries++;
+                } else if (is404) {
+                    console.log(`⏩ Model ${modelName} not found (404). Trying next model...`);
+                    break;
+                } else {
+                    break;
+                }
+            }
+        }
     }
+    throw new Error("All Gemini models failed.");
 }
 
 async function generateWithPerplexity(prompt) {
     console.log("  🌐 Using Perplexity API (sonar-reasoning)...");
     try {
+        const payload = {
+            model: "sonar-reasoning",
+            messages: [
+                { role: "system", content: "You are a professional blog post generator. Output strictly JSON formatting." },
+                { role: "user", content: prompt }
+            ]
+            // Removed response_format to avoid 400 errors if not supported
+        };
+
         const response = await fetch("https://api.perplexity.ai/chat/completions", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${PERPLEXITY_API_KEY}`,
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
-            body: JSON.stringify({
-                model: "sonar-reasoning",
-                messages: [
-                    { role: "system", content: "You are a professional blog post generator. Output strictly JSON." },
-                    { role: "user", content: prompt }
-                ],
-                response_format: { type: "json_object" }
-            })
+            body: JSON.stringify(payload)
         });
 
         if (!response.ok) {
-            throw new Error(`Perplexity API Error: ${response.status} ${response.statusText}`);
+            const errorBody = await response.text();
+            throw new Error(`Perplexity API Error: ${response.status} ${response.statusText} - ${errorBody}`);
         }
 
         const data = await response.json();
         return data.choices[0].message.content;
     } catch (error) {
-        console.error("  ❌ Perplexity Error:", error.message);
+        console.error("  ❌ Perplexity Error Details:", error.message);
         throw error;
     }
 }

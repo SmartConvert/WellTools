@@ -19,6 +19,83 @@ const ToolInfoSection = ({ toolId }) => {
                 </p>
             </section>
 
+            {/* Formula Explanation (NEW) */}
+            {content.formula_title && (
+                <section className="bg-blue-50 dark:bg-blue-900/10 p-8 md:p-12 rounded-[2.5rem] border border-blue-200 dark:border-blue-800">
+                    <h2 className="text-3xl font-black text-blue-900 dark:text-blue-100 mb-6 flex items-center gap-3">
+                        <span className="w-2 h-8 bg-blue-500 rounded-full"></span>
+                        {content.formula_title}
+                    </h2>
+                    <p className="text-lg text-blue-800 dark:text-blue-200 leading-relaxed mb-6">
+                        {content.formula_explanation}
+                    </p>
+                    <div className="bg-white dark:bg-blue-950/50 p-6 rounded-2xl border border-blue-300 dark:border-blue-700 mb-4">
+                        <p className="text-2xl font-mono font-bold text-center text-gray-900 dark:text-white">
+                            {content.formula_text}
+                        </p>
+                    </div>
+                    <p className="text-blue-700 dark:text-blue-300 italic">
+                        {content.formula_example}
+                    </p>
+                    {content.formula_accuracy && (
+                        <p className="mt-4 text-sm text-blue-600 dark:text-blue-400 font-semibold">
+                            ✓ {content.formula_accuracy}
+                        </p>
+                    )}
+                </section>
+            )}
+
+            {/* Step-by-Step Examples (NEW) */}
+            {content.examples && content.examples.length > 0 && (
+                <section className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-50 dark:border-gray-700">
+                    <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-3">
+                        <span className="w-2 h-8 bg-purple-500 rounded-full"></span>
+                        {content.example_title}
+                    </h2>
+                    <div className="space-y-6">
+                        {content.examples.map((example, idx) => (
+                            <div key={idx} className="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
+                                <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{example.name}</h4>
+                                <p className="text-gray-600 dark:text-gray-400 mb-2"><strong>Stats:</strong> {example.stats}</p>
+                                <p className="text-gray-600 dark:text-gray-400 mb-2 font-mono text-sm bg-gray-100 dark:bg-gray-800 p-3 rounded-lg">{example.calculation}</p>
+                                <p className="text-emerald-600 dark:text-emerald-400 font-bold mb-2">{example.result}</p>
+                                <p className="text-gray-700 dark:text-gray-300 italic">{example.interpretation}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
+
+            {/* Comparison Table (NEW) */}
+            {content.bmi_ranges && content.bmi_ranges.length > 0 && (
+                <section className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-50 dark:border-gray-700">
+                    <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-3">
+                        <span className="w-2 h-8 bg-amber-500 rounded-full"></span>
+                        {content.comparison_table_title}
+                    </h2>
+                    <div className="overflow-x-auto">
+                        <table className="w-full border-collapse">
+                            <thead>
+                                <tr className="bg-gray-100 dark:bg-gray-900">
+                                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white border-b-2 border-gray-300 dark:border-gray-600">Category</th>
+                                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white border-b-2 border-gray-300 dark:border-gray-600">BMI Range</th>
+                                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white border-b-2 border-gray-300 dark:border-gray-600">Health Risks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {content.bmi_ranges.map((range, idx) => (
+                                    <tr key={idx} className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900/30 transition-colors">
+                                        <td className="p-4 font-semibold text-gray-800 dark:text-gray-200">{range.category}</td>
+                                        <td className="p-4 text-gray-600 dark:text-gray-400">{range.range}</td>
+                                        <td className="p-4 text-gray-600 dark:text-gray-400">{range.risk}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            )}
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Why use it? */}
                 <section className="bg-emerald-50 dark:bg-emerald-900/20 p-8 md:p-10 rounded-[2.5rem] border border-emerald-100 dark:border-emerald-800/50">

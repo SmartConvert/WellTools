@@ -11,40 +11,97 @@ export const calculatorContent = {
                 { id: 'bmr', name: 'BMR Calculator' }
             ],
 
+            // Formula Explanation Section (NEW)
+            formula_title: 'BMI Formula: How It Works',
+            formula_explanation: 'BMI (Body Mass Index) is calculated using the Quetelet Index formula, developed by Belgian mathematician Adolphe Quetelet in 1832. The formula is simple yet powerful for screening weight-related health risks.',
+            formula_text: 'BMI = weight (kg) / height (m)²',
+            formula_example: 'For example: A person weighing 70 kg with a height of 1.75 m has a BMI of 70 / (1.75 × 1.75) = 22.9',
+            formula_accuracy: 'BMI is a screening tool with ±10% accuracy for general populations. It\'s endorsed by WHO and CDC for population-level health assessment.',
+
+            // Step-by-Step Example (NEW)
+            example_title: 'Step-by-Step Calculation Example',
+            examples: [
+                {
+                    name: 'Sarah, 30-year-old female',
+                    stats: 'Weight: 65 kg, Height: 170 cm (1.70 m)',
+                    calculation: 'BMI = 65 / (1.70)² = 65 / 2.89 = 22.5',
+                    result: 'BMI: 22.5 (Normal weight)',
+                    interpretation: 'Sarah\'s BMI falls in the healthy range (18.5-24.9). She should maintain her current weight through balanced diet and regular exercise.'
+                },
+                {
+                    name: 'John, 45-year-old male athlete',
+                    stats: 'Weight: 90 kg, Height: 180 cm (1.80 m)',
+                    calculation: 'BMI = 90 / (1.80)² = 90 / 3.24 = 27.8',
+                    result: 'BMI: 27.8 (Overweight)',
+                    interpretation: 'John\'s BMI suggests overweight, but as an athlete with high muscle mass, his body fat % may be healthy. He should consider body composition analysis.'
+                }
+            ],
+
+            // Comparison Tables (NEW)
+            comparison_table_title: 'BMI Categories and Health Risks',
+            bmi_ranges: [
+                { category: 'Underweight', range: 'Below 18.5', risk: 'Malnutrition, weakened immunity' },
+                { category: 'Normal weight', range: '18.5 - 24.9', risk: 'Minimal health risks' },
+                { category: 'Overweight', range: '25.0 - 29.9', risk: 'Increased risk of heart disease' },
+                { category: 'Obese (Class I)', range: '30.0 - 34.9', risk: 'High risk: diabetes, hypertension' },
+                { category: 'Obese (Class II)', range: '35.0 - 39.9', risk: 'Very high risk' },
+                { category: 'Obese (Class III)', range: '40.0+', risk: 'Extremely high risk' }
+            ],
+
             seo_what_title: 'What is BMI Calculator?',
-            seo_what_content: 'This BMI Calculator is a simple tool that estimates body fat based on height and weight. It helps categorize whether you are underweight, normal weight, overweight, or obese.',
+            seo_what_content: 'The BMI Calculator is a free, science-based tool that estimates body fat based on height and weight using the Quetelet Index formula. Developed in 1832 and adopted by WHO in 1995, BMI helps categorize individuals as underweight, normal weight, overweight, or obese. While BMI doesn\'t measure body fat directly, it serves as a reliable screening tool to identify potential weight-related health risks in adults aged 18 and above.',
 
             seo_why_title: 'Why Use a BMI Calculator?',
-            seo_why_content: 'Using a BMI Calculator is crucial for screening weight categories that may lead to health problems. Regular checks help track your fitness progress.',
+            seo_why_content: 'Understanding your BMI is crucial for assessing weight-related health risks. A BMI outside the healthy range (18.5-24.9) correlates with increased risks of cardiovascular disease, type 2 diabetes, hypertension, certain cancers, and reduced life expectancy. Regular BMI monitoring helps track fitness progress, guides weight management goals, and provides a simple, accessible metric for overall health screening—no expensive equipment needed.',
 
             seo_how_title: 'How to Use This BMI Calculator',
             seo_how_steps: [
                 'Enter your weight in kilograms (kg)',
                 'Enter your height in centimeters (cm)',
-                'Click calculate to instantly see your BMI result',
-                'Review your BMI category and personalized health recommendations'
+                'Click "Calculate BMI" to instantly see your result',
+                'Review your BMI category and personalized health recommendations',
+                'Compare your result with the BMI ranges table below',
+                'Track your BMI over time for better insights'
             ],
 
             seo_tips_title: 'BMI Tips & Recommendations',
             seo_tips: [
-                '💪 **For Athletes**: BMI may overestimate body fat in muscular individuals. Consider body composition analysis.',
-                '📊 **Track Trends**: Monitor your BMI over time rather than focusing on a single measurement.',
-                '🥗 **Combine with Lifestyle**: Use BMI alongside diet quality, physical activity, and overall health markers.',
-                '👨‍⚕️ **Consult Professionals**: Always discuss BMI results with healthcare providers for personalized advice.'
+                '💪 **For Athletes**: BMI may overestimate body fat in muscular individuals. Use body composition analysis or body fat percentage calculators for more accuracy.',
+                '📊 **Track Trends**: Monitor your BMI monthly to identify patterns rather than obsessing over single measurements.',
+                '🥗 **Combine with Lifestyle**: BMI is just one metric. Consider diet quality, physical activity, sleep, and stress levels for holistic health.',
+                '👨‍⚕️ **Consult Professionals**: Always discuss BMI results with healthcare providers for personalized medical advice.',
+                '⚖️ **Age Matters**: Older adults (65+) may have healthier outcomes with slightly higher BMI (23-27) due to muscle preservation.',
+                '🧬 **Ethnicity Considerations**: Asian populations may have higher health risks at lower BMI levels (WHO recommends different cut-offs).'
             ],
 
             seo_faqs: [
                 {
                     question: 'What is a healthy BMI range?',
-                    answer: 'A healthy BMI for adults typically falls between 18.5 and 24.9. However, ideal ranges may vary based on age, gender, muscle mass, and ethnicity.'
+                    answer: 'A healthy BMI for adults typically falls between 18.5 and 24.9 according to WHO guidelines. However, ideal ranges vary by age, gender, muscle mass, and ethnicity. Asian populations may benefit from lower thresholds (23-27.5 for overweight), while older adults (65+) may have better health outcomes with BMI of 23-27 to preserve muscle mass.'
                 },
                 {
-                    question: 'Can BMI be inaccurate?',
-                    answer: 'Yes, BMI doesn\'t distinguish between muscle and fat mass. Athletes and individuals with high muscle mass may have high BMI despite being healthy.'
+                    question: 'Can BMI be inaccurate for athletes?',
+                    answer: 'Yes, BMI doesn\'t distinguish between muscle and fat mass. Bodybuilders, athletes, and highly muscular individuals often have "overweight" or "obese" BMI readings despite having low body fat percentages. For these individuals, body composition analysis (DEXA scan, bioelectrical impedance) or waist-to-hip ratio measurements provide more accurate health assessments.'
                 },
                 {
                     question: 'How often should I check my BMI?',
-                    answer: 'For general health monitoring, checking your BMI monthly or quarterly is sufficient unless you\'re actively working on weight management.'
+                    answer: 'For general health monitoring, checking BMI monthly or quarterly is sufficient. If actively managing weight loss or gain, weekly measurements help track progress. However, daily weigh-ins can be misleading due to water retention and hormonal fluctuations.'
+                },
+                {
+                    question: 'Is BMI reliable for children and teens?',
+                    answer: 'BMI calculations differ for children and adolescents. Pediatric BMI uses age- and sex-specific percentiles (BMI-for-age charts) rather than fixed categories, as body composition changes rapidly during growth. Consult a pediatrician for accurate interpretation of children\'s BMI results.'
+                },
+                {
+                    question: 'What are the limitations of BMI?',
+                    answer: 'BMI has several limitations: (1) Doesn\'t measure body fat directly, (2) Doesn\'t account for muscle mass, bone density, or fat distribution, (3) May misclassify pregnant women, elderly individuals, and athletes, (4) Doesn\'t consider waist circumference (a better predictor of metabolic risk). Despite limitations, BMI remains a useful, quick screening tool when combined with other health metrics.'
+                },
+                {
+                    question: 'Can I use BMI if I\'m pregnant?',
+                    answer: 'BMI is not recommended during pregnancy as it doesn\'t account for fetal weight, amniotic fluid, or increased blood volume. Pre-pregnancy BMI is used to determine healthy weight gain ranges during pregnancy. Consult your OB-GYN for personalized guidance.'
+                },
+                {
+                    question: 'How do I improve my BMI?',
+                    answer: 'To achieve a healthy BMI: (1) Create a caloric deficit through balanced nutrition (500-750 cal/day deficit for 1-1.5 lbs/week loss), (2) Incorporate strength training to build muscle and boost metabolism, (3) Add 150+ minutes of moderate aerobic exercise weekly, (4) Prioritize sleep (7-9 hours), (5) Manage stress to reduce cortisol-driven weight gain. Sustainable lifestyle changes beat crash diets every time.'
                 }
             ]
         },

@@ -215,18 +215,34 @@ const DailyHealthTools = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const postId = params.get('post');
-    if (postId && currentPage !== 'blog-post') {
-      setCurrentPage('blog-post');
+    const pageId = params.get('page');
+
+    if (postId) {
+      const allPosts = [...(postsData.en || []), ...(postsData.ar || []), ...(postsData.fr || [])];
+      const foundPost = allPosts.find(p => p.id === postId);
+      if (foundPost) {
+        setSelectedPost(foundPost);
+        setCurrentPage('blog-post');
+      }
+    } else if (pageId) {
+      setCurrentPage(pageId);
     }
   }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+
+    // Sync post ID
     if (selectedPost) params.set('post', selectedPost.id);
     else params.delete('post');
-    const newUrl = `${window.location.pathname}?${params.toString()}`;
+
+    // Sync page ID (if not on blog-post)
+    if (currentPage !== 'blog-post' && currentPage !== 'home') params.set('page', currentPage);
+    else params.delete('page');
+
+    const newUrl = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
     window.history.replaceState(null, '', newUrl);
-  }, [selectedPost]);
+  }, [selectedPost, currentPage]);
 
   // Calculator States
   const [bmiWeight, setBmiWeight] = useState('');

@@ -173,7 +173,15 @@ async function generatePost() {
         6. List or Steps: Practical actionable information.
         7. Tips: 3-5 quick wellness tips related to the topic.
         8. FAQ: 3 frequent questions and concise answers.
-        9. Internal Links: Suggest natural context for linking to other WellTools calculators (BMI, Calories, Water, Ideal Weight).
+        9. Internal Links: Suggest natural context for linking to other WellTools health tools. 
+           STRICT URL FORMAT:
+           - BMI Calculator: [BMI Calculator](/?page=bmi)
+           - Calorie Counter: [Calorie Counter](/?page=calories)
+           - Water Intake: [Water Tracker](/?page=water)
+           - Ideal Weight: [Ideal Weight](/?page=ideal-weight)
+           - Sleep Tracker: [Sleep Calculator](/?page=sleep)
+           - Body Fat: [Body Fat Calculator](/?page=body-fat)
+           - Tracking: [Daily Tracking](/?page=tracking)
         10. Medical Sources: List 2-4 reputable medical or scientific sources (e.g., Mayo Clinic, NIH, WHO) with actual URLs.
         11. Medical Disclaimer: Mandatory section at the end.
 

@@ -3,7 +3,7 @@ import { BookOpen, ChevronRight } from 'lucide-react';
 import AdComponent from './AdComponent';
 import postsData from '../data/posts.json';
 
-const BlogImage = ({ src, alt, className }) => {
+export const BlogImage = ({ src, alt, className }) => {
     const [error, setError] = useState(false);
     const [retryCount, setRetryCount] = useState(0);
 
@@ -28,15 +28,31 @@ const BlogImage = ({ src, alt, className }) => {
         );
     }
 
-    // Pollinations URLs often have spaces and special characters in prompts which need encoding
-    const encodedSrc = src ? encodeURI(src) : src;
+    // Comprehensive URL cleaning to prevent double encoding or malformed strings
+    const processImageUrl = (url) => {
+        if (!url) return '';
+        try {
+            // First decode in case it's already encoded
+            const decoded = decodeURIComponent(url);
+            // Then encode specifically for spaces and special prompt chars
+            return encodeURI(decoded);
+        } catch (e) {
+            console.error('WellTools Debug: Image URL processing failed', e, url);
+            return url;
+        }
+    };
+
+    const encodedSrc = processImageUrl(src);
 
     return (
         <img
             src={encodedSrc}
             alt={alt}
             className={className}
-            onError={handleError}
+            onError={(e) => {
+                console.warn(`WellTools Debug: Image failed to load [Retry ${retryCount}]:`, encodedSrc);
+                handleError();
+            }}
             loading="lazy"
             decoding="async"
         />

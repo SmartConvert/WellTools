@@ -220,7 +220,8 @@ const DailyHealthTools = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const postId = params.get('post');
-    const pageId = params.get('page');
+    const path = window.location.pathname.replace(/^\/+/, ''); // Get path without leading slash
+    const pageId = params.get('page'); // Keep support for old ?page= temporarily
 
     if (postId) {
       const allPosts = [...(postsData.en || []), ...(postsData.ar || []), ...(postsData.fr || [])];
@@ -228,6 +229,16 @@ const DailyHealthTools = () => {
       if (foundPost) {
         setSelectedPost(foundPost);
         setCurrentPage('blog-post');
+      }
+    } else if (path && path !== '') {
+      // Valid pages list (should match renderPage switch)
+      const validPages = [
+        'bmi', 'calories', 'water', 'ideal-weight', 'sleep', 'body-fat',
+        'bmr', 'macro', '1rm', 'meal-planner', 'blog', 'tracking',
+        'about', 'how-it-works', 'experts', 'contact', 'privacy', 'terms', 'disclaimer'
+      ];
+      if (validPages.includes(path)) {
+        setCurrentPage(path);
       }
     } else if (pageId) {
       setCurrentPage(pageId);
@@ -238,15 +249,28 @@ const DailyHealthTools = () => {
     const params = new URLSearchParams(window.location.search);
 
     // Sync post ID
-    if (selectedPost) params.set('post', selectedPost.id);
-    else params.delete('post');
+    if (selectedPost) {
+      params.set('post', selectedPost.id);
+    } else {
+      params.delete('post');
+    }
 
-    // Sync page ID (if not on blog-post)
-    if (currentPage !== 'blog-post' && currentPage !== 'home') params.set('page', currentPage);
-    else params.delete('page');
+    // Determine new Path
+    let newPath = '/';
+    if (currentPage !== 'home') {
+      // Blog posts stay at / but with post param
+      if (currentPage !== 'blog-post') {
+        newPath = `/${currentPage}`;
+      }
+    }
 
-    const newUrl = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
-    window.history.replaceState(null, '', newUrl);
+    const searchString = params.toString();
+    const newUrl = `${newPath}${searchString ? '?' + searchString : ''}`;
+
+    // Only push state if the URL actually changed to avoid history spam
+    if (window.location.pathname + window.location.search !== newUrl) {
+      window.history.pushState({ page: currentPage }, '', newUrl);
+    }
 
     // SEO: Update Meta Title based on currentPage
     import('./data/seoContent').then(module => {

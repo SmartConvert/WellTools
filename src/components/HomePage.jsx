@@ -9,21 +9,21 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
 
     const slides = [
         {
-            image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=2670&q=80',
+            image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=80&fm=webp',
             title: t.hero_title,
             accent: t.hero_title_accent,
             subtitle: t.hero_subtitle,
             stats: { icon: '🥗', number: '100+', label: 'Healthy Recipes' }
         },
         {
-            image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=2670&q=80',
+            image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1200&q=80&fm=webp',
             title: 'Track Your',
             accent: 'Health Journey',
             subtitle: 'Smart calculators to help you achieve your wellness goals',
             stats: { icon: '🎯', number: '6+', label: 'Health Tools' }
         },
         {
-            image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=2670&q=80',
+            image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80&fm=webp',
             title: 'Personalized',
             accent: 'Nutrition Plans',
             subtitle: 'AI-powered meal suggestions tailored to your goals',
@@ -115,6 +115,37 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                     </div>
                 </div>
 
+                {/* Why WellTools Section */}
+                <div className="mb-20 lg:mb-28">
+                    <div className="text-center mb-16 px-4">
+                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
+                            Why <span className="text-emerald-500">WellTools</span>?
+                        </h2>
+                        <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg md:text-xl font-medium">
+                            We combine accurate science with modern technology to provide you with the most reliable health companion.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {[
+                            { icon: <Activity className="w-8 h-8" />, title: "Precision", desc: "Our calculators use medically-backed formulas like Mifflin-St Jeor.", color: "blue" },
+                            { icon: <Heart className="w-8 h-8" />, title: "Integrative", desc: "Connect your tracking with AI-powered meal suggestions seamlessly.", color: "emerald" },
+                            { icon: <TrendingDown className="w-8 h-8" />, title: "Insightful", desc: "Visualize your progress with beautiful, intuitive charts and trends.", color: "violet" },
+                            { icon: <Scale className="w-8 h-8" />, title: "Free Forever", desc: "No subscriptions. No paywalls. Just pure health tools for everyone.", color: "amber" }
+                        ].map((feature, i) => (
+                            <div key={i} className="group p-10 bg-white dark:bg-gray-800 rounded-[2.5rem] border border-gray-100 dark:border-gray-700 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                                <div className={`w-16 h-16 bg-${feature.color === 'emerald' ? 'emerald' : feature.color === 'blue' ? 'blue' : feature.color === 'violet' ? 'violet' : 'amber'}-500/10 rounded-2xl flex items-center justify-center text-${feature.color}-500 mb-8 group-hover:scale-110 transition-transform`}>
+                                    {feature.icon}
+                                </div>
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-emerald-500 transition-colors">{feature.title}</h3>
+                                <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-semibold">
+                                    {feature.desc}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
                 {/* Latest Blog Posts Feature */}
                 {currentLangPosts && currentLangPosts.length > 0 && (
                     <div className="mb-16 lg:mb-24 animate-fade-in">
@@ -151,7 +182,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                                     </div>
                                     <div className="p-6 md:p-8">
                                         <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-emerald-500 transition-colors line-clamp-1">{post.title}</h3>
-                                        <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base line-clamp-2 font-medium mb-4">{post.excerpt}</p>
+                                        <p className="text-gray-700 dark:text-gray-200 text-sm md:text-base line-clamp-2 font-bold mb-4">{post.excerpt}</p>
                                         <div className="flex items-center text-emerald-600 dark:text-emerald-400 font-bold text-sm">
                                             {t.read_article} <ChevronRight className="w-4 h-4 ms-1 group-hover:ms-2 transition-all" />
                                         </div>
@@ -184,7 +215,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                                     {React.cloneElement(tool.icon, { className: "w-8 h-8 text-white" })}
                                 </div>
                                 <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 group-hover:text-emerald-500 transition-colors tracking-tight">{tool.title}</h3>
-                                <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-medium grow mb-6">{tool.desc}</p>
+                                <p className="text-gray-800 dark:text-gray-200 leading-relaxed font-bold grow mb-6">{tool.desc}</p>
                                 <div className="flex items-center text-emerald-600 dark:text-emerald-400 font-bold group-hover:gap-2 transition-all">
                                     {t.explore_tool} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </div>

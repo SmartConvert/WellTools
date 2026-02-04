@@ -122,4 +122,3 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang = 'en' }) => {
 };
 
 export default BlogPage;
-export { BlogImage };

@@ -237,6 +237,23 @@ const ToolInfoSection = ({ toolId }) => {
                 </div>
             </section>
 
+            {/* Additional Info Sections (NEW) */}
+            {content.additional_info && content.additional_info.length > 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {content.additional_info.map((section, idx) => (
+                        <section key={idx} className="bg-white dark:bg-gray-800 p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-gray-50 dark:border-gray-700">
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+                                <Sparkles className="w-6 h-6 text-amber-500" />
+                                {section.title}
+                            </h3>
+                            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                                {section.content}
+                            </p>
+                        </section>
+                    ))}
+                </div>
+            )}
+
             {/* Related Tools - Internal Linking Strategy */}
             {content.related_tools?.length > 0 && (
                 <section className="bg-gray-50 dark:bg-gray-900/50 p-8 md:p-12 rounded-[2.5rem] border border-gray-200 dark:border-gray-700">

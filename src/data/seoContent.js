@@ -558,6 +558,21 @@ export const calculatorContent = {
                 { question: 'Can I be healthy if I\'m 10lbs over my ideal weight?', answer: 'Absolutely. If your blood pressure, cholesterol, and blood sugar are healthy, being slightly outside the calculated range is often perfectly fine.' },
                 { question: 'Why do men and women have different ideal weights?', answer: 'Men typically have higher bone density and more muscle mass, leading to higher medically-recommended weight targets for the same height.' },
                 { question: 'What is the most accurate formula?', answer: 'The Devine formula is the medical gold standard, but the "Healthy BMI Range" is often more practical for athletes.' }
+            ],
+
+            additional_info: [
+                {
+                    title: 'Ideal Weight by Age',
+                    content: 'As we age, our body composition naturally shifts. Sarcopenia (muscle loss) and changes in metabolic rates mean that a "healthy" weight at age 20 might feel different than at age 60. While standard formulas don\'t change with age, clinical studies suggest that maintaining a slightly higher BMI (25-27) in older adults (65+) can actually be protective against frailty and illness. Always pair your target weight with regular resistance training to preserve bone density.'
+                },
+                {
+                    title: 'Ideal Weight for Women vs. Men',
+                    content: 'Biological sex is a primary factor in IBW formulas. Men generally have larger bone frames and higher muscle mass, which is why their target weights are approximately 10-15% higher than women of the same height. Women naturally require a higher body fat percentage for hormonal health and reproductive function. For example, a 5\'7" man has an IBW of ~68kg, while a 5\'7" woman has an IBW of ~63kg.'
+                },
+                {
+                    title: 'Ideal Weight vs. BMI: What\'s the Difference?',
+                    content: 'BMI (Body Mass Index) provides a broad category (Underweight, Normal, Overweight), while Ideal Weight gives you a specific numerical goal. The "Healthy BMI Range" is often more realistic because it offers a 15-20kg buffer, whereas formulas like Devine offer a single "perfect" number. For most people, the best approach is to find a weight within the Healthy BMI Range where they feel most energetic and their clinical markers (blood pressure, A1C) are optimal.'
+                }
             ]
         },
         ar: {

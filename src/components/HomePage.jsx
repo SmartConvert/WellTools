@@ -28,8 +28,8 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                 <div className="relative h-[420px] md:h-[600px] rounded-4xl md:rounded-[3rem] overflow-hidden mb-12 lg:mb-16 shadow-2xl animate-fade-in group">
                     <div className="absolute inset-0">
                         <img
-                            src="/images/hero-doctor.png"
-                            alt="Healthy Living with WellTools"
+                            src="/images/hero-final.png"
+                            alt="WellTools - Your Daily Health & Wellness Companion"
                             className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-700"
                         />
                         <div className="absolute inset-0 bg-linear-to-r from-gray-900/80 via-gray-900/40 to-transparent"></div>

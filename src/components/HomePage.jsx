@@ -7,39 +7,6 @@ import TestimonialsSection from './TestimonialsSection';
 import EmailCaptureForm from './EmailCaptureForm';
 
 const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t }) => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-
-    const slides = [
-        {
-            image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=80&fm=webp',
-            title: 'Struggling to',
-            accent: 'Understand Your Health?',
-            subtitle: "You're not alone. Millions feel lost in a sea of conflicting diet advice and confusing health numbers. WellTools makes it crystal clear.",
-            stats: { icon: '🎯', number: '9/10', label: 'Users See Results' }
-        },
-        {
-            image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1200&q=80&fm=webp',
-            title: 'Tired of',
-            accent: 'Guessing Your Calories?',
-            subtitle: "Stop the endless cycle of dieting confusion. Get precise, science-backed calculations in seconds—completely free.",
-            stats: { icon: '🔥', number: '100K+', label: 'Calculations Daily' }
-        },
-        {
-            image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80&fm=webp',
-            title: 'Ready to',
-            accent: 'Transform Your Body?',
-            subtitle: 'Join thousands who achieved their goals with personalized insights and meal plans tailored to YOU.',
-            stats: { icon: '💪', number: '85%', label: 'Success Rate' }
-        }
-    ];
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 5000);
-        return () => clearInterval(timer);
-    }, [slides.length]);
-
     const currentLangPosts = postsData[t.lang || 'en'] || postsData['en'] || [];
 
     const tools = [
@@ -57,73 +24,45 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
     return (
         <div className="pt-20 pb-16 px-4">
             <div className="max-w-7xl mx-auto">
-                {/* Modern Hero Carousel */}
+                {/* Modern Hero Section - Static */}
                 <div className="relative h-[420px] md:h-[600px] rounded-4xl md:rounded-[3rem] overflow-hidden mb-12 lg:mb-16 shadow-2xl animate-fade-in group">
-                    {slides.map((slide, index) => (
-                        <div
-                            key={index}
-                            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'
-                                }`}
-                            aria-hidden={index !== currentSlide}
-                        >
-                            <img
-                                src={slide.image}
-                                srcSet={`
-                                    ${slide.image.replace('w=1200', 'w=600')} 600w,
-                                    ${slide.image.replace('w=1200', 'w=800')} 800w,
-                                    ${slide.image} 1200w
-                                `}
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-                                alt={slide.title}
-                                loading={index === 0 ? "eager" : "lazy"}
-                                fetchPriority={index === 0 ? "high" : "auto"}
-                                className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-10000"
-                            />
-                            <div className="absolute inset-0 bg-linear-to-r from-gray-900/80 via-gray-900/40 to-transparent"></div>
-                            <div className="absolute inset-0 flex items-center px-8 md:px-16">
-                                <div className="max-w-2xl">
-                                    <h1 className="text-2xl md:text-7xl font-black text-white mb-4 md:mb-6 tracking-tight leading-tight">
-                                        {slide.title} <br className="md:hidden" />
-                                        <span className="bg-linear-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                                            {slide.accent}
-                                        </span>
-                                    </h1>
-                                    <p className="text-base md:text-xl text-gray-200 max-w-xl leading-relaxed mb-8 md:mb-10">
-                                        {slide.subtitle}
-                                    </p>
-                                    <div className="flex flex-wrap gap-3 md:gap-4">
-                                        <button
-                                            onClick={() => {
-                                                const el = document.getElementById('tools-grid');
-                                                el?.scrollIntoView({ behavior: 'smooth' });
-                                            }}
-                                            className="px-5 py-2.5 md:px-8 md:py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-base md:text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
-                                        >
-                                            {t.explore_tools}
-                                        </button>
-                                        <button
-                                            onClick={() => setCurrentPage('meal-planner')}
-                                            className="px-5 py-2.5 md:px-8 md:py-4 bg-white/10 backdrop-blur-md text-white border-2 border-white/20 rounded-2xl font-bold text-base md:text-lg hover:bg-white/20 transition-all"
-                                        >
-                                            {t.meal_planner_title}
-                                        </button>
-                                    </div>
+                    <div className="absolute inset-0">
+                        <img
+                            src="/images/hero-doctor.png"
+                            alt="Healthy Living with WellTools"
+                            className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 bg-linear-to-r from-gray-900/80 via-gray-900/40 to-transparent"></div>
+                        <div className="absolute inset-0 flex items-center px-8 md:px-16">
+                            <div className="max-w-2xl">
+                                <h1 className="text-2xl md:text-7xl font-black text-white mb-4 md:mb-6 tracking-tight leading-tight">
+                                    Transform Your <br className="md:hidden" />
+                                    <span className="bg-linear-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                                        Health Journey
+                                    </span>
+                                </h1>
+                                <p className="text-base md:text-xl text-gray-200 max-w-xl leading-relaxed mb-8 md:mb-10">
+                                    Stop the guessing game. Get precise, science-backed health calculations and personalized meal plans to reach your peak potential.
+                                </p>
+                                <div className="flex flex-wrap gap-3 md:gap-4">
+                                    <button
+                                        onClick={() => {
+                                            const el = document.getElementById('tools-grid');
+                                            el?.scrollIntoView({ behavior: 'smooth' });
+                                        }}
+                                        className="px-5 py-2.5 md:px-8 md:py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-base md:text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
+                                    >
+                                        {t.explore_tools}
+                                    </button>
+                                    <button
+                                        onClick={() => setCurrentPage('meal-planner')}
+                                        className="px-5 py-2.5 md:px-8 md:py-4 bg-white/10 backdrop-blur-md text-white border-2 border-white/20 rounded-2xl font-bold text-base md:text-lg hover:bg-white/20 transition-all"
+                                    >
+                                        {t.meal_planner_title}
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                    ))}
-
-                    {/* Indicators */}
-                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
-                        {slides.map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setCurrentSlide(index)}
-                                aria-label={`Go to slide ${index + 1}`}
-                                className={`h-2 rounded-full transition-all duration-300 ${index === currentSlide ? 'w-12 bg-emerald-500' : 'w-2 bg-white/50'
-                                    }`}
-                            ></button>
-                        ))}
                     </div>
                 </div>
 

@@ -3,26 +3,45 @@ import { Heart, Menu, X, Moon, Sun } from 'lucide-react';
 import { translations } from './translations';
 import AdComponent from './components/AdComponent';
 
+// Helper to handle ChunkLoadError (when a new version is deployed while user has the site open)
+const lazyWithRetry = (componentImport) => {
+  return lazy(async () => {
+    try {
+      return await componentImport();
+    } catch (error) {
+      // Check if we already tried to reload in this session to avoid infinite loops
+      const hasReloaded = window.sessionStorage.getItem('chunk-reload-tried');
+      if (!hasReloaded) {
+        window.sessionStorage.setItem('chunk-reload-tried', 'true');
+        window.location.reload();
+        return { default: () => null }; // Placeholder
+      }
+      throw error; // If it still fails after reload, let ErrorBoundary or Suspense handle it
+    }
+  });
+};
+
 // Lazy load all page components for code splitting
-const HomePage = lazy(() => import('./components/HomePage'));
-const BMICalculatorPage = lazy(() => import('./components/BMICalculatorPage'));
-const CaloriesCalculatorPage = lazy(() => import('./components/CaloriesCalculatorPage'));
-const WaterCalculatorPage = lazy(() => import('./components/WaterCalculatorPage'));
-const IdealWeightPage = lazy(() => import('./components/IdealWeightPage'));
-const SleepCalculatorPage = lazy(() => import('./components/SleepCalculatorPage'));
-const BodyFatCalculatorPage = lazy(() => import('./components/BodyFatCalculatorPage'));
-const MealPlannerPage = lazy(() => import('./components/MealPlannerPage'));
-const BlogPage = lazy(() => import('./components/BlogPage'));
-const BlogPostPage = lazy(() => import('./components/BlogPostPage'));
-const DailyTrackingPage = lazy(() => import('./components/DailyTrackingPage'));
-const AboutPage = lazy(() => import('./components/AboutPage'));
-const ExpertPage = lazy(() => import('./components/ExpertPage'));
-const ContactPage = lazy(() => import('./components/ContactPage'));
+const HomePage = lazyWithRetry(() => import('./components/HomePage'));
+const BMICalculatorPage = lazyWithRetry(() => import('./components/BMICalculatorPage'));
+const CaloriesCalculatorPage = lazyWithRetry(() => import('./components/CaloriesCalculatorPage'));
+const WaterCalculatorPage = lazyWithRetry(() => import('./components/WaterCalculatorPage'));
+const IdealWeightPage = lazyWithRetry(() => import('./components/IdealWeightPage'));
+const SleepCalculatorPage = lazyWithRetry(() => import('./components/SleepCalculatorPage'));
+const BodyFatCalculatorPage = lazyWithRetry(() => import('./components/BodyFatCalculatorPage'));
+const MealPlannerPage = lazyWithRetry(() => import('./components/MealPlannerPage'));
+const BlogPage = lazyWithRetry(() => import('./components/BlogPage'));
+const BlogPostPage = lazyWithRetry(() => import('./components/BlogPostPage'));
+const DailyTrackingPage = lazyWithRetry(() => import('./components/DailyTrackingPage'));
+const AboutPage = lazyWithRetry(() => import('./components/AboutPage'));
+const ExpertPage = lazyWithRetry(() => import('./components/ExpertPage'));
+const ContactPage = lazyWithRetry(() => import('./components/ContactPage'));
+const PolicyPage = lazyWithRetry(() => import('./components/PolicyPage'));
 
 // Correct way to lazy load multiple exports in React 18
-const TermsOfUsePage = lazy(() => import('./components/LegalPages').then(m => ({ default: m.TermsOfUsePage })));
-const DisclaimerPage = lazy(() => import('./components/LegalPages').then(m => ({ default: m.DisclaimerPage })));
-const PrivacyPolicyPage = lazy(() => import('./components/LegalPages').then(m => ({ default: m.PrivacyPolicyPage })));
+const TermsOfUsePage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.TermsOfUsePage })));
+const DisclaimerPage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.DisclaimerPage })));
+const PrivacyPolicyPage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.PrivacyPolicyPage })));
 
 const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, t, theme, setTheme }) => (
   <nav className="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 shadow-sm transition-colors duration-300">
@@ -190,6 +209,8 @@ const DailyHealthTools = () => {
   useEffect(() => {
     document.documentElement.dir = 'ltr';
     document.documentElement.lang = 'en';
+    // Success! Clear the reload flag when the app mounts successfully
+    window.sessionStorage.removeItem('chunk-reload-tried');
   }, []);
 
   useEffect(() => {

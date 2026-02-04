@@ -24,7 +24,7 @@ const TermsOfUsePage = lazy(() => import('./components/LegalPages').then(m => ({
 const DisclaimerPage = lazy(() => import('./components/LegalPages').then(m => ({ default: m.DisclaimerPage })));
 const PrivacyPolicyPage = lazy(() => import('./components/LegalPages').then(m => ({ default: m.PrivacyPolicyPage })));
 
-const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, t, theme, setTheme }) => (
+const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, t, theme, setTheme, lang, setLang }) => (
   <nav className="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 shadow-sm transition-colors duration-300">
     <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
       <div className="flex justify-between items-center h-20">
@@ -55,6 +55,19 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, t, theme, s
         </div>
 
         <div className="flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl">
+            {['en', 'ar', 'fr'].map((l) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
+                className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all ${lang === l ? 'bg-white dark:bg-gray-700 text-emerald-600 shadow-sm' : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100'
+                  }`}
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
+          </div>
+
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             className="p-2 text-gray-700 dark:text-gray-200 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors shadow-sm"
@@ -94,7 +107,23 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, t, theme, s
             {t.nav_blog}
           </button>
 
-          <div className="pt-6 border-t border-gray-100 dark:border-gray-800">
+          <div className="pt-6 border-t border-gray-100 dark:border-gray-800 flex flex-col gap-4">
+            <div className="flex items-center justify-between px-4">
+              <span className="text-sm font-bold text-gray-500">{t.language}</span>
+              <div className="flex gap-2">
+                {['en', 'ar', 'fr'].map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => setLang(l)}
+                    className={`px-4 py-2 text-sm font-black rounded-xl transition-all ${lang === l ? 'bg-emerald-500 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-500'
+                      }`}
+                  >
+                    {l.toUpperCase()}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <div className="flex items-center justify-between px-4">
               <span className="text-sm font-bold text-gray-500">{t.dark_mode}</span>
               <button
@@ -174,6 +203,15 @@ const DailyHealthTools = () => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
+  const [lang, setLang] = useState(() => {
+    const saved = localStorage.getItem('lang');
+    if (saved) return saved;
+    const browserLang = navigator.language.split('-')[0];
+    return ['en', 'ar', 'fr'].includes(browserLang) ? browserLang : 'en';
+  });
+
+  const t = translations[lang] || translations.en;
+
   useEffect(() => {
     localStorage.setItem('theme', theme);
     if (theme === 'dark') {
@@ -183,12 +221,11 @@ const DailyHealthTools = () => {
     }
   }, [theme]);
 
-  const t = translations.en;
-
   useEffect(() => {
-    document.documentElement.dir = 'ltr';
-    document.documentElement.lang = 'en';
-  }, []);
+    localStorage.setItem('lang', lang);
+    document.documentElement.dir = t.dir || 'ltr';
+    document.documentElement.lang = lang;
+  }, [lang, t.dir]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -355,7 +392,7 @@ const DailyHealthTools = () => {
       case 'sleep': return <SleepCalculatorPage sleepAge={sleepAge} setSleepAge={setSleepAge} calculateSleep={calculateSleep} sleepResult={sleepResult} sleepBedtime={sleepBedtime} setSleepBedtime={setSleepBedtime} calculateSleepCycles={calculateSleepCycles} sleepWakeupTimes={sleepWakeupTimes} setCurrentPage={setCurrentPage} t={t} />;
       case 'body-fat': return <BodyFatCalculatorPage bfWeight={bfWeight} setBfWeight={setBfWeight} bfHeight={bfHeight} setBfHeight={setBfHeight} bfAge={bfAge} setBfAge={setBfAge} bfGender={bfGender} setBfGender={setBfGender} bfNeck={bfNeck} setBfNeck={setBfNeck} bfWaist={bfWaist} setBfWaist={setBfWaist} bfHip={bfHip} setBfHip={setBfHip} calculateBodyFat={calculateBodyFat} bfResult={bfResult} setCurrentPage={setCurrentPage} t={t} />;
       case 'meal-planner': return <MealPlannerPage selectedMealCategory={activeTab} setSelectedMealCategory={setActiveTab} t={t} />;
-      case 'blog': return <BlogPage setCurrentPage={setCurrentPage} setSelectedPost={setSelectedPost} t={t} lang="en" />;
+      case 'blog': return <BlogPage setCurrentPage={setCurrentPage} setSelectedPost={setSelectedPost} t={t} lang={lang} />;
       case 'blog-post': return <BlogPostPage post={selectedPost} setCurrentPage={setCurrentPage} t={t} />;
       case 'tracking': return <DailyTrackingPage activeTab={activeTab} setActiveTab={setActiveTab} trackingData={trackingData} newWeight={newWeight} setNewWeight={setNewWeight} addWeightEntry={addWeightEntry} newWater={newWater} setNewWater={setNewWater} addWaterEntry={addWaterEntry} newSleep={newSleep} setNewSleep={setNewSleep} addSleepEntry={addSleepEntry} deleteEntry={deleteEntry} setCurrentPage={setCurrentPage} t={t} />;
       case 'about': return <AboutPage setCurrentPage={setCurrentPage} t={t} />;
@@ -370,7 +407,7 @@ const DailyHealthTools = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans">
-      <NavBar setCurrentPage={setCurrentPage} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} t={t} theme={theme} setTheme={setTheme} />
+      <NavBar setCurrentPage={setCurrentPage} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} t={t} theme={theme} setTheme={setTheme} lang={lang} setLang={setLang} />
       <main className="min-h-[calc(100-80px)]">
         <Suspense fallback={<LoadingSpinner />}>
           {renderPage()}

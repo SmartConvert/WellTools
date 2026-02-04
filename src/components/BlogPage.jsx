@@ -28,9 +28,12 @@ const BlogImage = ({ src, alt, className }) => {
         );
     }
 
+    // Pollinations URLs often have spaces and special characters in prompts which need encoding
+    const encodedSrc = src ? encodeURI(src) : src;
+
     return (
         <img
-            src={src}
+            src={encodedSrc}
             alt={alt}
             className={className}
             onError={handleError}
@@ -40,8 +43,8 @@ const BlogImage = ({ src, alt, className }) => {
     );
 };
 
-const BlogPage = ({ setCurrentPage, setSelectedPost, t }) => {
-    const posts = postsData['en'] || [];
+const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang = 'en' }) => {
+    const posts = postsData[lang] || postsData['en'] || [];
 
     return (
         <div className="pt-24 pb-16 px-4">

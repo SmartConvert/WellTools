@@ -38,7 +38,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
         return () => clearInterval(timer);
     }, [slides.length]);
 
-    const currentLangPosts = postsData['en'] || [];
+    const currentLangPosts = postsData[t.lang || 'en'] || postsData['en'] || [];
 
     const tools = [
         { id: 'bmi', icon: <Scale className="w-8 h-8" />, title: t.bmi_calc, desc: t.bmi_desc, color: 'from-emerald-400 to-teal-500' },

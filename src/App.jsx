@@ -37,6 +37,7 @@ const MealPlannerPage = lazyWithRetry(() => import('./components/MealPlannerPage
 const BlogPage = lazyWithRetry(() => import('./components/BlogPage'));
 const BlogPostPage = lazyWithRetry(() => import('./components/BlogPostPage'));
 const DailyTrackingPage = lazyWithRetry(() => import('./components/DailyTrackingPage'));
+const HowItWorksPage = lazyWithRetry(() => import('./components/HowItWorksPage'));
 const AboutPage = lazyWithRetry(() => import('./components/AboutPage'));
 const ExpertPage = lazyWithRetry(() => import('./components/ExpertPage'));
 const ContactPage = lazyWithRetry(() => import('./components/ContactPage'));
@@ -468,6 +469,7 @@ const DailyHealthTools = () => {
       case 'blog-post': return <BlogPostPage post={selectedPost} setCurrentPage={setCurrentPage} t={t} />;
       case 'tracking': return <DailyTrackingPage activeTab={activeTab} setActiveTab={setActiveTab} trackingData={trackingData} newWeight={newWeight} setNewWeight={setNewWeight} addWeightEntry={addWeightEntry} newWater={newWater} setNewWater={setNewWater} addWaterEntry={addWaterEntry} newSleep={newSleep} setNewSleep={setNewSleep} addSleepEntry={addSleepEntry} deleteEntry={deleteEntry} setCurrentPage={setCurrentPage} t={t} />;
       case 'about': return <AboutPage setCurrentPage={setCurrentPage} t={t} />;
+      case 'how-it-works': return <HowItWorksPage setCurrentPage={setCurrentPage} />;
       case 'experts': return <ExpertPage setCurrentPage={setCurrentPage} t={t} />;
       case 'contact': return <ContactPage setCurrentPage={setCurrentPage} t={t} />;
       case 'privacy': return <PrivacyPolicyPage setCurrentPage={setCurrentPage} t={t} />;

@@ -88,29 +88,42 @@
   </script>
 
   <!-- Performance & Fonts -->
+  <!-- DNS Prefetch for external domains -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+
+  <!-- Preconnect for critical resources -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Preload critical fonts -->
+  <link rel="preload" as="font" type="font/woff2"
+    href="https://fonts.gstatic.com/s/plusjakartasans/v8/LDIbaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_KU7NShXUEKi4Rw.woff2"
+    crossorigin />
+
+  <!-- Load fonts with font-display swap -->
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
-    rel="stylesheet" />
+    rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- FOUC Prevention & Preloader Styles -->
   <style>
-    /* Prevent Flash of Unstyled Content */
+    /* Critical CSS - Prevent Flash of Unstyled Content */
     body {
+      margin: 0;
       visibility: hidden;
       opacity: 0;
       background-color: #f9fafb;
-      /* match light mode bg */
-      transition: opacity 0.4s ease-in-out;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      transition: opacity 0.3s ease-in-out;
     }
 
     .dark body {
       background-color: #111827;
-      /* match dark mode bg */
     }
 
-    /* Modern Preloader Styles */
+    /* Optimized Preloader - Minimal CLS */
     #preloader {
       position: fixed;
       inset: 0;
@@ -122,28 +135,29 @@
       z-index: 9999;
       visibility: visible;
       opacity: 1;
-      transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+      transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+      will-change: opacity, visibility;
     }
 
     .spinner {
-      width: 56px;
-      height: 56px;
-      border: 4px solid #10b981;
+      width: 48px;
+      height: 48px;
+      border: 3px solid #10b981;
       border-top-color: transparent;
       border-radius: 50%;
-      animation: spin 1s linear infinite;
-      box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+      animation: spin 0.8s linear infinite;
+      will-change: transform;
     }
 
     .preloader-text {
-      margin-top: 1.5rem;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin-top: 1rem;
+      font-family: inherit;
       font-weight: 700;
       color: #10b981;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      font-size: 0.875rem;
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      font-size: 0.75rem;
+      animation: pulse 2s ease-in-out infinite;
     }
 
     @keyframes spin {
@@ -160,19 +174,23 @@
       }
 
       50% {
-        opacity: .5;
+        opacity: 0.5;
       }
     }
 
-    /* Initial hidden state removed only via JS */
     body.is-loaded {
       visibility: visible;
       opacity: 1;
     }
+
+    /* Critical layout styles to prevent CLS */
+    #root {
+      min-height: 100vh;
+    }
   </style>
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4160895122812433"
+  <!-- Google AdSense - Deferred for performance -->
+  <script defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4160895122812433"
     crossorigin="anonymous"></script>
 </head>
 
@@ -184,8 +202,9 @@
   </div>
 
   <script>
-    // Visibility handler for FOUC and Preloader
+    // Optimized FOUC prevention and preloader
     (function () {
+      // Apply theme immediately to prevent flash
       const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       if (theme === 'dark') document.documentElement.classList.add('dark');
 
@@ -195,13 +214,17 @@
         if (preloader) {
           preloader.style.opacity = '0';
           preloader.style.visibility = 'hidden';
-          setTimeout(() => preloader.remove(), 500);
+          setTimeout(() => preloader.remove(), 300);
         }
       };
 
-      // Show page after first paint or a fallback timeout to prevent infinite loading
-      window.addEventListener('load', showPage);
-      setTimeout(showPage, 3000); // Fallback at 3 seconds
+      // Show page after load or fallback timeout
+      if (document.readyState === 'complete') {
+        showPage();
+      } else {
+        window.addEventListener('load', showPage);
+        setTimeout(showPage, 2000); // Fallback at 2 seconds
+      }
     })();
   </script>
 

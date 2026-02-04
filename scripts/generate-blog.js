@@ -75,7 +75,7 @@ async function generateWithPerplexity(prompt) {
     console.log("  🌐 Using Perplexity API (sonar-reasoning)...");
     try {
         const payload = {
-            model: "sonar-reasoning",
+            model: "sonar", // Changed to standard sonar for maximum compatibility
             messages: [
                 { role: "system", content: "You are a professional blog post generator. Output strictly JSON formatting." },
                 { role: "user", content: prompt }

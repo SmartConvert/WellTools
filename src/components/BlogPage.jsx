@@ -33,9 +33,17 @@ export const BlogImage = ({ src, alt, className }) => {
         if (!url) return '';
         try {
             // First decode in case it's already encoded
-            const decoded = decodeURIComponent(url);
+            let decoded = url;
+            try {
+                decoded = decodeURIComponent(url);
+            } catch (e) {
+                // If decode fails, use original
+            }
+
             // Then encode specifically for spaces and special prompt chars
-            return encodeURI(decoded);
+            // but keep the protocol and domain intact
+            const encoded = encodeURI(decoded);
+            return encoded.replace(/%2520/g, '%20'); // Fix common double-encoding cases
         } catch (e) {
             console.error('WellTools Debug: Image URL processing failed', e, url);
             return url;
@@ -49,6 +57,7 @@ export const BlogImage = ({ src, alt, className }) => {
             src={encodedSrc}
             alt={alt}
             className={className}
+            crossOrigin="anonymous"
             onError={(e) => {
                 console.warn(`WellTools Debug: Image failed to load [Retry ${retryCount}]:`, encodedSrc);
                 handleError();

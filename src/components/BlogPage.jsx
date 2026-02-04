@@ -52,9 +52,28 @@ export const BlogImage = ({ src, alt, className }) => {
 
     const encodedSrc = processImageUrl(src);
 
+    // Generate srcset for Pollinations images only
+    const generateSrcSet = (url) => {
+        if (!url || !url.includes('pollinations.ai')) return undefined;
+        // Base structure: https://image.pollinations.ai/prompt/...?width=1200&height=800...
+        // We want to create versions with width=400, 800, 1200
+        const makeVariant = (w, h) => {
+            const newUrl = url.replace(/width=\d+/, `width=${w}`).replace(/height=\d+/, `height=${h}`);
+            return `${newUrl} ${w}w`;
+        };
+
+        try {
+            return `${makeVariant(400, 300)}, ${makeVariant(800, 600)}, ${makeVariant(1200, 800)}`;
+        } catch (e) {
+            return undefined;
+        }
+    };
+
     return (
         <img
             src={encodedSrc}
+            srcSet={generateSrcSet(encodedSrc)}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             alt={alt}
             className={className}
             crossOrigin="anonymous"

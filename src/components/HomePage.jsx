@@ -63,8 +63,15 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                         >
                             <img
                                 src={slide.image}
+                                srcSet={`
+                                    ${slide.image.replace('w=1200', 'w=600')} 600w,
+                                    ${slide.image.replace('w=1200', 'w=800')} 800w,
+                                    ${slide.image} 1200w
+                                `}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                                 alt={slide.title}
                                 loading={index === 0 ? "eager" : "lazy"}
+                                fetchPriority={index === 0 ? "high" : "auto"}
                                 className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-10000"
                             />
                             <div className="absolute inset-0 bg-linear-to-r from-gray-900/80 via-gray-900/40 to-transparent"></div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Activity, ArrowRightCircle, Sparkles, Lightbulb, HelpCircle } from 'lucide-react';
 import { calculatorContent } from '../data/seoContent';
+import SchemaMarkup from './SchemaMarkup';
 
 const ToolInfoSection = ({ toolId }) => {
     const content = calculatorContent[toolId]?.['en'];
@@ -8,6 +9,7 @@ const ToolInfoSection = ({ toolId }) => {
 
     return (
         <div className="mt-16 space-y-12 animate-fade-in pb-12">
+            <SchemaMarkup toolId={toolId} content={content} />
             {/* What is it? */}
             <section className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-50 dark:border-gray-700">
                 <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-6 flex items-center gap-3">
@@ -88,6 +90,96 @@ const ToolInfoSection = ({ toolId }) => {
                                         <td className="p-4 font-semibold text-gray-800 dark:text-gray-200">{range.category}</td>
                                         <td className="p-4 text-gray-600 dark:text-gray-400">{range.range}</td>
                                         <td className="p-4 text-gray-600 dark:text-gray-400">{range.risk}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            )}
+
+            {/* Activity Levels Table (for Calorie/TDEE calculators) */}
+            {content.activity_levels && content.activity_levels.length > 0 && (
+                <section className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-50 dark:border-gray-700">
+                    <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-3">
+                        <span className="w-2 h-8 bg-orange-500 rounded-full"></span>
+                        {content.comparison_table_title}
+                    </h2>
+                    <div className="overflow-x-auto">
+                        <table className="w-full border-collapse">
+                            <thead>
+                                <tr className="bg-gray-100 dark:bg-gray-900">
+                                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white border-b-2 border-gray-300 dark:border-gray-600">Activity Level</th>
+                                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white border-b-2 border-gray-300 dark:border-gray-600">Multiplier</th>
+                                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white border-b-2 border-gray-300 dark:border-gray-600">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {content.activity_levels.map((level, idx) => (
+                                    <tr key={idx} className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900/30 transition-colors">
+                                        <td className="p-4 font-semibold text-gray-800 dark:text-gray-200">{level.level}</td>
+                                        <td className="p-4 text-emerald-600 dark:text-emerald-400 font-mono font-bold">{level.multiplier}</td>
+                                        <td className="p-4 text-gray-600 dark:text-gray-400">{level.description}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            )}
+
+            {/* Macro Ratios Table */}
+            {content.macro_ratios && content.macro_ratios.length > 0 && (
+                <section className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-50 dark:border-gray-700">
+                    <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-3">
+                        <span className="w-2 h-8 bg-emerald-500 rounded-full"></span>
+                        {content.comparison_table_title}
+                    </h2>
+                    <div className="overflow-x-auto">
+                        <table className="w-full border-collapse">
+                            <thead>
+                                <tr className="bg-gray-100 dark:bg-gray-900">
+                                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white border-b-2 border-gray-300 dark:border-gray-600">Goal</th>
+                                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white border-b-2 border-gray-300 dark:border-gray-600">P/C/F Split</th>
+                                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white border-b-2 border-gray-300 dark:border-gray-600">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {content.macro_ratios.map((ratio, idx) => (
+                                    <tr key={idx} className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900/30 transition-colors">
+                                        <td className="p-4 font-semibold text-gray-800 dark:text-gray-200">{ratio.goal}</td>
+                                        <td className="p-4 text-emerald-600 dark:text-emerald-400 font-mono font-bold">{ratio.split}</td>
+                                        <td className="p-4 text-gray-600 dark:text-gray-400">{ratio.description}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            )}
+
+            {/* Ideal Weight Table */}
+            {content.ideal_weight_table && content.ideal_weight_table.length > 0 && (
+                <section className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-50 dark:border-gray-700">
+                    <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-3">
+                        <span className="w-2 h-8 bg-amber-500 rounded-full"></span>
+                        {content.comparison_table_title}
+                    </h2>
+                    <div className="overflow-x-auto">
+                        <table className="w-full border-collapse">
+                            <thead>
+                                <tr className="bg-gray-100 dark:bg-gray-900">
+                                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white border-b-2 border-gray-300 dark:border-gray-600">Formula</th>
+                                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white border-b-2 border-gray-300 dark:border-gray-600">Result</th>
+                                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white border-b-2 border-gray-300 dark:border-gray-600">Context</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {content.ideal_weight_table.map((row, idx) => (
+                                    <tr key={idx} className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900/30 transition-colors">
+                                        <td className="p-4 font-semibold text-gray-800 dark:text-gray-200">{row.formula}</td>
+                                        <td className="p-4 text-amber-600 dark:text-amber-400 font-bold">{row.result}</td>
+                                        <td className="p-4 text-gray-600 dark:text-gray-400">{row.context}</td>
                                     </tr>
                                 ))}
                             </tbody>

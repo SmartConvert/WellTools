@@ -8,7 +8,7 @@ export const calculatorContent = {
             hero_color: 'from-lime-400 to-green-500',
             related_tools: [
                 { id: 'calories', name: 'Calorie Calculator' },
-                { id: 'ideal-weight', name: 'Ideal Weight' }
+                { id: 'bmr', name: 'BMR Calculator' }
             ],
 
             seo_what_title: 'What is BMI Calculator?',
@@ -390,6 +390,30 @@ export const calculatorContent = {
             seo_tips_title: 'نصائح لنوم صحي',
             seo_tips: ['حافظ على غرفتك باردة ومظلمة', 'تجنب الشاشات قبل ساعة من النوم'],
             seo_faqs: []
+        }
+    },
+    bmr: {
+        en: {
+            hero_title: 'BMR Calculator',
+            hero_subtitle: 'Calculate your Basal Metabolic Rate.',
+            hero_emoji: '⚡',
+            hero_color: 'from-amber-400 to-orange-500',
+            related_tools: [
+                { id: 'calories', name: 'Calorie Calculator' },
+                { id: 'macro', name: 'Macro Calculator' }
+            ],
+            seo_what_title: 'What is BMR?',
+            seo_what_content: 'Your Basal Metabolic Rate (BMR) is the number of calories your body needs to perform basic life-sustaining functions like breathing and circulation while at rest.',
+            seo_why_title: 'Why Calculate BMR?',
+            seo_why_content: 'Knowing your BMR is the starting point for calculating your total daily energy expenditure (TDEE) and planning a weight loss or muscle gain diet.',
+            seo_how_title: 'How to Use',
+            seo_how_steps: ['Enter age, gender, weight, and height', 'Get your daily BMR value'],
+            seo_tips_title: 'BMR Facts',
+            seo_tips: ['BMR accounts for ~60-70% of daily calorie burn', 'Muscle mass increases BMR'],
+            seo_faqs: [
+                { question: 'Does BMR change with age?', answer: 'Yes, BMR generally decreases as you age due to loss of muscle mass.' },
+                { question: 'Is BMR the same as TDEE?', answer: 'No. BMR is calories at rest. TDEE includes activity.' }
+            ]
         }
     },
     'body-fat': {

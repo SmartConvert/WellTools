@@ -46,7 +46,11 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
         { id: 'water', icon: <Droplet className="w-8 h-8" />, title: t.water_calc, desc: t.water_desc, color: 'from-blue-400 to-cyan-500' },
         { id: 'ideal-weight', icon: <Scale className="w-8 h-8" />, title: t.ideal_weight, desc: t.ideal_weight_desc, color: 'from-rose-400 to-pink-500' },
         { id: 'sleep', icon: <Moon className="w-8 h-8" />, title: t.sleep_calc, desc: t.sleep_desc, color: 'from-violet-400 to-purple-500' },
-        { id: 'body-fat', icon: <Percent className="w-8 h-8" />, title: t.body_fat_calc, desc: t.body_fat_desc, color: 'from-orange-400 to-red-500' }
+        { id: 'sleep', icon: <Moon className="w-8 h-8" />, title: t.sleep_calc, desc: t.sleep_desc, color: 'from-violet-400 to-purple-500' },
+        { id: 'body-fat', icon: <Percent className="w-8 h-8" />, title: t.body_fat_calc, desc: t.body_fat_desc, color: 'from-orange-400 to-red-500' },
+        { id: 'bmr', icon: <Zap className="w-8 h-8" />, title: 'BMR Calculator', desc: 'Calculate your Basal Metabolic Rate.', color: 'from-amber-400 to-orange-500' },
+        { id: 'macro', icon: <Utensils className="w-8 h-8" />, title: 'Macro Calculator', desc: 'Determine your optimal macronutrient split.', color: 'from-green-400 to-emerald-500' },
+        { id: '1rm', icon: <Dumbbell className="w-8 h-8" />, title: '1RM Calculator', desc: 'Estimate your one-rep max strength.', color: 'from-slate-600 to-gray-700' }
     ];
 
     return (

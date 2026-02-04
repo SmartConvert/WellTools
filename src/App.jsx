@@ -30,6 +30,9 @@ const WaterCalculatorPage = lazyWithRetry(() => import('./components/WaterCalcul
 const IdealWeightPage = lazyWithRetry(() => import('./components/IdealWeightPage'));
 const SleepCalculatorPage = lazyWithRetry(() => import('./components/SleepCalculatorPage'));
 const BodyFatCalculatorPage = lazyWithRetry(() => import('./components/BodyFatCalculatorPage'));
+const BMRCalculatorPage = lazyWithRetry(() => import('./components/BMRCalculatorPage'));
+const MacroCalculatorPage = lazyWithRetry(() => import('./components/MacroCalculatorPage'));
+const OneRepMaxCalculatorPage = lazyWithRetry(() => import('./components/OneRepMaxCalculatorPage'));
 const MealPlannerPage = lazyWithRetry(() => import('./components/MealPlannerPage'));
 const BlogPage = lazyWithRetry(() => import('./components/BlogPage'));
 const BlogPostPage = lazyWithRetry(() => import('./components/BlogPostPage'));
@@ -289,6 +292,20 @@ const DailyHealthTools = () => {
   const [bfHip, setBfHip] = useState('');
   const [bfResult, setBfResult] = useState(null);
 
+  const [bmrWeight, setBmrWeight] = useState('');
+  const [bmrHeight, setBmrHeight] = useState('');
+  const [bmrAge, setBmrAge] = useState('');
+  const [bmrGender, setBmrGender] = useState('male');
+  const [bmrResult, setBmrResult] = useState(null);
+
+  const [macroCalories, setMacroCalories] = useState('');
+  const [macroDiet, setMacroDiet] = useState('balanced');
+  const [macroResult, setMacroResult] = useState(null);
+
+  const [ormWeight, setOrmWeight] = useState('');
+  const [ormReps, setOrmReps] = useState('');
+  const [ormResult, setOrmResult] = useState(null);
+
   // Tracking State
   const [trackingData, setTrackingData] = useState({ weight: [], water: [], sleep: [] });
   const [newWeight, setNewWeight] = useState('');
@@ -371,6 +388,46 @@ const DailyHealthTools = () => {
     setBfResult({ bodyFat: bf, category, color: bf < 25 ? 'text-emerald-500' : 'text-orange-500' });
   };
 
+  const calculateBMR = () => {
+    const w = parseFloat(bmrWeight);
+    const h = parseFloat(bmrHeight);
+    const a = parseFloat(bmrAge);
+    if (!w || !h || !a) return;
+    // Mifflin-St Jeor
+    let bmr = (10 * w) + (6.25 * h) - (5 * a);
+    bmr += bmrGender === 'male' ? 5 : -161;
+    setBmrResult({ bmr: Math.round(bmr) });
+  };
+
+  const calculateMacros = () => {
+    const cal = parseFloat(macroCalories);
+    if (!cal) return;
+    let p, c, f;
+    // Simple splits: 
+    // Balanced: 30% P, 40% C, 30% F
+    // Low Carb: 40% P, 20% C, 40% F
+    // High Protein: 35% P, 35% C, 30% F
+    switch (macroDiet) {
+      case 'low-carb': p = 0.4; c = 0.2; f = 0.4; break;
+      case 'high-protein': p = 0.35; c = 0.35; f = 0.3; break;
+      case 'balanced': default: p = 0.3; c = 0.4; f = 0.3; break;
+    }
+    setMacroResult({
+      protein: Math.round((cal * p) / 4),
+      carbs: Math.round((cal * c) / 4),
+      fats: Math.round((cal * f) / 9)
+    });
+  };
+
+  const calculateORM = () => {
+    const w = parseFloat(ormWeight);
+    const r = parseFloat(ormReps);
+    if (!w || !r) return;
+    // Epley Formula: 1RM = w * (1 + r/30)
+    const max = w * (1 + r / 30);
+    setOrmResult({ max: Math.round(max) });
+  };
+
   const addWeightEntry = () => {
     if (!newWeight) return;
     const updated = { ...trackingData, weight: [...trackingData.weight, { date: new Date().toISOString().split('T')[0], value: parseFloat(newWeight) }].slice(-30) };
@@ -403,6 +460,9 @@ const DailyHealthTools = () => {
       case 'ideal-weight': return <IdealWeightPage idealHeight={idealHeight} setIdealHeight={setIdealHeight} idealGender={idealGender} setIdealGender={setIdealGender} calculateIdealWeight={calculateIdealWeight} idealResult={idealResult} setCurrentPage={setCurrentPage} t={t} />;
       case 'sleep': return <SleepCalculatorPage sleepAge={sleepAge} setSleepAge={setSleepAge} calculateSleep={calculateSleep} sleepResult={sleepResult} sleepBedtime={sleepBedtime} setSleepBedtime={setSleepBedtime} calculateSleepCycles={calculateSleepCycles} sleepWakeupTimes={sleepWakeupTimes} setCurrentPage={setCurrentPage} t={t} />;
       case 'body-fat': return <BodyFatCalculatorPage bfWeight={bfWeight} setBfWeight={setBfWeight} bfHeight={bfHeight} setBfHeight={setBfHeight} bfAge={bfAge} setBfAge={setBfAge} bfGender={bfGender} setBfGender={setBfGender} bfNeck={bfNeck} setBfNeck={setBfNeck} bfWaist={bfWaist} setBfWaist={setBfWaist} bfHip={bfHip} setBfHip={setBfHip} calculateBodyFat={calculateBodyFat} bfResult={bfResult} setCurrentPage={setCurrentPage} t={t} />;
+      case 'bmr': return <BMRCalculatorPage bmrWeight={bmrWeight} setBmrWeight={setBmrWeight} bmrHeight={bmrHeight} setBmrHeight={setBmrHeight} bmrAge={bmrAge} setBmrAge={setBmrAge} bmrGender={bmrGender} setBmrGender={setBmrGender} calculateBMR={calculateBMR} bmrResult={bmrResult} setCurrentPage={setCurrentPage} t={t} />;
+      case 'macro': return <MacroCalculatorPage macroCalories={macroCalories} setMacroCalories={setMacroCalories} macroDiet={macroDiet} setMacroDiet={setMacroDiet} calculateMacros={calculateMacros} macroResult={macroResult} setCurrentPage={setCurrentPage} t={t} />;
+      case '1rm': return <OneRepMaxCalculatorPage ormWeight={ormWeight} setOrmWeight={setOrmWeight} ormReps={ormReps} setOrmReps={setOrmReps} calculateORM={calculateORM} ormResult={ormResult} setCurrentPage={setCurrentPage} t={t} />;
       case 'meal-planner': return <MealPlannerPage selectedMealCategory={activeTab} setSelectedMealCategory={setActiveTab} t={t} />;
       case 'blog': return <BlogPage setCurrentPage={setCurrentPage} setSelectedPost={setSelectedPost} t={t} />;
       case 'blog-post': return <BlogPostPage post={selectedPost} setCurrentPage={setCurrentPage} t={t} />;

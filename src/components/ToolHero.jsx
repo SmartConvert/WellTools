@@ -11,7 +11,10 @@ const ToolHero = ({ toolId }) => {
                 toolId === 'water' ? 'from-blue-600 to-cyan-700' :
                     toolId === 'ideal-weight' ? 'from-rose-600 to-pink-700' :
                         toolId === 'sleep' ? 'from-violet-600 to-purple-700' :
-                            'from-orange-600 to-red-700'
+                            toolId === 'bmr' ? 'from-amber-600 to-orange-700' :
+                                toolId === 'macro' ? 'from-green-600 to-emerald-700' :
+                                    toolId === '1rm' ? 'from-slate-700 to-gray-800' :
+                                        'from-orange-600 to-red-700'
             }`}>
             <div className="absolute inset-0 bg-black/20 backdrop-blur-xl"></div>
             <div className="relative z-10 p-6 md:p-16 flex flex-col md:flex-row items-center gap-6 md:gap-12">

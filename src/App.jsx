@@ -36,7 +36,6 @@ const DailyTrackingPage = lazyWithRetry(() => import('./components/DailyTracking
 const AboutPage = lazyWithRetry(() => import('./components/AboutPage'));
 const ExpertPage = lazyWithRetry(() => import('./components/ExpertPage'));
 const ContactPage = lazyWithRetry(() => import('./components/ContactPage'));
-const PolicyPage = lazyWithRetry(() => import('./components/PolicyPage'));
 
 // Correct way to lazy load multiple exports in React 18
 const TermsOfUsePage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.TermsOfUsePage })));

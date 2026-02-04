@@ -3,6 +3,8 @@ import { BookOpen, ChevronRight, Activity, Percent, Scale, Droplet, Moon, Clock,
 import postsData from '../data/posts.json';
 import { BlogImage } from './BlogPage';
 import AdComponent from './AdComponent';
+import TestimonialsSection from './TestimonialsSection';
+import EmailCaptureForm from './EmailCaptureForm';
 
 const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -10,24 +12,24 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
     const slides = [
         {
             image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=80&fm=webp',
-            title: t.hero_title,
-            accent: t.hero_title_accent,
-            subtitle: "Free online health calculators and daily meal planning tools to help you track calories, BMI, water intake, and improve your lifestyle.",
-            stats: { icon: '🥗', number: '100+', label: 'Healthy Recipes' }
+            title: 'Struggling to',
+            accent: 'Understand Your Health?',
+            subtitle: "You're not alone. Millions feel lost in a sea of conflicting diet advice and confusing health numbers. WellTools makes it crystal clear.",
+            stats: { icon: '🎯', number: '9/10', label: 'Users See Results' }
         },
         {
             image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1200&q=80&fm=webp',
-            title: 'Track Your',
-            accent: 'Health Journey',
-            subtitle: 'Smart calculators to help you achieve your wellness goals',
-            stats: { icon: '🎯', number: '6+', label: 'Health Tools' }
+            title: 'Tired of',
+            accent: 'Guessing Your Calories?',
+            subtitle: "Stop the endless cycle of dieting confusion. Get precise, science-backed calculations in seconds—completely free.",
+            stats: { icon: '🔥', number: '100K+', label: 'Calculations Daily' }
         },
         {
             image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80&fm=webp',
-            title: 'Personalized',
-            accent: 'Nutrition Plans',
-            subtitle: 'AI-powered meal suggestions tailored to your goals',
-            stats: { icon: '🍎', number: '50+', label: 'Food Categories' }
+            title: 'Ready to',
+            accent: 'Transform Your Body?',
+            subtitle: 'Join thousands who achieved their goals with personalized insights and meal plans tailored to YOU.',
+            stats: { icon: '💪', number: '85%', label: 'Success Rate' }
         }
     ];
 
@@ -157,6 +159,48 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                             </div>
                         ))}
                     </div>
+                </div>
+
+                {/* Testimonials Section */}
+                <TestimonialsSection />
+
+                {/* Founder Story / Human Element */}
+                <div className="mb-20 lg:mb-28 px-4">
+                    <div className="max-w-4xl mx-auto bg-linear-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-900/20 dark:via-teal-900/20 dark:to-cyan-900/20 rounded-[3rem] p-8 md:p-12 border border-emerald-200 dark:border-emerald-800 shadow-xl">
+                        <div className="text-center mb-8">
+                            <div className="text-6xl mb-4">👨‍💻</div>
+                            <h2 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4">
+                                Why I Built <span className="text-emerald-600 dark:text-emerald-400">WellTools</span>
+                            </h2>
+                        </div>
+                        <div className="prose prose-lg dark:prose-invert mx-auto text-gray-700 dark:text-gray-300 leading-relaxed">
+                            <p className="text-lg md:text-xl font-medium mb-6">
+                                After years of struggling with my own health journey, I realized something was broken.
+                            </p>
+                            <p className="mb-6">
+                                Most health calculators are either <strong>buried behind paywalls</strong>, loaded with ads, or simply too complicated for everyday people. I wanted to change that.
+                            </p>
+                            <p className="mb-6">
+                                <strong>WellTools was born from a simple mission:</strong> Make accurate, science-backed health tools accessible to everyone—completely free, forever.
+                            </p>
+                            <p className="mb-6">
+                                Whether you're trying to lose weight, build muscle, or just understand your health better, you deserve tools that <em>actually work</em> without the BS.
+                            </p>
+                            <div className="mt-8 pt-6 border-t border-emerald-200 dark:border-emerald-800 text-center">
+                                <p className="font-bold text-xl text-emerald-700 dark:text-emerald-400">
+                                    Let's make health simple together 💚
+                                </p>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                                    — The WellTools Team
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Email Capture Section */}
+                <div className="mb-20 lg:mb-28 px-4">
+                    <EmailCaptureForm position="inline" />
                 </div>
 
                 {/* Latest Blog Posts Feature */}

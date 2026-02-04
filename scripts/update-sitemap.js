@@ -49,24 +49,17 @@ async function updateSitemap() {
 
         // Add Dynamic Blog Post URLs
         // Format: /?lang=en&post=ID
-        const languages = ['en', 'ar', 'fr'];
-
-        languages.forEach(lang => {
-            if (postsData[lang]) {
-                postsData[lang].forEach(post => {
-                    const postUrl = `${BASE_URL}/?lang=${lang}&amp;post=${post.id}`;
-                    // Special handling for clean URLs if we enable routed mode later, 
-                    // but for now query param is the source of truth
-
-                    sitemapContent += `  <url>
+        if (postsData.en) {
+            postsData.en.forEach(post => {
+                const postUrl = `${BASE_URL}/?post=${post.id}`;
+                sitemapContent += `  <url>
     <loc>${postUrl}</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 `;
-                });
-            }
-        });
+            });
+        }
 
         sitemapContent += `</urlset>`;
 

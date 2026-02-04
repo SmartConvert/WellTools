@@ -193,12 +193,6 @@ const DailyHealthTools = () => {
   const [selectedPost, setSelectedPost] = useState(null);
   const [activeTab, setActiveTab] = useState('weight');
 
-  const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    if (saved) return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  });
-
   const t = translations.en;
 
   useEffect(() => {
@@ -213,6 +207,8 @@ const DailyHealthTools = () => {
   useEffect(() => {
     document.documentElement.dir = 'ltr';
     document.documentElement.lang = 'en';
+    // Remove language from localStorage to keep it clean
+    localStorage.removeItem('language');
     // Success! Clear the reload flag when the app mounts successfully
     window.sessionStorage.removeItem('chunk-reload-tried');
   }, []);

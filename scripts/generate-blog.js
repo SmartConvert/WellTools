@@ -131,9 +131,7 @@ async function generatePost() {
     console.log(`🚀 Generating Multi-language Articles for: ${selectedTopic.title}`);
 
     const languages = [
-        { code: "en", name: "English", dir: "ltr" },
-        { code: "ar", name: "Arabic", dir: "rtl" },
-        { code: "fr", name: "French", dir: "ltr" }
+        { code: "en", name: "English", dir: "ltr" }
     ];
 
     let posts = {};
@@ -141,7 +139,7 @@ async function generatePost() {
         const data = await fs.readFile(POSTS_PATH, "utf-8");
         posts = JSON.parse(data);
     } catch (e) {
-        posts = { en: [], ar: [], fr: [] };
+        posts = { en: [] };
     }
 
     for (const lang of languages) {

@@ -12,7 +12,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
             image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=80&fm=webp',
             title: t.hero_title,
             accent: t.hero_title_accent,
-            subtitle: t.hero_subtitle,
+            subtitle: "Free online health calculators and daily meal planning tools to help you track calories, BMI, water intake, and improve your lifestyle.",
             stats: { icon: '🥗', number: '100+', label: 'Healthy Recipes' }
         },
         {
@@ -121,6 +121,9 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                         <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
                             Why <span className="text-emerald-500">WellTools</span>?
                         </h2>
+                        <p className="text-gray-900 dark:text-gray-100 max-w-2xl mx-auto text-xl md:text-2xl font-black mb-4">
+                            Accurate health calculators and nutrition tools you can trust.
+                        </p>
                         <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg md:text-xl font-medium">
                             We combine accurate science with modern technology to provide you with the most reliable health companion.
                         </p>
@@ -149,14 +152,19 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                 {/* Latest Blog Posts Feature */}
                 {currentLangPosts && currentLangPosts.length > 0 && (
                     <div className="mb-16 lg:mb-24 animate-fade-in">
-                        <div className="flex items-center justify-between mb-8 px-4">
-                            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
-                                <BookOpen className="w-8 h-8 text-emerald-500" />
-                                {t.latest_blog_title}
-                            </h2>
+                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 px-4">
+                            <div className="text-center md:text-left">
+                                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white flex items-center justify-center md:justify-start gap-3 mb-4">
+                                    <BookOpen className="w-8 h-8 text-emerald-500" />
+                                    {t.latest_blog_title}
+                                </h2>
+                                <p className="text-gray-600 dark:text-gray-400 font-bold max-w-2xl text-lg">
+                                    Our blog provides science-based health tips, meal plans, and daily wellness guidance to support your lifestyle.
+                                </p>
+                            </div>
                             <button
                                 onClick={() => setCurrentPage('blog')}
-                                className="hidden md:flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold hover:gap-3 transition-all"
+                                className="hidden md:flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold hover:gap-3 transition-all pb-1"
                             >
                                 {t.nav_blog} <ChevronRight className="w-5 h-5" />
                             </button>

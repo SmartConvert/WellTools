@@ -149,36 +149,43 @@ async function generatePost() {
 
         const prompt = `
         You are a world-class SEO expert and health content creator for "WellTools".
-        Generate a professional, high-quality blog post in ${lang.name}.
+        Your goal is to generate a comprehensive, SEO-optimized health page in ${lang.name}.
 
         CORE TOPIC: "${selectedTopic.title}"
         GROUP: ${selectedTopic.group}
         LANGUAGE: ${lang.name}
         DIRECTION: ${lang.dir}
 
-        SEO REQUIREMENTS:
-        - Identify 5 high-traffic keywords for this topic in ${lang.name} and use them naturally throughout the text.
-        - Create a compelling H1 title (Question-based or Listicle).
-        - Use H2 and H3 headings for logical structure.
-        - Strategic internal linking: Mention BMI Calculator, Calories Calculator, Water Intake Calculator, Ideal Weight Calculator, Sleep Hours Calculator naturally.
-        - Meta Description: 150-160 characters, highly clickable.
+        STRICT QUALITY RULES:
+        - Content must be medically neutral and informational.
+        - NEVER provide a medical diagnosis or specific medical advice.
+        - TONE: Professional but accessible (Simple ${lang.name}).
+        - AdSense Compatibility: Content must be high-value and original.
+        - NO EMOJIS.
+        - Use short, readable paragraphs.
 
-        CONTENT RULES:
-        - TONE: Professional but accessible (Simple English/Arabic/French).
-        - NO MEDICAL ADVICE: Use "This content provides general health information and does not replace professional medical advice." faithfully.
-        - LENGTH: 800 - 1500 words.
-        - IMAGE: Use exactly this URL pattern: "https://image.pollinations.ai/prompt/[professional_photo_description_in_english]?width=1200&height=800&nologo=true"
+        PAGE STRUCTURE:
+        1. SEO Title: Catchy and keyword-rich.
+        2. Meta Description: 150-160 characters, highly clickable.
+        3. H1 Heading: The primary title.
+        4. Introduction: (100-150 words) hook the reader and explain the topic's importance.
+        5. Main Content: (400-700 words) deep dive into ${selectedTopic.title}.
+        6. List or Steps: Practical actionable information.
+        7. Tips: 3-5 quick wellness tips related to the topic.
+        8. FAQ: 3 frequent questions and concise answers.
+        9. Internal Links: Suggest natural context for linking to other WellTools calculators (BMI, Calories, Water, Ideal Weight).
+        10. Medical Disclaimer: Mandatory section at the end.
 
-        OUTPUT FORMAT: Strictly valid JSON only.
+        OUTPUT FORMAT: Strictly valid JSON.
         {
           "title": "SEO Optimized Title",
           "category": "${selectedTopic.group}",
-          "excerpt": "Compelling Meta Description",
-          "image": "https://image.pollinations.ai/prompt/[english_description]?width=1200&height=800&nologo=true",
-          "imageAlt": "Descriptive Alt Text",
-          "content": "Full Markdown content starting with H1. Use proper H2/H3 breakdown.",
+          "excerpt": "Meta Description",
+          "image": "https://image.pollinations.ai/prompt/[professional_photo_description_in_english]?width=1200&height=800&nologo=true",
+          "imageAlt": "Alt focus for SEO",
+          "content": "Full content in Markdown starting from H1. Ensure clear headings and a professional layout.",
           "keywords": ["key1", "key2", "key3", "key4", "key5"],
-          "faq": [{"question": "Q1?", "answer": "A1."}, {"question": "Q2?", "answer": "A2."}]
+          "faq": [{"question": "Q1?", "answer": "A1."}, {"question": "Q2?", "answer": "A2."}, {"question": "Q3?", "answer": "A3."}]
         }
         `;
 

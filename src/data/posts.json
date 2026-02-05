@@ -1,6 +1,63 @@
 {
     "en": [
         {
+            "id": "welltools-3-1770270133534",
+            "title": "Water Intake Calculator: How Much Water Should You Drink Daily?",
+            "category": "health_calculators",
+            "excerpt": "Discover your ideal daily water intake with our free Water Intake Calculator. Learn how weight, activity, and age affect hydration needs for better health and energy. Calculate now!",
+            "image": "https://image.pollinations.ai/prompt/professional photo of a clear glass water bottle with fresh water drops on a wooden table next to a hydration calculator app on a smartphone, bright natural light, health and wellness theme?width=1200&height=800&nologo=true",
+            "imageAlt": "Water intake calculator for daily hydration needs",
+            "content": "# Water Intake Calculator: How Much Water Should You Drink Daily?\n\nStaying hydrated supports energy, focus, and overall wellness. Proper water intake helps maintain body functions like temperature regulation and digestion. Many people wonder how much water they truly need each day. Factors such as weight, activity level, and climate play key roles. Our Water Intake Calculator simplifies this by estimating your daily needs based on personal details. Use it to set hydration goals and feel your best.\n\n## Understanding Water Intake Needs\n\nWater makes up about 60% of the body. Daily needs vary by individual. Common guidelines suggest drinking half your body weight in pounds as ounces of water. For example, a 150-pound person might aim for 75 ounces daily.[1][3]\n\nMore precise methods link water to energy expenditure, known as Total Daily Energy Expenditure (TDEE). This accounts for calories burned through activity.[1] Age, gender, height, and exercise also influence requirements. Active people or those in hot climates need more.[5]\n\nFood and beverages provide some water, but drinking plain fluids covers most needs. Infants and children have specific guidelines, like 0.68-1.00 liters total for ages 0-12 months.[1]\n\n## How Water Intake Calculators Work\n\nThese tools use inputs like weight, height, age, gender, and activity level. Outputs appear in ounces, liters, or glasses. For instance:\n\n- Body weight (kg) × 0.03 = liters per day. A 70 kg person needs about 2.1 liters.[2]\n- One ounce per two pounds of body weight.[6]\n\nAdvanced calculators factor in exercise by adding 12 ounces per 30 minutes.[2] They separate total water from drinkable fluids, as food contributes 20-30%.[1]\n\nPregnant or breastfeeding individuals may need 24-32 extra ounces.[3] Older adults might drink less due to reduced thirst sensation.[5]\n\n## Steps to Use a Water Intake Calculator\n\n1. Enter your weight in pounds or kilograms.\n2. Add height, age, and gender.\n3. Select activity level: sedentary, moderate, or high.\n4. Note exercise duration and climate if applicable.\n5. Review results in preferred units like cups (8 oz) or bottles (500 ml).\n6. Track intake and adjust based on urine color or thirst.\n\nA standard glass holds 8 ounces, so eight glasses equal about 64 ounces or 1.9 liters.[2]\n\n## Quick Hydration Tips\n\n- Carry a reusable bottle for easy access.\n- Drink water before meals to aid digestion.\n- Add 12-16 ounces during workouts.\n- Check urine: pale yellow signals good hydration.\n- Include water-rich foods like fruits and vegetables.\n\n## Frequently Asked Questions\n\nThese cover common searches on hydration.\n\n### How much water should I drink based on weight?\nHalf your weight in pounds as ounces is a simple start. Adjust for activity.[1][3]\n\n### Does exercise increase water needs?\nYes, add 12 ounces per 30 minutes of activity to replace sweat loss.[2]\n\n### How many water bottles per day?\nFor 500 ml bottles: women 4-5, men 5-6, depending on needs.[2]\n\n### Is 8 glasses of water enough?\nIt provides 64 ounces, suitable for many but not all. Use a calculator for personalization.[2]\n\n### Do I need more water if pregnant?\nIncrease by 24-32 ounces daily, based on weight.[3]\n\n## Related WellTools\n\n- [BMI Calculator](/?page=bmi)\n- [Calorie Counter](/?page=calories)\n- [Water Tracker](/?page=water)\n- [Ideal Weight](/?page=ideal-weight)\n\n## Medical Sources\n\nSources: Mayo Clinic on hydration, NIH water guidelines.\n\n- [Mayo Clinic: Water Intake](https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/water/art-20044256)\n- [National Institutes of Health: Dietary Reference Intakes for Water](https://www.ncbi.nlm.nih.gov/books/NBK56570/)\n- [Institute of Medicine: Dietary Reference Intakes](https://nap.nationalacademies.org/catalog/10925/dietary-reference-intakes-for-water-potassium-sodium-chloride-and-sulfate)\n\n## Medical Disclaimer\n\nThis content is for informational purposes only and not a substitute for professional medical advice. Consult a healthcare provider for personalized guidance, especially with health conditions.",
+            "keywords": [
+                "water intake calculator",
+                "how much water to drink daily",
+                "daily water intake",
+                "hydration calculator",
+                "water needs by weight"
+            ],
+            "faq": [
+                {
+                    "question": "How much water should I drink based on my weight?",
+                    "answer": "A common rule is half your body weight in pounds as ounces daily. Adjust for activity and use a calculator for accuracy.[1][3]"
+                },
+                {
+                    "question": "How many water bottles should I drink per day?",
+                    "answer": "With 500 ml bottles, aim for 4-5 for women and 5-6 for men, based on individual needs.[2]"
+                },
+                {
+                    "question": "Does age affect daily water intake?",
+                    "answer": "Yes, children and older adults have adjusted needs. Infants need 0.68-1 liter total.[1][5]"
+                },
+                {
+                    "question": "How much extra water for exercise?",
+                    "answer": "Add 12 ounces per 30 minutes to replace fluids lost through sweat.[2]"
+                },
+                {
+                    "question": "Is 8 glasses of water a day enough?",
+                    "answer": "It equals 64 ounces, a baseline for many, but personalize with factors like weight and activity.[2]"
+                }
+            ],
+            "sources": [
+                {
+                    "title": "Mayo Clinic: Water - How much should you drink every day?",
+                    "url": "https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/water/art-20044256"
+                },
+                {
+                    "title": "NIH: Dietary Reference Intakes for Water, Potassium, Sodium, Chloride, and Sulfate",
+                    "url": "https://www.ncbi.nlm.nih.gov/books/NBK56570/"
+                },
+                {
+                    "title": "Institute of Medicine: DRI Tables",
+                    "url": "https://nap.nationalacademies.org/catalog/10925/dietary-reference-intakes-for-water-potassium-sodium-chloride-and-sulfate"
+                },
+                {
+                    "title": "CDC: Fast Facts About Drinking Water",
+                    "url": "https://www.cdc.gov/nutrition/php/data-research/fast-facts-water-consumption.html"
+                }
+            ],
+            "date": "2026-02-05"
+        },
+        {
             "id": "welltools-2-1770215056268",
             "title": "Daily Calorie Needs Calculator: Estimate Your Personalized Calorie Intake",
             "category": "health_calculators",

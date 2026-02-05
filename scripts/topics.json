@@ -21,7 +21,8 @@
             "id": 3,
             "group": "health_calculators",
             "title": "Water Intake Calculator",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-05"
         },
         {
             "id": 4,

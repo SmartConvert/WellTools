@@ -1,3 +1,6 @@
+cd /path/to/WellTools
+git remote add origin https://github.com/SmartConvert/WellTools
+git push -u origin work:master
 {
   "name": "daily-health-tools-enhanced",
   "private": true,

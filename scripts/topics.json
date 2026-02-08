@@ -21,13 +21,15 @@
             "id": 3,
             "group": "health_calculators",
             "title": "Water Intake Calculator",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-05"
         },
         {
             "id": 4,
             "group": "health_calculators",
             "title": "Ideal Weight Calculator",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-07"
         },
         {
             "id": 5,

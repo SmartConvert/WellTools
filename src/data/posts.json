@@ -1,6 +1,120 @@
 {
     "en": [
         {
+            "id": "welltools-4-1770441194643",
+            "title": "Ideal Weight Calculator: Find Your Healthy Weight Range by Height, Age & Gender",
+            "category": "health_calculators",
+            "excerpt": "Discover your ideal weight with our free calculator using BMI, Devine, Hamwi & more formulas. Learn healthy ranges for height, age & gender to support wellness goals. Accurate & easy tool.",
+            "image": "https://image.pollinations.ai/prompt/professional photo of a diverse group of healthy adults measuring height and weight with calculator tools in a modern clinic setting?width=1200&height=800&nologo=true",
+            "imageAlt": "Ideal weight calculator showing healthy weight ranges by height and gender",
+            "content": "# Ideal Weight Calculator\n\nMaintaining a healthy weight supports overall wellness. Our Ideal Weight Calculator helps you estimate a healthy weight range based on height, gender, and age using established formulas.[1][4]\n\nThis tool provides informational estimates. It uses methods like BMI ranges and formulas from Devine, Hamwi, Robinson, and Miller. Understanding your ideal weight can guide lifestyle choices for better health.[1][4]\n\nWhy does ideal weight matter? A balanced weight reduces risks tied to being underweight or overweight. Factors like muscle mass, bone density, and body composition influence health beyond numbers.[7] This calculator offers a starting point to explore wellness.\n\n## What Is an Ideal Weight Calculator?\n\nAn ideal weight calculator estimates a healthy body weight. It considers height, gender, and sometimes age. Common formulas include:\n\n- **Devine Formula (1974)**: Widely used for medication dosing. For males: 50 kg + 2.3 kg per inch over 5 feet. For females: 45.5 kg + 2.3 kg per inch over 5 feet.[4]\n- **Hamwi Formula (1964)**: Males: 48 kg + 2.7 kg per inch over 5 feet. Females: 45.5 kg + 2.2 kg per inch over 5 feet.[1][4]\n- **Robinson Formula (1983)**: Males: 52 kg + 1.9 kg per inch over 5 feet. Females: 49 kg + 1.7 kg per inch over 5 feet.[1]\n- **Miller Formula (1983)**: Males: 56.2 kg + 1.41 kg per inch over 5 feet. Females: 53.1 kg + 1.36 kg per inch over 5 feet.[1][4]\n\nThese provide single-point estimates. Many tools also show a **healthy BMI range** of 18.5-24.9, giving a weight spectrum for your height.[1][2][4]\n\nBMI, or Body Mass Index, is weight in kg divided by height in meters squared (BMI = kg / m²). A healthy range suggests balanced weight for most adults.[2][3][5]\n\n## How Does the Ideal Weight Calculator Work?\n\nEnter your height, gender, and optional age. The tool applies formulas to compute estimates.[1][4]\n\nFor BMI-based ranges:\n- Minimum weight: 18.5 × height² (meters).\n- Maximum weight: 24.9 × height² (meters).[2]\n\nExample: For 1.7m height, healthy range is about 53-72 kg.[3] Results vary by formula, showing why multiple methods help.[1]\n\nGraphs often visualize ranges, aiding understanding.[1] Note: BMI does not measure body fat directly and overlooks muscle or ethnicity factors.[3][7]\n\n## Steps to Use an Ideal Weight Calculator\n- **Step 1**: Input height in cm or feet/inches.\n- **Step 2**: Select gender (male/female).\n- **Step 3**: Add age if prompted (some adjust for it).\n- **Step 4**: Choose formula (e.g., BMI range, Devine).\n- **Step 5**: Review results and healthy range.\n\nCompare with your current weight for insights.[1][4]\n\n## Quick Wellness Tips\n- Aim for gradual changes through balanced eating and activity.\n- Combine with BMI checks for fuller picture.[2]\n- Track water and sleep for support.[internal links]\n- Focus on strength training to build muscle.\n- Consult trends over time, not single readings.\n\n## FAQ\n\n### What is a healthy weight for my height?\nHealthy weight aligns with BMI 18.5-24.9. Use height to calculate range: min 18.5 × height², max 24.9 × height² (kg, meters).[2][4]\n\n### How accurate are ideal weight formulas?\nFormulas like Devine and Hamwi offer estimates based on population data. They vary slightly; BMI range provides broader context.[1][4]\n\n### Does age affect ideal weight?\nSome calculators factor age as metabolism slows. Formulas primarily use height/gender, but BMI applies universally for adults.[4][7]\n\n### What if my weight is outside the ideal range?\nIt signals potential adjustments. Lifestyle supports wellness; professional input helps personalize.[3][9]\n\n### Is BMI enough for ideal weight?\nBMI indicates general range but ignores muscle, fat distribution. Pair with waist measure or body fat tools.[3][5][7]\n\n## Explore More WellTools\n- [BMI Calculator](/?page=bmi)\n- [Calorie Counter](/?page=calories)\n- [Water Tracker](/?page=water)\n- [Body Fat Calculator](/?page=body-fat)\n\n## Reputable Sources\n\n**Medical Disclaimer**: This content is for informational purposes only and not a substitute for professional medical advice. Always consult a healthcare provider for personalized guidance. Ideal weight tools are estimates and do not diagnose health conditions.",
+            "keywords": [
+                "ideal weight calculator",
+                "healthy weight by height",
+                "ideal body weight formula",
+                "BMI weight range",
+                "calculate ideal weight"
+            ],
+            "faq": [
+                {
+                    "question": "What is a healthy weight for my height?",
+                    "answer": "Healthy weight aligns with BMI 18.5-24.9. Use height to calculate range: min 18.5 × height², max 24.9 × height² (kg, meters)."
+                },
+                {
+                    "question": "How accurate are ideal weight formulas?",
+                    "answer": "Formulas like Devine and Hamwi offer estimates based on population data. They vary slightly; BMI range provides broader context."
+                },
+                {
+                    "question": "Does age affect ideal weight?",
+                    "answer": "Some calculators factor age as metabolism slows. Formulas primarily use height/gender, but BMI applies universally for adults."
+                },
+                {
+                    "question": "What if my weight is outside the ideal range?",
+                    "answer": "It signals potential adjustments. Lifestyle supports wellness; professional input helps personalize."
+                },
+                {
+                    "question": "Is BMI enough for ideal weight?",
+                    "answer": "BMI indicates general range but ignores muscle, fat distribution. Pair with waist measure or body fat tools."
+                }
+            ],
+            "sources": [
+                {
+                    "title": "Mayo Clinic - BMI Calculator",
+                    "url": "https://www.mayoclinic.org/healthy-lifestyle/weight-loss/in-depth/bmi-calculator/itt-20084938"
+                },
+                {
+                    "title": "NIH - Calculate Your BMI",
+                    "url": "https://www.nhlbi.nih.gov/calculate-your-bmi"
+                },
+                {
+                    "title": "CDC - Adult BMI Calculator",
+                    "url": "https://www.cdc.gov/bmi/adult-calculator/index.html"
+                },
+                {
+                    "title": "WHO - BMI Classification",
+                    "url": "https://www.who.int/data/gho/data/themes/topics/topic-details/GHO/body-mass-index-bmi"
+                }
+            ],
+            "date": "2026-02-07"
+        },
+        {
+            "id": "welltools-3-1770270133534",
+            "title": "Water Intake Calculator: How Much Water Should You Drink Daily?",
+            "category": "health_calculators",
+            "excerpt": "Discover your ideal daily water intake with our free Water Intake Calculator. Learn how weight, activity, and age affect hydration needs for better health and energy. Calculate now!",
+            "image": "https://image.pollinations.ai/prompt/professional photo of a clear glass water bottle with fresh water drops on a wooden table next to a hydration calculator app on a smartphone, bright natural light, health and wellness theme?width=1200&height=800&nologo=true",
+            "imageAlt": "Water intake calculator for daily hydration needs",
+            "content": "# Water Intake Calculator: How Much Water Should You Drink Daily?\n\nStaying hydrated supports energy, focus, and overall wellness. Proper water intake helps maintain body functions like temperature regulation and digestion. Many people wonder how much water they truly need each day. Factors such as weight, activity level, and climate play key roles. Our Water Intake Calculator simplifies this by estimating your daily needs based on personal details. Use it to set hydration goals and feel your best.\n\n## Understanding Water Intake Needs\n\nWater makes up about 60% of the body. Daily needs vary by individual. Common guidelines suggest drinking half your body weight in pounds as ounces of water. For example, a 150-pound person might aim for 75 ounces daily.[1][3]\n\nMore precise methods link water to energy expenditure, known as Total Daily Energy Expenditure (TDEE). This accounts for calories burned through activity.[1] Age, gender, height, and exercise also influence requirements. Active people or those in hot climates need more.[5]\n\nFood and beverages provide some water, but drinking plain fluids covers most needs. Infants and children have specific guidelines, like 0.68-1.00 liters total for ages 0-12 months.[1]\n\n## How Water Intake Calculators Work\n\nThese tools use inputs like weight, height, age, gender, and activity level. Outputs appear in ounces, liters, or glasses. For instance:\n\n- Body weight (kg) × 0.03 = liters per day. A 70 kg person needs about 2.1 liters.[2]\n- One ounce per two pounds of body weight.[6]\n\nAdvanced calculators factor in exercise by adding 12 ounces per 30 minutes.[2] They separate total water from drinkable fluids, as food contributes 20-30%.[1]\n\nPregnant or breastfeeding individuals may need 24-32 extra ounces.[3] Older adults might drink less due to reduced thirst sensation.[5]\n\n## Steps to Use a Water Intake Calculator\n\n1. Enter your weight in pounds or kilograms.\n2. Add height, age, and gender.\n3. Select activity level: sedentary, moderate, or high.\n4. Note exercise duration and climate if applicable.\n5. Review results in preferred units like cups (8 oz) or bottles (500 ml).\n6. Track intake and adjust based on urine color or thirst.\n\nA standard glass holds 8 ounces, so eight glasses equal about 64 ounces or 1.9 liters.[2]\n\n## Quick Hydration Tips\n\n- Carry a reusable bottle for easy access.\n- Drink water before meals to aid digestion.\n- Add 12-16 ounces during workouts.\n- Check urine: pale yellow signals good hydration.\n- Include water-rich foods like fruits and vegetables.\n\n## Frequently Asked Questions\n\nThese cover common searches on hydration.\n\n### How much water should I drink based on weight?\nHalf your weight in pounds as ounces is a simple start. Adjust for activity.[1][3]\n\n### Does exercise increase water needs?\nYes, add 12 ounces per 30 minutes of activity to replace sweat loss.[2]\n\n### How many water bottles per day?\nFor 500 ml bottles: women 4-5, men 5-6, depending on needs.[2]\n\n### Is 8 glasses of water enough?\nIt provides 64 ounces, suitable for many but not all. Use a calculator for personalization.[2]\n\n### Do I need more water if pregnant?\nIncrease by 24-32 ounces daily, based on weight.[3]\n\n## Related WellTools\n\n- [BMI Calculator](/?page=bmi)\n- [Calorie Counter](/?page=calories)\n- [Water Tracker](/?page=water)\n- [Ideal Weight](/?page=ideal-weight)\n\n## Medical Sources\n\nSources: Mayo Clinic on hydration, NIH water guidelines.\n\n- [Mayo Clinic: Water Intake](https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/water/art-20044256)\n- [National Institutes of Health: Dietary Reference Intakes for Water](https://www.ncbi.nlm.nih.gov/books/NBK56570/)\n- [Institute of Medicine: Dietary Reference Intakes](https://nap.nationalacademies.org/catalog/10925/dietary-reference-intakes-for-water-potassium-sodium-chloride-and-sulfate)\n\n## Medical Disclaimer\n\nThis content is for informational purposes only and not a substitute for professional medical advice. Consult a healthcare provider for personalized guidance, especially with health conditions.",
+            "keywords": [
+                "water intake calculator",
+                "how much water to drink daily",
+                "daily water intake",
+                "hydration calculator",
+                "water needs by weight"
+            ],
+            "faq": [
+                {
+                    "question": "How much water should I drink based on my weight?",
+                    "answer": "A common rule is half your body weight in pounds as ounces daily. Adjust for activity and use a calculator for accuracy.[1][3]"
+                },
+                {
+                    "question": "How many water bottles should I drink per day?",
+                    "answer": "With 500 ml bottles, aim for 4-5 for women and 5-6 for men, based on individual needs.[2]"
+                },
+                {
+                    "question": "Does age affect daily water intake?",
+                    "answer": "Yes, children and older adults have adjusted needs. Infants need 0.68-1 liter total.[1][5]"
+                },
+                {
+                    "question": "How much extra water for exercise?",
+                    "answer": "Add 12 ounces per 30 minutes to replace fluids lost through sweat.[2]"
+                },
+                {
+                    "question": "Is 8 glasses of water a day enough?",
+                    "answer": "It equals 64 ounces, a baseline for many, but personalize with factors like weight and activity.[2]"
+                }
+            ],
+            "sources": [
+                {
+                    "title": "Mayo Clinic: Water - How much should you drink every day?",
+                    "url": "https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/water/art-20044256"
+                },
+                {
+                    "title": "NIH: Dietary Reference Intakes for Water, Potassium, Sodium, Chloride, and Sulfate",
+                    "url": "https://www.ncbi.nlm.nih.gov/books/NBK56570/"
+                },
+                {
+                    "title": "Institute of Medicine: DRI Tables",
+                    "url": "https://nap.nationalacademies.org/catalog/10925/dietary-reference-intakes-for-water-potassium-sodium-chloride-and-sulfate"
+                },
+                {
+                    "title": "CDC: Fast Facts About Drinking Water",
+                    "url": "https://www.cdc.gov/nutrition/php/data-research/fast-facts-water-consumption.html"
+                }
+            ],
+            "date": "2026-02-05"
+        },
+        {
             "id": "welltools-2-1770215056268",
             "title": "Daily Calorie Needs Calculator: Estimate Your Personalized Calorie Intake",
             "category": "health_calculators",

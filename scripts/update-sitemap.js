@@ -18,10 +18,11 @@ async function updateSitemap() {
         // We will reconstruct it to ensure clean state, keeping the static pages
         const staticUrls = [
             { loc: '/', priority: '1.0', freq: 'daily' },
-            { loc: '/calculators', priority: '0.8', freq: 'weekly' },
             { loc: '/tracking', priority: '0.8', freq: 'weekly' },
             { loc: '/blog', priority: '0.9', freq: 'daily' },
             { loc: '/about', priority: '0.5', freq: 'monthly' },
+            { loc: '/how-it-works', priority: '0.5', freq: 'monthly' },
+            { loc: '/experts', priority: '0.5', freq: 'monthly' },
             { loc: '/contact', priority: '0.5', freq: 'monthly' },
             // Tools
             { loc: '/bmi', priority: '0.7', freq: 'monthly' },
@@ -30,7 +31,14 @@ async function updateSitemap() {
             { loc: '/ideal-weight', priority: '0.7', freq: 'monthly' },
             { loc: '/sleep', priority: '0.7', freq: 'monthly' },
             { loc: '/body-fat', priority: '0.7', freq: 'monthly' },
-            { loc: '/meal-planner', priority: '0.8', freq: 'weekly' }
+            { loc: '/bmr', priority: '0.7', freq: 'monthly' },
+            { loc: '/macro', priority: '0.7', freq: 'monthly' },
+            { loc: '/1rm', priority: '0.7', freq: 'monthly' },
+            { loc: '/meal-planner', priority: '0.8', freq: 'weekly' },
+            // Legal
+            { loc: '/privacy', priority: '0.3', freq: 'yearly' },
+            { loc: '/terms', priority: '0.3', freq: 'yearly' },
+            { loc: '/disclaimer', priority: '0.3', freq: 'yearly' }
         ];
 
         let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>

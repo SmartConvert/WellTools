@@ -42,7 +42,8 @@
             "id": 32,
             "group": "body_preservation",
             "title": "Muscle Mass & Aging: Why Strength Training is Non-Negotiable After 30",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-08"
         },
         {
             "id": 33,

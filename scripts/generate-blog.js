@@ -150,9 +150,7 @@ async function generatePost() {
     console.log(`🚀 Generating Professional Multilingual Articles for: ${selectedTopic.title}`);
 
     const languages = [
-        { code: "en", name: "English", dir: "ltr", nuance: "Professional, authoritative, yet accessible. Use American English." },
-        { code: "ar", name: "Arabic", dir: "rtl", nuance: "Modern Standard Arabic (Fusha). Professional, respectful, and clear. Avoid local dialects." },
-        { code: "fr", name: "French", dir: "ltr", nuance: "Professional, elegant, and precise medical French. Use formal 'Vous'." }
+        { code: "en", name: "English", dir: "ltr", nuance: "Professional, authoritative, yet accessible. Use American English." }
     ];
 
     let posts = {};
@@ -160,7 +158,7 @@ async function generatePost() {
         const data = await fs.readFile(POSTS_PATH, "utf-8");
         posts = JSON.parse(data);
     } catch (e) {
-        posts = { en: [], ar: [], fr: [] };
+        posts = { en: [] };
     }
 
     // Initialize arrays if they don't exist

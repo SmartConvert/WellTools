@@ -3,6 +3,8 @@ export const calculatorContent = {
     bmi: {
         en: {
             hero_title: 'BMI Calculator',
+            meta_title: 'BMI Calculator - Calculate Your Body Mass Index | WellTools',
+            meta_description: 'Calculate your Body Mass Index (BMI) instantly with our free tool. Understand your weight category based on WHO guidelines.',
             hero_subtitle: 'Calculate your Body Mass Index.',
             hero_emoji: '🥑',
             hero_color: 'from-lime-400 to-green-500',
@@ -107,7 +109,9 @@ export const calculatorContent = {
         },
         ar: {
             hero_title: 'حاسبة مؤشر كتلة الجسم',
-            hero_subtitle: 'احسب مؤشر كتلة جسمك فوراً وافهم حالة وزنك الصحية',
+            meta_title: 'حاسبة مؤشر كتلة الجسم (BMI) - احسب وزنك المثالي | WellTools',
+            meta_description: 'احسب مؤشر كتلة الجسم (BMI) فوراً واعرف تصنيف وزنك (نقص الوزن، طبيعي، زيادة الوزن، سمنة) بناءً على معايير منظمة الصحة العالمية.',
+            hero_subtitle: 'احسب مؤشر كتلة الجسمك فوراً وافهم حالة وزنك الصحية',
             hero_emoji: '🥑',
             hero_color: 'from-lime-400 to-green-500',
 
@@ -150,6 +154,8 @@ export const calculatorContent = {
         },
         fr: {
             hero_title: 'Calculateur d\'IMC',
+            meta_title: 'Calculatrice IMC - Calculez votre Indice de Masse Corporelle | WellTools',
+            meta_description: 'Calculez votre Indice de Masse Corporelle (IMC) instantanément. Découvrez votre catégorie de poids selon l\'OMS.',
             hero_subtitle: 'Calculez instantanément votre Indice de Masse Corporelle et comprenez votre statut pondéral',
             hero_emoji: '🥑',
             hero_color: 'from-lime-400 to-green-500',
@@ -197,6 +203,8 @@ export const calculatorContent = {
     calories: {
         en: {
             hero_title: 'Calorie Calculator',
+            meta_title: 'Calorie Calculator - Daily TDEE & Needs for Weight Loss | WellTools',
+            meta_description: 'Estimate your daily calorie needs (TDEE) for weight loss, maintenance, or muscle gain using the Mifflin-St Jeor equation.',
             hero_subtitle: 'Estimate daily calories for weight maintenance, loss, or gain.',
             hero_emoji: '🔥',
             hero_color: 'from-orange-400 to-red-500',
@@ -301,6 +309,8 @@ export const calculatorContent = {
         },
         ar: {
             hero_title: 'حاسبة السعرات الحرارية',
+            meta_title: 'حاسبة السعرات الحرارية - احسب احتياجك اليومي للوزن | WellTools',
+            meta_description: 'احسب احتياجاتك اليومية من السعرات الحرارية لفقدان الوزن أو الحفاظ عليه أو بناء العضلات باستخدام معادلة Mifflin-St Jeor.',
             hero_subtitle: 'اكتشف احتياجاتك اليومية من السعرات الحرارية لأهدافك الصحية',
             hero_emoji: '🍎',
             hero_color: 'from-red-400 to-rose-500',
@@ -340,6 +350,8 @@ export const calculatorContent = {
         },
         fr: {
             hero_title: 'Calculateur de Calories',
+            meta_title: 'Calculateur de Calories - Besoins Journaliers & TDEE | WellTools',
+            meta_description: 'Estimez vos besoins caloriques quotidiens pour perdre du poids, maintenir ou gagner du muscle. Précision scientifique.',
             hero_subtitle: 'Découvrez vos besoins caloriques quotidiens pour vos objectifs de santé',
             hero_emoji: '🍎',
             hero_color: 'from-red-400 to-rose-500',
@@ -381,6 +393,8 @@ export const calculatorContent = {
     water: {
         en: {
             hero_title: 'Water Intake Calculator',
+            meta_title: 'Water Intake Calculator - Daily Hydration Needs | WellTools',
+            meta_description: 'Calculate your daily water intake based on weight and activity. Stay hydrated for energy, focus, and health with our personalized hydration tool.',
             hero_subtitle: 'Calculate your daily hydration needs based on your body and lifestyle.',
             hero_emoji: '💧',
             hero_color: 'from-blue-400 to-cyan-500',
@@ -447,6 +461,8 @@ export const calculatorContent = {
         },
         ar: {
             hero_title: 'حاسبة شرب الماء',
+            meta_title: 'حاسبة شرب الماء - احتياجك اليومي من الماء | WellTools',
+            meta_description: 'احسب كمية الماء التي يحتاجها جسمك يومياً بناءً على وزنك ومستوى نشاطك للحفاظ على الترطيب المثالي.',
             hero_subtitle: 'اكتشف كمية الماء التي يجب تناولها يومياً بناءً على جسمك ونشاطك',
             hero_emoji: '💧',
             hero_color: 'from-blue-400 to-cyan-500',
@@ -465,6 +481,8 @@ export const calculatorContent = {
         },
         fr: {
             hero_title: 'Calculateur d\'Eau',
+            meta_title: 'Calculateur d\'Eau - Besoins Quotidiens en Hydratation | WellTools',
+            meta_description: 'Calculez votre consommation d\'eau quotidienne selon votre poids et activité. Restez hydraté pour l\'énergie et la santé.',
             hero_subtitle: 'Découvrez la quantité d\'eau à boire quotidiennement selon votre corps et activité',
             hero_emoji: '💧',
             hero_color: 'from-blue-400 to-cyan-500',
@@ -485,6 +503,8 @@ export const calculatorContent = {
     'ideal-weight': {
         en: {
             hero_title: 'Ideal Weight Calculator',
+            meta_title: 'Ideal Weight Calculator - Find Your Healthy Weight Range | WellTools',
+            meta_description: 'Find your medically-recommended ideal weight range using clinical formulas (Devine, Miller, Robinson). Discover your healthy weight for longevity.',
             hero_subtitle: 'Find your medically-recommended healthy weight range.',
             hero_emoji: '🍐',
             hero_color: 'from-yellow-400 to-amber-500',
@@ -577,6 +597,8 @@ export const calculatorContent = {
         },
         ar: {
             hero_title: 'حاسبة الوزن المثالي',
+            meta_title: 'حاسبة الوزن المثالي - اكتشف وزنك الصحي | WellTools',
+            meta_description: 'اكتشف نطاق وزنك المثالي الموصى به طبياً باستخدام الصيغ السريرية. اعرف وزنك الصحي للعمر الطويل والوقاية من الأمراض.',
             hero_subtitle: 'اكتشف نطاق الوزن الصحي الموصى به طبياً لك',
             hero_emoji: '🍐',
             hero_color: 'from-yellow-400 to-amber-500',
@@ -594,6 +616,8 @@ export const calculatorContent = {
     sleep: {
         en: {
             hero_title: 'Sleep Calculator',
+            meta_title: 'Sleep Calculator - Optimize Sleep Cycles & Wake Up Refreshed | WellTools',
+            meta_description: 'Wake up feeling refreshed by timing your sleep cycles. Calculate the best time to go to bed or wake up based on 90-minute sleep cycles.',
             hero_subtitle: 'Optimize your rest by waking up between 90-minute sleep cycles.',
             hero_emoji: '😴',
             hero_color: 'from-indigo-500 to-purple-600',
@@ -661,6 +685,8 @@ export const calculatorContent = {
         },
         ar: {
             hero_title: 'حاسبة مدة النوم',
+            meta_title: 'حاسبة النوم - حسن دورات نومك واستيقظ نشيطاً | WellTools',
+            meta_description: 'استيقظ وأنت تشعر بالانتعاش من خلال توقيت دورات نومك. احسب أفضل وقت للنوم أو الاستيقاظ بناءً على دورات نوم مدتها 90 دقيقة.',
             hero_subtitle: 'قم بتحسين راحتك عن طريق حساب أفضل أوقات الاستيقاظ والنوم',
             hero_emoji: '🍇',
             hero_color: 'from-purple-400 to-violet-500',
@@ -678,6 +704,8 @@ export const calculatorContent = {
     bmr: {
         en: {
             hero_title: 'BMR Calculator',
+            meta_title: 'BMR Calculator - Basal Metabolic Rate | WellTools',
+            meta_description: 'Calculate your Basal Metabolic Rate (BMR) instantly. Learn how many calories your body burns at rest using the Mifflin-St Jeor equation.',
             hero_subtitle: 'Calculate your Basal Metabolic Rate.',
             hero_emoji: '⚡',
             hero_color: 'from-amber-400 to-orange-500',
@@ -767,11 +795,21 @@ export const calculatorContent = {
                     answer: 'There is no single "normal" BMR, as it depends entirely on your size and age. However, for most adults, BMR ranges between 1,200 and 2,200 calories per day.'
                 }
             ]
+        },
+        ar: {
+            hero_title: 'حاسبة معدل الأيض الأساسي (BMR)',
+            meta_title: 'حاسبة معدل الأيض الأساسي (BMR) - احسب سعراتك | WellTools',
+            meta_description: 'احسب معدل الأيض الأساسي (BMR) فوراً. اعرف عدد السعرات الحرارية التي يحرقها جسمك أثناء الراحة باستخدام معادلة Mifflin-St Jeor.',
+            hero_subtitle: 'احسب معدل الأيض الأساسي الخاص بك.',
+            hero_emoji: '⚡',
+            hero_color: 'from-amber-400 to-orange-500'
         }
     },
     macro: {
         en: {
             hero_title: 'Macro Calculator',
+            meta_title: 'Macro Calculator - Protein, Carbs, Fat for Your Goals | WellTools',
+            meta_description: 'Calculate your optimal macronutrient split (Protein, Carbs, Fats) for weight loss, muscle gain, or maintenance. Customized to your TDEE.',
             hero_subtitle: 'Find your target protein, carb, and fat ranges.',
             hero_emoji: '🥗',
             hero_color: 'from-green-400 to-emerald-600',
@@ -843,11 +881,21 @@ export const calculatorContent = {
                 { question: 'Do I need to track macros every day?', answer: 'At first, yes. Tracking for 30 days helps you learn the nutritional content of foods.' },
                 { question: 'What happens if I eat too much protein?', answer: 'Protein has calories too. If too much protein puts you in a calorie surplus, you will gain weight.' }
             ]
+        },
+        ar: {
+            hero_title: 'حاسبة الماكروز',
+            meta_title: 'حاسبة الماكروز - البروتين والكربوهيدرات والدهون | WellTools',
+            meta_description: 'احسب تقسيم الماكروز الأمثل (بروتين، كربوهيدرات، دهون) لفقدان الوزن أو بناء العضلات. مخصصة لاحتياجاتك اليومية.',
+            hero_subtitle: 'ابحث عن نطاقات البروتين والكربوهيدرات والدهون المستهدفة.',
+            hero_emoji: '🥗',
+            hero_color: 'from-green-400 to-emerald-600'
         }
     },
     'body-fat': {
         en: {
             hero_title: 'Body Fat Calculator',
+            meta_title: 'Body Fat Calculator - Army Body Fat Percentage | WellTools',
+            meta_description: 'Estimate your body fat percentage using the US Navy method. A simple, non-invasive way to track your body composition progress.',
             hero_subtitle: 'Estimate your body fat percentage accurately.',
             hero_emoji: '🍊',
             hero_color: 'from-orange-400 to-orange-600',
@@ -910,11 +958,21 @@ export const calculatorContent = {
                 { question: 'How often should I measure body fat?', answer: 'Body fat changes slowly. Measuring once every 2-4 weeks is ideal to see real trends.' },
                 { question: 'Is this as accurate as a DEXA scan?', answer: 'No, DEXA is the gold standard. However, the Navy Method is surprisingly accurate for a free, no-cost tool and is perfect for tracking relative progress.' }
             ]
+        },
+        ar: {
+            hero_title: 'حاسبة دهون الجسم',
+            meta_title: 'حاسبة دهون الجسم - نسبة الدهون الدقيقة | WellTools',
+            meta_description: 'قدر نسبة دهون جسمك باستخدام طريقة البحرية الأمريكية. طريقة بسيطة وغير جراحية لتتبع تكوين جسمك.',
+            hero_subtitle: 'قدر نسبة دهون جسمك بدقة.',
+            hero_emoji: '🍊',
+            hero_color: 'from-orange-400 to-orange-600'
         }
     },
-    'one-rep-max': {
+    '1rm': {
         en: {
             hero_title: 'One-Rep Max (1RM) Calculator',
+            meta_title: 'One Rep Max Calculator - Improve Your Strength | WellTools',
+            meta_description: 'Calculate your estimated One Rep Max (1RM) for squats, bench press, and deadlifts. Plan your strength training safely.',
             hero_subtitle: 'Predict your maximum lifting capacity safely.',
             hero_emoji: '🏋️',
             hero_color: 'from-gray-700 to-gray-900',
@@ -990,6 +1048,96 @@ export const calculatorContent = {
                 { question: 'How do I use these percentages?', answer: 'If your 1RM is 100kg and your program asks for "3x8 @ 75%", you should lift 75kg for 3 sets of 8 reps.' },
                 { question: 'Does 1RM apply to isolation moves?', answer: 'Strictly speaking, yes, but 1RM is best used for compound lifts (Squat, Bench, Deadlift, Press). Testing 1RM on a bicep curl or tricep extension is generally not recommended due to joint stress.' }
             ]
+        },
+        ar: {
+            hero_title: 'حاسبة أقصى وزن لتكرار واحد (1RM)',
+            meta_title: 'حاسبة أقصى وزن لتكرار واحد (1RM) - حسن قوتك | WellTools',
+            meta_description: 'احسب أقصى وزن يمكنك رفعه لتكرار واحد (1RM) لتمارين القرفصاء وضغط الصدر والرفعة المميتة. خطط لتمارين القوة بأمان.',
+            hero_subtitle: 'توقع أقصى قدرة رفع لك بأمان.',
+            hero_emoji: '🏋️',
+            hero_color: 'from-gray-700 to-gray-900'
         }
+    },
+    'meal-planner': {
+        en: { meta_title: 'Meal Planner - Personalized Diet Plans | WellTools', meta_description: 'Create a custom meal plan based on your calories and macros. Healthy, delicious recipes tailored to your weight loss or muscle gain goals.' },
+        ar: { meta_title: 'مخطط الوجبات - خطط غذائية مخصصة | WellTools', meta_description: 'أنشئ خطة وجبات مخصصة بناءً على السعرات الحرارية والماكروز. وصفات صحية ولذيذة مصممة لأهدافك.' },
+        fr: { meta_title: 'Planificateur de repas - Plans diététiques personnalisés | WellTools', meta_description: 'Créez un plan de repas personnalisé basé sur vos calories et macros. Des recettes saines et délicieuses adaptées à vos objectifs.' }
+    },
+    tracking: {
+        en: { meta_title: 'Daily Tracking - Monitor Your Fitness Progress | WellTools', meta_description: 'Track your daily weight, water intake, and calories. Visualize your progress with interactive charts and stay motivated.' },
+        ar: { meta_title: 'التتبع اليومي - راقب تقدم لياقتك | WellTools', meta_description: 'تتبع وزنك والمياه والسعرات الحرارية يومياً. راقب تقدمك مع مخططات تفاعلية وحافظ على حماسك.' },
+        fr: { meta_title: 'Suivi Quotidien - Surveillez vos progrès | WellTools', meta_description: 'Suivez votre poids, votre consommation d\'eau et vos calories chaque jour. Visualisez vos progrès avec des graphiques interactifs.' }
+    },
+    home: {
+        en: {
+            meta_title: 'WellTools - Free Health Calculators, Meal Plans & Wellness Tracking',
+            meta_description: 'Achieve your fitness goals with our free, science-backed health calculators (BMI, TDEE, Macros), personalized meal planner, and daily progress tracking tools.'
+        },
+        ar: {
+            meta_title: 'WellTools - حاسبات صحية مجانية، خطط وجبات وتتبع اللياقة',
+            meta_description: 'حقق أهدافك الصحية مع حاسباتنا المجانية (مؤشر كتلة الجسم، السعرات، الماكروز)، ومخطط الوجبات الشخصي، وأدوات تتبع التقدم اليومي.'
+        },
+        fr: {
+            meta_title: 'WellTools - Calculateurs de santé gratuits, plans de repas et suivi',
+            meta_description: 'Atteignez vos objectifs de forme avec nos calculateurs de santé gratuits et validés par la science (IMC, TDEE, Macros), nos plans de repas et outils de suivi.'
+        }
+    },
+    about: {
+        en: {
+            meta_title: 'About WellTools - Our Mission & Health Experts',
+            meta_description: 'Learn about WellTools mission to provide accessible, accurate health tools. Meet our team of fitness experts and medical advisors.'
+        },
+        ar: {
+            meta_title: 'عن WellTools - مهمتنا وخبراء الصحة',
+            meta_description: 'تعرف على مهمة WellTools لتوفير أدوات صحية دقيقة وسهلة الوصول. قابل فريقنا من خبراء اللياقة والمستشارين الطبيين.'
+        },
+        fr: {
+            meta_title: 'À propos de WellTools - Notre mission & experts santé',
+            meta_description: 'Découvrez la mission de WellTools de fournir des outils de santé accessibles et précis. Rencontrez notre équipe d\'experts en fitness et conseillers médicaux.'
+        }
+    },
+    contact: {
+        en: {
+            meta_title: 'Contact Us - WellTools Support',
+            meta_description: 'Have questions or feedback? Contact the WellTools team for support with our calculators or meal planning tools.'
+        },
+        ar: {
+            meta_title: 'اتصل بنا - دعم WellTools',
+            meta_description: 'لديك أسئلة أو ملاحظات؟ اتصل بفريق WellTools للحصول على الدعم بخصوص حاسباتنا أو أدوات تخطيط الوجبات.'
+        },
+        fr: {
+            meta_title: 'Contactez-nous - Support WellTools',
+            meta_description: 'Des questions ou des commentaires ? Contactez l\'équipe WellTools pour obtenir de l\'aide avec nos calculateurs ou outils de planification de repas.'
+        }
+    },
+    privacy: {
+        en: { meta_title: 'Privacy Policy - WellTools', meta_description: 'Read our privacy policy to understand how we protect your personal health data.' },
+        ar: { meta_title: 'سياسة الخصوصية - WellTools', meta_description: 'اقرأ سياسة الخصوصية لفهم كيف نحمي بياناتك الصحية الشخصية.' },
+        fr: { meta_title: 'Politique de confidentialité - WellTools', meta_description: 'Lisez notre politique de confidentialité pour comprendre comment nous protégeons vos données de santé personnelles.' }
+    },
+    terms: {
+        en: { meta_title: 'Terms of Service - WellTools', meta_description: 'Terms and conditions for using WellTools services.' },
+        ar: { meta_title: 'شروط الخدمة - WellTools', meta_description: 'شروط وأحكام استخدام خدمات WellTools.' },
+        fr: { meta_title: 'Conditions d\'utilisation - WellTools', meta_description: 'Conditions générales d\'utilisation des services WellTools.' }
+    },
+    disclaimer: {
+        en: { meta_title: 'Medical Disclaimer - WellTools', meta_description: 'Important medical disclaimer regarding the use of our health calculators and content.' },
+        ar: { meta_title: 'إخلاء المسؤولية الطبية - WellTools', meta_description: 'إخلاء مسؤولية طبي هام بخصوص استخدام حاسباتنا الصحية والمحتوى.' },
+        fr: { meta_title: 'Avis de non-responsabilité médicale - WellTools', meta_description: 'Avis de non-responsabilité médicale important concernant l\'utilisation de nos calculateurs de santé et de notre contenu.' }
+    },
+    'how-it-works': {
+        en: { meta_title: 'How It Works - Science Behind WellTools', meta_description: 'Understand the science and formulas behind our health calculators.' },
+        ar: { meta_title: 'كيف يعمل - العلم وراء WellTools', meta_description: 'افهم العلم والصيغ وراء حاسباتنا الصحية.' },
+        fr: { meta_title: 'Comment ça marche - La science derrière WellTools', meta_description: 'Comprenez la science et les formules derrière nos calculateurs de santé.' }
+    },
+    experts: {
+        en: { meta_title: 'Our Experts - WellTools Medical Advisory Board', meta_description: 'Meet the certified nutritionists, doctors, and trainers who review our content.' },
+        ar: { meta_title: 'خبراؤنا - المجلس الاستشاري الطبي لـ WellTools', meta_description: 'قابل خبراء التغذية والأطباء والمدربين المعتمدين الذين يراجعون محتوانا.' },
+        fr: { meta_title: 'Nos experts - Conseil consultatif médical WellTools', meta_description: 'Rencontrez les nutritionnistes, médecins et entraîneurs certifiés qui examinent notre contenu.' }
+    },
+    blog: {
+        en: { meta_title: 'Health & Fitness Blog - WellTools', meta_description: 'Latest articles on nutrition, fitness, and wellness from our experts.' },
+        ar: { meta_title: 'مدونة الصحة واللياقة - WellTools', meta_description: 'أحدث المقالات حول التغذية واللياقة والعافية من خبرائنا.' },
+        fr: { meta_title: 'Blog Santé & Fitness - WellTools', meta_description: 'Derniers articles sur la nutrition, le fitness et le bien-être par nos experts.' }
     }
 };

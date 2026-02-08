@@ -275,11 +275,24 @@ const DailyHealthTools = () => {
       window.history.pushState({ page: currentPage }, '', newUrl);
     }
 
-    // SEO: Update Meta Title based on currentPage
+    // SEO: Update Meta Title & Description based on currentPage
     import('./data/seoContent').then(module => {
-      const content = module.calculatorContent[currentPage]?.['en'];
+      const currentLang = document.documentElement.lang || 'en';
+      const pageContent = module.calculatorContent[currentPage];
+      const content = pageContent?.[currentLang] || pageContent?.['en'];
+
       if (content) {
-        document.title = `${content.hero_title} - WellTools`;
+        // Update Title
+        document.title = content.meta_title || `${content.hero_title} - WellTools`;
+
+        // Update Meta Description
+        let metaDesc = document.querySelector('meta[name="description"]');
+        if (!metaDesc) {
+          metaDesc = document.createElement('meta');
+          metaDesc.name = 'description';
+          document.head.appendChild(metaDesc);
+        }
+        metaDesc.content = content.meta_description || content.hero_subtitle || 'Free online health calculators and wellness tools.';
       } else if (currentPage === 'home') {
         document.title = 'WellTools - Free Online Health Calculators';
       }

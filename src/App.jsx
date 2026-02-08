@@ -3,6 +3,7 @@ import { Heart, Menu, X, Moon, Sun } from 'lucide-react';
 import { translations } from './translations';
 import postsData from './data/posts.json';
 import AdComponent from './components/AdComponent';
+import { parseLocalizedNumber } from './utils/numbers';
 
 // Helper to handle ChunkLoadError (when a new version is deployed while user has the site open)
 const lazyWithRetry = (componentImport) => {
@@ -350,8 +351,14 @@ const DailyHealthTools = () => {
   };
 
   const calculateBMI = () => {
-    const weight = parseFloat(bmiWeight);
-    const height = parseFloat(bmiHeight) / 100;
+    const weight = parseLocalizedNumber(bmiWeight);
+    const height = parseLocalizedNumber(bmiHeight) / 100;
+
+    if (isNaN(weight) || isNaN(height) || height === 0) {
+      setBmiResult(null);
+      return;
+    }
+
     const bmi = (weight / (height * height)).toFixed(1);
     let category = bmi < 18.5 ? 'cat_underweight' : bmi < 25 ? 'cat_normal' : bmi < 30 ? 'cat_overweight' : 'cat_obese';
     let color = bmi < 18.5 ? 'text-blue-600' : bmi < 25 ? 'text-green-600' : bmi < 30 ? 'text-yellow-600' : 'text-red-600';
@@ -359,9 +366,15 @@ const DailyHealthTools = () => {
   };
 
   const calculateCalories = () => {
-    const weight = parseFloat(calWeight);
-    const height = parseFloat(calHeight);
-    const age = parseInt(calAge);
+    const weight = parseLocalizedNumber(calWeight);
+    const height = parseLocalizedNumber(calHeight);
+    const age = parseLocalizedNumber(calAge);
+
+    if (isNaN(weight) || isNaN(height) || isNaN(age)) {
+      setCalResult(null);
+      return;
+    }
+
     const bmr = calGender === 'male'
       ? 10 * weight + 6.25 * height - 5 * age + 5
       : 10 * weight + 6.25 * height - 5 * age - 161;
@@ -371,7 +384,12 @@ const DailyHealthTools = () => {
   };
 
   const calculateWater = () => {
-    const weight = parseFloat(waterWeight);
+    const weight = parseLocalizedNumber(waterWeight);
+    if (isNaN(weight)) {
+      setWaterResult(null);
+      return;
+    }
+
     let intake = weight * 0.033;
     if (waterActivity === 'moderate') intake += 0.5;
     if (waterActivity === 'high') intake += 1;
@@ -379,13 +397,22 @@ const DailyHealthTools = () => {
   };
 
   const calculateIdealWeight = () => {
-    const height = parseFloat(idealHeight);
+    const height = parseLocalizedNumber(idealHeight);
+    if (isNaN(height)) {
+      setIdealResult(null);
+      return;
+    }
+
     const ideal = idealGender === 'male' ? 50 + 0.91 * (height - 152.4) : 45.5 + 0.91 * (height - 152.4);
     setIdealResult({ ideal: ideal.toFixed(1), min: (ideal * 0.9).toFixed(1), max: (ideal * 1.1).toFixed(1) });
   };
 
   const calculateSleep = () => {
-    const age = parseInt(sleepAge);
+    const age = parseLocalizedNumber(sleepAge);
+    if (isNaN(age)) {
+      setSleepResult(null);
+      return;
+    }
     let hours = age < 1 ? '14-17' : age < 2 ? '11-14' : age < 5 ? '10-13' : age < 13 ? '9-11' : age < 18 ? '8-10' : age < 65 ? '7-9' : '7-8';
     setSleepResult(`${hours} ${t.hours}`);
   };
@@ -401,13 +428,25 @@ const DailyHealthTools = () => {
   };
 
   const calculateBodyFat = () => {
-    const height = parseFloat(bfHeight);
-    const neck = parseFloat(bfNeck);
-    const waist = parseFloat(bfWaist);
-    const hip = parseFloat(bfHip);
+    const height = parseLocalizedNumber(bfHeight);
+    const neck = parseLocalizedNumber(bfNeck);
+    const waist = parseLocalizedNumber(bfWaist);
+    const hip = parseLocalizedNumber(bfHip);
+
+    if (isNaN(height) || isNaN(neck) || isNaN(waist) || (bfGender === 'female' && isNaN(hip))) {
+      setBfResult(null);
+      return;
+    }
+
     let bf = bfGender === 'male'
       ? 495 / (1.0324 - 0.19077 * Math.log10(waist - neck) + 0.15456 * Math.log10(height)) - 450
       : 495 / (1.29579 - 0.35004 * Math.log10(waist + hip - neck) + 0.22100 * Math.log10(height)) - 450;
+
+    if (isNaN(bf) || !isFinite(bf)) {
+      setBfResult(null);
+      return;
+    }
+
     bf = bf.toFixed(1);
     let category = bfGender === 'male'
       ? bf < 6 ? t.cat_essential : bf < 14 ? t.cat_athletes : bf < 18 ? t.cat_fitness : bf < 25 ? t.cat_average : t.cat_obese
@@ -416,10 +455,13 @@ const DailyHealthTools = () => {
   };
 
   const calculateBMR = () => {
-    const w = parseFloat(bmrWeight);
-    const h = parseFloat(bmrHeight);
-    const a = parseFloat(bmrAge);
-    if (!w || !h || !a) return;
+    const w = parseLocalizedNumber(bmrWeight);
+    const h = parseLocalizedNumber(bmrHeight);
+    const a = parseLocalizedNumber(bmrAge);
+    if (!w || !h || !a) {
+      setBmrResult(null);
+      return;
+    }
     // Mifflin-St Jeor
     let bmr = (10 * w) + (6.25 * h) - (5 * a);
     bmr += bmrGender === 'male' ? 5 : -161;
@@ -427,8 +469,11 @@ const DailyHealthTools = () => {
   };
 
   const calculateMacros = () => {
-    const cal = parseFloat(macroCalories);
-    if (!cal) return;
+    const cal = parseLocalizedNumber(macroCalories);
+    if (isNaN(cal) || cal <= 0) {
+      setMacroResult(null);
+      return;
+    }
     let p, c, f;
     // Simple splits: 
     // Balanced: 30% P, 40% C, 30% F
@@ -447,29 +492,35 @@ const DailyHealthTools = () => {
   };
 
   const calculateORM = () => {
-    const w = parseFloat(ormWeight);
-    const r = parseFloat(ormReps);
-    if (!w || !r) return;
+    const w = parseLocalizedNumber(ormWeight);
+    const r = parseLocalizedNumber(ormReps);
+    if (!w || !r) {
+      setOrmResult(null);
+      return;
+    }
     // Epley Formula: 1RM = w * (1 + r/30)
     const max = w * (1 + r / 30);
     setOrmResult({ max: Math.round(max) });
   };
 
   const addWeightEntry = () => {
-    if (!newWeight) return;
-    const updated = { ...trackingData, weight: [...trackingData.weight, { date: new Date().toISOString().split('T')[0], value: parseFloat(newWeight) }].slice(-30) };
+    const val = parseLocalizedNumber(newWeight);
+    if (!val && val !== 0) return;
+    const updated = { ...trackingData, weight: [...trackingData.weight, { date: new Date().toISOString().split('T')[0], value: val }].slice(-30) };
     saveTrackingData(updated); setNewWeight('');
   };
 
   const addWaterEntry = () => {
-    if (!newWater) return;
-    const updated = { ...trackingData, water: [...trackingData.water, { date: new Date().toISOString().split('T')[0], value: parseFloat(newWater) }].slice(-30) };
+    const val = parseLocalizedNumber(newWater);
+    if (!val && val !== 0) return;
+    const updated = { ...trackingData, water: [...trackingData.water, { date: new Date().toISOString().split('T')[0], value: val }].slice(-30) };
     saveTrackingData(updated); setNewWater('');
   };
 
   const addSleepEntry = () => {
-    if (!newSleep) return;
-    const updated = { ...trackingData, sleep: [...trackingData.sleep, { date: new Date().toISOString().split('T')[0], value: parseFloat(newSleep) }].slice(-30) };
+    const val = parseLocalizedNumber(newSleep);
+    if (!val && val !== 0) return;
+    const updated = { ...trackingData, sleep: [...trackingData.sleep, { date: new Date().toISOString().split('T')[0], value: val }].slice(-30) };
     saveTrackingData(updated); setNewSleep('');
   };
 

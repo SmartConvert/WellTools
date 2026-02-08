@@ -3,6 +3,7 @@ import { Utensils, TrendingDown, Activity, Scale as ScaleIcon, Info, Plus } from
 import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import { mealCategories } from '../data/meals';
+import { parseLocalizedNumber } from '../utils/numbers';
 
 const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
     const [goal, setGoal] = useState(calResult ? (calResult.goal || 'maintain') : 'maintain');
@@ -40,7 +41,7 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
         }
     };
 
-    const foodRecs = getFoodRecommendations(isManualMode ? (parseInt(manualCalories) > 2500 ? 'gain' : parseInt(manualCalories) < 1600 ? 'lose' : 'maintain') : goal);
+    const foodRecs = getFoodRecommendations(isManualMode ? (parseLocalizedNumber(manualCalories) > 2500 ? 'gain' : parseLocalizedNumber(manualCalories) < 1600 ? 'lose' : 'maintain') : goal);
 
     const [currentPlan, setCurrentPlan] = useState({ total: 0, items: [] });
 
@@ -63,7 +64,7 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
                 allMeals = [...allMeals, ...cat.meals];
             });
 
-            const targetCals = isManualMode ? parseInt(manualCalories) : 0;
+            const targetCals = isManualMode ? (parseLocalizedNumber(manualCalories) || 0) : 0;
             const mealTypes = [t.breakfast, t.lunch, t.dinner, t.snack];
             const splits = [0.25, 0.35, 0.30, 0.10]; // Portion percentages
 

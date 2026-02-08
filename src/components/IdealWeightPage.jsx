@@ -4,7 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 
-const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGender, calculateIdealWeight, idealResult, setCurrentPage, t }) => (
+const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGender, calculateIdealWeight, idealResult, idealError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
             <ToolHero toolId="ideal-weight" />
@@ -51,6 +51,9 @@ const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGen
                         >
                             {t.calculate}
                         </button>
+                        {idealError && (
+                            <p className="text-sm text-rose-600 dark:text-rose-400 text-center">{idealError}</p>
+                        )}
                     </div>
 
                     {idealResult && (

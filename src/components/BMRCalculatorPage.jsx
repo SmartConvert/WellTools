@@ -4,7 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 
-const BMRCalculatorPage = ({ bmrWeight, setBmrWeight, bmrHeight, setBmrHeight, bmrAge, setBmrAge, bmrGender, setBmrGender, calculateBMR, bmrResult, setCurrentPage, t }) => (
+const BMRCalculatorPage = ({ bmrWeight, setBmrWeight, bmrHeight, setBmrHeight, bmrAge, setBmrAge, bmrGender, setBmrGender, calculateBMR, bmrResult, bmrError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
             <ToolHero toolId="bmr" />
@@ -79,6 +79,9 @@ const BMRCalculatorPage = ({ bmrWeight, setBmrWeight, bmrHeight, setBmrHeight, b
                         >
                             Calculate BMR
                         </button>
+                        {bmrError && (
+                            <p className="text-sm text-rose-600 dark:text-rose-400 text-center">{bmrError}</p>
+                        )}
                     </div>
 
                     {bmrResult && (

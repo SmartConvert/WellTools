@@ -6,11 +6,6 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/calculators</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://welltools.pages.dev/tracking</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -22,6 +17,16 @@
   </url>
   <url>
     <loc>https://welltools.pages.dev/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://welltools.pages.dev/how-it-works</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://welltools.pages.dev/experts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -61,9 +66,39 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://welltools.pages.dev/bmr</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://welltools.pages.dev/macro</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://welltools.pages.dev/1rm</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://welltools.pages.dev/meal-planner</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://welltools.pages.dev/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://welltools.pages.dev/terms</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://welltools.pages.dev/disclaimer</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://welltools.pages.dev/?post=welltools-4-1770441194643</loc>

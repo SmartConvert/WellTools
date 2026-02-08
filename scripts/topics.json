@@ -32,6 +32,67 @@
             "completedDate": "2026-02-07"
         },
         {
+            "id": 31,
+            "group": "body_preservation",
+            "title": "The Science of Longevity: 5 Daily Habits to Slow Aging",
+            "completed": true,
+            "completedDate": "2026-02-08"
+        },
+        {
+            "id": 32,
+            "group": "body_preservation",
+            "title": "Muscle Mass & Aging: Why Strength Training is Non-Negotiable After 30",
+            "completed": false
+        },
+        {
+            "id": 33,
+            "group": "body_preservation",
+            "title": "Visceral Fat vs. Subcutaneous Fat: The Hidden Danger to Your Organs",
+            "completed": false
+        },
+        {
+            "id": 34,
+            "group": "body_preservation",
+            "title": "Gut Microbiome: The Second Brain Controlling Your Health",
+            "completed": false
+        },
+        {
+            "id": 35,
+            "group": "body_preservation",
+            "title": "Chronic Inflammation: The Silent Killer & How to Fight It Naturally",
+            "completed": false
+        },
+        {
+            "id": 36,
+            "group": "body_preservation",
+            "title": "Sleep Architecture: Understanding Deep vs. REM Sleep for Recovery",
+            "completed": false
+        },
+        {
+            "id": 37,
+            "group": "body_preservation",
+            "title": "Hormonal Health: Signs of Imbalance & Natural Fixes",
+            "completed": false
+        },
+        {
+            "id": 38,
+            "group": "body_preservation",
+            "title": "Hydration & Cognitive Function: The Water-Brain Connection",
+            "completed": false
+        },
+        {
+            "id": 39,
+            "group": "body_preservation",
+            "title": "Intermittent Fasting: Autophagy & Cellular Repair Explained",
+            "completed": false
+        },
+        {
+            "id": 40,
+            "group": "body_preservation",
+            "title": "Stress Management: Cortisol's Impact on Weight & Longevity",
+            "completed": false
+        },
+        {
             "id": 5,
             "group": "health_calculators",
             "title": "Sleep Hours Calculator",
@@ -68,66 +129,6 @@
             "completed": false
         },
         {
-            "id": 11,
-            "group": "meal_plans",
-            "title": "What should I eat today?",
-            "completed": false
-        },
-        {
-            "id": 12,
-            "group": "meal_plans",
-            "title": "Meal plan for weight loss",
-            "completed": false
-        },
-        {
-            "id": 13,
-            "group": "meal_plans",
-            "title": "Meal plan for weight gain",
-            "completed": false
-        },
-        {
-            "id": 14,
-            "group": "meal_plans",
-            "title": "Meal plan for diabetes",
-            "completed": false
-        },
-        {
-            "id": 15,
-            "group": "meal_plans",
-            "title": "Meal plan for high blood pressure",
-            "completed": false
-        },
-        {
-            "id": 16,
-            "group": "meal_plans",
-            "title": "Meal plan for cholesterol",
-            "completed": false
-        },
-        {
-            "id": 17,
-            "group": "meal_plans",
-            "title": "Meal plan for office workers",
-            "completed": false
-        },
-        {
-            "id": 18,
-            "group": "meal_plans",
-            "title": "Meal plan for students",
-            "completed": false
-        },
-        {
-            "id": 19,
-            "group": "meal_plans",
-            "title": "Cheap healthy meal plan",
-            "completed": false
-        },
-        {
-            "id": 20,
-            "group": "meal_plans",
-            "title": "Vegetarian daily meal plan",
-            "completed": false
-        },
-        {
             "id": 21,
             "group": "daily_health_topics",
             "title": "How much water should I drink per day?",
@@ -146,18 +147,6 @@
             "completed": false
         },
         {
-            "id": 24,
-            "group": "daily_health_topics",
-            "title": "How many hours should I sleep?",
-            "completed": false
-        },
-        {
-            "id": 25,
-            "group": "daily_health_topics",
-            "title": "Why am I gaining weight?",
-            "completed": false
-        },
-        {
             "id": 26,
             "group": "daily_health_topics",
             "title": "How to lose weight safely",
@@ -173,18 +162,6 @@
             "id": 28,
             "group": "daily_health_topics",
             "title": "Best foods for energy",
-            "completed": false
-        },
-        {
-            "id": 29,
-            "group": "daily_health_topics",
-            "title": "Foods that help digestion",
-            "completed": false
-        },
-        {
-            "id": 30,
-            "group": "daily_health_topics",
-            "title": "Simple daily healthy routine",
             "completed": false
         }
     ]

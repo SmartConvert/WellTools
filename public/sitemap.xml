@@ -101,6 +101,11 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://welltools.pages.dev/?post=welltools-5-1770616760760</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://welltools.pages.dev/?post=welltools-4-1770441194643</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

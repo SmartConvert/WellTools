@@ -1,6 +1,63 @@
 {
     "en": [
         {
+            "id": "welltools-5-1770616760760",
+            "title": "Sleep Hours Calculator: Find Your Ideal Bedtime & Wake-Up Time",
+            "category": "health_calculators",
+            "excerpt": "Discover your perfect sleep schedule with our Sleep Hours Calculator. Calculate ideal bedtime and wake-up times based on sleep cycles and age-specific needs for better rest and energy. Try it now!",
+            "image": "https://image.pollinations.ai/prompt/professional photo of a person sleeping peacefully in a cozy bed with clock showing bedtime, soft lighting, health wellness theme?width=1200&height=800&nologo=true",
+            "imageAlt": "Sleep Hours Calculator showing ideal bedtime and wake-up times for better rest",
+            "content": "# Sleep Hours Calculator\n\nA **Sleep Hours Calculator** helps you determine the best bedtime and wake-up times to match your natural sleep cycles. Quality sleep supports daily energy, focus, and health. This tool uses sleep cycle lengths of about 90 minutes and recommended hours by age to suggest optimal schedules.[2][3][4]\n\nMany people feel groggy because they wake mid-cycle. A calculator aligns your routine to end cycles naturally, promoting refreshment. It considers factors like fall-asleep time, often 15 minutes, and total cycles needed, typically 4-6 per night.[2][4][9]\n\n## How a Sleep Hours Calculator Works\n\nSleep cycles last 90-110 minutes, including light sleep, deep sleep, and REM stages. Waking at cycle ends feels better than interrupting deep phases.[4][7]\n\nCalculators compute based on:\n- Your wake-up time or desired sleep hours.\n- Number of cycles (e.g., 5 cycles = 7.5 hours).[2]\n- Buffer for falling asleep (15-30 minutes).[3][9]\n\n**Example**: Wake at 7 AM? For 7.5 hours (5 cycles), bedtime is around 11:30 PM, plus 15 minutes to sleep.[2] Tools adjust for 4-6 cycles to fit needs.[4]\n\nAge affects needs:\n\n| Age Group | Recommended Sleep |\n|-----------|-------------------|\n| Newborn (0-3 months) | 14-17 hours[4] |\n| Infant (4-12 months) | 12-16 hours[4] |\n| Toddler (1-2 years) | 11-14 hours[4] |\n| Preschool (3-5 years) | 10-13 hours[3][4] |\n| School Age (6-12 years) | 9-12 hours[3][4] |\n| Teen (13-18 years) | 8-10 hours[3][4] |\n| Adult (18-60 years) | 7+ hours[3][4] |\n| Older Adult (61-64 years) | 7-9 hours[3] |\n| Senior (65+ years) | 7-8 hours[3][4] |\n\nThese guidelines come from sleep experts.[3][4]\n\n## Steps to Use a Sleep Hours Calculator\n\n1. Enter your wake-up time.\n2. Select desired cycles (4-6) or hours based on age.[2][4]\n3. Account for 15 minutes to fall asleep.[9]\n4. Review suggested bedtimes.\n5. Track for a week; adjust by 15 minutes if needed.[7]\n\nFor sleep efficiency (quality metric): Track time in bed vs. asleep. Formula: (Sleep Time / Bed Time) x 100. Aim for 85-95%.[1][5]\n\nExample: 8 hours in bed, 6.5 hours asleep = 81%.[1] Low efficiency? Limit bed time to boost it.[5]\n\n## Quick Tips for Better Sleep\n\n- Stick to consistent bed and wake times, even weekends.\n- Avoid screens 1 hour before bed to support natural cycles.\n- Create a cool, dark sleep environment.\n- Limit caffeine after noon.\n- Exercise daily but not near bedtime.\n\n## FAQ\n\n### How many hours of sleep do I need?\nRecommended hours vary by age: adults need 7+ hours, teens 8-10, children more with naps.[3][4]\n\n### What is a sleep cycle?\nA sleep cycle lasts 90-110 minutes through light, deep, and REM stages. Aim for 4-6 full cycles nightly.[2][4]\n\n### How do I calculate ideal bedtime?\nSubtract desired sleep (e.g., 7.5 hours for 5 cycles) from wake time, add 15 minutes fall-asleep buffer.[2][9]\n\n### What is sleep efficiency?\nPercentage of time in bed actually asleep. Calculate: (asleep hours / bed hours) x 100. 85-95% is good.[1][5]\n\n### Can I catch up on sleep?\nRegular schedules matter more; use calculators for consistency, not one-off fixes.[7]\n\n## Explore More WellTools\n\n- [BMI Calculator](/?page=bmi)\n- [Sleep Calculator](/?page=sleep)\n- [Water Tracker](/?page=water)\n- [Ideal Weight](/?page=ideal-weight)\n\n## Medical Sources\n\nSources inform general guidelines only.\n\n## Medical Disclaimer\n\nThis content is for informational purposes only and not a substitute for professional medical advice. Consult a healthcare provider for personalized guidance. WellTools does not diagnose or treat conditions.",
+            "keywords": [
+                "sleep hours calculator",
+                "ideal bedtime calculator",
+                "sleep cycle calculator",
+                "how much sleep do I need",
+                "sleep efficiency calculator"
+            ],
+            "faq": [
+                {
+                    "question": "How many hours of sleep do I need?",
+                    "answer": "Recommended hours vary by age: adults need 7+ hours, teens 8-10, children more with naps.[3][4]"
+                },
+                {
+                    "question": "What is a sleep cycle?",
+                    "answer": "A sleep cycle lasts 90-110 minutes through light, deep, and REM stages. Aim for 4-6 full cycles nightly.[2][4]"
+                },
+                {
+                    "question": "How do I calculate ideal bedtime?",
+                    "answer": "Subtract desired sleep (e.g., 7.5 hours for 5 cycles) from wake time, add 15 minutes fall-asleep buffer.[2][9]"
+                },
+                {
+                    "question": "What is sleep efficiency?",
+                    "answer": "Percentage of time in bed actually asleep. Calculate: (asleep hours / bed hours) x 100. 85-95% is good.[1][5]"
+                },
+                {
+                    "question": "Can I catch up on sleep?",
+                    "answer": "Regular schedules matter more; use calculators for consistency, not one-off fixes.[7]"
+                }
+            ],
+            "sources": [
+                {
+                    "title": "Sleep Foundation Sleep Calculator",
+                    "url": "https://www.sleepfoundation.org/sleep-calculator"
+                },
+                {
+                    "title": "Medical News Today Sleep Calculator",
+                    "url": "https://www.medicalnewstoday.com/articles/sleep-calculator"
+                },
+                {
+                    "title": "Healthline Sleep Calculator",
+                    "url": "https://www.healthline.com/health/sleep/sleep-calculator"
+                },
+                {
+                    "title": "NIH Sleep Guidelines",
+                    "url": "https://www.nhlbi.nih.gov/health/sleep/how-much-sleep"
+                }
+            ],
+            "date": "2026-02-09"
+        },
+        {
             "id": "welltools-4-1770441194643",
             "title": "Ideal Weight Calculator: Find Your Healthy Weight Range by Height, Age & Gender",
             "category": "health_calculators",

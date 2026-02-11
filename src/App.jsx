@@ -3,6 +3,7 @@ import { Heart, Menu, X, Moon, Sun } from 'lucide-react';
 import { translations } from './translations';
 import postsData from './data/posts.json';
 import AdComponent from './components/AdComponent';
+import ExitIntentPopup from './components/ExitIntentPopup';
 
 // Helper to handle ChunkLoadError (when a new version is deployed while user has the site open)
 const lazyWithRetry = (componentImport) => {
@@ -641,6 +642,7 @@ const DailyHealthTools = () => {
         </Suspense>
       </main>
       <Footer setCurrentPage={setCurrentPage} t={t} />
+      <ExitIntentPopup />
     </div>
   );
 };

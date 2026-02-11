@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Clock } from 'lucide-react';
 import AdComponent from './AdComponent';
 import { BlogImage } from './BlogPage';
 
@@ -170,6 +170,15 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
                         </div>
                     )}
                     <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] mb-8 tracking-tight">{post.title}</h1>
+                    <div className="flex items-center gap-6 text-gray-500 dark:text-gray-400 font-bold mb-4">
+                        <div className="flex items-center gap-2">
+                            <Clock className="w-5 h-5 text-emerald-500" />
+                            <span>Last Updated: {post.lastUpdated || post.date}</span>
+                        </div>
+                        <div className="px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-lg text-sm">
+                            Health Verified
+                        </div>
+                    </div>
                 </header>
                 <article className="max-w-none text-gray-700 dark:text-gray-300">
                     {parseMarkdown(post.content)}

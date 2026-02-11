@@ -47,6 +47,7 @@ const ContactPage = lazyWithRetry(() => import('./components/ContactPage'));
 const TermsOfUsePage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.TermsOfUsePage })));
 const DisclaimerPage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.DisclaimerPage })));
 const PrivacyPolicyPage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.PrivacyPolicyPage })));
+const EditorialPolicyPage = lazyWithRetry(() => import('./components/EditorialPolicyPage'));
 
 const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, t, theme, setTheme }) => (
   <nav className="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 shadow-sm transition-colors duration-300">
@@ -171,6 +172,7 @@ const Footer = ({ setCurrentPage, t }) => (
         <p className="text-gray-500 dark:text-gray-400 font-medium">© 2026 WellTools. Built for better health.</p>
         <div className="flex flex-wrap gap-4 md:gap-8 justify-center">
           <button onClick={() => { setCurrentPage('privacy'); window.scrollTo(0, 0); }} className="text-sm text-gray-400 hover:text-emerald-500 transition-colors font-bold uppercase tracking-widest">{t.privacy}</button>
+          <button onClick={() => { setCurrentPage('editorial-policy'); window.scrollTo(0, 0); }} className="text-sm text-gray-400 hover:text-emerald-500 transition-colors font-bold uppercase tracking-widest">{t.editorial_policy}</button>
           <button onClick={() => { setCurrentPage('terms'); window.scrollTo(0, 0); }} className="text-sm text-gray-400 hover:text-emerald-500 transition-colors font-bold uppercase tracking-widest">{t.terms}</button>
           <button onClick={() => { setCurrentPage('disclaimer'); window.scrollTo(0, 0); }} className="text-sm text-gray-400 hover:text-emerald-500 transition-colors font-bold uppercase tracking-widest">{t.disclaimer}</button>
         </div>
@@ -238,7 +240,7 @@ const DailyHealthTools = () => {
       const validPages = [
         'bmi', 'calories', 'water', 'ideal-weight', 'sleep', 'body-fat',
         'bmr', 'macro', '1rm', 'meal-planner', 'blog', 'tracking',
-        'about', 'how-it-works', 'experts', 'contact', 'privacy', 'terms', 'disclaimer'
+        'about', 'how-it-works', 'experts', 'contact', 'privacy', 'terms', 'disclaimer', 'editorial-policy'
       ];
       if (validPages.includes(path)) {
         setCurrentPage(path);
@@ -629,6 +631,7 @@ const DailyHealthTools = () => {
       case 'privacy': return <PrivacyPolicyPage setCurrentPage={setCurrentPage} t={t} />;
       case 'terms': return <TermsOfUsePage setCurrentPage={setCurrentPage} t={t} />;
       case 'disclaimer': return <DisclaimerPage setCurrentPage={setCurrentPage} t={t} />;
+      case 'editorial-policy': return <EditorialPolicyPage setCurrentPage={setCurrentPage} t={t} />;
       default: return <HomePage setCurrentPage={setCurrentPage} />;
     }
   };

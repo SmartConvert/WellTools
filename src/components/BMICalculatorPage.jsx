@@ -3,6 +3,7 @@ import { Calculator, Info } from 'lucide-react';
 import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
+import MedicalDisclaimer from './MedicalDisclaimer';
 
 const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, calculateBMI, bmiResult, bmiError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -81,6 +82,7 @@ const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, c
                         </div>
                     )}
 
+                    <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="bmi" />
 
                     <AdComponent slot="bmi_bottom" />

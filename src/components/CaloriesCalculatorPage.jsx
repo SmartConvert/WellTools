@@ -3,6 +3,7 @@ import { Activity, Utensils } from 'lucide-react';
 import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
+import MedicalDisclaimer from './MedicalDisclaimer';
 
 const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeight, calAge, setCalAge, calGender, setCalGender, calActivity, setCalActivity, calculateCalories, calResult, calError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -127,6 +128,7 @@ const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeig
                         </div>
                     )}
 
+                    <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="calories" />
 
                     <AdComponent slot="calories_bottom" />

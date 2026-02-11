@@ -3,6 +3,7 @@ import { Moon, Clock, Sparkles } from 'lucide-react';
 import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
+import MedicalDisclaimer from './MedicalDisclaimer';
 
 const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResult, sleepBedtime, setSleepBedtime, calculateSleepCycles, sleepWakeupTimes, sleepError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -122,6 +123,7 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                     </div>
                 </div>
 
+                <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                 <ToolInfoSection toolId="sleep" />
                 <AdComponent slot="sleep_bottom" />
             </div>

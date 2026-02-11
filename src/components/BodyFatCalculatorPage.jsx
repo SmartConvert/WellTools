@@ -3,6 +3,7 @@ import { Percent } from 'lucide-react';
 import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
+import MedicalDisclaimer from './MedicalDisclaimer';
 
 const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, bfAge, setBfAge, bfGender, setBfGender, bfNeck, setBfNeck, bfWaist, setBfWaist, bfHip, setBfHip, calculateBodyFat, bfResult, bfError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -133,6 +134,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                         </div>
                     )}
 
+                    <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="body-fat" />
 
                     <AdComponent slot="body_fat_bottom" />

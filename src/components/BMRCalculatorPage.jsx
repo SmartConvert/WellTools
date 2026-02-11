@@ -3,6 +3,7 @@ import { Calculator, Info, Zap } from 'lucide-react';
 import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
+import MedicalDisclaimer from './MedicalDisclaimer';
 
 const BMRCalculatorPage = ({ bmrWeight, setBmrWeight, bmrHeight, setBmrHeight, bmrAge, setBmrAge, bmrGender, setBmrGender, calculateBMR, bmrResult, bmrError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -99,6 +100,7 @@ const BMRCalculatorPage = ({ bmrWeight, setBmrWeight, bmrHeight, setBmrHeight, b
                         </div>
                     )}
 
+                    <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="bmr" />
 
                     <AdComponent slot="bmr_bottom" />

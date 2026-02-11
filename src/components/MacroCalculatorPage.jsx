@@ -3,6 +3,7 @@ import { Utensils, Info, PieChart } from 'lucide-react';
 import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
+import MedicalDisclaimer from './MedicalDisclaimer';
 
 const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMacroDiet, calculateMacros, macroResult, macroError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -80,6 +81,7 @@ const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMa
                         </div>
                     )}
 
+                    <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="macro" />
 
                     <AdComponent slot="macro_bottom" />

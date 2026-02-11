@@ -3,6 +3,7 @@ import { Dumbbell, Info, Trophy } from 'lucide-react';
 import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
+import MedicalDisclaimer from './MedicalDisclaimer';
 
 const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps, calculateORM, ormResult, ormError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -80,6 +81,7 @@ const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps,
                         </div>
                     )}
 
+                    <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="1rm" />
 
                     <AdComponent slot="orm_bottom" />

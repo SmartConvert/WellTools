@@ -316,6 +316,7 @@ export const translations = {
         terms: 'Terms of Use',
         disclaimer: 'Disclaimer',
         privacy: 'Privacy Policy',
+        editorial_policy: 'Editorial Policy',
         all_rights: 'All rights reserved.',
         footer_medical_disclaimer: 'This website provides general health information and does not replace professional medical advice.',
 

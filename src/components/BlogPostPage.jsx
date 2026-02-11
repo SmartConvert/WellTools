@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import AdComponent from './AdComponent';
 import { BlogImage } from './BlogPage';
@@ -102,6 +102,49 @@ const parseInlineMarkdown = (text) => {
 };
 
 const BlogPostPage = ({ post, setCurrentPage, t }) => {
+    // Inject Article Schema for SEO
+    useEffect(() => {
+        if (!post) return;
+
+        const articleSchema = {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": post.title,
+            "image": post.image || "https://welltools.online/images/hero_fitness.png",
+            "datePublished": post.date || new Date().toISOString(),
+            "dateModified": post.lastUpdated || post.date || new Date().toISOString(),
+            "author": {
+                "@type": "Organization",
+                "name": "WellTools Health Team",
+                "url": "https://welltools.online/about"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "WellTools",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://welltools.online/favicon.svg"
+                }
+            },
+            "description": post.excerpt || post.title,
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": window.location.href
+            }
+        };
+
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.id = `article-schema-${post.id}`;
+        script.innerHTML = JSON.stringify(articleSchema);
+        document.head.appendChild(script);
+
+        return () => {
+            const oldScript = document.getElementById(`article-schema-${post.id}`);
+            if (oldScript) document.head.removeChild(oldScript);
+        };
+    }, [post]);
+
     if (!post) return null;
     return (
         <div className="bg-white dark:bg-gray-900 pt-24 pb-16 px-4">

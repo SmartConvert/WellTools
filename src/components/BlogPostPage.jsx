@@ -49,13 +49,11 @@ const parseInlineMarkdown = (text) => {
             parts.push(text.slice(lastIdx, match.index));
         }
         parts.push(
-            <img
+            <BlogImage
                 key={`img-${match.index}`}
                 src={match[2]}
                 alt={match[1]}
-                className="max-w-full h-auto rounded-2xl my-6 shadow-lg block mx-auto bg-gray-100"
-                loading="lazy"
-                onError={(e) => { e.target.style.display = 'none'; }}
+                className="max-w-full rounded-2xl my-6 shadow-lg block mx-auto bg-gray-100"
             />
         );
         lastIdx = imgRegex.lastIdx;
@@ -161,11 +159,11 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
                 </button>
                 <header className="mb-12">
                     {post.image && (
-                        <div className="w-full h-[300px] md:h-[400px] rounded-[2.5rem] overflow-hidden mb-10 shadow-2xl bg-gray-800 flex items-center justify-center">
+                        <div className="w-full aspect-video md:aspect-[21/9] rounded-[2.5rem] overflow-hidden mb-10 shadow-2xl bg-gray-800 flex items-center justify-center">
                             <BlogImage
                                 src={post.image}
                                 alt={post.imageAlt || post.title}
-                                className="w-full h-full object-cover animate-fade-in"
+                                className="w-full h-full object-cover"
                             />
                         </div>
                     )}

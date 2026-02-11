@@ -6,13 +6,16 @@ import postsData from '../data/posts.json';
 export const BlogImage = ({ src, alt, className }) => {
     const [error, setError] = useState(false);
     const [retryCount, setRetryCount] = useState(0);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setError(false);
         setRetryCount(0);
+        setLoading(true);
     }, [src]);
 
     const handleError = () => {
+        setLoading(false);
         if (retryCount < 1) {
             setRetryCount(prev => prev + 1);
         } else {
@@ -20,9 +23,9 @@ export const BlogImage = ({ src, alt, className }) => {
         }
     };
 
-    if (!src || error) {
+    if (error) {
         return (
-            <div className={`${className} bg-gray-200 dark:bg-gray-700 flex items-center justify-center`}>
+            <div className={`${className} bg-gray-200 dark:bg-gray-700 flex items-center justify-center aspect-ratio`}>
                 <BookOpen className="w-12 h-12 text-gray-400" />
             </div>
         );
@@ -70,20 +73,26 @@ export const BlogImage = ({ src, alt, className }) => {
     };
 
     return (
-        <img
-            src={encodedSrc}
-            srcSet={generateSrcSet(encodedSrc)}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            alt={alt}
-            className={className}
-            crossOrigin="anonymous"
-            onError={(e) => {
-                console.warn(`WellTools Debug: Image failed to load [Retry ${retryCount}]:`, encodedSrc);
-                handleError();
-            }}
-            loading="lazy"
-            decoding="async"
-        />
+        <div className={`relative overflow-hidden ${className} bg-gray-200 dark:bg-gray-800`}>
+            {loading && (
+                <div className="absolute inset-0 bg-linear-to-r from-gray-200 via-gray-300 to-gray-200 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700 animate-shimmer scale-110"></div>
+            )}
+            <img
+                src={encodedSrc}
+                srcSet={generateSrcSet(encodedSrc)}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                alt={alt}
+                className={`${className} transition-opacity duration-300 ${loading ? 'opacity-0' : 'opacity-100'}`}
+                crossOrigin="anonymous"
+                onLoad={() => setLoading(false)}
+                onError={(e) => {
+                    console.warn(`WellTools Debug: Image failed to load [Retry ${retryCount}]:`, encodedSrc);
+                    handleError();
+                }}
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
     );
 };
 
@@ -113,7 +122,7 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang = 'en' }) => {
                     {posts.map((post) => (
                         <article key={post.id} className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col">
                             {post.image && (
-                                <div className="relative h-64 overflow-hidden bg-gray-800 flex items-center justify-center">
+                                <div className="relative aspect-video overflow-hidden bg-gray-800 flex items-center justify-center">
                                     <BlogImage src={post.image} alt={post.imageAlt || post.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                                     <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
                                 </div>

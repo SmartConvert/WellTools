@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const POSTS_PATH = path.join(__dirname, "../src/data/posts.json");
 const SITEMAP_PATH = path.join(__dirname, "../public/sitemap.xml");
-const BASE_URL = "https://welltools.pages.dev";
+const BASE_URL = "https://welltools.online";
 
 async function updateSitemap() {
     try {

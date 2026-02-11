@@ -97,13 +97,15 @@
             "id": 5,
             "group": "health_calculators",
             "title": "Sleep Hours Calculator",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-09"
         },
         {
             "id": 6,
             "group": "health_calculators",
             "title": "Protein Intake Calculator",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-11"
         },
         {
             "id": 7,

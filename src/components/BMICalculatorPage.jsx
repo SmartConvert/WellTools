@@ -4,6 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
+import RelatedTools from './RelatedTools';
 
 const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, calculateBMI, bmiResult, bmiError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -58,27 +59,38 @@ const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, c
                     </div>
 
                     {bmiResult && (
-                        <div id="bmi-result" className="mt-8 p-8 bg-linear-to-br from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-2xl border-2 border-cyan-200 dark:border-cyan-800 animate-scale-in">
-                            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
-                            <div className="space-y-6 text-center">
-                                <div className="inline-block p-6 bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-cyan-100 dark:border-cyan-900">
-                                    <p className="text-5xl font-black text-cyan-600 dark:text-cyan-400">{bmiResult.bmi}</p>
-                                    <p className={`text-2xl font-bold ${bmiResult.color} mt-2`}>{t[bmiResult.category]}</p>
+                        <div id="bmi-result" className="mt-8 space-y-4 animate-in zoom-in duration-500">
+                            <div className="p-8 bg-emerald-50 dark:bg-emerald-900/20 rounded-[2.5rem] border-2 border-emerald-100 dark:border-emerald-900/30 text-center relative overflow-hidden">
+                                <div className="text-sm font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-2">{t.res_your_bmi}</div>
+                                <div className="text-6xl font-black text-gray-900 dark:text-white mb-4">
+                                    {bmiResult.bmi}
+                                </div>
+                                <div className={`inline-flex items-center gap-2 px-6 py-2 rounded-full text-lg font-black ${bmiResult.color} bg-white dark:bg-gray-800 shadow-xl shadow-gray-200/50 dark:shadow-none mb-6`}>
+                                    <div className="w-3 h-3 rounded-full bg-current animate-pulse" />
+                                    {t[bmiResult.category]}
                                 </div>
 
-                                <div className="pt-6 border-t border-cyan-100 dark:border-cyan-900/50">
+                                <div className="pt-6 border-t border-emerald-100 dark:border-emerald-900/50">
                                     <h4 className="text-lg font-bold text-gray-800 dark:text-white mb-3 flex items-center justify-center gap-2">
-                                        <Info className="w-5 h-5 text-cyan-500" />
+                                        <Info className="w-5 h-5 text-emerald-500" />
                                         {t.bmi_advice_title}
                                     </h4>
                                     <p className={`text-lg font-semibold mb-4 ${bmiResult.suitable ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
                                         {bmiResult.suitable ? t.bmi_status_suitable : t.bmi_status_not_suitable}
                                     </p>
-                                    <div className="bg-white/50 dark:bg-gray-800/50 p-6 rounded-2xl text-gray-700 dark:text-gray-300 leading-relaxed shadow-sm">
+                                    <div className="bg-white/50 dark:bg-gray-800/50 p-6 rounded-2xl text-gray-700 dark:text-gray-300 leading-relaxed shadow-sm text-sm">
                                         {bmiResult.tip}
                                     </div>
                                 </div>
                             </div>
+
+                            <button
+                                onClick={() => { setCurrentPage('bmi-guide'); window.scrollTo(0, 0); }}
+                                className="w-full p-6 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-[2rem] font-black text-xl shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 group"
+                            >
+                                <Zap className="w-6 h-6 text-emerald-400 group-hover:animate-pulse" />
+                                Read The Definitive BMI Guide
+                            </button>
                         </div>
                     )}
 
@@ -87,6 +99,8 @@ const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, c
 
                     <AdComponent slot="bmi_bottom" />
                 </div>
+
+                <RelatedTools currentToolId="bmi" setCurrentPage={setCurrentPage} />
 
                 <button
                     onClick={() => setCurrentPage('home')}

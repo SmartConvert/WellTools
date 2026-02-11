@@ -4,6 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
+import RelatedTools from './RelatedTools';
 
 const BMRCalculatorPage = ({ bmrWeight, setBmrWeight, bmrHeight, setBmrHeight, bmrAge, setBmrAge, bmrGender, setBmrGender, calculateBMR, bmrResult, bmrError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -105,6 +106,8 @@ const BMRCalculatorPage = ({ bmrWeight, setBmrWeight, bmrHeight, setBmrHeight, b
 
                     <AdComponent slot="bmr_bottom" />
                 </div>
+
+                <RelatedTools currentToolId="bmr" setCurrentPage={setCurrentPage} />
 
                 <button
                     onClick={() => setCurrentPage('home')}

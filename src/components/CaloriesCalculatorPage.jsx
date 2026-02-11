@@ -4,6 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
+import RelatedTools from './RelatedTools';
 
 const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeight, calAge, setCalAge, calGender, setCalGender, calActivity, setCalActivity, calculateCalories, calResult, calError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -133,6 +134,8 @@ const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeig
 
                     <AdComponent slot="calories_bottom" />
                 </div>
+
+                <RelatedTools currentToolId="calories" setCurrentPage={setCurrentPage} />
 
                 <button
                     onClick={() => setCurrentPage('home')}

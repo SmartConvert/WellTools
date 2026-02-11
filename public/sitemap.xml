@@ -86,14 +86,19 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://welltools.online/how-it-works</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://welltools.online/body-fat-guide</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://welltools.online/experts</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://welltools.online/bmi-guide</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://welltools.online/sleep-guide</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://welltools.online/privacy</loc>
@@ -108,6 +113,11 @@
   <url>
     <loc>https://welltools.online/disclaimer</loc>
     <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://welltools.online/editorial-policy</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>

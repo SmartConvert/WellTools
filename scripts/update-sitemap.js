@@ -35,11 +35,15 @@ async function updateSitemap() {
             { loc: '/macro', priority: '0.7', freq: 'monthly' },
             { loc: '/1rm', priority: '0.7', freq: 'monthly' },
             { loc: '/meal-planner', priority: '0.8', freq: 'weekly' },
-            { loc: '/how-it-works', priority: '0.5', freq: 'monthly' },
-            { loc: '/experts', priority: '0.5', freq: 'monthly' },
+            // Pillar Guides
+            { loc: '/body-fat-guide', priority: '0.9', freq: 'weekly' },
+            { loc: '/bmi-guide', priority: '0.9', freq: 'weekly' },
+            { loc: '/sleep-guide', priority: '0.9', freq: 'weekly' },
+            // Legal
             { loc: '/privacy', priority: '0.3', freq: 'yearly' },
             { loc: '/terms', priority: '0.3', freq: 'yearly' },
-            { loc: '/disclaimer', priority: '0.3', freq: 'yearly' }
+            { loc: '/disclaimer', priority: '0.3', freq: 'yearly' },
+            { loc: '/editorial-policy', priority: '0.3', freq: 'monthly' }
         ];
 
         let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>

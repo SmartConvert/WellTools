@@ -4,6 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
+import RelatedTools from './RelatedTools';
 
 const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMacroDiet, calculateMacros, macroResult, macroError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -86,6 +87,8 @@ const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMa
 
                     <AdComponent slot="macro_bottom" />
                 </div>
+
+                <RelatedTools currentToolId="macro" setCurrentPage={setCurrentPage} />
 
                 <button
                     onClick={() => setCurrentPage('home')}

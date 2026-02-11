@@ -4,6 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
+import RelatedTools from './RelatedTools';
 
 const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, bfAge, setBfAge, bfGender, setBfGender, bfNeck, setBfNeck, bfWaist, setBfWaist, bfHip, setBfHip, calculateBodyFat, bfResult, bfError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -125,12 +126,25 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                     </div>
 
                     {bfResult && (
-                        <div id="body-fat-result" className="mt-8 p-8 bg-linear-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-2xl border-2 border-orange-200 dark:border-orange-800 animate-scale-in">
-                            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
-                            <div className="text-center p-6 bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
-                                <p className="text-5xl font-black text-orange-600 dark:text-orange-400">{bfResult.bodyFat}%</p>
-                                <p className={`text-2xl font-bold ${bfResult.color} mt-2`}>{bfResult.category}</p>
+                        <div className="mt-8 space-y-4">
+                            <div className="p-8 bg-emerald-50 dark:bg-emerald-900/20 rounded-[2.5rem] border-2 border-emerald-100 dark:border-emerald-900/30 text-center animate-in zoom-in duration-500">
+                                <div className="text-sm font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-2">{t.res_your_body_fat}</div>
+                                <div className="text-6xl font-black text-gray-900 dark:text-white mb-4">
+                                    {bfResult.bodyFat}<span className="text-3xl ml-1">%</span>
+                                </div>
+                                <div className={`inline-flex items-center gap-2 px-6 py-2 rounded-full text-lg font-black ${bfResult.color} bg-white dark:bg-gray-800 shadow-xl shadow-gray-200/50 dark:shadow-none`}>
+                                    <div className="w-3 h-3 rounded-full bg-current animate-pulse" />
+                                    {bfResult.category}
+                                </div>
                             </div>
+
+                            <button
+                                onClick={() => { setCurrentPage('body-fat-guide'); window.scrollTo(0, 0); }}
+                                className="w-full p-5 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-[2rem] font-black text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 group"
+                            >
+                                <Zap className="w-6 h-6 text-emerald-400 group-hover:animate-pulse" />
+                                Read The Ultimate Body Fat Guide
+                            </button>
                         </div>
                     )}
 
@@ -139,6 +153,8 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
 
                     <AdComponent slot="body_fat_bottom" />
                 </div>
+
+                <RelatedTools currentToolId="body-fat" setCurrentPage={setCurrentPage} />
 
                 <button
                     onClick={() => setCurrentPage('home')}

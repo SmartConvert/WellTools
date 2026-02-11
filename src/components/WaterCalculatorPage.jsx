@@ -4,6 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
+import RelatedTools from './RelatedTools';
 
 const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWaterActivity, calculateWater, waterResult, waterError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -72,6 +73,8 @@ const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWa
 
                     <AdComponent slot="water_bottom" />
                 </div>
+
+                <RelatedTools currentToolId="water" setCurrentPage={setCurrentPage} />
 
                 <button
                     onClick={() => setCurrentPage('home')}

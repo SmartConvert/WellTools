@@ -26,11 +26,14 @@ const lazyWithRetry = (componentImport) => {
 // Lazy load all page components for code splitting
 const HomePage = lazyWithRetry(() => import('./components/HomePage'));
 const BMICalculatorPage = lazyWithRetry(() => import('./components/BMICalculatorPage'));
+const BMIGuidePage = lazyWithRetry(() => import('./components/BMIGuidePage'));
 const CaloriesCalculatorPage = lazyWithRetry(() => import('./components/CaloriesCalculatorPage'));
 const WaterCalculatorPage = lazyWithRetry(() => import('./components/WaterCalculatorPage'));
 const IdealWeightPage = lazyWithRetry(() => import('./components/IdealWeightPage'));
 const SleepCalculatorPage = lazyWithRetry(() => import('./components/SleepCalculatorPage'));
+const SleepGuidePage = lazyWithRetry(() => import('./components/SleepGuidePage'));
 const BodyFatCalculatorPage = lazyWithRetry(() => import('./components/BodyFatCalculatorPage'));
+const BodyFatGuidePage = lazyWithRetry(() => import('./components/BodyFatGuidePage'));
 const BMRCalculatorPage = lazyWithRetry(() => import('./components/BMRCalculatorPage'));
 const MacroCalculatorPage = lazyWithRetry(() => import('./components/MacroCalculatorPage'));
 const OneRepMaxCalculatorPage = lazyWithRetry(() => import('./components/OneRepMaxCalculatorPage'));
@@ -238,7 +241,7 @@ const DailyHealthTools = () => {
     } else if (path && path !== '') {
       // Valid pages list (should match renderPage switch)
       const validPages = [
-        'bmi', 'calories', 'water', 'ideal-weight', 'sleep', 'body-fat',
+        'bmi', 'bmi-guide', 'calories', 'water', 'ideal-weight', 'sleep', 'sleep-guide', 'body-fat', 'body-fat-guide',
         'bmr', 'macro', '1rm', 'meal-planner', 'blog', 'tracking',
         'about', 'how-it-works', 'experts', 'contact', 'privacy', 'terms', 'disclaimer', 'editorial-policy'
       ];
@@ -420,6 +423,14 @@ const DailyHealthTools = () => {
     let category = bmi < 18.5 ? 'cat_underweight' : bmi < 25 ? 'cat_normal' : bmi < 30 ? 'cat_overweight' : 'cat_obese';
     let color = bmi < 18.5 ? 'text-blue-600' : bmi < 25 ? 'text-green-600' : bmi < 30 ? 'text-yellow-600' : 'text-red-600';
     setBmiResult({ bmi, category, color });
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'calculator_use',
+        tool_name: 'bmi',
+        bmi_score: bmi,
+        bmi_category: category
+      });
+    }
   };
 
   const calculateCalories = () => {
@@ -438,6 +449,13 @@ const DailyHealthTools = () => {
     const multipliers = { sedentary: 1.2, light: 1.375, moderate: 1.55, active: 1.725, veryActive: 1.9 };
     const tdee = Math.round(bmr * multipliers[calActivity]);
     setCalResult({ maintain: tdee, loss: Math.round(tdee - 500), gain: Math.round(tdee + 500) });
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'calculator_use',
+        tool_name: 'calories',
+        daily_maintenance: tdee
+      });
+    }
   };
 
   const calculateWater = () => {
@@ -452,6 +470,13 @@ const DailyHealthTools = () => {
     if (waterActivity === 'moderate') intake += 0.5;
     if (waterActivity === 'high') intake += 1;
     setWaterResult(intake.toFixed(1));
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'calculator_use',
+        tool_name: 'water',
+        liters: intake.toFixed(1)
+      });
+    }
   };
 
   const calculateIdealWeight = () => {
@@ -464,6 +489,13 @@ const DailyHealthTools = () => {
     setIdealError('');
     const ideal = idealGender === 'male' ? 50 + 0.91 * (height - 152.4) : 45.5 + 0.91 * (height - 152.4);
     setIdealResult({ ideal: ideal.toFixed(1), min: (ideal * 0.9).toFixed(1), max: (ideal * 1.1).toFixed(1) });
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'calculator_use',
+        tool_name: 'ideal_weight',
+        ideal_weight_kg: ideal.toFixed(1)
+      });
+    }
   };
 
   const calculateSleep = () => {
@@ -476,6 +508,13 @@ const DailyHealthTools = () => {
     setSleepError('');
     let hours = age < 1 ? '14-17' : age < 2 ? '11-14' : age < 5 ? '10-13' : age < 13 ? '9-11' : age < 18 ? '8-10' : age < 65 ? '7-9' : '7-8';
     setSleepResult(`${hours} ${t.hours}`);
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'calculator_use',
+        tool_name: 'sleep_recommendation',
+        age: age
+      });
+    }
   };
 
   const calculateSleepCycles = () => {
@@ -486,6 +525,13 @@ const DailyHealthTools = () => {
       return { time: time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }), hours: (c * 90) / 60 };
     });
     setSleepWakeupTimes(times);
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'calculator_use',
+        tool_name: 'sleep_cycles',
+        bedtime: sleepBedtime
+      });
+    }
   };
 
   const calculateBodyFat = () => {
@@ -507,6 +553,14 @@ const DailyHealthTools = () => {
       ? bf < 6 ? t.cat_essential : bf < 14 ? t.cat_athletes : bf < 18 ? t.cat_fitness : bf < 25 ? t.cat_average : t.cat_obese
       : bf < 14 ? t.cat_essential : bf < 21 ? t.cat_athletes : bf < 25 ? t.cat_fitness : bf < 32 ? t.cat_average : t.cat_obese;
     setBfResult({ bodyFat: bf, category, color: bf < 25 ? 'text-emerald-500' : 'text-orange-500' });
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'calculator_use',
+        tool_name: 'body_fat',
+        body_fat_percent: bf,
+        category: category
+      });
+    }
   };
 
   const calculateBMR = () => {
@@ -523,6 +577,13 @@ const DailyHealthTools = () => {
     let bmr = (10 * w) + (6.25 * h) - (5 * a);
     bmr += bmrGender === 'male' ? 5 : -161;
     setBmrResult({ bmr: Math.round(bmr) });
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'calculator_use',
+        tool_name: 'bmr',
+        bmr_score: Math.round(bmr)
+      });
+    }
   };
 
   const calculateMacros = () => {
@@ -548,6 +609,14 @@ const DailyHealthTools = () => {
       carbs: Math.round((cal * c) / 4),
       fats: Math.round((cal * f) / 9)
     });
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'calculator_use',
+        tool_name: 'macro',
+        calories: cal,
+        diet: macroDiet
+      });
+    }
   };
 
   const calculateORM = () => {
@@ -562,6 +631,13 @@ const DailyHealthTools = () => {
     // Epley Formula: 1RM = w * (1 + r/30)
     const max = w * (1 + r / 30);
     setOrmResult({ max: Math.round(max) });
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'calculator_use',
+        tool_name: '1rm',
+        max_kg: Math.round(max)
+      });
+    }
   };
 
   const addWeightEntry = () => {
@@ -612,11 +688,14 @@ const DailyHealthTools = () => {
     switch (currentPage) {
       case 'home': return <HomePage setCurrentPage={setCurrentPage} setSelectedMealCategory={(c) => { setActiveTab(c); setCurrentPage('meal-planner'); }} setSelectedPost={setSelectedPost} t={t} />;
       case 'bmi': return <BMICalculatorPage bmiWeight={bmiWeight} setBmiWeight={setBmiWeight} bmiHeight={bmiHeight} setBmiHeight={setBmiHeight} calculateBMI={calculateBMI} bmiResult={bmiResult} bmiError={bmiError} setCurrentPage={setCurrentPage} t={t} />;
+      case 'bmi-guide': return <BMIGuidePage setCurrentPage={setCurrentPage} t={t} />;
       case 'calories': return <CaloriesCalculatorPage calWeight={calWeight} setCalWeight={setCalWeight} calHeight={calHeight} setCalHeight={setCalHeight} calAge={calAge} setCalAge={setCalAge} calGender={calGender} setCalGender={setCalGender} calActivity={calActivity} setCalActivity={setCalActivity} calculateCalories={calculateCalories} calResult={calResult} calError={calError} setCurrentPage={setCurrentPage} t={t} />;
       case 'water': return <WaterCalculatorPage waterWeight={waterWeight} setWaterWeight={setWaterWeight} waterActivity={waterActivity} setWaterActivity={setWaterActivity} calculateWater={calculateWater} waterResult={waterResult} waterError={waterError} setCurrentPage={setCurrentPage} t={t} />;
       case 'ideal-weight': return <IdealWeightPage idealHeight={idealHeight} setIdealHeight={setIdealHeight} idealGender={idealGender} setIdealGender={setIdealGender} calculateIdealWeight={calculateIdealWeight} idealResult={idealResult} idealError={idealError} setCurrentPage={setCurrentPage} t={t} />;
       case 'sleep': return <SleepCalculatorPage sleepAge={sleepAge} setSleepAge={setSleepAge} calculateSleep={calculateSleep} sleepResult={sleepResult} sleepBedtime={sleepBedtime} setSleepBedtime={setSleepBedtime} calculateSleepCycles={calculateSleepCycles} sleepWakeupTimes={sleepWakeupTimes} sleepError={sleepError} setCurrentPage={setCurrentPage} t={t} />;
+      case 'sleep-guide': return <SleepGuidePage setCurrentPage={setCurrentPage} t={t} />;
       case 'body-fat': return <BodyFatCalculatorPage bfWeight={bfWeight} setBfWeight={setBfWeight} bfHeight={bfHeight} setBfHeight={setBfHeight} bfAge={bfAge} setBfAge={setBfAge} bfGender={bfGender} setBfGender={setBfGender} bfNeck={bfNeck} setBfNeck={setBfNeck} bfWaist={bfWaist} setBfWaist={setBfWaist} bfHip={bfHip} setBfHip={setBfHip} calculateBodyFat={calculateBodyFat} bfResult={bfResult} bfError={bfError} setCurrentPage={setCurrentPage} t={t} />;
+      case 'body-fat-guide': return <BodyFatGuidePage setCurrentPage={setCurrentPage} t={t} />;
       case 'bmr': return <BMRCalculatorPage bmrWeight={bmrWeight} setBmrWeight={setBmrWeight} bmrHeight={bmrHeight} setBmrHeight={setBmrHeight} bmrAge={bmrAge} setBmrAge={setBmrAge} bmrGender={bmrGender} setBmrGender={setBmrGender} calculateBMR={calculateBMR} bmrResult={bmrResult} bmrError={bmrError} setCurrentPage={setCurrentPage} t={t} />;
       case 'macro': return <MacroCalculatorPage macroCalories={macroCalories} setMacroCalories={setMacroCalories} macroDiet={macroDiet} setMacroDiet={setMacroDiet} calculateMacros={calculateMacros} macroResult={macroResult} macroError={macroError} setCurrentPage={setCurrentPage} t={t} />;
       case '1rm': return <OneRepMaxCalculatorPage ormWeight={ormWeight} setOrmWeight={setOrmWeight} ormReps={ormReps} setOrmReps={setOrmReps} calculateORM={calculateORM} ormResult={ormResult} ormError={ormError} setCurrentPage={setCurrentPage} t={t} />;

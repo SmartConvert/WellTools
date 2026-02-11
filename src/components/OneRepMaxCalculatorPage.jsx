@@ -4,6 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
+import RelatedTools from './RelatedTools';
 
 const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps, calculateORM, ormResult, ormError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -86,6 +87,8 @@ const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps,
 
                     <AdComponent slot="orm_bottom" />
                 </div>
+
+                <RelatedTools currentToolId="1rm" setCurrentPage={setCurrentPage} />
 
                 <button
                     onClick={() => setCurrentPage('home')}

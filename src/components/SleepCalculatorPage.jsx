@@ -4,6 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
+import RelatedTools from './RelatedTools';
 
 const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResult, sleepBedtime, setSleepBedtime, calculateSleepCycles, sleepWakeupTimes, sleepError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -45,9 +46,25 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                     </div>
 
                     {sleepResult && (
-                        <div id="sleep-result" className="mt-8 p-8 bg-linear-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-2xl border-2 border-violet-200 dark:border-violet-800 animate-scale-in">
-                            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">{t.result}:</h3>
-                            <p className="text-4xl font-black text-violet-600 dark:text-violet-400 text-center">{sleepResult}</p>
+                        <div className="mt-8 space-y-4">
+                            <div id="sleep-result" className="p-8 bg-emerald-50 dark:bg-emerald-900/20 rounded-[2.5rem] border-2 border-emerald-100 dark:border-emerald-900/30 text-center animate-in zoom-in duration-500">
+                                <h3 className="text-sm font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-4">{t.res_ideal_sleep}</h3>
+                                <div className="text-5xl md:text-6xl font-black text-gray-900 dark:text-white mb-6">
+                                    {sleepResult} <span className="text-2xl text-emerald-500">{t.unit_hours}</span>
+                                </div>
+                                <div className="p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-emerald-100 dark:border-emerald-900/30 inline-flex items-center gap-2 font-bold text-gray-700 dark:text-gray-300">
+                                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                    {t.sleep_cycles_note}
+                                </div>
+                            </div>
+
+                            <button
+                                onClick={() => { setCurrentPage('sleep-guide'); window.scrollTo(0, 0); }}
+                                className="w-full p-6 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-[2rem] font-black text-xl shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 group"
+                            >
+                                <Zap className="w-6 h-6 text-emerald-400 group-hover:animate-pulse" />
+                                Read The Sleep Optimization Handbook
+                            </button>
                         </div>
                     )}
                 </div>
@@ -127,6 +144,8 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                 <ToolInfoSection toolId="sleep" />
                 <AdComponent slot="sleep_bottom" />
             </div>
+
+            <RelatedTools currentToolId="sleep" setCurrentPage={setCurrentPage} />
 
             <button
                 onClick={() => setCurrentPage('home')}

@@ -4,6 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
+import RelatedTools from './RelatedTools';
 
 const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGender, calculateIdealWeight, idealResult, idealError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -81,6 +82,8 @@ const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGen
 
                     <AdComponent slot="ideal_weight_bottom" />
                 </div>
+
+                <RelatedTools currentToolId="ideal-weight" setCurrentPage={setCurrentPage} />
 
                 <button
                     onClick={() => setCurrentPage('home')}

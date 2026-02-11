@@ -4,7 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 
-const BodyFatCalculatorPage = ({ bfWeight, setBmiWeight, bfHeight, setBfHeight, bfAge, setBfAge, bfGender, setBfGender, bfNeck, setBfNeck, bfWaist, setBfWaist, bfHip, setBfHip, calculateBodyFat, bfResult, setCurrentPage, t }) => (
+const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, bfAge, setBfAge, bfGender, setBfGender, bfNeck, setBfNeck, bfWaist, setBfWaist, bfHip, setBfHip, calculateBodyFat, bfResult, bfError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
             <ToolHero toolId="body-fat" />
@@ -118,6 +118,9 @@ const BodyFatCalculatorPage = ({ bfWeight, setBmiWeight, bfHeight, setBfHeight, 
                         >
                             {t.calculate}
                         </button>
+                        {bfError && (
+                            <p className="text-sm text-rose-600 dark:text-rose-400 text-center">{bfError}</p>
+                        )}
                     </div>
 
                     {bfResult && (

@@ -4,7 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 
-const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeight, calAge, setCalAge, calGender, setCalGender, calActivity, setCalActivity, calculateCalories, calResult, setCurrentPage, t }) => (
+const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeight, calAge, setCalAge, calGender, setCalGender, calActivity, setCalActivity, calculateCalories, calResult, calError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
             <ToolHero toolId="calories" />
@@ -94,6 +94,9 @@ const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeig
                         >
                             {t.calculate}
                         </button>
+                        {calError && (
+                            <p className="text-sm text-rose-600 dark:text-rose-400 text-center">{calError}</p>
+                        )}
                     </div>
 
                     {calResult && (

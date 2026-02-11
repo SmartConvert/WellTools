@@ -3,7 +3,6 @@ import { Heart, Menu, X, Moon, Sun } from 'lucide-react';
 import { translations } from './translations';
 import postsData from './data/posts.json';
 import AdComponent from './components/AdComponent';
-import { parseLocalizedNumber } from './utils/numbers';
 
 // Helper to handle ChunkLoadError (when a new version is deployed while user has the site open)
 const lazyWithRetry = (componentImport) => {
@@ -270,32 +269,50 @@ const DailyHealthTools = () => {
     const searchString = params.toString();
     const newUrl = `${newPath}${searchString ? '?' + searchString : ''}`;
 
+    const setMetaDescription = (description) => {
+      if (!description) return;
+      let meta = document.querySelector('meta[name="description"]');
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', 'description');
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', description);
+    };
+
+    const setCanonical = (href) => {
+      if (!href) return;
+      let link = document.querySelector('link[rel="canonical"]');
+      if (!link) {
+        link = document.createElement('link');
+        link.setAttribute('rel', 'canonical');
+        document.head.appendChild(link);
+      }
+      link.setAttribute('href', href);
+    };
+
     // Only push state if the URL actually changed to avoid history spam
     if (window.location.pathname + window.location.search !== newUrl) {
       window.history.pushState({ page: currentPage }, '', newUrl);
     }
 
-    // SEO: Update Meta Title & Description based on currentPage
+    setCanonical(`${window.location.origin}${newUrl}`);
+
+    // SEO: Update Meta Title based on currentPage
     import('./data/seoContent').then(module => {
-      const currentLang = document.documentElement.lang || 'en';
-      const pageContent = module.calculatorContent[currentPage];
-      const content = pageContent?.[currentLang] || pageContent?.['en'];
-
+      const content = module.calculatorContent[currentPage]?.['en'];
+      let description = t.hero_subtitle;
+      if (currentPage === 'blog-post' && selectedPost?.excerpt) {
+        description = selectedPost.excerpt;
+      } else if (content?.hero_subtitle) {
+        description = content.hero_subtitle;
+      }
       if (content) {
-        // Update Title
-        document.title = content.meta_title || `${content.hero_title} - WellTools`;
-
-        // Update Meta Description
-        let metaDesc = document.querySelector('meta[name="description"]');
-        if (!metaDesc) {
-          metaDesc = document.createElement('meta');
-          metaDesc.name = 'description';
-          document.head.appendChild(metaDesc);
-        }
-        metaDesc.content = content.meta_description || content.hero_subtitle || 'Free online health calculators and wellness tools.';
+        document.title = `${content.hero_title} - WellTools`;
       } else if (currentPage === 'home') {
         document.title = 'WellTools - Free Online Health Calculators';
       }
+      setMetaDescription(description);
     });
   }, [selectedPost, currentPage]);
 
@@ -303,6 +320,7 @@ const DailyHealthTools = () => {
   const [bmiWeight, setBmiWeight] = useState('');
   const [bmiHeight, setBmiHeight] = useState('');
   const [bmiResult, setBmiResult] = useState(null);
+  const [bmiError, setBmiError] = useState('');
 
   const [calWeight, setCalWeight] = useState('');
   const [calHeight, setCalHeight] = useState('');
@@ -310,19 +328,23 @@ const DailyHealthTools = () => {
   const [calGender, setCalGender] = useState('male');
   const [calActivity, setCalActivity] = useState('sedentary');
   const [calResult, setCalResult] = useState(null);
+  const [calError, setCalError] = useState('');
 
   const [waterWeight, setWaterWeight] = useState('');
   const [waterActivity, setWaterActivity] = useState('low');
   const [waterResult, setWaterResult] = useState(null);
+  const [waterError, setWaterError] = useState('');
 
   const [idealHeight, setIdealHeight] = useState('');
   const [idealGender, setIdealGender] = useState('male');
   const [idealResult, setIdealResult] = useState(null);
+  const [idealError, setIdealError] = useState('');
 
   const [sleepAge, setSleepAge] = useState('');
   const [sleepBedtime, setSleepBedtime] = useState('22:00');
   const [sleepWakeupTimes, setSleepWakeupTimes] = useState([]);
   const [sleepResult, setSleepResult] = useState(null);
+  const [sleepError, setSleepError] = useState('');
 
   const [bfWeight, setBfWeight] = useState('');
   const [bfHeight, setBfHeight] = useState('');
@@ -332,20 +354,24 @@ const DailyHealthTools = () => {
   const [bfWaist, setBfWaist] = useState('');
   const [bfHip, setBfHip] = useState('');
   const [bfResult, setBfResult] = useState(null);
+  const [bfError, setBfError] = useState('');
 
   const [bmrWeight, setBmrWeight] = useState('');
   const [bmrHeight, setBmrHeight] = useState('');
   const [bmrAge, setBmrAge] = useState('');
   const [bmrGender, setBmrGender] = useState('male');
   const [bmrResult, setBmrResult] = useState(null);
+  const [bmrError, setBmrError] = useState('');
 
   const [macroCalories, setMacroCalories] = useState('');
   const [macroDiet, setMacroDiet] = useState('balanced');
   const [macroResult, setMacroResult] = useState(null);
+  const [macroError, setMacroError] = useState('');
 
   const [ormWeight, setOrmWeight] = useState('');
   const [ormReps, setOrmReps] = useState('');
   const [ormResult, setOrmResult] = useState(null);
+  const [ormError, setOrmError] = useState('');
 
   // Tracking State
   const [trackingData, setTrackingData] = useState({ weight: [], water: [], sleep: [] });
@@ -355,7 +381,22 @@ const DailyHealthTools = () => {
 
   useEffect(() => {
     const saved = localStorage.getItem('healthTracking');
-    if (saved) setTrackingData(JSON.parse(saved));
+    if (!saved) return;
+    try {
+      const parsed = JSON.parse(saved);
+      const normalizeEntries = (entries = []) =>
+        entries.map((entry) => (entry.id ? entry : { ...entry, id: crypto.randomUUID() }));
+      const normalized = {
+        weight: normalizeEntries(parsed.weight),
+        water: normalizeEntries(parsed.water),
+        sleep: normalizeEntries(parsed.sleep)
+      };
+      setTrackingData(normalized);
+      localStorage.setItem('healthTracking', JSON.stringify(normalized));
+    } catch (error) {
+      console.warn('Invalid healthTracking data in storage, resetting.', error);
+      localStorage.removeItem('healthTracking');
+    }
   }, []);
 
   const saveTrackingData = (data) => {
@@ -364,14 +405,14 @@ const DailyHealthTools = () => {
   };
 
   const calculateBMI = () => {
-    const weight = parseLocalizedNumber(bmiWeight);
-    const height = parseLocalizedNumber(bmiHeight) / 100;
-
-    if (isNaN(weight) || isNaN(height) || height === 0) {
+    const weight = parseFloat(bmiWeight);
+    const height = parseFloat(bmiHeight) / 100;
+    if (!weight || !height) {
+      setBmiError(t.validation_required);
       setBmiResult(null);
       return;
     }
-
+    setBmiError('');
     const bmi = (weight / (height * height)).toFixed(1);
     let category = bmi < 18.5 ? 'cat_underweight' : bmi < 25 ? 'cat_normal' : bmi < 30 ? 'cat_overweight' : 'cat_obese';
     let color = bmi < 18.5 ? 'text-blue-600' : bmi < 25 ? 'text-green-600' : bmi < 30 ? 'text-yellow-600' : 'text-red-600';
@@ -379,15 +420,15 @@ const DailyHealthTools = () => {
   };
 
   const calculateCalories = () => {
-    const weight = parseLocalizedNumber(calWeight);
-    const height = parseLocalizedNumber(calHeight);
-    const age = parseLocalizedNumber(calAge);
-
-    if (isNaN(weight) || isNaN(height) || isNaN(age)) {
+    const weight = parseFloat(calWeight);
+    const height = parseFloat(calHeight);
+    const age = parseInt(calAge);
+    if (!weight || !height || !age) {
+      setCalError(t.validation_required);
       setCalResult(null);
       return;
     }
-
+    setCalError('');
     const bmr = calGender === 'male'
       ? 10 * weight + 6.25 * height - 5 * age + 5
       : 10 * weight + 6.25 * height - 5 * age - 161;
@@ -397,12 +438,13 @@ const DailyHealthTools = () => {
   };
 
   const calculateWater = () => {
-    const weight = parseLocalizedNumber(waterWeight);
-    if (isNaN(weight)) {
+    const weight = parseFloat(waterWeight);
+    if (!weight) {
+      setWaterError(t.validation_required);
       setWaterResult(null);
       return;
     }
-
+    setWaterError('');
     let intake = weight * 0.033;
     if (waterActivity === 'moderate') intake += 0.5;
     if (waterActivity === 'high') intake += 1;
@@ -410,22 +452,25 @@ const DailyHealthTools = () => {
   };
 
   const calculateIdealWeight = () => {
-    const height = parseLocalizedNumber(idealHeight);
-    if (isNaN(height)) {
+    const height = parseFloat(idealHeight);
+    if (!height) {
+      setIdealError(t.validation_required);
       setIdealResult(null);
       return;
     }
-
+    setIdealError('');
     const ideal = idealGender === 'male' ? 50 + 0.91 * (height - 152.4) : 45.5 + 0.91 * (height - 152.4);
     setIdealResult({ ideal: ideal.toFixed(1), min: (ideal * 0.9).toFixed(1), max: (ideal * 1.1).toFixed(1) });
   };
 
   const calculateSleep = () => {
-    const age = parseLocalizedNumber(sleepAge);
-    if (isNaN(age)) {
+    const age = parseInt(sleepAge);
+    if ((!age && age !== 0) || age < 0) {
+      setSleepError(t.validation_required);
       setSleepResult(null);
       return;
     }
+    setSleepError('');
     let hours = age < 1 ? '14-17' : age < 2 ? '11-14' : age < 5 ? '10-13' : age < 13 ? '9-11' : age < 18 ? '8-10' : age < 65 ? '7-9' : '7-8';
     setSleepResult(`${hours} ${t.hours}`);
   };
@@ -441,25 +486,19 @@ const DailyHealthTools = () => {
   };
 
   const calculateBodyFat = () => {
-    const height = parseLocalizedNumber(bfHeight);
-    const neck = parseLocalizedNumber(bfNeck);
-    const waist = parseLocalizedNumber(bfWaist);
-    const hip = parseLocalizedNumber(bfHip);
-
-    if (isNaN(height) || isNaN(neck) || isNaN(waist) || (bfGender === 'female' && isNaN(hip))) {
+    const height = parseFloat(bfHeight);
+    const neck = parseFloat(bfNeck);
+    const waist = parseFloat(bfWaist);
+    const hip = parseFloat(bfHip);
+    if (!height || !neck || !waist || (bfGender === 'female' && !hip)) {
+      setBfError(t.validation_required);
       setBfResult(null);
       return;
     }
-
+    setBfError('');
     let bf = bfGender === 'male'
       ? 495 / (1.0324 - 0.19077 * Math.log10(waist - neck) + 0.15456 * Math.log10(height)) - 450
       : 495 / (1.29579 - 0.35004 * Math.log10(waist + hip - neck) + 0.22100 * Math.log10(height)) - 450;
-
-    if (isNaN(bf) || !isFinite(bf)) {
-      setBfResult(null);
-      return;
-    }
-
     bf = bf.toFixed(1);
     let category = bfGender === 'male'
       ? bf < 6 ? t.cat_essential : bf < 14 ? t.cat_athletes : bf < 18 ? t.cat_fitness : bf < 25 ? t.cat_average : t.cat_obese
@@ -468,13 +507,15 @@ const DailyHealthTools = () => {
   };
 
   const calculateBMR = () => {
-    const w = parseLocalizedNumber(bmrWeight);
-    const h = parseLocalizedNumber(bmrHeight);
-    const a = parseLocalizedNumber(bmrAge);
+    const w = parseFloat(bmrWeight);
+    const h = parseFloat(bmrHeight);
+    const a = parseFloat(bmrAge);
     if (!w || !h || !a) {
+      setBmrError(t.validation_required);
       setBmrResult(null);
       return;
     }
+    setBmrError('');
     // Mifflin-St Jeor
     let bmr = (10 * w) + (6.25 * h) - (5 * a);
     bmr += bmrGender === 'male' ? 5 : -161;
@@ -482,11 +523,13 @@ const DailyHealthTools = () => {
   };
 
   const calculateMacros = () => {
-    const cal = parseLocalizedNumber(macroCalories);
-    if (isNaN(cal) || cal <= 0) {
+    const cal = parseFloat(macroCalories);
+    if (!cal) {
+      setMacroError(t.validation_required);
       setMacroResult(null);
       return;
     }
+    setMacroError('');
     let p, c, f;
     // Simple splits: 
     // Balanced: 30% P, 40% C, 30% F
@@ -505,55 +548,75 @@ const DailyHealthTools = () => {
   };
 
   const calculateORM = () => {
-    const w = parseLocalizedNumber(ormWeight);
-    const r = parseLocalizedNumber(ormReps);
+    const w = parseFloat(ormWeight);
+    const r = parseFloat(ormReps);
     if (!w || !r) {
+      setOrmError(t.validation_required);
       setOrmResult(null);
       return;
     }
+    setOrmError('');
     // Epley Formula: 1RM = w * (1 + r/30)
     const max = w * (1 + r / 30);
     setOrmResult({ max: Math.round(max) });
   };
 
   const addWeightEntry = () => {
-    const val = parseLocalizedNumber(newWeight);
-    if (!val && val !== 0) return;
-    const updated = { ...trackingData, weight: [...trackingData.weight, { date: new Date().toISOString().split('T')[0], value: val }].slice(-30) };
+    const value = parseFloat(newWeight);
+    if (!value) return;
+    const updated = {
+      ...trackingData,
+      weight: [
+        ...trackingData.weight,
+        { id: crypto.randomUUID(), date: new Date().toISOString().split('T')[0], value }
+      ].slice(-30)
+    };
     saveTrackingData(updated); setNewWeight('');
   };
 
   const addWaterEntry = () => {
-    const val = parseLocalizedNumber(newWater);
-    if (!val && val !== 0) return;
-    const updated = { ...trackingData, water: [...trackingData.water, { date: new Date().toISOString().split('T')[0], value: val }].slice(-30) };
+    const value = parseFloat(newWater);
+    if (!value) return;
+    const updated = {
+      ...trackingData,
+      water: [
+        ...trackingData.water,
+        { id: crypto.randomUUID(), date: new Date().toISOString().split('T')[0], value }
+      ].slice(-30)
+    };
     saveTrackingData(updated); setNewWater('');
   };
 
   const addSleepEntry = () => {
-    const val = parseLocalizedNumber(newSleep);
-    if (!val && val !== 0) return;
-    const updated = { ...trackingData, sleep: [...trackingData.sleep, { date: new Date().toISOString().split('T')[0], value: val }].slice(-30) };
+    const value = parseFloat(newSleep);
+    if (!value) return;
+    const updated = {
+      ...trackingData,
+      sleep: [
+        ...trackingData.sleep,
+        { id: crypto.randomUUID(), date: new Date().toISOString().split('T')[0], value }
+      ].slice(-30)
+    };
     saveTrackingData(updated); setNewSleep('');
   };
 
-  const deleteEntry = (type, index) => {
-    const updated = { ...trackingData, [type]: trackingData[type].filter((_, i) => i !== index) };
+  const deleteEntry = (type, id) => {
+    const updated = { ...trackingData, [type]: trackingData[type].filter((entry) => entry.id !== id) };
     saveTrackingData(updated);
   };
 
   const renderPage = () => {
     switch (currentPage) {
       case 'home': return <HomePage setCurrentPage={setCurrentPage} setSelectedMealCategory={(c) => { setActiveTab(c); setCurrentPage('meal-planner'); }} setSelectedPost={setSelectedPost} t={t} />;
-      case 'bmi': return <BMICalculatorPage bmiWeight={bmiWeight} setBmiWeight={setBmiWeight} bmiHeight={bmiHeight} setBmiHeight={setBmiHeight} calculateBMI={calculateBMI} bmiResult={bmiResult} setCurrentPage={setCurrentPage} t={t} />;
-      case 'calories': return <CaloriesCalculatorPage calWeight={calWeight} setCalWeight={setCalWeight} calHeight={calHeight} setCalHeight={setCalHeight} calAge={calAge} setCalAge={setCalAge} calGender={calGender} setCalGender={setCalGender} calActivity={calActivity} setCalActivity={setCalActivity} calculateCalories={calculateCalories} calResult={calResult} setCurrentPage={setCurrentPage} t={t} />;
-      case 'water': return <WaterCalculatorPage waterWeight={waterWeight} setWaterWeight={setWaterWeight} waterActivity={waterActivity} setWaterActivity={setWaterActivity} calculateWater={calculateWater} waterResult={waterResult} setCurrentPage={setCurrentPage} t={t} />;
-      case 'ideal-weight': return <IdealWeightPage idealHeight={idealHeight} setIdealHeight={setIdealHeight} idealGender={idealGender} setIdealGender={setIdealGender} calculateIdealWeight={calculateIdealWeight} idealResult={idealResult} setCurrentPage={setCurrentPage} t={t} />;
-      case 'sleep': return <SleepCalculatorPage sleepAge={sleepAge} setSleepAge={setSleepAge} calculateSleep={calculateSleep} sleepResult={sleepResult} sleepBedtime={sleepBedtime} setSleepBedtime={setSleepBedtime} calculateSleepCycles={calculateSleepCycles} sleepWakeupTimes={sleepWakeupTimes} setCurrentPage={setCurrentPage} t={t} />;
-      case 'body-fat': return <BodyFatCalculatorPage bfWeight={bfWeight} setBfWeight={setBfWeight} bfHeight={bfHeight} setBfHeight={setBfHeight} bfAge={bfAge} setBfAge={setBfAge} bfGender={bfGender} setBfGender={setBfGender} bfNeck={bfNeck} setBfNeck={setBfNeck} bfWaist={bfWaist} setBfWaist={setBfWaist} bfHip={bfHip} setBfHip={setBfHip} calculateBodyFat={calculateBodyFat} bfResult={bfResult} setCurrentPage={setCurrentPage} t={t} />;
-      case 'bmr': return <BMRCalculatorPage bmrWeight={bmrWeight} setBmrWeight={setBmrWeight} bmrHeight={bmrHeight} setBmrHeight={setBmrHeight} bmrAge={bmrAge} setBmrAge={setBmrAge} bmrGender={bmrGender} setBmrGender={setBmrGender} calculateBMR={calculateBMR} bmrResult={bmrResult} setCurrentPage={setCurrentPage} t={t} />;
-      case 'macro': return <MacroCalculatorPage macroCalories={macroCalories} setMacroCalories={setMacroCalories} macroDiet={macroDiet} setMacroDiet={setMacroDiet} calculateMacros={calculateMacros} macroResult={macroResult} setCurrentPage={setCurrentPage} t={t} />;
-      case '1rm': return <OneRepMaxCalculatorPage ormWeight={ormWeight} setOrmWeight={setOrmWeight} ormReps={ormReps} setOrmReps={setOrmReps} calculateORM={calculateORM} ormResult={ormResult} setCurrentPage={setCurrentPage} t={t} />;
+      case 'bmi': return <BMICalculatorPage bmiWeight={bmiWeight} setBmiWeight={setBmiWeight} bmiHeight={bmiHeight} setBmiHeight={setBmiHeight} calculateBMI={calculateBMI} bmiResult={bmiResult} bmiError={bmiError} setCurrentPage={setCurrentPage} t={t} />;
+      case 'calories': return <CaloriesCalculatorPage calWeight={calWeight} setCalWeight={setCalWeight} calHeight={calHeight} setCalHeight={setCalHeight} calAge={calAge} setCalAge={setCalAge} calGender={calGender} setCalGender={setCalGender} calActivity={calActivity} setCalActivity={setCalActivity} calculateCalories={calculateCalories} calResult={calResult} calError={calError} setCurrentPage={setCurrentPage} t={t} />;
+      case 'water': return <WaterCalculatorPage waterWeight={waterWeight} setWaterWeight={setWaterWeight} waterActivity={waterActivity} setWaterActivity={setWaterActivity} calculateWater={calculateWater} waterResult={waterResult} waterError={waterError} setCurrentPage={setCurrentPage} t={t} />;
+      case 'ideal-weight': return <IdealWeightPage idealHeight={idealHeight} setIdealHeight={setIdealHeight} idealGender={idealGender} setIdealGender={setIdealGender} calculateIdealWeight={calculateIdealWeight} idealResult={idealResult} idealError={idealError} setCurrentPage={setCurrentPage} t={t} />;
+      case 'sleep': return <SleepCalculatorPage sleepAge={sleepAge} setSleepAge={setSleepAge} calculateSleep={calculateSleep} sleepResult={sleepResult} sleepBedtime={sleepBedtime} setSleepBedtime={setSleepBedtime} calculateSleepCycles={calculateSleepCycles} sleepWakeupTimes={sleepWakeupTimes} sleepError={sleepError} setCurrentPage={setCurrentPage} t={t} />;
+      case 'body-fat': return <BodyFatCalculatorPage bfWeight={bfWeight} setBfWeight={setBfWeight} bfHeight={bfHeight} setBfHeight={setBfHeight} bfAge={bfAge} setBfAge={setBfAge} bfGender={bfGender} setBfGender={setBfGender} bfNeck={bfNeck} setBfNeck={setBfNeck} bfWaist={bfWaist} setBfWaist={setBfWaist} bfHip={bfHip} setBfHip={setBfHip} calculateBodyFat={calculateBodyFat} bfResult={bfResult} bfError={bfError} setCurrentPage={setCurrentPage} t={t} />;
+      case 'bmr': return <BMRCalculatorPage bmrWeight={bmrWeight} setBmrWeight={setBmrWeight} bmrHeight={bmrHeight} setBmrHeight={setBmrHeight} bmrAge={bmrAge} setBmrAge={setBmrAge} bmrGender={bmrGender} setBmrGender={setBmrGender} calculateBMR={calculateBMR} bmrResult={bmrResult} bmrError={bmrError} setCurrentPage={setCurrentPage} t={t} />;
+      case 'macro': return <MacroCalculatorPage macroCalories={macroCalories} setMacroCalories={setMacroCalories} macroDiet={macroDiet} setMacroDiet={setMacroDiet} calculateMacros={calculateMacros} macroResult={macroResult} macroError={macroError} setCurrentPage={setCurrentPage} t={t} />;
+      case '1rm': return <OneRepMaxCalculatorPage ormWeight={ormWeight} setOrmWeight={setOrmWeight} ormReps={ormReps} setOrmReps={setOrmReps} calculateORM={calculateORM} ormResult={ormResult} ormError={ormError} setCurrentPage={setCurrentPage} t={t} />;
       case 'meal-planner': return <MealPlannerPage selectedMealCategory={activeTab} setSelectedMealCategory={setActiveTab} t={t} />;
       case 'blog': return <BlogPage setCurrentPage={setCurrentPage} setSelectedPost={setSelectedPost} t={t} />;
       case 'blog-post': return <BlogPostPage post={selectedPost} setCurrentPage={setCurrentPage} t={t} />;

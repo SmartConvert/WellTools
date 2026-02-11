@@ -1,157 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://welltools.pages.dev/</loc>
+    <loc>https://welltools.online/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/tracking</loc>
+    <loc>https://welltools.online/tracking</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/blog</loc>
+    <loc>https://welltools.online/blog</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/about</loc>
+    <loc>https://welltools.online/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/how-it-works</loc>
+    <loc>https://welltools.online/how-it-works</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/experts</loc>
+    <loc>https://welltools.online/experts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/contact</loc>
+    <loc>https://welltools.online/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/bmi</loc>
+    <loc>https://welltools.online/bmi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/calories</loc>
+    <loc>https://welltools.online/calories</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/water</loc>
+    <loc>https://welltools.online/water</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/ideal-weight</loc>
+    <loc>https://welltools.online/ideal-weight</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/sleep</loc>
+    <loc>https://welltools.online/sleep</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/body-fat</loc>
+    <loc>https://welltools.online/body-fat</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/bmr</loc>
+    <loc>https://welltools.online/bmr</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/macro</loc>
+    <loc>https://welltools.online/macro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/1rm</loc>
+    <loc>https://welltools.online/1rm</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/meal-planner</loc>
+    <loc>https://welltools.online/meal-planner</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/privacy</loc>
+    <loc>https://welltools.online/how-it-works</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://welltools.online/experts</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://welltools.online/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/terms</loc>
+    <loc>https://welltools.online/terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/disclaimer</loc>
+    <loc>https://welltools.online/disclaimer</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/?post=welltools-6-1770789614394</loc>
+    <loc>https://welltools.online/?post=welltools-32-1770568425242</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/?post=welltools-5-1770616760760</loc>
+    <loc>https://welltools.online/?post=welltools-6-1770789614394</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/?post=welltools-4-1770441194643</loc>
+    <loc>https://welltools.online/?post=welltools-31-1770567772345</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/?post=welltools-3-1770270133534</loc>
+    <loc>https://welltools.online/?post=welltools-5-1770616760760</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/?post=welltools-2-1770215056268</loc>
+    <loc>https://welltools.online/?post=welltools-4-1770441194643</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/?post=welltools-1-1770214162708</loc>
+    <loc>https://welltools.online/?post=welltools-3-1770270133534</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/?post=intermittent-fasting-1770054780375</loc>
+    <loc>https://welltools.online/?post=welltools-2-1770215056268</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/?post=science-hydration-1769979000000</loc>
+    <loc>https://welltools.online/?post=welltools-1-1770214162708</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/?post=bmi-athlete-truth</loc>
+    <loc>https://welltools.online/?post=intermittent-fasting-1770054780375</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/?post=metabolism-survival-myth</loc>
+    <loc>https://welltools.online/?post=science-hydration-1769979000000</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://welltools.pages.dev/?post=increase-bmr-naturally</loc>
+    <loc>https://welltools.online/?post=bmi-athlete-truth</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://welltools.online/?post=metabolism-survival-myth</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://welltools.online/?post=increase-bmr-naturally</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

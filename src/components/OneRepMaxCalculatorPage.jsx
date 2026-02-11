@@ -4,7 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 
-const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps, calculateORM, ormResult, setCurrentPage, t }) => (
+const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps, calculateORM, ormResult, ormError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
             <ToolHero toolId="1rm" />
@@ -52,6 +52,9 @@ const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps,
                         >
                             Calculate 1RM
                         </button>
+                        {ormError && (
+                            <p className="text-sm text-rose-600 dark:text-rose-400 text-center">{ormError}</p>
+                        )}
                     </div>
 
                     {ormResult && (

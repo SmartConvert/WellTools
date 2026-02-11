@@ -4,7 +4,7 @@ import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 
-const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMacroDiet, calculateMacros, macroResult, setCurrentPage, t }) => (
+const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMacroDiet, calculateMacros, macroResult, macroError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
             <ToolHero toolId="macro" />
@@ -55,6 +55,9 @@ const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMa
                         >
                             Calculate Macros
                         </button>
+                        {macroError && (
+                            <p className="text-sm text-rose-600 dark:text-rose-400 text-center">{macroError}</p>
+                        )}
                     </div>
 
                     {macroResult && (

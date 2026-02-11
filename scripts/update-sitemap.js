@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const POSTS_PATH = path.join(__dirname, "../src/data/posts.json");
 const SITEMAP_PATH = path.join(__dirname, "../public/sitemap.xml");
-const BASE_URL = "https://welltools.pages.dev";
+const BASE_URL = "https://welltools.online";
 
 async function updateSitemap() {
     try {
@@ -35,7 +35,8 @@ async function updateSitemap() {
             { loc: '/macro', priority: '0.7', freq: 'monthly' },
             { loc: '/1rm', priority: '0.7', freq: 'monthly' },
             { loc: '/meal-planner', priority: '0.8', freq: 'weekly' },
-            // Legal
+            { loc: '/how-it-works', priority: '0.5', freq: 'monthly' },
+            { loc: '/experts', priority: '0.5', freq: 'monthly' },
             { loc: '/privacy', priority: '0.3', freq: 'yearly' },
             { loc: '/terms', priority: '0.3', freq: 'yearly' },
             { loc: '/disclaimer', priority: '0.3', freq: 'yearly' }

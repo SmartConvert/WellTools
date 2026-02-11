@@ -19,9 +19,23 @@ const DailyTrackingPage = ({
     setCurrentPage,
     t
 }) => {
-    const weightChartData = trackingData.weight.map(e => ({ date: e.date.split('-').slice(1).join('/'), weight: e.value }));
-    const waterChartData = trackingData.water.map(e => ({ date: e.date.split('-').slice(1).join('/'), liters: e.value }));
-    const sleepChartData = trackingData.sleep.map(e => ({ date: e.date.split('-').slice(1).join('/'), hours: e.value }));
+    const formatDateLabel = (value) => {
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return value;
+        return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+    };
+
+    const formatRange = (entries) => {
+        if (!entries.length) return null;
+        const dates = entries.map((entry) => entry.date);
+        const start = dates[0];
+        const end = dates[dates.length - 1];
+        return `${formatDateLabel(start)} - ${formatDateLabel(end)}`;
+    };
+
+    const weightChartData = trackingData.weight.map(e => ({ date: formatDateLabel(e.date), weight: e.value }));
+    const waterChartData = trackingData.water.map(e => ({ date: formatDateLabel(e.date), liters: e.value }));
+    const sleepChartData = trackingData.sleep.map(e => ({ date: formatDateLabel(e.date), hours: e.value }));
 
     return (
         <div className="pt-24 pb-16 px-4">
@@ -123,6 +137,9 @@ const DailyTrackingPage = ({
                                             />
                                         </AreaChart>
                                     </ResponsiveContainer>
+                                    <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+                                        {t.tracking_range}: {formatRange(trackingData.weight)}
+                                    </p>
                                 </div>
                             )}
 
@@ -133,13 +150,13 @@ const DailyTrackingPage = ({
                                 ) : (
                                     <div className="space-y-2">
                                         {[...trackingData.weight].reverse().slice(0, 10).map((entry, index) => (
-                                            <div key={index} className="flex justify-between items-center p-4 bg-linear-to-r from-violet-50 to-purple-50 dark:from-violet-900/10 dark:to-purple-900/10 rounded-xl border border-violet-100 dark:border-violet-900/30">
+                                            <div key={entry.id ?? `${entry.date}-${entry.value}-${index}`} className="flex justify-between items-center p-4 bg-linear-to-r from-violet-50 to-purple-50 dark:from-violet-900/10 dark:to-purple-900/10 rounded-xl border border-violet-100 dark:border-violet-900/30">
                                                 <div>
                                                     <p className="font-semibold text-gray-800 dark:text-white">{entry.value} {t.unit_kg}</p>
                                                     <p className="text-sm text-gray-600 dark:text-gray-400">{entry.date}</p>
                                                 </div>
                                                 <button
-                                                    onClick={() => deleteEntry('weight', trackingData.weight.length - 1 - index)}
+                                                    onClick={() => deleteEntry('weight', entry.id)}
                                                     className="text-red-600 hover:text-red-800 transition-colors p-2"
                                                     aria-label={t.aria_delete_entry}
                                                 >
@@ -199,6 +216,9 @@ const DailyTrackingPage = ({
                                             <Bar dataKey="liters" fill="#3b82f6" radius={[8, 8, 0, 0]} />
                                         </BarChart>
                                     </ResponsiveContainer>
+                                    <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+                                        {t.tracking_range}: {formatRange(trackingData.water)}
+                                    </p>
                                 </div>
                             )}
 
@@ -209,13 +229,13 @@ const DailyTrackingPage = ({
                                 ) : (
                                     <div className="space-y-2">
                                         {[...trackingData.water].reverse().slice(0, 10).map((entry, index) => (
-                                            <div key={index} className="flex justify-between items-center p-4 bg-linear-to-r from-blue-50 to-cyan-50 dark:from-blue-900/10 dark:to-cyan-900/10 rounded-xl border border-blue-100 dark:border-blue-900/30">
+                                            <div key={entry.id ?? `${entry.date}-${entry.value}-${index}`} className="flex justify-between items-center p-4 bg-linear-to-r from-blue-50 to-cyan-50 dark:from-blue-900/10 dark:to-cyan-900/10 rounded-xl border border-blue-100 dark:border-blue-900/30">
                                                 <div>
                                                     <p className="font-semibold text-gray-800 dark:text-white">{entry.value} {t.liters}</p>
                                                     <p className="text-sm text-gray-600 dark:text-gray-400">{entry.date}</p>
                                                 </div>
                                                 <button
-                                                    onClick={() => deleteEntry('water', trackingData.water.length - 1 - index)}
+                                                    onClick={() => deleteEntry('water', entry.id)}
                                                     className="text-red-600 hover:text-red-800 transition-colors p-2"
                                                     aria-label={t.aria_delete_entry}
                                                 >
@@ -282,6 +302,9 @@ const DailyTrackingPage = ({
                                             />
                                         </LineChart>
                                     </ResponsiveContainer>
+                                    <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+                                        {t.tracking_range}: {formatRange(trackingData.sleep)}
+                                    </p>
                                 </div>
                             )}
 
@@ -292,13 +315,13 @@ const DailyTrackingPage = ({
                                 ) : (
                                     <div className="space-y-2">
                                         {[...trackingData.sleep].reverse().slice(0, 10).map((entry, index) => (
-                                            <div key={index} className="flex justify-between items-center p-4 bg-linear-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/10 dark:to-purple-900/10 rounded-xl border border-indigo-100 dark:border-indigo-900/30">
+                                            <div key={entry.id ?? `${entry.date}-${entry.value}-${index}`} className="flex justify-between items-center p-4 bg-linear-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/10 dark:to-purple-900/10 rounded-xl border border-indigo-100 dark:border-indigo-900/30">
                                                 <div>
                                                     <p className="font-semibold text-gray-800 dark:text-white">{entry.value} {t.hours}</p>
                                                     <p className="text-sm text-gray-600 dark:text-gray-400">{entry.date}</p>
                                                 </div>
                                                 <button
-                                                    onClick={() => deleteEntry('sleep', trackingData.sleep.length - 1 - index)}
+                                                    onClick={() => deleteEntry('sleep', entry.id)}
                                                     className="text-red-600 hover:text-red-800 transition-colors p-2"
                                                     aria-label={t.aria_delete_entry}
                                                 >

@@ -1,6 +1,63 @@
 {
     "en": [
         {
+            "id": "welltools-6-1770789614394",
+            "title": "Protein Intake Calculator: Calculate Your Daily Protein Needs Accurately",
+            "category": "health_calculators",
+            "excerpt": "Discover how much protein you need daily with our free Protein Intake Calculator. Learn simple formulas based on weight, activity level, and goals for optimal health and fitness. Calculate now!",
+            "image": "https://image.pollinations.ai/prompt/professional photo of a diverse group of fit people measuring protein portions with fresh foods like chicken eggs nuts and vegetables on a kitchen table?width=1200&height=800&nologo=true",
+            "imageAlt": "Protein intake calculator showing daily protein needs from foods",
+            "content": "# Protein Intake Calculator\n\nUnderstanding your protein needs is key to supporting muscle health, energy levels, and overall wellness. Our **Protein Intake Calculator** helps you estimate daily protein requirements based on your body weight and activity level. This tool uses established guidelines to provide personalized estimates, making it easier to plan balanced meals.\n\nProtein plays a vital role in repairing tissues, building muscles, and maintaining bodily functions. Whether you are sedentary, active, or aiming for fitness goals, knowing the right amount prevents under- or over-consumption. Use this calculator as a starting point to align your diet with general nutritional recommendations.\n\n## How Protein Intake Calculators Work\n\nA **protein intake calculator** estimates daily needs using simple formulas grounded in body weight and lifestyle factors. Most tools convert your weight to kilograms, then multiply by a protein range per kilogram.[1][4]\n\nFor example:\n- Step 1: Divide weight in pounds by 2.2 to get kilograms (e.g., 150 lbs ÷ 2.2 = 68 kg).[1]\n- Step 2: Multiply by grams per kg based on activity:\n  - Sedentary adults: 1.2-1.8 g/kg.[1]\n  - Active adults: 1.2-2.0 g/kg.[1]\n  - Muscle gain: 1.2-2.4 g/kg.[1]\n  - Overweight: 1.2-1.5 g/kg.[1]\n\nThis yields a range like 82-136 grams for a 68 kg person.[1] Advanced calculators factor in height, training history, and goals for lean body mass estimates.[2]\n\nThe Recommended Dietary Allowance (RDA) starts at 0.8 g/kg for basic health, but active individuals often need more, up to 1.8-2.0 g/kg.[4] Factors like age, exercise intensity, and health conditions influence needs.[4][5]\n\n## Why Calculate Your Protein Intake?\n\nProtein supports muscle repair after exercise and helps maintain satiety for weight management. Insufficient intake may lead to fatigue, while excess is unnecessary for most.[4] Calculators provide clarity, especially for athletes or those monitoring diets for conditions like kidney health.[3][4]\n\nTools like the DRI Calculator also estimate macronutrients based on age, weight, height, and activity.[5] Whole foods should be prioritized over supplements, with supplements limited to 35% of total intake.[2]\n\n## Steps to Use a Protein Intake Calculator\n- **Enter your weight**: Use pounds or kilograms accurately.\n- **Select activity level**: Choose sedentary, moderate, intense, or very intense exercise.[4]\n- **Input goals**: Note if building muscle or maintaining weight.[2]\n- **Review results**: Get a daily gram range and adjust meals accordingly.\n- **Track intake**: Log foods to match the estimate.\n\n## Quick Tips for Meeting Protein Needs\n- Spread intake across meals for better absorption.\n- Include diverse sources like lean meats, eggs, dairy, beans, and nuts.[4]\n- Combine with exercise for muscle benefits.\n- Stay hydrated to aid protein metabolism.\n- Consult a professional for personalized adjustments.\n\n## Frequently Asked Questions\n\nThese cover common searches on protein needs.\n\n## Related WellTools\n- [BMI Calculator](/?page=bmi)\n- [Calorie Counter](/?page=calories)\n- [Water Tracker](/?page=water)\n- [Ideal Weight](/?page=ideal-weight)\n\n## Reputable Sources\n\n- Garden of Life: [How to Calculate Your Protein Needs](https://www.gardenoflife.com/blog/how-to-calculate-your-protein-needs-according-to-a-dietitian)\n- Calculator.net: [Protein Calculator](https://www.calculator.net/protein-calculator.html)\n- USDA: [DRI Calculator](https://www.nal.usda.gov/human-nutrition-and-food-safety/dri-calculator)\n- MD Anderson: [How Much Protein Do I Need](https://www.mdanderson.org/cancerwise/how-much-protein-do-i-need-a-dietitian-answers.h00-159781179.html)\n\n## Medical Disclaimer\nThis content is for informational purposes only and not a substitute for professional medical advice. Always consult a healthcare provider before making dietary changes, especially with health conditions.",
+            "keywords": [
+                "protein intake calculator",
+                "daily protein needs",
+                "how much protein per day",
+                "protein calculator",
+                "calculate protein intake"
+            ],
+            "faq": [
+                {
+                    "question": "How much protein do I need per day?",
+                    "answer": "General needs range from 0.8-2.0 g per kg of body weight, depending on activity level.[1][4]"
+                },
+                {
+                    "question": "How to calculate protein intake from body weight?",
+                    "answer": "Convert weight to kg (lbs ÷ 2.2), then multiply by 1.2-2.0 g/kg for most adults.[1]"
+                },
+                {
+                    "question": "Is 1 gram of protein per pound of body weight too much?",
+                    "answer": "This equals about 2.2 g/kg, suitable for intense training but high for sedentary people.[4]"
+                },
+                {
+                    "question": "How much protein for muscle gain?",
+                    "answer": "Aim for 1.6-2.2 g/kg, spread across meals.[1][2]"
+                },
+                {
+                    "question": "Do I need more protein if overweight?",
+                    "answer": "Use 1.2-1.5 g/kg of body weight, or consider lean mass for accuracy.[1]"
+                }
+            ],
+            "sources": [
+                {
+                    "title": "Garden of Life: How to Calculate Your Protein Needs",
+                    "url": "https://www.gardenoflife.com/blog/how-to-calculate-your-protein-needs-according-to-a-dietitian"
+                },
+                {
+                    "title": "Calculator.net: Protein Calculator",
+                    "url": "https://www.calculator.net/protein-calculator.html"
+                },
+                {
+                    "title": "USDA: DRI Calculator",
+                    "url": "https://www.nal.usda.gov/human-nutrition-and-food-safety/dri-calculator"
+                },
+                {
+                    "title": "MD Anderson: How Much Protein Do I Need",
+                    "url": "https://www.mdanderson.org/cancerwise/how-much-protein-do-i-need-a-dietitian-answers.h00-159781179.html"
+                }
+            ],
+            "date": "2026-02-11"
+        },
+        {
             "id": "welltools-5-1770616760760",
             "title": "Sleep Hours Calculator: Find Your Ideal Bedtime & Wake-Up Time",
             "category": "health_calculators",

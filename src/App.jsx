@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Heart, Menu, X, Moon, Sun } from 'lucide-react';
-import translations from './translations';
+import { translations } from './translations';
 import AdComponent from './components/AdComponent';
 import ExitIntentPopup from './components/ExitIntentPopup';
 

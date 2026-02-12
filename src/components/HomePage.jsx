@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, ChevronRight, Activity, Percent, Scale, Droplet, Moon, Clock, Heart, Apple, TrendingDown, Calendar, BarChart3, LineChart as LineChartIcon, Utensils, Zap, Dumbbell } from 'lucide-react';
-import postsData from '../data/posts.json';
 import { BlogImage } from './BlogPage';
 import AdComponent from './AdComponent';
 import TestimonialsSection from './TestimonialsSection';
 import EmailCaptureForm from './EmailCaptureForm';
 
 const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t }) => {
-    const currentLangPosts = postsData[t.lang || 'en'] || postsData['en'] || [];
+    const [currentLangPosts, setCurrentLangPosts] = React.useState([]);
+
+    React.useEffect(() => {
+        import('../data/posts.json').then(module => {
+            const postsData = module.default;
+            const data = postsData[t.lang || 'en'] || postsData['en'] || [];
+            setCurrentLangPosts(data);
+        });
+    }, [t.lang]);
 
     const tools = [
         { id: 'bmi', icon: <Scale className="w-8 h-8" />, title: t.bmi_calc, desc: t.bmi_desc, color: 'from-emerald-400 to-teal-500' },

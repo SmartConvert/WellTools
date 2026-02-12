@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, ChevronRight } from 'lucide-react';
 import AdComponent from './AdComponent';
-import postsData from '../data/posts.json';
 
 export const BlogImage = ({ src, alt, className }) => {
     const [error, setError] = useState(false);
@@ -97,7 +96,29 @@ export const BlogImage = ({ src, alt, className }) => {
 };
 
 const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang = 'en' }) => {
-    const posts = postsData[lang] || postsData['en'] || [];
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(true);
+        import('../data/posts.json').then(module => {
+            const postsData = module.default;
+            setPosts(postsData[lang] || postsData['en'] || []);
+            setLoading(false);
+        }).catch(err => {
+            console.error('Failed to load blog posts', err);
+            setLoading(false);
+        });
+    }, [lang]);
+
+    if (loading) {
+        return (
+            <div className="pt-24 pb-16 px-4 flex flex-col items-center justify-center min-h-[400px]">
+                <div className="w-16 h-16 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin mb-4"></div>
+                <p className="text-gray-500 font-medium animate-pulse">Loading amazing content...</p>
+            </div>
+        );
+    }
 
     return (
         <div className="pt-24 pb-16 px-4">

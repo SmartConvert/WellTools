@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Heart, Menu, X, Moon, Sun } from 'lucide-react';
-import { translations } from './translations';
-import postsData from './data/posts.json';
+import translations from './translations';
 import AdComponent from './components/AdComponent';
 import ExitIntentPopup from './components/ExitIntentPopup';
 
@@ -232,12 +231,15 @@ const DailyHealthTools = () => {
     const pageId = params.get('page'); // Keep support for old ?page= temporarily
 
     if (postId) {
-      const allPosts = [...(postsData.en || []), ...(postsData.ar || []), ...(postsData.fr || [])];
-      const foundPost = allPosts.find(p => p.id === postId);
-      if (foundPost) {
-        setSelectedPost(foundPost);
-        setCurrentPage('blog-post');
-      }
+      import('./data/posts.json').then(module => {
+        const postsData = module.default;
+        const allPosts = [...(postsData.en || []), ...(postsData.ar || []), ...(postsData.fr || [])];
+        const foundPost = allPosts.find(p => p.id === postId);
+        if (foundPost) {
+          setSelectedPost(foundPost);
+          setCurrentPage('blog-post');
+        }
+      });
     } else if (path && path !== '') {
       // Valid pages list (should match renderPage switch)
       const validPages = [

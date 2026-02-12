@@ -233,7 +233,7 @@ const DailyHealthTools = () => {
     if (postId) {
       import('./data/posts.json').then(module => {
         const postsData = module.default;
-        const allPosts = [...(postsData.en || []), ...(postsData.ar || []), ...(postsData.fr || [])];
+        const allPosts = postsData.en || [];
         const foundPost = allPosts.find(p => p.id === postId);
         if (foundPost) {
           setSelectedPost(foundPost);

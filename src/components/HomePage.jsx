@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, ChevronRight, Activity, Percent, Scale, Droplet, Moon, Clock, Heart, Apple, TrendingDown, Calendar, BarChart3, LineChart as LineChartIcon, Utensils, Zap, Dumbbell } from 'lucide-react';
-import { BlogImage } from './BlogPage';
-import AdComponent from './AdComponent';
 import TestimonialsSection from './TestimonialsSection';
 import EmailCaptureForm from './EmailCaptureForm';
 
@@ -190,13 +188,6 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                                         }}
                                         className="group cursor-pointer relative bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700"
                                     >
-                                        <div className="h-40 md:h-56 relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                                            <BlogImage src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                                            <div className="absolute inset-0 bg-linear-to-t from-gray-900/60 to-transparent"></div>
-                                            <div className="absolute bottom-4 left-6">
-                                                <span className="px-3 py-1 bg-emerald-500 text-white text-[10px] font-bold rounded-lg uppercase tracking-widest">{post.category}</span>
-                                            </div>
-                                        </div>
                                         <div className="p-6 md:p-8">
                                             <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-emerald-500 transition-colors line-clamp-1">{post.title}</h3>
                                             <p className="text-gray-700 dark:text-gray-200 text-sm md:text-base line-clamp-2 font-bold mb-4">{post.excerpt}</p>
@@ -241,8 +232,6 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                         ))}
                     </div>
                 </div>
-
-                <AdComponent slot="home_bottom" />
             </div>
         </div>
     );

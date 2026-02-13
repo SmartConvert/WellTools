@@ -1,6 +1,5 @@
 import React from 'react';
 import { Droplet } from 'lucide-react';
-import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
@@ -70,8 +69,6 @@ const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWa
 
                     <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="water" />
-
-                    <AdComponent slot="water_bottom" />
                 </div>
 
                 <RelatedTools currentToolId="water" setCurrentPage={setCurrentPage} />

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Scale as ScaleIcon } from 'lucide-react';
-import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
@@ -79,8 +78,6 @@ const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGen
 
                     <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="ideal-weight" />
-
-                    <AdComponent slot="ideal_weight_bottom" />
                 </div>
 
                 <RelatedTools currentToolId="ideal-weight" setCurrentPage={setCurrentPage} />

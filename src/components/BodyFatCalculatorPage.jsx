@@ -1,6 +1,5 @@
 import React from 'react';
 import { Percent } from 'lucide-react';
-import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
@@ -150,8 +149,6 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
 
                     <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="body-fat" />
-
-                    <AdComponent slot="body_fat_bottom" />
                 </div>
 
                 <RelatedTools currentToolId="body-fat" setCurrentPage={setCurrentPage} />

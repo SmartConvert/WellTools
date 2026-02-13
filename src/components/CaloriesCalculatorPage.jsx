@@ -1,6 +1,5 @@
 import React from 'react';
 import { Activity, Utensils } from 'lucide-react';
-import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
@@ -131,8 +130,6 @@ const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeig
 
                     <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="calories" />
-
-                    <AdComponent slot="calories_bottom" />
                 </div>
 
                 <RelatedTools currentToolId="calories" setCurrentPage={setCurrentPage} />

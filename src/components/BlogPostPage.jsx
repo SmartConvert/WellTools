@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Clock } from 'lucide-react';
-import AdComponent from './AdComponent';
-import { BlogImage } from './BlogPage';
 
 const parseMarkdown = (text) => {
     if (!text) return null;
@@ -38,64 +36,37 @@ const parseMarkdown = (text) => {
 const parseInlineMarkdown = (text) => {
     if (typeof text !== 'string') return text;
 
-    // Handle Images FIRST: ![alt](url)
-    const parts = [];
-    const imgRegex = /!\[(.*?)\]\((.*?)\)/g;
-    let match;
-    let lastIdx = 0;
+    // Remove Images: ![alt](url) -> replace with empty string or skip
+    let processedText = text.replace(/!\[.*?\]\(.*?\)/g, '');
 
-    while ((match = imgRegex.exec(text)) !== null) {
-        if (match.index > lastIdx) {
-            parts.push(text.slice(lastIdx, match.index));
+    // Bold: **text**
+    const subParts = processedText.split(/(\*\*.*?\*\*)/g);
+    return subParts.flatMap((subPart, j) => {
+        if (subPart.startsWith('**') && subPart.endsWith('**')) {
+            return [<strong key={`bold-${j}`} className="font-bold text-gray-900 dark:text-white">{subPart.slice(2, -2)}</strong>];
         }
-        parts.push(
-            <BlogImage
-                key={`img-${match.index}`}
-                src={match[2]}
-                alt={match[1]}
-                className="max-w-full rounded-2xl my-6 shadow-lg block mx-auto bg-gray-100"
-            />
-        );
-        lastIdx = imgRegex.lastIdx;
-    }
-    if (lastIdx < text.length) {
-        parts.push(text.slice(lastIdx));
-    }
 
-    const result = parts.length > 0 ? parts : [text];
-
-    return result.flatMap((part, i) => {
-        if (typeof part !== 'string') return [part];
-
-        // Bold: **text**
-        const subParts = part.split(/(\*\*.*?\*\*)/g);
-        return subParts.flatMap((subPart, j) => {
-            if (subPart.startsWith('**') && subPart.endsWith('**')) {
-                return [<strong key={`${i}-${j}`} className="font-bold text-gray-900 dark:text-white">{subPart.slice(2, -2)}</strong>];
+        // Final Links: [text](url)
+        const linkRegex = /\[(.*?)\]\((.*?)\)/g;
+        const linkParts = [];
+        let lMatch;
+        let lLastIdx = 0;
+        while ((lMatch = linkRegex.exec(subPart)) !== null) {
+            if (lMatch.index > lLastIdx) {
+                linkParts.push(subPart.slice(lLastIdx, lMatch.index));
             }
+            linkParts.push(
+                <a key={`link-${lMatch.index}`} href={lMatch[2]} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline font-medium">
+                    {lMatch[1]}
+                </a>
+            );
+            lLastIdx = linkRegex.lastIdx;
+        }
+        if (lLastIdx < subPart.length) {
+            linkParts.push(subPart.slice(lLastIdx));
+        }
 
-            // Final Links: [text](url)
-            const linkRegex = /\[(.*?)\]\((.*?)\)/g;
-            const linkParts = [];
-            let lMatch;
-            let lLastIdx = 0;
-            while ((lMatch = linkRegex.exec(subPart)) !== null) {
-                if (lMatch.index > lLastIdx) {
-                    linkParts.push(subPart.slice(lLastIdx, lMatch.index));
-                }
-                linkParts.push(
-                    <a key={`link-${i}-${j}-${lMatch.index}`} href={lMatch[2]} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline font-medium">
-                        {lMatch[1]}
-                    </a>
-                );
-                lLastIdx = linkRegex.lastIdx;
-            }
-            if (lLastIdx < subPart.length) {
-                linkParts.push(subPart.slice(lLastIdx));
-            }
-
-            return linkParts.length > 0 ? linkParts : [subPart];
-        });
+        return linkParts.length > 0 ? linkParts : [subPart];
     });
 };
 
@@ -158,15 +129,6 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
                     {t.back_to_blog}
                 </button>
                 <header className="mb-12">
-                    {post.image && (
-                        <div className="w-full aspect-video md:aspect-[21/9] rounded-[2.5rem] overflow-hidden mb-10 shadow-2xl bg-gray-800 flex items-center justify-center">
-                            <BlogImage
-                                src={post.image}
-                                alt={post.imageAlt || post.title}
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                    )}
                     <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] mb-8 tracking-tight">{post.title}</h1>
                     <div className="flex items-center gap-6 text-gray-500 dark:text-gray-400 font-bold mb-4">
                         <div className="flex items-center gap-2">
@@ -221,8 +183,6 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
                         </ul>
                     </div>
                 )}
-
-                <AdComponent slot="blog_post_bottom" />
             </div>
         </div>
     );

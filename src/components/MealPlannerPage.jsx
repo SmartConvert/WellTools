@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Utensils, TrendingDown, Activity, Scale as ScaleIcon, Info, Plus } from 'lucide-react';
-import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import { mealCategories } from '../data/meals';
 import { parseLocalizedNumber } from '../utils/numbers';
@@ -317,8 +316,6 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
                 </div>
 
                 <ToolInfoSection toolId="meal_planner" t={t} />
-
-                <AdComponent slot="meal_planner_bottom" />
             </div>
         </div>
     );

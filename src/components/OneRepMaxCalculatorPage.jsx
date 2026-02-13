@@ -1,6 +1,5 @@
 import React from 'react';
 import { Dumbbell, Info, Trophy } from 'lucide-react';
-import AdComponent from './AdComponent';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
@@ -84,8 +83,6 @@ const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps,
 
                     <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="1rm" />
-
-                    <AdComponent slot="orm_bottom" />
                 </div>
 
                 <RelatedTools currentToolId="1rm" setCurrentPage={setCurrentPage} />

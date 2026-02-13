@@ -1,99 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, ChevronRight } from 'lucide-react';
-import AdComponent from './AdComponent';
-
-export const BlogImage = ({ src, alt, className }) => {
-    const [error, setError] = useState(false);
-    const [retryCount, setRetryCount] = useState(0);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        setError(false);
-        setRetryCount(0);
-        setLoading(true);
-    }, [src]);
-
-    const handleError = () => {
-        setLoading(false);
-        if (retryCount < 1) {
-            setRetryCount(prev => prev + 1);
-        } else {
-            setError(true);
-        }
-    };
-
-    if (error) {
-        return (
-            <div className={`${className} bg-gray-200 dark:bg-gray-700 flex items-center justify-center aspect-ratio`}>
-                <BookOpen className="w-12 h-12 text-gray-400" />
-            </div>
-        );
-    }
-
-    // Comprehensive URL cleaning to prevent double encoding or malformed strings
-    const processImageUrl = (url) => {
-        if (!url) return '';
-        try {
-            // First decode in case it's already encoded
-            let decoded = url;
-            try {
-                decoded = decodeURIComponent(url);
-            } catch (e) {
-                // If decode fails, use original
-            }
-
-            // Then encode specifically for spaces and special prompt chars
-            // but keep the protocol and domain intact
-            const encoded = encodeURI(decoded);
-            return encoded.replace(/%2520/g, '%20'); // Fix common double-encoding cases
-        } catch (e) {
-            console.error('WellTools Debug: Image URL processing failed', e, url);
-            return url;
-        }
-    };
-
-    const encodedSrc = processImageUrl(src);
-
-    // Generate srcset for Pollinations images only
-    const generateSrcSet = (url) => {
-        if (!url || !url.includes('pollinations.ai')) return undefined;
-        // Base structure: https://image.pollinations.ai/prompt/...?width=1200&height=800...
-        // We want to create versions with width=400, 800, 1200
-        const makeVariant = (w, h) => {
-            const newUrl = url.replace(/width=\d+/, `width=${w}`).replace(/height=\d+/, `height=${h}`);
-            return `${newUrl} ${w}w`;
-        };
-
-        try {
-            return `${makeVariant(400, 300)}, ${makeVariant(800, 600)}, ${makeVariant(1200, 800)}`;
-        } catch (e) {
-            return undefined;
-        }
-    };
-
-    return (
-        <div className={`relative overflow-hidden ${className} bg-gray-200 dark:bg-gray-800`}>
-            {loading && (
-                <div className="absolute inset-0 bg-linear-to-r from-gray-200 via-gray-300 to-gray-200 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700 animate-shimmer scale-110"></div>
-            )}
-            <img
-                src={encodedSrc}
-                srcSet={generateSrcSet(encodedSrc)}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                alt={alt}
-                className={`${className} transition-opacity duration-300 ${loading ? 'opacity-0' : 'opacity-100'}`}
-                crossOrigin="anonymous"
-                onLoad={() => setLoading(false)}
-                onError={(e) => {
-                    console.warn(`WellTools Debug: Image failed to load [Retry ${retryCount}]:`, encodedSrc);
-                    handleError();
-                }}
-                loading="lazy"
-                decoding="async"
-            />
-        </div>
-    );
-};
 
 const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang = 'en' }) => {
     const [posts, setPosts] = useState([]);
@@ -137,17 +43,9 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang = 'en' }) => {
                     </p>
                 </div>
 
-                <AdComponent slot="blog_top" />
-
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {posts.map((post) => (
                         <article key={post.id} className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col">
-                            {post.image && (
-                                <div className="relative aspect-video overflow-hidden bg-gray-800 flex items-center justify-center">
-                                    <BlogImage src={post.image} alt={post.imageAlt || post.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                    <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
-                                </div>
-                            )}
                             <div className="p-8 grow">
                                 <div className="flex items-center gap-3 mb-4">
                                     <span className="px-4 py-1.5 bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 text-xs font-bold rounded-full uppercase tracking-wider">{post.category}</span>

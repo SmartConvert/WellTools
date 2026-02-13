@@ -2,11 +2,11 @@
 export const calculatorContent = {
     bmi: {
         en: {
-            hero_title: 'BMI Calculator',
-            meta_title: 'BMI Calculator - Calculate Your Body Mass Index | WellTools',
-            meta_description: 'Calculate your Body Mass Index (BMI) instantly with our free tool. Understand your weight category based on WHO guidelines.',
-            hero_subtitle: 'Calculate your Body Mass Index.',
-            hero_emoji: '🥑',
+            hero_title: 'BMI Calculator for Women & Men',
+            meta_title: 'BMI Calculator for Women & Men - Accurate BMI with Age | WellTools',
+            meta_description: 'Calculate your Body Mass Index (BMI) accurately with age and gender. Free BMI calculator for women, men, and teens based on WHO standard metrics.',
+            hero_subtitle: 'Discover your healthy weight range with our precise BMI calculator.',
+            hero_emoji: '⚖️',
             hero_color: 'from-lime-400 to-green-500',
             related_tools: [
                 { id: 'calories', name: 'Calorie Calculator' },
@@ -108,11 +108,11 @@ export const calculatorContent = {
             ]
         },
         ar: {
-            hero_title: 'حاسبة مؤشر كتلة الجسم',
-            meta_title: 'حاسبة مؤشر كتلة الجسم (BMI) - احسب وزنك المثالي | WellTools',
-            meta_description: 'احسب مؤشر كتلة الجسم (BMI) فوراً واعرف تصنيف وزنك (نقص الوزن، طبيعي، زيادة الوزن، سمنة) بناءً على معايير منظمة الصحة العالمية.',
-            hero_subtitle: 'احسب مؤشر كتلة الجسمك فوراً وافهم حالة وزنك الصحية',
-            hero_emoji: '🥑',
+            hero_title: 'حاسبة مؤشر كتلة الجسم للنساء والرجال',
+            meta_title: 'حاسبة مؤشر كتلة الجسم (BMI) - احسب وزنك المثالي حسب العمر | WellTools',
+            meta_description: 'احسب مؤشر كتلة الجسم (BMI) للنساء والرجال بدقة. اعرف تصنيف وزنك (نقص الوزن، طبيعي، زيادة الوزن، سمنة) بناءً على معايير منظمة الصحة العالمية.',
+            hero_subtitle: 'حاسبة دقيقة لمؤشر كتلة الجسم لمساعدتك في الوصول للوزن الصحي',
+            hero_emoji: '⚖️',
             hero_color: 'from-lime-400 to-green-500',
 
             seo_what_title: 'ما هو مؤشر كتلة الجسم (BMI)؟',
@@ -202,10 +202,10 @@ export const calculatorContent = {
     // I'll add all other calculators in the same format...
     calories: {
         en: {
-            hero_title: 'Calorie Calculator',
-            meta_title: 'Calorie Calculator - Daily TDEE & Needs for Weight Loss | WellTools',
-            meta_description: 'Estimate your daily calorie needs (TDEE) for weight loss, maintenance, or muscle gain using the Mifflin-St Jeor equation.',
-            hero_subtitle: 'Estimate daily calories for weight maintenance, loss, or gain.',
+            hero_title: 'Personalized Calorie Calculator',
+            meta_title: 'Calorie Deficit Calculator - Daily Needs for Weight Loss | WellTools',
+            meta_description: 'Calculate your daily calorie needs and calorie deficit for weight loss, maintenance, or muscle gain. Precision TDEE calculator for personalized nutrition.',
+            hero_subtitle: 'Find your perfect calorie target for weight loss or muscle building.',
             hero_emoji: '🔥',
             hero_color: 'from-orange-400 to-red-500',
             related_tools: [
@@ -308,10 +308,10 @@ export const calculatorContent = {
             ]
         },
         ar: {
-            hero_title: 'حاسبة السعرات الحرارية',
-            meta_title: 'حاسبة السعرات الحرارية - احسب احتياجك اليومي للوزن | WellTools',
-            meta_description: 'احسب احتياجاتك اليومية من السعرات الحرارية لفقدان الوزن أو الحفاظ عليه أو بناء العضلات باستخدام معادلة Mifflin-St Jeor.',
-            hero_subtitle: 'اكتشف احتياجاتك اليومية من السعرات الحرارية لأهدافك الصحية',
+            hero_title: 'حاسبة السعرات الحرارية لإنقاص الوزن',
+            meta_title: 'حاسبة السعرات الحرارية - احسب احتياجك اليومي والعجز الحراري | WellTools',
+            meta_description: 'احسب السعرات الحرارية التي يحتاجها جسمك يومياً لإنقاص الوزن أو الحفاظ عليه أو بناء العضلات. حاسبة دقيقة تعتمد على مستوى نشاطك.',
+            hero_subtitle: 'اكتشف احتياجك اليومي من السعرات الحرارية بدقة للوصول لهدفك',
             hero_emoji: '🍎',
             hero_color: 'from-red-400 to-rose-500',
 
@@ -392,10 +392,10 @@ export const calculatorContent = {
     },
     water: {
         en: {
-            hero_title: 'Water Intake Calculator',
-            meta_title: 'Water Intake Calculator - Daily Hydration Needs | WellTools',
-            meta_description: 'Calculate your daily water intake based on weight and activity. Stay hydrated for energy, focus, and health with our personalized hydration tool.',
-            hero_subtitle: 'Calculate your daily hydration needs based on your body and lifestyle.',
+            hero_title: 'Daily Water Intake Calculator',
+            meta_title: 'Water Intake Calculator - How Much Water Should I Drink? | WellTools',
+            meta_description: 'Calculate your daily water intake based on weight, age, and activity level. Discover how many liters of water you need to stay hydrated and healthy.',
+            hero_subtitle: 'Personalized hydration goals based on your body and physical activity.',
             hero_emoji: '💧',
             hero_color: 'from-blue-400 to-cyan-500',
             related_tools: [
@@ -460,10 +460,10 @@ export const calculatorContent = {
             ]
         },
         ar: {
-            hero_title: 'حاسبة شرب الماء',
-            meta_title: 'حاسبة شرب الماء - احتياجك اليومي من الماء | WellTools',
-            meta_description: 'احسب كمية الماء التي يحتاجها جسمك يومياً بناءً على وزنك ومستوى نشاطك للحفاظ على الترطيب المثالي.',
-            hero_subtitle: 'اكتشف كمية الماء التي يجب تناولها يومياً بناءً على جسمك ونشاطك',
+            hero_title: 'حاسبة شرب الماء حسب الوزن',
+            meta_title: 'حاسبة شرب الماء - كم لتر ماء يحتاج الجسم يومياً؟ | WellTools',
+            meta_description: 'احسب احتياجك اليومي من الماء بدقة بناءً على وزنك ومستوى نشاطك. أداة سهلة لمعرفة كمية الماء المثالية للترطيب والصحة.',
+            hero_subtitle: 'اكتشف كم لتر ماء يحتاجه جسمك يومياً بناءً على وزنك ونشاطك',
             hero_emoji: '💧',
             hero_color: 'from-blue-400 to-cyan-500',
             seo_what_title: 'أهمية الترطيب',
@@ -502,11 +502,11 @@ export const calculatorContent = {
     },
     'ideal-weight': {
         en: {
-            hero_title: 'Ideal Weight Calculator',
-            meta_title: 'Ideal Weight Calculator - Find Your Healthy Weight Range | WellTools',
-            meta_description: 'Find your medically-recommended ideal weight range using clinical formulas (Devine, Miller, Robinson). Discover your healthy weight for longevity.',
-            hero_subtitle: 'Find your medically-recommended healthy weight range.',
-            hero_emoji: '🍐',
+            hero_title: 'Ideal Weight Calculator by Height',
+            meta_title: 'Ideal Weight Calculator - Medically Recommended Healthy Range | WellTools',
+            meta_description: 'Find your medically recommended ideal weight range based on height, age, and gender using clinical formulas (Devine, Miller). Set realistic health goals.',
+            hero_subtitle: 'Discover your healthy target weight range using scientific health metrics.',
+            hero_emoji: '⚖️',
             hero_color: 'from-yellow-400 to-amber-500',
             related_tools: [
                 { id: 'bmi', name: 'BMI Calculator' },
@@ -596,11 +596,11 @@ export const calculatorContent = {
             ]
         },
         ar: {
-            hero_title: 'حاسبة الوزن المثالي',
-            meta_title: 'حاسبة الوزن المثالي - اكتشف وزنك الصحي | WellTools',
-            meta_description: 'اكتشف نطاق وزنك المثالي الموصى به طبياً باستخدام الصيغ السريرية. اعرف وزنك الصحي للعمر الطويل والوقاية من الأمراض.',
-            hero_subtitle: 'اكتشف نطاق الوزن الصحي الموصى به طبياً لك',
-            hero_emoji: '🍐',
+            hero_title: 'حاسبة الوزن المثالي حسب الطول والعمر',
+            meta_title: 'حاسبة الوزن المثالي - اكتشف وزنك الصحي وطولك المناسب | WellTools',
+            meta_description: 'اكتشف نطاق وزنك المثالي الموصى به طبياً بناءً على الطول والعمر والجنس. أداة دقيقة لتحديد أهداف الوزن الصحي المستدامة.',
+            hero_subtitle: 'اكتشف الوزن المثالي لجسمك بناءً على المعايير الطبية العالمية',
+            hero_emoji: '⚖️',
             hero_color: 'from-yellow-400 to-amber-500',
             seo_what_title: 'ما هو الوزن المثالي؟',
             seo_what_content: 'يوفر الوزن المثالي للجسم (IBW) هدفاً صحياً بناءً على الطول والجنس باستخدام صيغ سريرية.',
@@ -703,10 +703,10 @@ export const calculatorContent = {
     },
     bmr: {
         en: {
-            hero_title: 'BMR Calculator',
-            meta_title: 'BMR Calculator - Basal Metabolic Rate | WellTools',
-            meta_description: 'Calculate your Basal Metabolic Rate (BMR) instantly. Learn how many calories your body burns at rest using the Mifflin-St Jeor equation.',
-            hero_subtitle: 'Calculate your Basal Metabolic Rate.',
+            hero_title: 'BMR Calculator (Mifflin-St Jeor)',
+            meta_title: 'BMR Calculator - Calculate Your Basal Metabolic Rate | WellTools',
+            meta_description: 'Find your Basal Metabolic Rate (BMR) using the accurate Mifflin-St Jeor equation. Discover how many calories your body burns at rest for better health tracking.',
+            hero_subtitle: 'Discover your body’s baseline calorie needs with our precision BMR tool.',
             hero_emoji: '⚡',
             hero_color: 'from-amber-400 to-orange-500',
             related_tools: [
@@ -798,19 +798,19 @@ export const calculatorContent = {
         },
         ar: {
             hero_title: 'حاسبة معدل الأيض الأساسي (BMR)',
-            meta_title: 'حاسبة معدل الأيض الأساسي (BMR) - احسب سعراتك | WellTools',
-            meta_description: 'احسب معدل الأيض الأساسي (BMR) فوراً. اعرف عدد السعرات الحرارية التي يحرقها جسمك أثناء الراحة باستخدام معادلة Mifflin-St Jeor.',
-            hero_subtitle: 'احسب معدل الأيض الأساسي الخاص بك.',
+            meta_title: 'حاسبة BMR - احسب السعرات الحرارية التي يحرقها جسمك في الراحة | WellTools',
+            meta_description: 'احسب معدل الأيض الأساسي (BMR) بدقة باستخدام معادلة ميفلين سانت جيور. اكتشف الحد الأدنى من السعرات الحرارية التي يحتاجها جسمك للبقاء على قيد الحياة.',
+            hero_subtitle: 'اكتشف احتياج جسمك الأساسي من الطاقة في وضع الراحة التامة',
             hero_emoji: '⚡',
             hero_color: 'from-amber-400 to-orange-500'
         }
     },
     macro: {
         en: {
-            hero_title: 'Macro Calculator',
-            meta_title: 'Macro Calculator - Protein, Carbs, Fat for Your Goals | WellTools',
-            meta_description: 'Calculate your optimal macronutrient split (Protein, Carbs, Fats) for weight loss, muscle gain, or maintenance. Customized to your TDEE.',
-            hero_subtitle: 'Find your target protein, carb, and fat ranges.',
+            hero_title: 'Macro Calculator for Performance',
+            meta_title: 'Macro Calculator - Optimal Protein, Carbs, & Fat Ratios | WellTools',
+            meta_description: 'Calculate your optimal macronutrient split (Protein, Carbs, Fats) for weight loss, muscle gain, or maintenance. Tailored macro ratios for every fitness goal.',
+            hero_subtitle: 'Get your personalized daily targets for protein, carbs, and fats.',
             hero_emoji: '🥗',
             hero_color: 'from-green-400 to-emerald-600',
             related_tools: [
@@ -883,20 +883,20 @@ export const calculatorContent = {
             ]
         },
         ar: {
-            hero_title: 'حاسبة الماكروز',
-            meta_title: 'حاسبة الماكروز - البروتين والكربوهيدرات والدهون | WellTools',
-            meta_description: 'احسب تقسيم الماكروز الأمثل (بروتين، كربوهيدرات، دهون) لفقدان الوزن أو بناء العضلات. مخصصة لاحتياجاتك اليومية.',
-            hero_subtitle: 'ابحث عن نطاقات البروتين والكربوهيدرات والدهون المستهدفة.',
+            hero_title: 'حاسبة الماكروز للجسم',
+            meta_title: 'حاسبة الماكروز - تقسيم البروتين والكربوهيدرات والدهون بدقة | WellTools',
+            meta_description: 'احسب نسب الماكروز المثالية (البروتين، الكربوهيدرات، الدهون) لأهدافك الرياضية سواء لإنقاص الوزن أو بناء العضلات. خطة غذائية مخصصة لك.',
+            hero_subtitle: 'حدد أهدافك اليومية من البروتين والدهون والكربوهيدرات بدقة علمية',
             hero_emoji: '🥗',
-            hero_color: 'from-green-400 to-emerald-600'
+            hero_color: 'from-green-400 to-emerald-600',
         }
     },
     'body-fat': {
         en: {
-            hero_title: 'Body Fat Calculator',
-            meta_title: 'Body Fat Calculator - Army Body Fat Percentage | WellTools',
-            meta_description: 'Estimate your body fat percentage using the US Navy method. A simple, non-invasive way to track your body composition progress.',
-            hero_subtitle: 'Estimate your body fat percentage accurately.',
+            hero_title: 'Body Fat Calculator (Navy Method)',
+            meta_title: 'Body Fat Calculator - Accurate Body Fat Percentage | WellTools',
+            meta_description: 'Estimate your body fat percentage accurately using the U.S. Navy Method. Track your body composition changes and fitness progress efficiently.',
+            hero_subtitle: 'Calculate your body fat percentage with clinical accuracy using simple measurements.',
             hero_emoji: '🍊',
             hero_color: 'from-orange-400 to-orange-600',
             related_tools: [
@@ -960,20 +960,20 @@ export const calculatorContent = {
             ]
         },
         ar: {
-            hero_title: 'حاسبة دهون الجسم',
-            meta_title: 'حاسبة دهون الجسم - نسبة الدهون الدقيقة | WellTools',
-            meta_description: 'قدر نسبة دهون جسمك باستخدام طريقة البحرية الأمريكية. طريقة بسيطة وغير جراحية لتتبع تكوين جسمك.',
-            hero_subtitle: 'قدر نسبة دهون جسمك بدقة.',
+            hero_title: 'حاسبة نسبة الدهون في الجسم',
+            meta_title: 'حاسبة دهون الجسم - قياس نسبة الدهون بدقة (طريقة البحرية) | WellTools',
+            meta_description: 'احسب نسبة الدهون في جسمك بدقة باستخدام طريقة البحرية الأمريكية. تتبع تطور تكوين جسمك ونسبة العضلات والدهون بسهولة.',
+            hero_subtitle: 'أداة دقيقة لقياس نسبة الدهون في الجسم بناءً على مقاساتك الشخصية',
             hero_emoji: '🍊',
-            hero_color: 'from-orange-400 to-orange-600'
+            hero_color: 'from-orange-400 to-orange-600',
         }
     },
     '1rm': {
         en: {
-            hero_title: 'One-Rep Max (1RM) Calculator',
-            meta_title: 'One Rep Max Calculator - Improve Your Strength | WellTools',
-            meta_description: 'Calculate your estimated One Rep Max (1RM) for squats, bench press, and deadlifts. Plan your strength training safely.',
-            hero_subtitle: 'Predict your maximum lifting capacity safely.',
+            hero_title: 'One-Rep Max (1RM) Strength Calculator',
+            meta_title: 'One Rep Max Calculator - Find Your Max Lift Safely | WellTools',
+            meta_description: 'Calculate your estimated 1RM for bench press, squat, and deadlift. Use our strength calculator to plan your training percentages and gain muscle.',
+            hero_subtitle: 'Predict your maximum lifting capacity and optimize your strength training.',
             hero_emoji: '🏋️',
             hero_color: 'from-gray-700 to-gray-900',
             related_tools: [
@@ -1051,11 +1051,11 @@ export const calculatorContent = {
         },
         ar: {
             hero_title: 'حاسبة أقصى وزن لتكرار واحد (1RM)',
-            meta_title: 'حاسبة أقصى وزن لتكرار واحد (1RM) - حسن قوتك | WellTools',
-            meta_description: 'احسب أقصى وزن يمكنك رفعه لتكرار واحد (1RM) لتمارين القرفصاء وضغط الصدر والرفعة المميتة. خطط لتمارين القوة بأمان.',
-            hero_subtitle: 'توقع أقصى قدرة رفع لك بأمان.',
+            meta_title: 'حاسبة 1RM - احسب أقصى قدرة رفع وقوتك البدنية | WellTools',
+            meta_description: 'احسب أقصى وزن يمكنك رفعه (1RM) بدقة. أداة مثالية للاعبي كمال الأجسام والقوة لتحديد أوزان التدريب المناسبة وتجنب الإصابة.',
+            hero_subtitle: 'توقع قوتك القصوى للأوزان وخطط لتمارينك بناءً على قدراتك الفعلية',
             hero_emoji: '🏋️',
-            hero_color: 'from-gray-700 to-gray-900'
+            hero_color: 'from-gray-700 to-gray-900',
         }
     },
     'meal-planner': {

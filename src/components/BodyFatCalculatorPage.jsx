@@ -13,7 +13,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
             <div className="max-w-3xl mx-auto">
                 <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
                     <div className="flex items-center gap-4 mb-8">
-                        <div className="w-16 h-16 bg-linear-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="bg-linear-to-r from-orange-500 to-orange-600 rounded-4xl p-8 text-white shadow-xl relative overflow-hidden group">
                             <Percent className="w-8 h-8 text-white" />
                         </div>
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.body_fat_calc}</h2>
@@ -139,7 +139,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
 
                             <button
                                 onClick={() => { setCurrentPage('body-fat-guide'); window.scrollTo(0, 0); }}
-                                className="w-full p-5 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-[2rem] font-black text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 group"
+                                className="w-full p-5 bg-linear-to-r from-gray-900 to-gray-800 text-white rounded-4xl font-black text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 group"
                             >
                                 <Zap className="w-6 h-6 text-emerald-400 group-hover:animate-pulse" />
                                 Read The Ultimate Body Fat Guide

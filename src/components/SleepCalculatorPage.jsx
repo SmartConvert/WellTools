@@ -59,7 +59,7 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
 
                             <button
                                 onClick={() => { setCurrentPage('sleep-guide'); window.scrollTo(0, 0); }}
-                                className="w-full p-6 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-[2rem] font-black text-xl shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 group"
+                                className="w-full p-6 bg-linear-to-r from-gray-900 to-gray-800 text-white rounded-4xl font-black text-xl shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02] flex items-center justify-center gap-3 group"
                             >
                                 <Zap className="w-6 h-6 text-emerald-400 group-hover:animate-pulse" />
                                 Read The Sleep Optimization Handbook

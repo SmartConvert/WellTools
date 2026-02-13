@@ -22,8 +22,8 @@ const ToolHero = ({ toolId }) => {
                     {content.hero_emoji}
                 </div>
                 <div className="text-center md:text-left">
-                    <h1 className="text-3xl md:text-6xl font-black text-white mb-3 md:mb-4 tracking-tight">
-                        {content.hero_title}
+                    <h1 className="text-3xl md:text-5xl font-black text-white mb-3 md:mb-4 tracking-tight leading-tight">
+                        {content.h1_title || content.hero_title}
                     </h1>
                     <p className="text-lg md:text-2xl text-white/90 max-w-2xl font-medium leading-relaxed">
                         {content.hero_subtitle}

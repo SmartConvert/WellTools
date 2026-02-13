@@ -3,6 +3,8 @@ export const calculatorContent = {
     bmi: {
         en: {
             hero_title: 'BMI Calculator for Women & Men',
+            h1_title: 'BMI Calculator: Calculate Body Mass Index for Men, Women & Kids',
+            h2_title: 'Calculate Your BMI Score & Health Category Instantly',
             meta_title: 'BMI Calculator for Women & Men - Accurate BMI with Age | WellTools',
             meta_description: 'Calculate your Body Mass Index (BMI) accurately with age and gender. Free BMI calculator for women, men, and teens based on WHO standard metrics.',
             hero_subtitle: 'Discover your healthy weight range with our precise BMI calculator.',
@@ -203,6 +205,8 @@ export const calculatorContent = {
     calories: {
         en: {
             hero_title: 'Personalized Calorie Calculator',
+            h1_title: 'Calorie Calculator: Daily Calorie Needs for Weight Loss & Muscle Gain',
+            h2_title: 'Calculate Your Optimal Daily Caloric Intake',
             meta_title: 'Calorie Deficit Calculator - Daily Needs for Weight Loss | WellTools',
             meta_description: 'Calculate your daily calorie needs and calorie deficit for weight loss, maintenance, or muscle gain. Precision TDEE calculator for personalized nutrition.',
             hero_subtitle: 'Find your perfect calorie target for weight loss or muscle building.',
@@ -393,6 +397,8 @@ export const calculatorContent = {
     water: {
         en: {
             hero_title: 'Daily Water Intake Calculator',
+            h1_title: 'Water Intake Calculator: How Much Water Should You Drink a Day?',
+            h2_title: 'Calculate Your Personalized Daily Hydration Goal',
             meta_title: 'Water Intake Calculator - How Much Water Should I Drink? | WellTools',
             meta_description: 'Calculate your daily water intake based on weight, age, and activity level. Discover how many liters of water you need to stay hydrated and healthy.',
             hero_subtitle: 'Personalized hydration goals based on your body and physical activity.',

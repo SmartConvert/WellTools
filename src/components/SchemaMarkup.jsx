@@ -1,6 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const SchemaMarkup = ({ toolId, content }) => {
+const SchemaMarkup = ({ toolId }) => {
+    const [content, setContent] = useState(null);
+
+    useEffect(() => {
+        if (!toolId) {
+            setContent(null);
+            return;
+        }
+
+        const validTools = [
+            'bmi', 'calories', 'water', 'ideal-weight', 'sleep',
+            'body-fat', 'bmr', 'macro', '1rm'
+        ];
+
+        if (validTools.includes(toolId)) {
+            import('../data/seoContent').then(module => {
+                // Default to English for schema as per site standard
+                const data = module.calculatorContent[toolId]?.['en'];
+                setContent(data);
+            });
+        } else {
+            setContent(null);
+        }
+    }, [toolId]);
+
     useEffect(() => {
         if (!content) return;
 
@@ -26,6 +50,13 @@ const SchemaMarkup = ({ toolId, content }) => {
             "url": window.location.href,
             "applicationCategory": "HealthApplication",
             "operatingSystem": "All",
+            "browserRequirements": "Requires JavaScript. Compatible with all major browsers.",
+            "softwareVersion": "2.0",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
             "abstract": content.hero_subtitle || "",
             "description": content.seo_what_content || ""
         };
@@ -42,26 +73,15 @@ const SchemaMarkup = ({ toolId, content }) => {
                 "cssSelector": ".calculator-container"
             },
             "specialty": "https://schema.org/DietNutrition",
+            "audience": {
+                "@type": "Audience",
+                "audienceType": "Health-conscious individuals"
+            },
             "about": {
                 "@type": "MedicalEntity",
                 "name": content.hero_title || "Health Metrics"
             }
         };
-
-        const scriptFaq = document.createElement('script');
-        scriptFaq.type = 'application/ld+json';
-        scriptFaq.id = `faq-schema-${toolId}`;
-        scriptFaq.innerHTML = JSON.stringify(faqSchema);
-
-        const scriptCalc = document.createElement('script');
-        scriptCalc.type = 'application/ld+json';
-        scriptCalc.id = `calc-schema-${toolId}`;
-        scriptCalc.innerHTML = JSON.stringify(calculatorSchema);
-
-        const scriptMedical = document.createElement('script');
-        scriptMedical.type = 'application/ld+json';
-        scriptMedical.id = `medical-schema-${toolId}`;
-        scriptMedical.innerHTML = JSON.stringify(medicalSchema);
 
         // 4. BreadcrumbList Schema
         const breadcrumbSchema = {
@@ -82,6 +102,21 @@ const SchemaMarkup = ({ toolId, content }) => {
                 }
             ]
         };
+
+        const scriptFaq = document.createElement('script');
+        scriptFaq.type = 'application/ld+json';
+        scriptFaq.id = `faq-schema-${toolId}`;
+        scriptFaq.innerHTML = JSON.stringify(faqSchema);
+
+        const scriptCalc = document.createElement('script');
+        scriptCalc.type = 'application/ld+json';
+        scriptCalc.id = `calc-schema-${toolId}`;
+        scriptCalc.innerHTML = JSON.stringify(calculatorSchema);
+
+        const scriptMedical = document.createElement('script');
+        scriptMedical.type = 'application/ld+json';
+        scriptMedical.id = `medical-schema-${toolId}`;
+        scriptMedical.innerHTML = JSON.stringify(medicalSchema);
 
         const scriptBreadcrumb = document.createElement('script');
         scriptBreadcrumb.type = 'application/ld+json';

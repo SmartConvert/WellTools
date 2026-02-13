@@ -105,35 +105,28 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
             }
         };
 
-        const breadcrumbSchema = {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": "https://welltools.online/"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Blog",
-                    "item": "https://welltools.online/blog"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": post.title,
-                    "item": window.location.href
-                }
-            ]
-        };
+        const schemas = [articleSchema, breadcrumbSchema];
+
+        if (post.faq && post.faq.length > 0) {
+            const faqSchema = {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": post.faq.map(item => ({
+                    "@type": "Question",
+                    "name": item.question,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": item.answer
+                    }
+                }))
+            };
+            schemas.push(faqSchema);
+        }
 
         const script = document.createElement('script');
         script.type = 'application/ld+json';
         script.id = `article-schema-${post.id}`;
-        script.innerHTML = JSON.stringify([articleSchema, breadcrumbSchema]);
+        script.innerHTML = JSON.stringify(schemas);
         document.head.appendChild(script);
 
         return () => {

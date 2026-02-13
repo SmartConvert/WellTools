@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowLeft, Moon, Zzz, ShieldCheck, Zap, Info, CheckCircle2, CloudMoon } from 'lucide-react';
+import { ArrowLeft, Moon, ShieldCheck, Zap, Info, CheckCircle2, CloudMoon } from 'lucide-react';
 import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
 
@@ -31,7 +31,7 @@ const SleepGuidePage = ({ setCurrentPage, t }) => {
                     Pillar Guide
                 </div>
                 <h1 className="text-5xl md:text-6xl font-black text-gray-900 dark:text-white mb-6 leading-tight">
-                    The Sleep <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-500">Optimization Handbook</span>
+                    The Sleep <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-500">Optimization Handbook</span>
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed font-medium capitalize">
                     Master your circadian rhythm, understand sleep cycles, and transform your nighttime routine for peak daytime performance.

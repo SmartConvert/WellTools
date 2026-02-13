@@ -105,147 +105,147 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
             }
         };
 
-    };
 
-    const breadcrumbSchema = {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://welltools.online"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Blog",
-                "item": "https://welltools.online/blog"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": post.title,
-                "item": window.location.href
-            }
-        ]
-    };
 
-    const schemas = [articleSchema, breadcrumbSchema];
-
-    if (post.faq && post.faq.length > 0) {
-        const faqSchema = {
+        const breadcrumbSchema = {
             "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": post.faq.map(item => ({
-                "@type": "Question",
-                "name": item.question,
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": item.answer
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://welltools.online"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Blog",
+                    "item": "https://welltools.online/blog"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": post.title,
+                    "item": window.location.href
                 }
-            }))
+            ]
         };
-        schemas.push(faqSchema);
-    }
 
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.id = `article-schema-${post.id}`;
-    script.innerHTML = JSON.stringify(schemas);
-    document.head.appendChild(script);
+        const schemas = [articleSchema, breadcrumbSchema];
 
-    return () => {
-        const oldScript = document.getElementById(`article-schema-${post.id}`);
-        if (oldScript) document.head.removeChild(oldScript);
-    };
-}, [post]);
+        if (post.faq && post.faq.length > 0) {
+            const faqSchema = {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": post.faq.map(item => ({
+                    "@type": "Question",
+                    "name": item.question,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": item.answer
+                    }
+                }))
+            };
+            schemas.push(faqSchema);
+        }
 
-if (!post) return null;
-return (
-    <div className="bg-white dark:bg-gray-900 pt-24 pb-16 px-4">
-        <div className="max-w-4xl mx-auto">
-            <button
-                onClick={() => setCurrentPage('blog')}
-                className="mb-8 flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-emerald-600 font-bold transition-all group"
-                aria-label={t.aria_back}
-            >
-                <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded-xl group-hover:bg-emerald-50">
-                    <ArrowLeft className="w-5 h-5" />
-                </div>
-                {t.back_to_blog}
-            </button>
-            <header className="mb-12">
-                <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] mb-8 tracking-tight">{post.title}</h1>
-                <div className="flex items-center gap-6 text-gray-500 dark:text-gray-400 font-bold mb-4">
-                    <div className="flex items-center gap-2">
-                        <Clock className="w-5 h-5 text-emerald-500" />
-                        <span>Last Updated: {post.lastUpdated || post.date}</span>
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.id = `article-schema-${post.id}`;
+        script.innerHTML = JSON.stringify(schemas);
+        document.head.appendChild(script);
+
+        return () => {
+            const oldScript = document.getElementById(`article-schema-${post.id}`);
+            if (oldScript) document.head.removeChild(oldScript);
+        };
+    }, [post]);
+
+    if (!post) return null;
+    return (
+        <div className="bg-white dark:bg-gray-900 pt-24 pb-16 px-4">
+            <div className="max-w-4xl mx-auto">
+                <button
+                    onClick={() => setCurrentPage('blog')}
+                    className="mb-8 flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-emerald-600 font-bold transition-all group"
+                    aria-label={t.aria_back}
+                >
+                    <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded-xl group-hover:bg-emerald-50">
+                        <ArrowLeft className="w-5 h-5" />
                     </div>
-                    <div className="px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-lg text-sm">
-                        Health Verified
+                    {t.back_to_blog}
+                </button>
+                <header className="mb-12">
+                    <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] mb-8 tracking-tight">{post.title}</h1>
+                    <div className="flex items-center gap-6 text-gray-500 dark:text-gray-400 font-bold mb-4">
+                        <div className="flex items-center gap-2">
+                            <Clock className="w-5 h-5 text-emerald-500" />
+                            <span>Last Updated: {post.lastUpdated || post.date}</span>
+                        </div>
+                        <div className="px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-lg text-sm">
+                            Health Verified
+                        </div>
                     </div>
-                </div>
-            </header>
+                </header>
 
-            <TableOfContents content={post.content} />
+                <TableOfContents content={post.content} />
 
-            <article className="max-w-none text-gray-700 dark:text-gray-300">
-                {parseMarkdown(post.content)}
-            </article>
+                <article className="max-w-none text-gray-700 dark:text-gray-300">
+                    {parseMarkdown(post.content)}
+                </article>
 
-            {post.faq && post.faq.length > 0 && (
-                <div className="mt-20 p-8 md:p-12 bg-slate-50 dark:bg-gray-800 rounded-[2.5rem] border border-slate-200 dark:border-gray-700">
-                    <h2 className="text-3xl font-black text-gray-800 dark:text-white mb-8">{t.faq_title}</h2>
-                    <div className="space-y-6">
-                        {post.faq.map((item, i) => (
-                            <div key={i} className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-gray-700">
-                                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">{item.question}</h3>
-                                <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">{item.answer}</p>
-                            </div>
-                        ))}
+                {post.faq && post.faq.length > 0 && (
+                    <div className="mt-20 p-8 md:p-12 bg-slate-50 dark:bg-gray-800 rounded-[2.5rem] border border-slate-200 dark:border-gray-700">
+                        <h2 className="text-3xl font-black text-gray-800 dark:text-white mb-8">{t.faq_title}</h2>
+                        <div className="space-y-6">
+                            {post.faq.map((item, i) => (
+                                <div key={i} className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-gray-700">
+                                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">{item.question}</h3>
+                                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">{item.answer}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
 
-            {post.sources && post.sources.length > 0 && (
-                <div className="mt-12 p-8 md:p-10 bg-emerald-50/30 dark:bg-emerald-900/10 rounded-[2.5rem] border border-emerald-100 dark:border-emerald-900/30">
-                    <h2 className="text-2xl font-black text-emerald-900 dark:text-emerald-400 mb-6 flex items-center gap-3">
-                        <span className="w-8 h-8 bg-emerald-500 text-white rounded-lg flex items-center justify-center text-sm">#</span>
-                        {t.sources_title}
-                    </h2>
-                    <ul className="flex flex-col gap-3">
-                        {post.sources.map((source, i) => (
-                            <li key={i}>
-                                <a
-                                    href={source.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-2xl border border-emerald-50 dark:border-emerald-900/20 hover:border-emerald-500 transition-all group"
-                                >
-                                    <div className="w-2 h-2 rounded-full bg-emerald-400 group-hover:scale-150 transition-transform" />
-                                    <span className="text-gray-700 dark:text-gray-300 font-semibold group-hover:text-emerald-600 transition-colors line-clamp-1">
-                                        {source.title}
-                                    </span>
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
+                {post.sources && post.sources.length > 0 && (
+                    <div className="mt-12 p-8 md:p-10 bg-emerald-50/30 dark:bg-emerald-900/10 rounded-[2.5rem] border border-emerald-100 dark:border-emerald-900/30">
+                        <h2 className="text-2xl font-black text-emerald-900 dark:text-emerald-400 mb-6 flex items-center gap-3">
+                            <span className="w-8 h-8 bg-emerald-500 text-white rounded-lg flex items-center justify-center text-sm">#</span>
+                            {t.sources_title}
+                        </h2>
+                        <ul className="flex flex-col gap-3">
+                            {post.sources.map((source, i) => (
+                                <li key={i}>
+                                    <a
+                                        href={source.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-2xl border border-emerald-50 dark:border-emerald-900/20 hover:border-emerald-500 transition-all group"
+                                    >
+                                        <div className="w-2 h-2 rounded-full bg-emerald-400 group-hover:scale-150 transition-transform" />
+                                        <span className="text-gray-700 dark:text-gray-300 font-semibold group-hover:text-emerald-600 transition-colors line-clamp-1">
+                                            {source.title}
+                                        </span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
 
-            <RelatedArticles
-                currentPostId={post.id}
-                category={post.category}
-                setCurrentPage={setCurrentPage}
-                setSelectedPost={setSelectedPost}
-            />
+                <RelatedArticles
+                    currentPostId={post.id}
+                    category={post.category}
+                    setCurrentPage={setCurrentPage}
+                    setSelectedPost={setSelectedPost}
+                />
 
-            <CommentSection postId={post.id} />
+                <CommentSection postId={post.id} />
+            </div>
         </div>
-    </div>
-);
+    );
 };
 
 export default BlogPostPage;

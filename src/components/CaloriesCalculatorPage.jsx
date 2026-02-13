@@ -6,6 +6,7 @@ import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
 import TrustBadge from './TrustBadge';
 import PostResultCTA from './PostResultCTA';
+import AffiliateBlock from './AffiliateBlock';
 import { calculatorContent } from '../data/seoContent';
 
 const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeight, calAge, setCalAge, calGender, setCalGender, calActivity, setCalActivity, calculateCalories, calResult, calError, setCurrentPage, t }) => {
@@ -139,6 +140,8 @@ const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeig
 
                         <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                         <ToolInfoSection toolId="calories" />
+                        <PostResultCTA toolId="calories" setCurrentPage={setCurrentPage} />
+                        <AffiliateBlock toolId="calories" />
                     </div>
 
                     <RelatedTools currentToolId="calories" setCurrentPage={setCurrentPage} />

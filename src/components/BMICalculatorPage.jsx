@@ -1,5 +1,7 @@
 import React from 'react';
 import { Calculator, Info, Zap } from 'lucide-react';
+import PostResultCTA from './PostResultCTA';
+import AffiliateBlock from './AffiliateBlock';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
@@ -96,6 +98,9 @@ const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, c
                             </button>
                         </div>
                     )}
+
+                    <PostResultCTA toolId="bmi" setCurrentPage={setCurrentPage} />
+                    <AffiliateBlock toolId="bmi" />
 
                     <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="bmi" />

@@ -1,0 +1,133 @@
+{
+    "bmi": [
+        {
+            "id": "scale-1",
+            "name": "Renpho Smart Body Fat Scale",
+            "description": "Syncs with fitness apps to track BMI, body fat, and more.",
+            "image": "/images/products/scale.jpg",
+            "link": "https://amazon.com/dp/example1",
+            "price": "$29.99",
+            "rating": 4.8
+        },
+        {
+            "id": "tape-1",
+            "name": "Body Measuring Tape",
+            "description": "Accurate retractable tape for tracking body measurements.",
+            "image": "/images/products/tape.jpg",
+            "link": "https://amazon.com/dp/example2",
+            "price": "$9.99",
+            "rating": 4.6
+        }
+    ],
+    "ideal-weight": [
+        {
+            "id": "scale-1",
+            "name": "Renpho Smart Body Fat Scale",
+            "description": "Syncs with fitness apps to track BMI, body fat, and more.",
+            "image": "/images/products/scale.jpg",
+            "link": "https://amazon.com/dp/example1",
+            "price": "$29.99",
+            "rating": 4.8
+        },
+        {
+            "id": "tape-1",
+            "name": "Body Measuring Tape",
+            "description": "Accurate retractable tape for tracking body measurements.",
+            "image": "/images/products/tape.jpg",
+            "link": "https://amazon.com/dp/example2",
+            "price": "$9.99",
+            "rating": 4.6
+        }
+    ],
+    "calories": [
+        {
+            "id": "tracker-1",
+            "name": "Fitbit Charge 6",
+            "description": "Advanced health tracker with built-in GPS and heart rate monitoring.",
+            "image": "/images/products/tracker.jpg",
+            "link": "https://amazon.com/dp/example3",
+            "price": "$149.95",
+            "rating": 4.7
+        },
+        {
+            "id": "scale-food",
+            "name": "Etekcity Food Scale",
+            "description": "Precise digital kitchen scale for accurate calorie counting.",
+            "image": "/images/products/food-scale.jpg",
+            "link": "https://amazon.com/dp/example4",
+            "price": "$13.99",
+            "rating": 4.9
+        }
+    ],
+    "macro": [
+        {
+            "id": "scale-food-macro",
+            "name": "Etekcity Food Scale",
+            "description": "Precise digital kitchen scale for tracking macros.",
+            "image": "/images/products/food-scale.jpg",
+            "link": "https://amazon.com/dp/example4",
+            "price": "$13.99",
+            "rating": 4.9
+        },
+        {
+            "id": "shaker-1",
+            "name": "BlenderBottle Classic",
+            "description": "Perfect for protein shakes and pre-workout.",
+            "image": "/images/products/shaker.jpg",
+            "link": "https://amazon.com/dp/example10",
+            "price": "$9.99",
+            "rating": 4.8
+        }
+    ],
+    "water": [
+        {
+            "id": "bottle-1",
+            "name": "Hydro Flask 32 oz",
+            "description": "Vacuum insulated stainless steel water bottle.",
+            "image": "/images/products/bottle.jpg",
+            "link": "https://amazon.com/dp/example5",
+            "price": "$39.95",
+            "rating": 4.8
+        },
+        {
+            "id": "bottle-smart",
+            "name": "Hidrate Spark PRO",
+            "description": "Smart water bottle that tracks intake and glows to remind you.",
+            "image": "/images/products/smart-bottle.jpg",
+            "link": "https://amazon.com/dp/example6",
+            "price": "$69.99",
+            "rating": 4.5
+        }
+    ],
+    "sleep": [
+        {
+            "id": "mask-1",
+            "name": "Manta Sleep Mask",
+            "description": "100% blackout sleep mask for deep sleep.",
+            "image": "/images/products/mask.jpg",
+            "link": "https://amazon.com/dp/example7",
+            "price": "$35.00",
+            "rating": 4.7
+        },
+        {
+            "id": "sound-1",
+            "name": "White Noise Machine",
+            "description": "High fidelity sound machine for sleeping and relaxation.",
+            "image": "/images/products/sound.jpg",
+            "link": "https://amazon.com/dp/example8",
+            "price": "$21.99",
+            "rating": 4.6
+        }
+    ],
+    "general": [
+        {
+            "id": "vitamins",
+            "name": "Multivitamin for Men/Women",
+            "description": "Daily essential nutrients for overall health.",
+            "image": "/images/products/vitamins.jpg",
+            "link": "https://amazon.com/dp/example9",
+            "price": "$19.99",
+            "rating": 4.7
+        }
+    ]
+}

@@ -63,17 +63,45 @@ const SchemaMarkup = ({ toolId, content }) => {
         scriptMedical.id = `medical-schema-${toolId}`;
         scriptMedical.innerHTML = JSON.stringify(medicalSchema);
 
+        // 4. BreadcrumbList Schema
+        const breadcrumbSchema = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://welltools.online/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": content.hero_title || "Tool",
+                    "item": window.location.href
+                }
+            ]
+        };
+
+        const scriptBreadcrumb = document.createElement('script');
+        scriptBreadcrumb.type = 'application/ld+json';
+        scriptBreadcrumb.id = `breadcrumb-schema-${toolId}`;
+        scriptBreadcrumb.innerHTML = JSON.stringify(breadcrumbSchema);
+
         document.head.appendChild(scriptFaq);
         document.head.appendChild(scriptCalc);
         document.head.appendChild(scriptMedical);
+        document.head.appendChild(scriptBreadcrumb);
 
         return () => {
             const oldFaq = document.getElementById(`faq-schema-${toolId}`);
             const oldCalc = document.getElementById(`calc-schema-${toolId}`);
             const oldMedical = document.getElementById(`medical-schema-${toolId}`);
+            const oldBreadcrumb = document.getElementById(`breadcrumb-schema-${toolId}`);
             if (oldFaq) document.head.removeChild(oldFaq);
             if (oldCalc) document.head.removeChild(oldCalc);
             if (oldMedical) document.head.removeChild(oldMedical);
+            if (oldBreadcrumb) document.head.removeChild(oldBreadcrumb);
         };
     }, [toolId, content]);
 

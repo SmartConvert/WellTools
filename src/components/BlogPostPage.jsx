@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Clock } from 'lucide-react';
+import TableOfContents from './TableOfContents';
+import RelatedArticles from './RelatedArticles';
+import CommentSection from './CommentSection';
 
 const parseMarkdown = (text) => {
     if (!text) return null;
@@ -102,10 +105,35 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
             }
         };
 
+        const breadcrumbSchema = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://welltools.online/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Blog",
+                    "item": "https://welltools.online/blog"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": post.title,
+                    "item": window.location.href
+                }
+            ]
+        };
+
         const script = document.createElement('script');
         script.type = 'application/ld+json';
         script.id = `article-schema-${post.id}`;
-        script.innerHTML = JSON.stringify(articleSchema);
+        script.innerHTML = JSON.stringify([articleSchema, breadcrumbSchema]);
         document.head.appendChild(script);
 
         return () => {
@@ -140,6 +168,9 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
                         </div>
                     </div>
                 </header>
+
+                <TableOfContents content={post.content} />
+
                 <article className="max-w-none text-gray-700 dark:text-gray-300">
                     {parseMarkdown(post.content)}
                 </article>
@@ -183,6 +214,15 @@ const BlogPostPage = ({ post, setCurrentPage, t }) => {
                         </ul>
                     </div>
                 )}
+
+                <RelatedArticles
+                    currentPostId={post.id}
+                    category={post.category}
+                    setCurrentPage={setCurrentPage}
+                    setSelectedPost={setSelectedPost}
+                />
+
+                <CommentSection postId={post.id} />
             </div>
         </div>
     );

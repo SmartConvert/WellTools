@@ -6,21 +6,25 @@ import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
 
 const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, calculateBMI, bmiResult, bmiError, setCurrentPage, t }) => (
-    <div className="pt-24 pb-16 px-4">
+    <div className="pt-20 md:pt-24 pb-12 px-4">
         <div className="max-w-7xl mx-auto">
             <ToolHero toolId="bmi" />
 
             <div className="max-w-3xl mx-auto">
                 <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
                     <div className="flex items-center gap-4 mb-8">
-                        <div className="w-16 h-16 bg-linear-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
-                            <Calculator className="w-8 h-8 text-white" />
+                        <div className="w-12 h-12 md:w-16 md:h-16 bg-linear-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg shrink-0">
+                            <Calculator className="w-6 h-6 md:w-8 md:h-8 text-white" />
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.bmi_calc}</h2>
+                        <h2 className="text-2xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.bmi_calc}</h2>
                     </div>
 
-                    <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
+                    {/* Collapsible or short description on mobile to save space */}
+                    <p className="text-gray-600 dark:text-gray-400 mb-6 text-base md:text-lg leading-relaxed hidden md:block">
                         {t.bmi_desc}
+                    </p>
+                    <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm md:hidden">
+                        Calculate your Body Mass Index (BMI) instantly.
                     </p>
 
                     <div className="space-y-6">

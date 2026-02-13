@@ -68,6 +68,35 @@ const AboutPage = ({ setCurrentPage, t }) => (
                 </div>
             </section>
 
+            {/* Our Story Section */}
+            <section className="mb-24 flex flex-col md:flex-row items-center gap-12">
+                <div className="w-full md:w-1/2">
+                    <div className="relative rounded-5xl overflow-hidden shadow-2xl skew-y-3 transform hover:skew-y-0 transition-transform duration-700">
+                        {/* Placeholder for a team/story image - using a gradient for now */}
+                        <div className="aspect-square bg-linear-to-br from-gray-900 to-emerald-900 flex items-center justify-center p-12 text-center">
+                            <p className="text-emerald-100/50 font-black text-3xl">Where Wellness Meets Data</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="w-full md:w-1/2">
+                    <h2 className="text-4xl font-black text-gray-900 dark:text-white mb-6">Our Story</h2>
+                    <div className="space-y-6 text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                        <p>
+                            It started with a simple frustration: <strong className="text-emerald-600 dark:text-emerald-400">confusion.</strong>
+                        </p>
+                        <p>
+                            In 2024, our founder Mark was trying to optimize his own health but found himself drowning in contradictory advice, paywalled calculators, and overly complex medical journals. He realized that while the science existed, it wasn't accessible to the people who needed it most.
+                        </p>
+                        <p>
+                            WellTools was born from a desire to bridge that gap. We assembled a team of developers, nutritionists, and doctors to build tools that aren't just accurate, but <em>intuitive</em>.
+                        </p>
+                        <p>
+                            Today, we serve thousands of users daily, proving that when you give people the right tools, they can achieve incredible things.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
             {/* Team Section */}
             <section className="mb-24">
                 <div className="text-center mb-16">

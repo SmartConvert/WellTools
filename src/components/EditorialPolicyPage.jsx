@@ -6,7 +6,7 @@ const EditorialPolicyPage = ({ setCurrentPage, t }) => {
         <div className="bg-white dark:bg-gray-900 pt-24 pb-16 px-4">
             <div className="max-w-4xl mx-auto">
                 <header className="mb-12 text-center">
-                    <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                    <div className="w-20 h-20 bg-linear-to-br from-emerald-500 to-teal-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
                         <Shield className="w-10 h-10 text-white" />
                     </div>
                     <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-4">
@@ -57,7 +57,7 @@ const EditorialPolicyPage = ({ setCurrentPage, t }) => {
                                     <div>
                                         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Expert Review Process</h3>
                                         <p className="text-gray-700 dark:text-gray-300">
-                                            Our content is created by health and wellness professionals with backgrounds in nutrition, exercise science, and public health. All calculators use validated formulas from established medical research.
+                                            Our content is created and reviewed by a team with expertise in nutrition, exercise science, and data analysis. All calculators use validated formulas from established medical research, including the <strong>Mifflin-St Jeor</strong> and <strong>Harris-Benedict</strong> equations for metabolic rates, and the <strong>U.S. Navy Method</strong> for body composition.
                                         </p>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@ const EditorialPolicyPage = ({ setCurrentPage, t }) => {
                     {/* Fact-Checking Process */}
                     <section className="mb-12">
                         <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-6">Fact-Checking Process</h2>
-                        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 p-8 rounded-3xl border border-blue-100 dark:border-blue-900/30">
+                        <div className="bg-linear-to-br from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 p-8 rounded-3xl border border-blue-100 dark:border-blue-900/30">
                             <ol className="space-y-4 text-gray-700 dark:text-gray-300">
                                 <li className="flex gap-3">
                                     <span className="font-bold text-emerald-600 shrink-0">1.</span>
@@ -161,7 +161,7 @@ const EditorialPolicyPage = ({ setCurrentPage, t }) => {
                     </section>
 
                     {/* Contact */}
-                    <section className="p-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl text-white">
+                    <section className="p-8 bg-linear-to-br from-emerald-500 to-teal-600 rounded-3xl text-white">
                         <h2 className="text-2xl font-black mb-4">Questions About Our Editorial Policy?</h2>
                         <p className="text-emerald-50 mb-6">
                             We welcome feedback and questions about our content standards and editorial practices.

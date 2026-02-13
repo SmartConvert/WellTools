@@ -18,7 +18,7 @@ const ExpertPage = ({ setCurrentPage, t }) => (
                         { id: 'fitness', title: t.expert_fitness_title, role: t.expert_fitness_role, bio: t.expert_fitness_bio, color: 'blue' },
                         { id: 'mental', title: t.expert_mental_title, role: t.expert_mental_role, bio: t.expert_mental_bio, color: 'violet' }
                     ].map((expert) => (
-                        <div key={expert.id} className="bg-white dark:bg-gray-800 p-10 rounded-[2.5rem] shadow-xl border border-gray-50 dark:border-gray-700 hover:shadow-2xl transition-all group hover:-translate-y-2 duration-300">
+                        <div key={expert.id} className="bg-white dark:bg-gray-800 p-10 rounded-4xl shadow-xl border border-gray-50 dark:border-gray-700 hover:shadow-2xl transition-all group hover:-translate-y-2 duration-300">
                             <div className={`w-20 h-20 bg-${expert.color === 'emerald' ? 'emerald' : expert.color === 'blue' ? 'blue' : 'violet'}-500/10 rounded-3xl mb-8 flex items-center justify-center text-${expert.color === 'emerald' ? 'emerald' : expert.color === 'blue' ? 'blue' : 'violet'}-500 shadow-inner`}>
                                 {expert.id === 'nutrition' && <Utensils className="w-10 h-10" />}
                                 {expert.id === 'fitness' && <Activity className="w-10 h-10" />}

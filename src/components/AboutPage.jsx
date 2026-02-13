@@ -6,7 +6,7 @@ const AboutPage = ({ setCurrentPage, t }) => (
         <div className="max-w-5xl mx-auto">
             {/* Hero Section */}
             <header className="mb-20 text-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-[2rem] flex items-center justify-center mx-auto mb-8 shadow-xl">
+                <div className="w-24 h-24 bg-linear-to-br from-emerald-500 to-teal-600 rounded-4xl flex items-center justify-center mx-auto mb-8 shadow-xl">
                     <Heart className="w-12 h-12 text-white" />
                 </div>
                 <h1 className="text-5xl md:text-7xl font-black text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">
@@ -19,7 +19,7 @@ const AboutPage = ({ setCurrentPage, t }) => (
 
             {/* Mission & Trust Section */}
             <section className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
-                <div className="bg-emerald-50 dark:bg-emerald-900/10 p-10 md:p-12 rounded-[3.5rem] border border-emerald-100 dark:border-emerald-800/30">
+                <div className="bg-emerald-50 dark:bg-emerald-900/10 p-10 md:p-12 rounded-5xl border border-emerald-100 dark:border-emerald-800/30">
                     <Award className="w-12 h-12 text-emerald-600 mb-6" />
                     <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-6">Our Mission</h2>
                     <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
@@ -96,7 +96,7 @@ const AboutPage = ({ setCurrentPage, t }) => (
                             icon: < Shield className="w-6 h-6 text-emerald-500" />
                         }
                     ].map((member, idx) => (
-                        <div key={idx} className="bg-white dark:bg-gray-800 p-8 rounded-[2.5rem] shadow-xl border border-gray-50 dark:border-gray-700 text-center">
+                        <div key={idx} className="bg-white dark:bg-gray-800 p-8 rounded-4xl shadow-xl border border-gray-50 dark:border-gray-700 text-center">
                             <div className="w-16 h-16 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
                                 {member.icon}
                             </div>
@@ -109,7 +109,7 @@ const AboutPage = ({ setCurrentPage, t }) => (
             </section>
 
             {/* Editorial Standard Cta */}
-            <section className="bg-gray-900 dark:bg-emerald-900/10 rounded-[3.5rem] p-12 md:p-16 text-center text-white relative overflow-hidden">
+            <section className="bg-gray-900 dark:bg-emerald-900/10 rounded-5xl p-12 md:p-16 text-center text-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl -mr-48 -mt-48"></div>
                 <h2 className="text-4xl font-black mb-6">Our Commitment to Transparency</h2>
                 <p className="text-xl text-emerald-100 max-w-2xl mx-auto mb-10 leading-relaxed">

@@ -73,7 +73,7 @@ const parseInlineMarkdown = (text) => {
     });
 };
 
-const BlogPostPage = ({ post, setCurrentPage, t }) => {
+const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
     // Inject Article Schema for SEO
     useEffect(() => {
         if (!post) return;

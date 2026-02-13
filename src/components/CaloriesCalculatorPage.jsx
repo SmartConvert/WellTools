@@ -151,7 +151,8 @@ const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeig
                     </button>
                 </div>
             </div>
-            );
+        </div>
+    );
 };
 
-            export default CaloriesCalculatorPage;
+export default CaloriesCalculatorPage;

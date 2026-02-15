@@ -185,6 +185,17 @@ async function generatePost() {
         4. **Formatting**: Use proper Markdown (H1, H2, H3, bolding for emphasis).
         5. **No Fluff**: Get straight to the point. Respect the reader's time.
 
+        KEYWORD RESEARCH & STRATEGY (CRITICAL):
+        Before writing, you must:
+        1. Identify 3-5 high-impact, long-tail keywords relevant to the topic (e.g., "how to improve gut health naturally" instead of just "gut health").
+        2. **MANDATORY INTEGRATION**: You must naturally insert these keywords into:
+           - The SEO Meta Title
+           - The H1 Headline
+           - The first paragraph (Introduction)
+           - At least two H2 Subheadings
+           - The Meta Description
+        3. List these specific keywords in the JSON output "keywords" array.
+
         IMAGE GENERATION RULE:
         You must generate a "Photographic Image Prompt" in ENGLISH.
         - It must describe a high-quality, cinematic, photorealistic image.
@@ -194,14 +205,14 @@ async function generatePost() {
         - NO TEXT IN IMAGE.
 
         CONTENT STRUCTURE:
-        1. **SEO Meta Title**: Compelling, under 60 chars.
+        1. **SEO Meta Title**: Compelling, under 60 chars, MUST include primary keyword.
         2. **Meta Description**: High CTR, under 160 chars, includes keywords.
-        3. **H1 Headline**: The main article title.
+        3. **H1 Headline**: The main article title (include primary keyword).
         4. **Introduction**: Hook the reader immediately. State the problem and the solution.
-        5. **Deep Dive (Body)**: 3-5 distinct sections with H2 headings. Explain the "Science" and the "How-To".
+        5. **Deep Dive (Body)**: 3-5 distinct sections with H2 headings (include keywords in headers). Explain the "Science" and the "How-To".
         6. **Actionable List**: Bullet points of immediate steps the reader can take.
         7. **Pro Tips**: A "WellTools Expert Tip" section.
-        8. **FAQ**: 5 real-world questions people ask on Google about this topic.
+        8. **FAQ**: 5 real-world questions people ask on Google about this topic. (Direct answers, no fluff).
         9. **Internal Linking**: Suggest 3 relevant WellTools calculators (BMI, Calories, Water, etc.) that fit the context.
         10. **Medical Disclaimer**: Standard medical disclaimer in ${lang.name}.
 

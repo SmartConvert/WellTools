@@ -51,6 +51,7 @@ const TermsOfUsePage = lazyWithRetry(() => import('./components/LegalPages').the
 const DisclaimerPage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.DisclaimerPage })));
 const PrivacyPolicyPage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.PrivacyPolicyPage })));
 const EditorialPolicyPage = lazyWithRetry(() => import('./components/EditorialPolicyPage'));
+const NotFoundPage = lazyWithRetry(() => import('./components/NotFoundPage'));
 
 const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, t, theme, setTheme }) => (
   <nav className="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 shadow-sm transition-colors duration-300">
@@ -714,7 +715,7 @@ const DailyHealthTools = () => {
       case 'terms': return <TermsOfUsePage setCurrentPage={setCurrentPage} t={t} />;
       case 'disclaimer': return <DisclaimerPage setCurrentPage={setCurrentPage} t={t} />;
       case 'editorial-policy': return <EditorialPolicyPage setCurrentPage={setCurrentPage} t={t} />;
-      default: return <HomePage setCurrentPage={setCurrentPage} />;
+      default: return <NotFoundPage setCurrentPage={setCurrentPage} t={t} />;
     }
   };
 

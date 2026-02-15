@@ -56,7 +56,8 @@
             "id": 34,
             "group": "body_preservation",
             "title": "Gut Microbiome: The Second Brain Controlling Your Health",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-15"
         },
         {
             "id": 35,

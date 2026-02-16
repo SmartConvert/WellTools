@@ -221,7 +221,7 @@ async function generatePost() {
           "title": "SEO Optimized Title",
           "category": "${selectedTopic.group}",
           "excerpt": "Meta Description",
-          "imagePrompt": "Detailed English description for the photo...",
+          "imagePrompt": "precise, visual description of a photorealistic image for the post (e.g., \"overhead shot of fresh vegetables on wood table, soft window light, high resolution\"). Focus on natural, authentic, Unsplash-style photography. Avoid text in image.",
           "imageAlt": "SEO optimized alt text in ${lang.name}",
           "content": "Full markdown content starting with H1...",
           "keywords": ["keyword1", "keyword2", "keyword3"],
@@ -267,8 +267,10 @@ async function generatePost() {
 
             const newContent = JSON.parse(cleanedText);
 
-            // Construct Image URL using the high-quality prompt
-            const encodedPrompt = encodeURIComponent(newContent.imagePrompt || selectedTopic.title + " high quality 8k photography");
+            // Construct Image URL using high-quality prompt with Unsplash style keywords
+            const basePrompt = newContent.imagePrompt || selectedTopic.title + " high quality 8k photography";
+            const enhancedPrompt = `${basePrompt}, photorealistic, 8k, cinematic lighting, unsplash style, authentic, natural light`;
+            const encodedPrompt = encodeURIComponent(enhancedPrompt);
             const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1200&height=800&nologo=true&model=flux`;
 
             const postObj = {

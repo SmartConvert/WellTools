@@ -3,6 +3,10 @@ import { BookOpen, ChevronRight, Activity, Percent, Scale, Droplet, Moon, Clock,
 import TestimonialsSection from './TestimonialsSection';
 import EmailCaptureForm from './EmailCaptureForm';
 
+// Import hero image with vite-imagetools directives
+// Generate WebP and AVIF, and resize for responsiveness
+import heroImage from '../assets/hero-final.png?as=webp&w=1200';
+
 const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t }) => {
     const [currentLangPosts, setCurrentLangPosts] = React.useState([]);
 
@@ -33,9 +37,13 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                 <div className="relative h-[420px] md:h-[600px] rounded-4xl md:rounded-[3rem] overflow-hidden mb-12 lg:mb-16 shadow-2xl animate-fade-in group">
                     <div className="absolute inset-0">
                         <img
-                            src="/images/hero-final.png"
+                            src={heroImage}
                             alt="WellTools - Your Daily Health & Wellness Companion"
+                            width="1200"
+                            height="800"
                             className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-700"
+                            loading="eager"
+                            fetchpriority="high"
                         />
                         <div className="absolute inset-0 bg-linear-to-r from-gray-900/80 via-gray-900/40 to-transparent"></div>
                         <div className="absolute inset-0 flex items-center px-8 md:px-16">

@@ -5,7 +5,7 @@ import EmailCaptureForm from './EmailCaptureForm';
 
 // Import hero image with vite-imagetools directives
 // Generate WebP and AVIF, and resize for responsiveness
-import heroImage from '../assets/hero-final.png?as=webp&w=1200';
+import heroImage from '../assets/hero-final.jpg?as=webp&w=1200';
 
 const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t }) => {
     const [currentLangPosts, setCurrentLangPosts] = React.useState([]);

@@ -301,6 +301,23 @@ const ToolInfoSection = ({ toolId }) => {
                     </div>
                 </section>
             )}
+
+            {/* Medical Sources (NEW) */}
+            {content.medical_sources && content.medical_sources.length > 0 && (
+                <section className="bg-gray-50 dark:bg-gray-900/30 p-8 rounded-3xl border border-gray-200 dark:border-gray-700">
+                    <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-4">
+                        Medical References & Sources
+                    </h4>
+                    <ul className="space-y-2">
+                        {content.medical_sources.map((source, i) => (
+                            <li key={i} className="text-xs text-gray-500 dark:text-gray-500 flex items-start gap-2">
+                                <span className="mt-1 w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0" />
+                                {source}
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            )}
         </div>
     );
 };

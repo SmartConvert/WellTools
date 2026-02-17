@@ -479,7 +479,13 @@ const DailyHealthTools = () => {
     const bmi = (weight / (height * height)).toFixed(1);
     let category = bmi < 18.5 ? 'cat_underweight' : bmi < 25 ? 'cat_normal' : bmi < 30 ? 'cat_overweight' : 'cat_obese';
     let color = bmi < 18.5 ? 'text-blue-600' : bmi < 25 ? 'text-green-600' : bmi < 30 ? 'text-yellow-600' : 'text-red-600';
-    setBmiResult({ bmi, category, color });
+
+    // Fix: Dynamic Advice
+    const tipKey = bmi < 18.5 ? 'tip_underweight' : bmi < 25 ? 'tip_normal' : bmi < 30 ? 'tip_overweight' : 'tip_obese';
+    const tip = t[tipKey];
+    const suitable = bmi >= 18.5 && bmi < 25;
+
+    setBmiResult({ bmi, category, color, tip, suitable });
     if (window.dataLayer) {
       window.dataLayer.push({
         event: 'calculator_use',

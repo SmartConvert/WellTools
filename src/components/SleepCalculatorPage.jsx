@@ -1,10 +1,11 @@
 import React from 'react';
-import { Moon, Clock, Sparkles } from 'lucide-react';
+import { Moon, Sun, Battery, Brain, Sparkles, Clock } from 'lucide-react';
 import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
 import TrustBadge from './TrustBadge';
+import SleepResultInterpretation from './SleepResultInterpretation';
 import PostResultCTA from './PostResultCTA';
 import AffiliateBlock from './AffiliateBlock';
 import { calculatorContent } from '../data/seoContent';
@@ -118,6 +119,10 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                                     ))}
                                 </div>
                             </div>
+                        )}
+
+                        {sleepWakeupTimes.length > 0 && (
+                            <SleepResultInterpretation wakeupTimes={sleepWakeupTimes} />
                         )}
                     </div>
 

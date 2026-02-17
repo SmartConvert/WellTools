@@ -7,6 +7,7 @@ import RelatedTools from './RelatedTools';
 import TrustBadge from './TrustBadge';
 import PostResultCTA from './PostResultCTA';
 import AffiliateBlock from './AffiliateBlock';
+import WaterResultInterpretation from './WaterResultInterpretation';
 import { calculatorContent } from '../data/seoContent';
 
 const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWaterActivity, calculateWater, waterResult, waterError, setCurrentPage, t }) => {
@@ -76,6 +77,9 @@ const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWa
                                         <p className="text-5xl font-black text-blue-600 dark:text-blue-400">{waterResult} {t.unit_liter}</p>
                                     </div>
                                 </div>
+
+                                <WaterResultInterpretation waterResult={waterResult} activityLevel={waterActivity} />
+
                                 <PostResultCTA toolId="water" setCurrentPage={setCurrentPage} />
                                 <AffiliateBlock toolId="water" />
                             </div>

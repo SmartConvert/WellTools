@@ -7,6 +7,7 @@ import RelatedTools from './RelatedTools';
 import TrustBadge from './TrustBadge';
 import PostResultCTA from './PostResultCTA';
 import AffiliateBlock from './AffiliateBlock';
+import CalorieResultInterpretation from './CalorieResultInterpretation';
 import { calculatorContent } from '../data/seoContent';
 
 const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeight, calAge, setCalAge, calGender, setCalGender, calActivity, setCalActivity, calculateCalories, calResult, calError, setCurrentPage, t }) => {
@@ -126,6 +127,10 @@ const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeig
                                     <p className="text-gray-600 dark:text-gray-400 font-bold mb-2">{t.weight_gain}</p>
                                     <p className="text-3xl font-black text-rose-600 dark:text-rose-400">{calResult.gain}</p>
                                     <p className="text-sm font-semibold text-gray-500">{t.calories_day}</p>
+                                </div>
+
+                                <div className="md:col-span-3">
+                                    <CalorieResultInterpretation tdee={calResult.maintain} />
                                 </div>
 
                                 <button

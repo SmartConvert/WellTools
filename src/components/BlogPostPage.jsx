@@ -20,6 +20,28 @@ const parseMarkdown = (text) => {
             return <h1 key={i} className="text-3xl font-black text-gray-900 dark:text-white mt-12 mb-8">{line.slice(2)}</h1>;
         }
 
+        // Images (Block level)
+        const imageMatch = line.match(/^!\[(.*?)\]\((.*?)\)$/);
+        if (imageMatch) {
+            const altText = imageMatch[1];
+            const imageUrl = imageMatch[2];
+            return (
+                <div key={i} className="my-8 rounded-2xl overflow-hidden shadow-xl">
+                    <img
+                        src={imageUrl}
+                        alt={altText}
+                        className="w-full h-auto object-cover"
+                        loading="lazy"
+                    />
+                    {altText && (
+                        <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-2 italic">
+                            {altText}
+                        </p>
+                    )}
+                </div>
+            );
+        }
+
         // Lists
         if (line.trim().startsWith('- ') || line.trim().startsWith('* ')) {
             return <li key={i} className="ml-6 list-disc text-gray-700 dark:text-gray-300 mb-2">{parseInlineMarkdown(line.trim().slice(2))}</li>;

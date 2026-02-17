@@ -40,8 +40,9 @@ function getRelevantImage(post) {
 }
 
 // Function to insert image into content after first section
+// Function to insert image into content after first section
 function insertImageIntoContent(content, imageUrl, altText) {
-    const lines = content.split('\\n');
+    const lines = content.split('\n');
     let insertIndex = -1;
 
     // Find the first ## heading (after the main title)
@@ -63,11 +64,11 @@ function insertImageIntoContent(content, imageUrl, altText) {
     }
 
     if (insertIndex > 0) {
-        const imageMarkdown = `\\n![${altText}](${imageUrl})\\n`;
+        const imageMarkdown = `\n![${altText}](${imageUrl})\n`;
         lines.splice(insertIndex, 0, imageMarkdown);
     }
 
-    return lines.join('\\n');
+    return lines.join('\n');
 }
 
 // Main function to update posts

@@ -183,18 +183,22 @@ async function generatePost() {
         2. **Accuracy**: No pseudoscience. Stick to consensus medical facts.
         3. **Tone**: Empathetic but authoritative. Professional yet motivating.
         4. **Formatting**: Use proper Markdown (H1, H2, H3, bolding for emphasis).
-        5. **No Fluff**: Get straight to the point. Respect the reader's time.
+        5. **Word Count**: MANDATORY 1800-3000 words for comprehensive coverage.
+        6. **Readability**: Short paragraphs (3-4 lines max), bullet points, numbered lists.
+        7. **No Fluff**: Get straight to the point. Respect the reader's time.
 
         KEYWORD RESEARCH & STRATEGY (CRITICAL):
         Before writing, you must:
-        1. Identify 3-5 high-impact, long-tail keywords relevant to the topic (e.g., "how to improve gut health naturally" instead of just "gut health").
+        1. Identify 5-7 high-impact, long-tail keywords (3-5 words each) relevant to the topic.
+           - Example: "how to reduce chronic inflammation naturally" NOT "inflammation"
+           - Example: "best anti-inflammatory foods for gut health" NOT "anti-inflammatory foods"
         2. **MANDATORY INTEGRATION**: You must naturally insert these keywords into:
-           - The SEO Meta Title
-           - The H1 Headline
-           - The first paragraph (Introduction)
-           - At least two H2 Subheadings
-           - The Meta Description
-        3. List these specific keywords in the JSON output "keywords" array.
+           - The SEO Meta Title (primary keyword)
+           - The H1 Headline (primary keyword in first 60 characters)
+           - The first 100 words (primary keyword at least once)
+           - At least THREE H2 Subheadings (include variations of keywords)
+           - The Meta Description (primary + secondary keyword)
+        3. List these specific long-tail keywords in the JSON output "keywords" array (5-7 items).
 
         IMAGE GENERATION RULE:
         You must generate a "Photographic Image Prompt" in ENGLISH.
@@ -204,17 +208,43 @@ async function generatePost() {
         - Subject: Healthy food, active people, medical concepts, or nature (depending on topic).
         - NO TEXT IN IMAGE.
 
-        CONTENT STRUCTURE:
-        1. **SEO Meta Title**: Compelling, under 60 chars, MUST include primary keyword.
-        2. **Meta Description**: High CTR, under 160 chars, includes keywords.
-        3. **H1 Headline**: The main article title (include primary keyword).
-        4. **Introduction**: Hook the reader immediately. State the problem and the solution.
-        5. **Deep Dive (Body)**: 3-5 distinct sections with H2 headings (include keywords in headers). Explain the "Science" and the "How-To".
-        6. **Actionable List**: Bullet points of immediate steps the reader can take.
-        7. **Pro Tips**: A "WellTools Expert Tip" section.
-        8. **FAQ**: 5 real-world questions people ask on Google about this topic. (Direct answers, no fluff).
-        9. **Internal Linking**: Suggest 3 relevant WellTools calculators (BMI, Calories, Water, etc.) that fit the context.
-        10. **Medical Disclaimer**: Standard medical disclaimer in ${lang.name}.
+        CONTENT STRUCTURE (MANDATORY 1800-3000 WORDS):
+        1. **SEO Meta Title**: Compelling, 50-60 chars, MUST include primary long-tail keyword.
+        2. **Meta Description**: High CTR, 150-160 chars, includes primary + secondary keyword.
+        3. **H1 Headline**: The main article title with primary keyword in first 60 characters.
+        4. **Introduction (150-200 words)**: 
+           - Hook with relatable problem
+           - Include primary keyword in first 100 words
+           - Promise clear solution
+           - Keep paragraphs to 2-3 sentences max
+        5. **Deep Dive Body (1200-1800 words)**: 
+           - 6-8 major sections with H2 headings (include keyword variations)
+           - Each H2 section: 200-300 words
+           - Use H3 subheadings for subsections (10-15 total H3s)
+           - Short paragraphs (3-4 lines maximum)
+           - Bullet points for lists of 3+ items
+           - Numbered lists for step-by-step processes
+           - Bold key terms and concepts
+        6. **Actionable Steps Section (200-300 words)**:
+           - "Your [Number]-Day Action Plan" or "Step-by-Step Guide"
+           - Numbered list with detailed, practical steps
+        7. **Common Mistakes Section (150-200 words)**:
+           - "[Number] Mistakes to Avoid When [Topic]"
+           - Numbered list with explanations
+        8. **WellTools Expert Tips (100-150 words)**:
+           - Unique insights
+           - Tool integration recommendations
+        9. **FAQ Section**: 7 real-world questions with detailed answers (50-100 words each).
+           - Questions should be long-tail queries people actually search
+           - Answers should be comprehensive, not one-liners
+        10. **Internal Linking (8-12 links total)**:
+           - 3-4 calculator links with contextual anchor text
+           - 3-4 related blog post links (use /blog/[topic-slug])
+           - 1-2 guide page links (/bmi-guide, /sleep-guide, etc.)
+           - Use descriptive anchor text, NOT "click here"
+        11. **Related Resources Section**:
+           - Bullet list of 4-6 internal links with brief descriptions
+        12. **Medical Disclaimer**: Standard medical disclaimer in ${lang.name}.
 
         OUTPUT FORMAT: Single Valid JSON Object.
         {
@@ -226,8 +256,13 @@ async function generatePost() {
           "content": "Full markdown content starting with H1...",
           "keywords": ["keyword1", "keyword2", "keyword3"],
           "faq": [
-            {"question": "Q1", "answer": "A1"},
-            {"question": "Q2", "answer": "A2"}
+            {"question": "Long-tail question 1", "answer": "Detailed answer 1 (50-100 words)"},
+            {"question": "Long-tail question 2", "answer": "Detailed answer 2 (50-100 words)"},
+            {"question": "Long-tail question 3", "answer": "Detailed answer 3 (50-100 words)"},
+            {"question": "Long-tail question 4", "answer": "Detailed answer 4 (50-100 words)"},
+            {"question": "Long-tail question 5", "answer": "Detailed answer 5 (50-100 words)"},
+            {"question": "Long-tail question 6", "answer": "Detailed answer 6 (50-100 words)"},
+            {"question": "Long-tail question 7", "answer": "Detailed answer 7 (50-100 words)"}
           ],
           "sources": [
             {"title": "Reputable Source (e.g., PubMed, Mayo Clinic)", "url": "https://..."}
@@ -284,6 +319,17 @@ async function generatePost() {
             // delete postObj.imagePrompt; 
 
             posts[lang.code].unshift(postObj);
+
+            // Validate word count
+            const wordCount = newContent.content.split(/\s+/).length;
+            console.log(`    📊 Word count: ${wordCount} words`);
+            if (wordCount < 1800) {
+                console.warn(`    ⚠️ WARNING: Article is below 1800 words (${wordCount}). Consider regenerating for better SEO.`);
+            } else if (wordCount > 3000) {
+                console.warn(`    ⚠️ WARNING: Article exceeds 3000 words (${wordCount}). Consider condensing.`);
+            } else {
+                console.log(`    ✅ Word count within optimal range (1800-3000)`);
+            }
 
             console.log(`    ✅ Done: ${lang.name}`);
 

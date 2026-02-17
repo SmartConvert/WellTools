@@ -6,6 +6,7 @@ import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
+import TrustBadge from './TrustBadge';
 import BMIResultInterpretation from './BMIResultInterpretation';
 
 const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, calculateBMI, bmiResult, bmiError, setCurrentPage, t }) => (

@@ -4,6 +4,7 @@ import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
+import TrustBadge from './TrustBadge';
 
 const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps, calculateORM, ormResult, ormError, setCurrentPage, t }) => (
     <div className="pt-24 pb-16 px-4">
@@ -81,6 +82,7 @@ const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps,
                         </div>
                     )}
 
+                    <TrustBadge setCurrentPage={setCurrentPage} />
                     <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="1rm" />
                 </div>

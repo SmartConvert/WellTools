@@ -143,6 +143,7 @@ const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeig
                             </div>
                         )}
 
+                        <TrustBadge setCurrentPage={setCurrentPage} />
                         <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                         <ToolInfoSection toolId="calories" />
                         <PostResultCTA toolId="calories" setCurrentPage={setCurrentPage} />

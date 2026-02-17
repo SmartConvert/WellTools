@@ -39,11 +39,55 @@ const parseMarkdown = (text) => {
 const parseInlineMarkdown = (text) => {
     if (typeof text !== 'string') return text;
 
-    // Remove Images: ![alt](url) -> replace with empty string or skip
-    let processedText = text.replace(/!\[.*?\]\(.*?\)/g, '');
+    // Process Images: ![alt](url) - render them properly
+    const imageRegex = /!\[(.*?)\]\((.*?)\)/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = imageRegex.exec(text)) !== null) {
+        // Add text before image
+        if (match.index > lastIndex) {
+            const textBefore = text.slice(lastIndex, match.index);
+            parts.push(processTextMarkdown(textBefore));
+        }
+
+        // Add image element
+        const altText = match[1];
+        const imageUrl = match[2];
+        parts.push(
+            <div key={`img-${match.index}`} className="my-8 rounded-2xl overflow-hidden shadow-xl">
+                <img
+                    src={imageUrl}
+                    alt={altText}
+                    className="w-full h-auto object-cover"
+                    loading="lazy"
+                />
+                {altText && (
+                    <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-2 italic">
+                        {altText}
+                    </p>
+                )}
+            </div>
+        );
+
+        lastIndex = imageRegex.lastIndex;
+    }
+
+    // Add remaining text
+    if (lastIndex < text.length) {
+        parts.push(processTextMarkdown(text.slice(lastIndex)));
+    }
+
+    return parts.length > 0 ? parts : processTextMarkdown(text);
+};
+
+// Helper function to process text markdown (bold, links)
+const processTextMarkdown = (text) => {
+    if (!text) return text;
 
     // Bold: **text**
-    const subParts = processedText.split(/(\*\*.*?\*\*)/g);
+    const subParts = text.split(/(\*\*.*?\*\*)/g);
     return subParts.flatMap((subPart, j) => {
         if (subPart.startsWith('**') && subPart.endsWith('**')) {
             return [<strong key={`bold-${j}`} className="font-bold text-gray-900 dark:text-white">{subPart.slice(2, -2)}</strong>];

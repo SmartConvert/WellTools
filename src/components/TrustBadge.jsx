@@ -1,4 +1,3 @@
-```javascript
 import React from 'react';
 import { ShieldCheck, Award, FileText } from 'lucide-react';
 
@@ -16,8 +15,8 @@ const TrustBadge = ({ setCurrentPage }) => {
                 <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
                     This tool uses the <strong>Mifflin-St Jeor</strong> and <strong>Harris-Benedict</strong> equations, trusted by healthcare professionals worldwide. Our content is reviewed by certified nutritionists to ensure scientific accuracy.
                 </p>
-                <button 
-                    onClick={() => { setCurrentPage('editorial-policy'); window.scrollTo(0,0); }}
+                <button
+                    onClick={() => { setCurrentPage('editorial-policy'); window.scrollTo(0, 0); }}
                     className="text-blue-600 dark:text-blue-400 text-xs font-semibold hover:underline mt-2 inline-flex items-center gap-1 bg-transparent border-none cursor-pointer"
                 >
                     <FileText className="w-3 h-3" />
@@ -29,4 +28,3 @@ const TrustBadge = ({ setCurrentPage }) => {
 };
 
 export default TrustBadge;
-```

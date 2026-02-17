@@ -6,6 +6,7 @@ import ToolInfoSection from './ToolInfoSection';
 import ToolHero from './ToolHero';
 import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
+import BMIResultInterpretation from './BMIResultInterpretation';
 
 const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, calculateBMI, bmiResult, bmiError, setCurrentPage, t }) => (
     <div className="pt-20 md:pt-24 pb-12 px-4">
@@ -96,6 +97,13 @@ const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, c
                                 <Zap className="w-6 h-6 text-emerald-400 group-hover:animate-pulse" />
                                 Read The Definitive BMI Guide
                             </button>
+
+                            {/* Medical Interpretation Component */}
+                            <BMIResultInterpretation
+                                bmi={parseFloat(bmiResult.bmi)}
+                                age={null}
+                                gender={null}
+                            />
                         </div>
                     )}
 

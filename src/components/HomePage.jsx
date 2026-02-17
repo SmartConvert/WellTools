@@ -19,15 +19,15 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
     }, [t.lang]);
 
     const tools = [
-        { id: 'bmi', icon: <Scale className="w-8 h-8" />, title: t.bmi_calc, desc: t.bmi_desc, color: 'from-emerald-400 to-teal-500' },
-        { id: 'calories', icon: <Activity className="w-8 h-8" />, title: t.calories_calc, desc: t.calories_desc, color: 'from-emerald-400 to-teal-500' },
-        { id: 'water', icon: <Droplet className="w-8 h-8" />, title: t.water_calc, desc: t.water_desc, color: 'from-blue-400 to-cyan-500' },
-        { id: 'ideal-weight', icon: <Scale className="w-8 h-8" />, title: t.ideal_weight, desc: t.ideal_weight_desc, color: 'from-rose-400 to-pink-500' },
-        { id: 'sleep', icon: <Moon className="w-8 h-8" />, title: t.sleep_calc, desc: t.sleep_desc, color: 'from-violet-400 to-purple-500' },
-        { id: 'body-fat', icon: <Percent className="w-8 h-8" />, title: t.body_fat_calc, desc: t.body_fat_desc, color: 'from-orange-400 to-red-500' },
-        { id: 'bmr', icon: <Zap className="w-8 h-8" />, title: 'BMR Calculator', desc: 'Calculate your Basal Metabolic Rate.', color: 'from-amber-400 to-orange-500' },
-        { id: 'macro', icon: <Utensils className="w-8 h-8" />, title: 'Macro Calculator', desc: 'Determine your optimal macronutrient split.', color: 'from-green-400 to-emerald-500' },
-        { id: '1rm', icon: <Dumbbell className="w-8 h-8" />, title: '1RM Calculator', desc: 'Estimate your one-rep max strength.', color: 'from-slate-600 to-gray-700' }
+        { id: 'bmi', icon: <Scale className="w-8 h-8" />, title: 'BMI Calculator Free', desc: 'Calculate your Body Mass Index instantly with our free BMI calculator. Get health risk assessments and personalized weight recommendations.', color: 'from-emerald-400 to-teal-500' },
+        { id: 'calories', icon: <Activity className="w-8 h-8" />, title: 'Daily Calorie Calculator', desc: 'Discover your personalized daily calorie needs based on age, weight, height, and activity level using the Mifflin-St Jeor equation.', color: 'from-emerald-400 to-teal-500' },
+        { id: 'water', icon: <Droplet className="w-8 h-8" />, title: 'Water Intake Calculator', desc: 'Calculate your optimal daily water intake based on weight, activity, and climate. Stay hydrated with science-backed recommendations.', color: 'from-blue-400 to-cyan-500' },
+        { id: 'ideal-weight', icon: <Scale className="w-8 h-8" />, title: 'Ideal Weight Calculator', desc: 'Find your ideal body weight using multiple medical formulas (Robinson, Miller, Devine). Get personalized weight range goals.', color: 'from-rose-400 to-pink-500' },
+        { id: 'sleep', icon: <Moon className="w-8 h-8" />, title: 'Sleep Calculator', desc: 'Optimize your sleep schedule based on 90-minute sleep cycles. Wake up refreshed with our free sleep calculator.', color: 'from-violet-400 to-purple-500' },
+        { id: 'body-fat', icon: <Percent className="w-8 h-8" />, title: 'Body Fat Calculator', desc: 'Estimate your body fat percentage using Navy Method or BMI-based formulas. Track body composition beyond weight.', color: 'from-orange-400 to-red-500' },
+        { id: 'bmr', icon: <Zap className="w-8 h-8" />, title: 'BMR Calculator', desc: 'Calculate your Basal Metabolic Rate - the calories you burn at rest. Essential for weight loss and muscle gain planning.', color: 'from-amber-400 to-orange-500' },
+        { id: 'macro', icon: <Utensils className="w-8 h-8" />, title: 'Macro Calculator', desc: 'Determine your optimal macronutrient split (protein, carbs, fats) for weight loss, muscle gain, or maintenance goals.', color: 'from-green-400 to-emerald-500' },
+        { id: '1rm', icon: <Dumbbell className="w-8 h-8" />, title: '1RM Calculator', desc: 'Estimate your one-rep max strength for any exercise. Plan progressive overload and track strength gains safely.', color: 'from-slate-600 to-gray-700' }
     ];
 
     return (
@@ -48,14 +48,14 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                         <div className="absolute inset-0 bg-linear-to-r from-gray-900/80 via-gray-900/40 to-transparent"></div>
                         <div className="absolute inset-0 flex items-center px-8 md:px-16">
                             <div className="max-w-2xl">
-                                <h1 className="text-2xl md:text-7xl font-black text-white mb-4 md:mb-6 tracking-tight leading-tight">
-                                    Transform Your <br className="md:hidden" />
+                                <h1 className="text-2xl md:text-6xl font-black text-white mb-4 md:mb-6 tracking-tight leading-tight">
+                                    Free Health Calculators Online: <br className="hidden md:block" />
                                     <span className="bg-linear-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                                        Health Journey
+                                        BMI, Calories & Nutrition
                                     </span>
                                 </h1>
                                 <p className="text-base md:text-xl text-gray-200 max-w-xl leading-relaxed mb-8 md:mb-10">
-                                    Stop the guessing game. Get precise, science-backed health calculations and personalized meal plans to reach your peak potential.
+                                    Access 9+ free health calculators online including BMI calculator free, calorie counter, macro calculator, and water tracker. Get instant, science-backed results to optimize your wellness journey.
                                 </p>
                                 <div className="flex flex-wrap gap-3 md:gap-4">
                                     <button
@@ -79,34 +79,122 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                     </div>
                 </div>
 
-                {/* Why WellTools Section */}
+                {/* How It Works Section */}
+                <div className="mb-20 lg:mb-28 px-4">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
+                            How <span className="text-emerald-500">WellTools</span> Works
+                        </h2>
+                        <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg md:text-xl">
+                            Get personalized health insights in 3 simple steps
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        {/* Step 1 */}
+                        <div className="relative">
+                            <div className="text-center">
+                                <div className="w-20 h-20 bg-emerald-500 rounded-full flex items-center justify-center text-white text-3xl font-black mx-auto mb-6 shadow-xl">
+                                    1
+                                </div>
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                                    Choose Your Tool
+                                </h3>
+                                <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
+                                    Select from 9+ free health calculators: BMI, calories, macros, water intake, sleep, and more.
+                                </p>
+                            </div>
+                            {/* Connector Arrow (hidden on mobile) */}
+                            <div className="hidden md:block absolute top-10 -right-4 text-emerald-500">
+                                <ChevronRight className="w-8 h-8" />
+                            </div>
+                        </div>
+
+                        {/* Step 2 */}
+                        <div className="relative">
+                            <div className="text-center">
+                                <div className="w-20 h-20 bg-teal-500 rounded-full flex items-center justify-center text-white text-3xl font-black mx-auto mb-6 shadow-xl">
+                                    2
+                                </div>
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                                    Enter Your Data
+                                </h3>
+                                <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
+                                    Input your height, weight, age, and activity level. All calculations happen instantly in your browser.
+                                </p>
+                            </div>
+                            <div className="hidden md:block absolute top-10 -right-4 text-teal-500">
+                                <ChevronRight className="w-8 h-8" />
+                            </div>
+                        </div>
+
+                        {/* Step 3 */}
+                        <div className="text-center">
+                            <div className="w-20 h-20 bg-cyan-500 rounded-full flex items-center justify-center text-white text-3xl font-black mx-auto mb-6 shadow-xl">
+                                3
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                                Get Instant Insights
+                            </h3>
+                            <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
+                                Receive personalized health metrics, medical interpretations, and actionable recommendations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Why Choose WellTools Over Others */}
                 <div className="mb-20 lg:mb-28">
                     <div className="text-center mb-16 px-4">
                         <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
-                            Why <span className="text-emerald-500">WellTools</span>?
+                            Why Choose <span className="text-emerald-500">WellTools</span> Over Others?
                         </h2>
-                        <p className="text-gray-900 dark:text-gray-100 max-w-2xl mx-auto text-xl md:text-2xl font-black mb-4">
-                            Accurate health calculators and nutrition tools you can trust.
-                        </p>
                         <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg md:text-xl font-medium">
-                            We combine accurate science with modern technology to provide you with the most reliable health companion.
+                            The most trusted free health calculators online with medical-grade accuracy
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
-                            { icon: <Activity className="w-8 h-8" />, title: "Precision", desc: "Our calculators use medically-backed formulas like Mifflin-St Jeor.", color: "blue" },
-                            { icon: <Heart className="w-8 h-8" />, title: "Integrative", desc: "Connect your tracking with AI-powered meal suggestions seamlessly.", color: "emerald" },
-                            { icon: <TrendingDown className="w-8 h-8" />, title: "Insightful", desc: "Visualize your progress with beautiful, intuitive charts and trends.", color: "violet" },
-                            { icon: <Scale className="w-8 h-8" />, title: "Free Forever", desc: "No subscriptions. No paywalls. Just pure health tools for everyone.", color: "amber" }
+                            {
+                                icon: <Activity className="w-8 h-8" />,
+                                title: "Medical Accuracy",
+                                desc: "Our free health calculators use validated formulas like Mifflin-St Jeor (BMR) and Katch-McArdle (body fat).",
+                                comparison: "vs. outdated formulas on other sites",
+                                color: "emerald"
+                            },
+                            {
+                                icon: <Heart className="w-8 h-8" />,
+                                title: "No Ads Overload",
+                                desc: "Clean, fast interface without intrusive ads. Your health data stays private and secure.",
+                                comparison: "vs. ad-heavy competitors",
+                                color: "blue"
+                            },
+                            {
+                                icon: <TrendingDown className="w-8 h-8" />,
+                                title: "Medical References",
+                                desc: "Every calculation backed by peer-reviewed research from PubMed, Mayo Clinic, and WHO.",
+                                comparison: "vs. unsourced calculators",
+                                color: "violet"
+                            },
+                            {
+                                icon: <Scale className="w-8 h-8" />,
+                                title: "Free Forever",
+                                desc: "All 9+ health calculators online are completely free. No subscriptions, no paywalls, ever.",
+                                comparison: "vs. premium-only features",
+                                color: "amber"
+                            }
                         ].map((feature, i) => (
                             <div key={i} className="group p-10 bg-white dark:bg-gray-800 rounded-[2.5rem] border border-gray-100 dark:border-gray-700 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                                <div className={`w-16 h-16 bg-${feature.color === 'emerald' ? 'emerald' : feature.color === 'blue' ? 'blue' : feature.color === 'violet' ? 'violet' : 'amber'}-500/10 rounded-2xl flex items-center justify-center text-${feature.color}-500 mb-8 group-hover:scale-110 transition-transform`}>
+                                <div className={`w-16 h-16 bg-${feature.color}-500/10 rounded-2xl flex items-center justify-center text-${feature.color}-500 mb-8 group-hover:scale-110 transition-transform`}>
                                     {feature.icon}
                                 </div>
                                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-emerald-500 transition-colors">{feature.title}</h3>
-                                <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-semibold">
+                                <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-semibold mb-4">
                                     {feature.desc}
+                                </p>
+                                <p className="text-sm text-emerald-600 dark:text-emerald-400 font-bold">
+                                    ✓ {feature.comparison}
                                 </p>
                             </div>
                         ))}
@@ -212,8 +300,13 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
 
                 {/* Tools Grid */}
                 <div id="tools-grid" className="scroll-mt-24 mb-16 lg:mb-24">
-                    <div className="text-center mb-12 md:mb-16">
-                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">{t.explore_tools}</h2>
+                    <div className="text-center mb-12 md:mb-16 px-4">
+                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
+                            Explore Our Free Health Calculators Online
+                        </h2>
+                        <p className="text-gray-700 dark:text-gray-300 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed mb-6 font-medium">
+                            Our <strong>free health calculators online</strong> help you track BMI, daily calories, macronutrients, hydration, sleep quality, and overall wellness. Each <strong>nutrition calculator</strong> uses medical-grade formulas to deliver instant, personalized results.
+                        </p>
                         <div className="w-20 h-1.5 bg-emerald-500 mx-auto rounded-full"></div>
                     </div>
 
@@ -238,6 +331,62 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                                 </div>
                             </div>
                         ))}
+                    </div>
+                </div>
+
+                {/* FAQ Section */}
+                <div className="mb-20 lg:mb-28 px-4">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
+                                Frequently Asked Questions
+                            </h2>
+                            <p className="text-gray-600 dark:text-gray-300 text-lg md:text-xl">
+                                Everything you need to know about our free health calculators online
+                            </p>
+                        </div>
+
+                        <div className="space-y-6">
+                            {[
+                                {
+                                    q: "Are these health calculators medically accurate?",
+                                    a: "Yes, all our free health calculators online use validated medical formulas. Our BMI calculator uses WHO standards, calorie calculator uses Mifflin-St Jeor equation, and body fat calculator uses Katch-McArdle formula. Each tool is backed by peer-reviewed research from PubMed, Mayo Clinic, and WHO."
+                                },
+                                {
+                                    q: "Are all the health tools completely free?",
+                                    a: "Absolutely! All 9+ health calculators are 100% free forever. No subscriptions, no hidden fees, no paywalls. We believe everyone deserves access to accurate health tools without barriers."
+                                },
+                                {
+                                    q: "Can I use these calculators on mobile?",
+                                    a: "Yes, all our free health calculators online are fully responsive and work perfectly on smartphones, tablets, and desktops. Your data is calculated instantly in your browser with no app download required."
+                                },
+                                {
+                                    q: "Do you store my health data?",
+                                    a: "No, we prioritize your privacy. All calculations happen locally in your browser. We don't store, sell, or share your personal health information. Your data stays completely private and secure."
+                                },
+                                {
+                                    q: "Which health calculator should I start with?",
+                                    a: "Start with our free BMI calculator to assess your current weight status, then use the calorie calculator to determine your daily energy needs. For detailed nutrition planning, try our macro calculator to optimize your protein, carbs, and fat intake."
+                                },
+                                {
+                                    q: "How often should I use these calculators?",
+                                    a: "Use our BMI and body fat calculators monthly to track progress. Daily calorie and water calculators can be used anytime you adjust your diet or activity level. Sleep calculator is helpful when optimizing your sleep schedule."
+                                },
+                                {
+                                    q: "What makes WellTools different from other health calculator websites?",
+                                    a: "Unlike ad-heavy sites, we offer clean, fast, medically-accurate calculators with detailed interpretations. Every result includes health risk assessments, personalized recommendations, and links to scientific sources. Plus, we're 100% free with no premium upsells."
+                                }
+                            ].map((faq, i) => (
+                                <div key={i} className="bg-white dark:bg-gray-800 rounded-2xl p-6 md:p-8 shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-shadow">
+                                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                                        {faq.q}
+                                    </h3>
+                                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base md:text-lg">
+                                        {faq.a}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -95,7 +95,7 @@ const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMa
                             </div>
                         )}
 
-                        <TrustBadge />
+                        <TrustBadge setCurrentPage={setCurrentPage} />
                         <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                         <ToolInfoSection toolId="macro" />
                     </div>

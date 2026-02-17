@@ -152,7 +152,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                             </div>
                         )}
 
-                        <TrustBadge />
+                        <TrustBadge setCurrentPage={setCurrentPage} />
                         <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                         <ToolInfoSection toolId="body-fat" />
                     </div>

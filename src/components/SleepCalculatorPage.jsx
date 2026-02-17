@@ -149,7 +149,7 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                         </div>
                     </div>
 
-                    <TrustBadge />
+                    <TrustBadge setCurrentPage={setCurrentPage} />
                     <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="sleep" />
                 </div>

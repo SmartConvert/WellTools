@@ -114,7 +114,7 @@ const BMRCalculatorPage = ({ bmrWeight, setBmrWeight, bmrHeight, setBmrHeight, b
                             </div>
                         )}
 
-                        <TrustBadge />
+                        <TrustBadge setCurrentPage={setCurrentPage} />
                         <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                         <ToolInfoSection toolId="bmr" />
                     </div>

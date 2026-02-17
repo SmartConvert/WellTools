@@ -110,6 +110,7 @@ const BMICalculatorPage = ({ bmiWeight, setBmiWeight, bmiHeight, setBmiHeight, c
                     <PostResultCTA toolId="bmi" setCurrentPage={setCurrentPage} />
                     <AffiliateBlock toolId="bmi" />
 
+                    <TrustBadge setCurrentPage={setCurrentPage} />
                     <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                     <ToolInfoSection toolId="bmi" />
                 </div>

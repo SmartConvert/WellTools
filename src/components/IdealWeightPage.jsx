@@ -90,7 +90,7 @@ const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGen
                             </div>
                         )}
 
-                        <TrustBadge />
+                        <TrustBadge setCurrentPage={setCurrentPage} />
                         <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                         <ToolInfoSection toolId="ideal-weight" />
                     </div>

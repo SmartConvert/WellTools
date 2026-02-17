@@ -5,6 +5,42 @@ import { translations } from './translations';
 import ExitIntentPopup from './components/ExitIntentPopup';
 import SchemaMarkup from './components/SchemaMarkup';
 
+const PAGE_SLUGS = {
+  'bmi': 'bmi-calculator-for-women-and-men',
+  'bmi-guide': 'bmichart-and-bmi-categories-guide',
+  'calories': 'daily-calorie-calculator-for-weight-loss',
+  'water': 'daily-water-intake-calculator-by-weight',
+  'sleep': 'sleep-calculator-and-sleep-cycles',
+  'sleep-guide': 'sleep-hygiene-and-circadian-rhythm-guide',
+  'ideal-weight': 'ideal-weight-calculator-for-men-and-women',
+  'body-fat': 'precise-body-fat-percentage-calculator',
+  'body-fat-guide': 'body-fat-percentage-chart-and-health-guide',
+  'bmr': 'bmr-calculator-mifflin-st-jeor',
+  'macro': 'macro-calculator-for-muscle-gain-and-fat-loss',
+  '1rm': 'one-rep-max-calculator-for-weightlifting',
+  'meal-planner': 'custom-meal-planner-and-nutrition-guide',
+  'blog': 'blog-health-and-fitness-tips',
+  'tracking': 'daily-health-and-weight-tracker',
+  'about': 'about-welltools-scientific-health-calculators',
+  'how-it-works': 'science-behind-our-health-calculators',
+  'experts': 'our-medical-and-fitness-experts',
+  'contact': 'contact-welltools-support-and-feedback',
+  'privacy': 'privacy-policy',
+  'terms': 'terms-of-use',
+  'disclaimer': 'medical-disclaimer',
+  'editorial-policy': 'editorial-policy'
+};
+
+const generateSlug = (text) => {
+  if (!text) return '';
+  return text
+    .toLowerCase()
+    .replace(/[^\w\u0621-\u064A\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+};
+
 // Helper to handle ChunkLoadError (when a new version is deployed while user has the site open)
 const lazyWithRetry = (componentImport) => {
   return lazy(async () => {
@@ -232,6 +268,9 @@ const DailyHealthTools = () => {
     const path = window.location.pathname.replace(/^\/+/, ''); // Get path without leading slash
     const pageId = params.get('page'); // Keep support for old ?page= temporarily
 
+    // Inverse Slug Lookup
+    const idFromSlug = Object.keys(PAGE_SLUGS).find(key => PAGE_SLUGS[key] === path);
+
     if (postId) {
       import('./data/posts.json').then(module => {
         const postsData = module.default;
@@ -243,14 +282,26 @@ const DailyHealthTools = () => {
         }
       });
     } else if (path && path !== '') {
-      // Valid pages list (should match renderPage switch)
-      const validPages = [
-        'bmi', 'bmi-guide', 'calories', 'water', 'ideal-weight', 'sleep', 'sleep-guide', 'body-fat', 'body-fat-guide',
-        'bmr', 'macro', '1rm', 'meal-planner', 'blog', 'tracking',
-        'about', 'how-it-works', 'experts', 'contact', 'privacy', 'terms', 'disclaimer', 'editorial-policy'
-      ];
-      if (validPages.includes(path)) {
-        setCurrentPage(path);
+      // Check if it's a blog post path: /blog/slug
+      if (path.startsWith('blog/')) {
+        const blogSlug = path.replace('blog/', '');
+        import('./data/posts.json').then(module => {
+          const postsData = module.default;
+          const allPosts = postsData.en || [];
+          const foundPost = allPosts.find(p => generateSlug(p.title) === blogSlug);
+          if (foundPost) {
+            setSelectedPost(foundPost);
+            setCurrentPage('blog-post');
+          }
+        });
+      } else {
+        // Valid internal IDs for legacy support
+        const validIds = Object.keys(PAGE_SLUGS);
+        if (idFromSlug) {
+          setCurrentPage(idFromSlug);
+        } else if (validIds.includes(path)) {
+          setCurrentPage(path);
+        }
       }
     } else if (pageId) {
       setCurrentPage(pageId);
@@ -260,19 +311,21 @@ const DailyHealthTools = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
 
-    // Sync post ID
-    if (selectedPost) {
-      params.set('post', selectedPost.id);
-    } else {
-      params.delete('post');
+    // Sync post ID (Legacy support)
+    if (selectedPost && currentPage === 'blog-post') {
+      // For SEO we want /blog/slug, but we can keep ?post=ID for backward compatibility
+      // params.set('post', selectedPost.id);
     }
 
     // Determine new Path
     let newPath = '/';
     if (currentPage !== 'home') {
-      // Blog posts stay at / but with post param
-      if (currentPage !== 'blog-post') {
-        newPath = `/${currentPage}`;
+      if (currentPage === 'blog-post' && selectedPost) {
+        newPath = `/blog/${generateSlug(selectedPost.title)}`;
+        params.delete('post'); // Clean up URL if we have the slug path
+      } else {
+        const slug = PAGE_SLUGS[currentPage];
+        newPath = slug ? `/${slug}` : `/${currentPage}`;
       }
     }
 

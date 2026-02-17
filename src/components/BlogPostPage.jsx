@@ -124,8 +124,29 @@ const processTextMarkdown = (text) => {
             if (lMatch.index > lLastIdx) {
                 linkParts.push(subPart.slice(lLastIdx, lMatch.index));
             }
+            const href = lMatch[2];
+            const isInternal = href.startsWith('/');
+
             linkParts.push(
-                <a key={`link-${lMatch.index}`} href={lMatch[2]} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline font-medium">
+                <a
+                    key={`link-${lMatch.index}`}
+                    href={href}
+                    target={isInternal ? "_self" : "_blank"}
+                    rel={isInternal ? "" : "noopener noreferrer"}
+                    className="text-emerald-600 hover:underline font-medium"
+                    onClick={(e) => {
+                        if (isInternal) {
+                            e.preventDefault();
+                            const path = href.replace(/^\//, '');
+                            // App.jsx will handle resolving slugs/IDs in its URL useEffect
+                            // But since we want to navigate internally WITHOUT a reload:
+                            // We can manually set the history and state if App.jsx supports it.
+                            // Currently we just set current page.
+                            setCurrentPage(path);
+                            window.scrollTo(0, 0);
+                        }
+                    }}
+                >
                     {lMatch[1]}
                 </a>
             );

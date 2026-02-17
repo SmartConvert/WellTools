@@ -85,7 +85,7 @@ const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWa
                             </div>
                         )}
 
-                        <TrustBadge />
+                        <TrustBadge setCurrentPage={setCurrentPage} />
                         <MedicalDisclaimer setCurrentPage={setCurrentPage} />
                         <ToolInfoSection toolId="water" />
                     </div>

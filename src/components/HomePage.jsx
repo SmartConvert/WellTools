@@ -284,6 +284,19 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                                         }}
                                         className="group cursor-pointer relative bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700"
                                     >
+                                        {/* Blog Post Image */}
+                                        {post.image && (
+                                            <div className="relative h-48 overflow-hidden">
+                                                <img
+                                                    src={post.image}
+                                                    alt={post.imageAlt || post.title}
+                                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                                    loading="lazy"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                            </div>
+                                        )}
+
                                         <div className="p-6 md:p-8">
                                             <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-emerald-500 transition-colors line-clamp-1">{post.title}</h3>
                                             <p className="text-gray-700 dark:text-gray-200 text-sm md:text-base line-clamp-2 font-bold mb-4">{post.excerpt}</p>

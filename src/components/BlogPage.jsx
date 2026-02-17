@@ -46,6 +46,19 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang = 'en' }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {posts.map((post) => (
                         <article key={post.id} className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col">
+                            {/* Blog Post Image */}
+                            {post.image && (
+                                <div className="relative h-56 overflow-hidden">
+                                    <img
+                                        src={post.image}
+                                        alt={post.imageAlt || post.title}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        loading="lazy"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                </div>
+                            )}
+
                             <div className="p-8 grow">
                                 <div className="flex items-center gap-3 mb-4">
                                     <span className="px-4 py-1.5 bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 text-xs font-bold rounded-full uppercase tracking-wider">{post.category}</span>

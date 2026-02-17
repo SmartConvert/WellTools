@@ -29,21 +29,21 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang = 'en' }) => {
     return (
         <div className="pt-24 pb-16 px-4">
             <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-16 animate-fade-in">
-                    <div className="flex items-center justify-center gap-4 mb-6">
-                        <div className="w-16 h-16 bg-linear-to-br from-emerald-500 to-cyan-600 rounded-2xl flex items-center justify-center shadow-xl">
-                            <BookOpen className="w-8 h-8 text-white" />
+                <div className="text-center mb-12 md:mb-16 animate-fade-in">
+                    <div className="flex items-center justify-center gap-4 mb-4 md:mb-6">
+                        <div className="w-14 h-14 md:w-16 md:h-16 bg-linear-to-br from-emerald-500 to-cyan-600 rounded-2xl flex items-center justify-center shadow-xl">
+                            <BookOpen className="w-7 h-7 md:w-8 md:h-8 text-white" />
                         </div>
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white mb-4 md:mb-6 tracking-tight">
                         {t.blog_title}
                     </h1>
-                    <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed px-4">
                         {t.blog_subtitle}
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {posts.map((post) => (
                         <article key={post.id} className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col">
                             {/* Blog Post Image */}
@@ -55,7 +55,7 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang = 'en' }) => {
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                         loading="lazy"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </div>
                             )}
 

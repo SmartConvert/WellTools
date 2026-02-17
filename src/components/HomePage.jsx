@@ -45,31 +45,31 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                             loading="eager"
                             fetchpriority="high"
                         />
-                        <div className="absolute inset-0 bg-linear-to-r from-gray-900/80 via-gray-900/40 to-transparent"></div>
-                        <div className="absolute inset-0 flex items-center px-8 md:px-16">
+                        <div className="absolute inset-0 bg-linear-to-r from-gray-900/90 via-gray-900/60 to-transparent"></div>
+                        <div className="absolute inset-0 flex items-center px-4 sm:px-6 md:px-16">
                             <div className="max-w-2xl">
-                                <h1 className="text-2xl md:text-6xl font-black text-white mb-4 md:mb-6 tracking-tight leading-tight">
-                                    Free Health Calculators Online: <br className="hidden md:block" />
+                                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-3 sm:mb-4 md:mb-6 tracking-tight leading-tight">
+                                    Free Health Calculators Online: <br className="hidden sm:block" />
                                     <span className="bg-linear-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
                                         BMI, Calories & Nutrition
                                     </span>
                                 </h1>
-                                <p className="text-base md:text-xl text-gray-200 max-w-xl leading-relaxed mb-8 md:mb-10">
+                                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 max-w-xl leading-relaxed mb-6 sm:mb-8 md:mb-10">
                                     Access 9+ free health calculators online including BMI calculator free, calorie counter, macro calculator, and water tracker. Get instant, science-backed results to optimize your wellness journey.
                                 </p>
-                                <div className="flex flex-wrap gap-3 md:gap-4">
+                                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                                     <button
                                         onClick={() => {
                                             const el = document.getElementById('tools-grid');
                                             el?.scrollIntoView({ behavior: 'smooth' });
                                         }}
-                                        className="px-5 py-2.5 md:px-8 md:py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-base md:text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
+                                        className="px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-sm sm:text-base md:text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
                                     >
                                         {t.explore_tools}
                                     </button>
                                     <button
                                         onClick={() => setCurrentPage('meal-planner')}
-                                        className="px-5 py-2.5 md:px-8 md:py-4 bg-white/10 backdrop-blur-md text-white border-2 border-white/20 rounded-2xl font-bold text-base md:text-lg hover:bg-white/20 transition-all"
+                                        className="px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 bg-white/10 backdrop-blur-md text-white border-2 border-white/20 rounded-2xl font-bold text-sm sm:text-base md:text-lg hover:bg-white/20 transition-all"
                                     >
                                         {t.meal_planner_title}
                                     </button>
@@ -80,12 +80,12 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                 </div>
 
                 {/* How It Works Section */}
-                <div className="mb-20 lg:mb-28 px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
+                <div className="mb-16 lg:mb-24 px-4">
+                    <div className="text-center mb-12 md:mb-16">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white mb-4 md:mb-6 tracking-tight">
                             How <span className="text-emerald-500">WellTools</span> Works
                         </h2>
-                        <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg md:text-xl">
+                        <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-base sm:text-lg md:text-xl">
                             Get personalized health insights in 3 simple steps
                         </p>
                     </div>
@@ -144,17 +144,17 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                 </div>
 
                 {/* Why Choose WellTools Over Others */}
-                <div className="mb-20 lg:mb-28">
-                    <div className="text-center mb-16 px-4">
-                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
+                <div className="mb-16 lg:mb-24">
+                    <div className="text-center mb-12 md:mb-16 px-4">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white mb-4 md:mb-6 tracking-tight">
                             Why Choose <span className="text-emerald-500">WellTools</span> Over Others?
                         </h2>
-                        <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg md:text-xl font-medium">
+                        <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-base sm:text-lg md:text-xl font-medium">
                             The most trusted free health calculators online with medical-grade accuracy
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 px-4">
                         {[
                             {
                                 icon: <Activity className="w-8 h-8" />,
@@ -185,7 +185,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                                 color: "amber"
                             }
                         ].map((feature, i) => (
-                            <div key={i} className="group p-10 bg-white dark:bg-gray-800 rounded-[2.5rem] border border-gray-100 dark:border-gray-700 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                            <div key={i} className="group p-6 sm:p-8 md:p-10 bg-white dark:bg-gray-800 rounded-2xl md:rounded-[2.5rem] border border-gray-100 dark:border-gray-700 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
                                 <div className={`w-16 h-16 bg-${feature.color}-500/10 rounded-2xl flex items-center justify-center text-${feature.color}-500 mb-8 group-hover:scale-110 transition-transform`}>
                                     {feature.icon}
                                 </div>
@@ -312,18 +312,18 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                 )}
 
                 {/* Tools Grid */}
-                <div id="tools-grid" className="scroll-mt-24 mb-16 lg:mb-24">
-                    <div className="text-center mb-12 md:mb-16 px-4">
-                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
+                <div id="tools-grid" className="mb-16 lg:mb-24">
+                    <div className="text-center mb-10 md:mb-16 px-4">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white mb-4 md:mb-6 tracking-tight">
                             Explore Our Free Health Calculators Online
                         </h2>
-                        <p className="text-gray-700 dark:text-gray-300 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed mb-6 font-medium">
+                        <p className="text-gray-700 dark:text-gray-300 max-w-3xl mx-auto text-base sm:text-lg md:text-xl leading-relaxed mb-4 md:mb-6 font-medium">
                             Our <strong>free health calculators online</strong> help you track BMI, daily calories, macronutrients, hydration, sleep quality, and overall wellness. Each <strong>nutrition calculator</strong> uses medical-grade formulas to deliver instant, personalized results.
                         </p>
-                        <div className="w-20 h-1.5 bg-emerald-500 mx-auto rounded-full"></div>
+                        <div className="w-16 sm:w-20 h-1 sm:h-1.5 bg-emerald-500 mx-auto rounded-full"></div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                         {tools.map((tool) => (
                             <div
                                 key={tool.id}

@@ -70,7 +70,8 @@
             "id": 36,
             "group": "body_preservation",
             "title": "Sleep Architecture: Understanding Deep vs. REM Sleep for Recovery",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-19"
         },
         {
             "id": 37,

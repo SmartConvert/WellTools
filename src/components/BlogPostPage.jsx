@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Clock } from 'lucide-react';
+import { ArrowLeft, Clock, CheckCircle, Shield, User, ExternalLink, BookOpen, Calculator } from 'lucide-react';
 import TableOfContents from './TableOfContents';
 import RelatedArticles from './RelatedArticles';
 import CommentSection from './CommentSection';
 
-const parseMarkdown = (text) => {
+// ─── Markdown Parsing ────────────────────────────────────────────────────────
+
+let h2Count = 0; // track h2 headings for mid-article CTA injection
+let ctaInjected = false;
+let ctaComponent = null;
+
+const parseMarkdown = (text, ctaBlock) => {
     if (!text) return null;
+
+    h2Count = 0;
+    ctaInjected = false;
+    ctaComponent = ctaBlock || null;
 
     const lines = text.split('\n');
     return lines.map((line, i) => {
@@ -14,10 +24,31 @@ const parseMarkdown = (text) => {
             return <h3 key={i} className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4">{line.slice(4)}</h3>;
         }
         if (line.startsWith('## ')) {
-            return <h2 key={i} className="text-2xl font-black text-gray-900 dark:text-white mt-10 mb-6">{line.slice(3)}</h2>;
+            h2Count++;
+            const heading = <h2 key={i} className="text-2xl font-black text-gray-900 dark:text-white mt-10 mb-6">{line.slice(3)}</h2>;
+            // Inject mid-article CTA after the 3rd h2
+            if (h2Count === 3 && !ctaInjected && ctaComponent) {
+                ctaInjected = true;
+                return [heading, <React.Fragment key={`cta-mid-${i}`}>{ctaComponent}</React.Fragment>];
+            }
+            return heading;
         }
         if (line.startsWith('# ')) {
             return <h1 key={i} className="text-3xl font-black text-gray-900 dark:text-white mt-12 mb-8">{line.slice(2)}</h1>;
+        }
+
+        // Tables (markdown | col | col |)
+        if (line.trim().startsWith('|') && line.trim().endsWith('|')) {
+            // Skip separator rows
+            if (/^[\|\s\-:]+$/.test(line.trim())) return null;
+            const cells = line.split('|').filter((_, idx, arr) => idx > 0 && idx < arr.length - 1);
+            return (
+                <tr key={i} className="border-b border-gray-100 dark:border-gray-800">
+                    {cells.map((cell, j) => (
+                        <td key={j} className="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">{parseInlineMarkdown(cell.trim())}</td>
+                    ))}
+                </tr>
+            );
         }
 
         // Images (Block level)
@@ -26,7 +57,7 @@ const parseMarkdown = (text) => {
             const altText = imageMatch[1];
             const imageUrl = imageMatch[2];
             return (
-                <div key={i} className="my-8 rounded-2xl overflow-hidden shadow-xl">
+                <figure key={i} className="my-10 rounded-2xl overflow-hidden shadow-xl">
                     <img
                         src={imageUrl}
                         alt={altText}
@@ -34,11 +65,11 @@ const parseMarkdown = (text) => {
                         loading="lazy"
                     />
                     {altText && (
-                        <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-2 italic">
-                            {altText}
-                        </p>
+                        <figcaption className="text-sm text-gray-500 dark:text-gray-400 text-center py-3 px-4 bg-gray-50 dark:bg-gray-800 italic">
+                            📷 {altText}
+                        </figcaption>
                     )}
-                </div>
+                </figure>
             );
         }
 
@@ -68,17 +99,14 @@ const parseInlineMarkdown = (text) => {
     let match;
 
     while ((match = imageRegex.exec(text)) !== null) {
-        // Add text before image
         if (match.index > lastIndex) {
             const textBefore = text.slice(lastIndex, match.index);
             parts.push(processTextMarkdown(textBefore));
         }
-
-        // Add image element
         const altText = match[1];
         const imageUrl = match[2];
         parts.push(
-            <div key={`img-${match.index}`} className="my-8 rounded-2xl overflow-hidden shadow-xl">
+            <figure key={`img-${match.index}`} className="my-10 rounded-2xl overflow-hidden shadow-xl">
                 <img
                     src={imageUrl}
                     alt={altText}
@@ -86,17 +114,15 @@ const parseInlineMarkdown = (text) => {
                     loading="lazy"
                 />
                 {altText && (
-                    <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-2 italic">
-                        {altText}
-                    </p>
+                    <figcaption className="text-sm text-gray-500 dark:text-gray-400 text-center py-3 px-4 bg-gray-50 dark:bg-gray-800 italic">
+                        📷 {altText}
+                    </figcaption>
                 )}
-            </div>
+            </figure>
         );
-
         lastIndex = imageRegex.lastIndex;
     }
 
-    // Add remaining text
     if (lastIndex < text.length) {
         parts.push(processTextMarkdown(text.slice(lastIndex)));
     }
@@ -104,18 +130,15 @@ const parseInlineMarkdown = (text) => {
     return parts.length > 0 ? parts : processTextMarkdown(text);
 };
 
-// Helper function to process text markdown (bold, links)
 const processTextMarkdown = (text) => {
     if (!text) return text;
 
-    // Bold: **text**
     const subParts = text.split(/(\*\*.*?\*\*)/g);
     return subParts.flatMap((subPart, j) => {
         if (subPart.startsWith('**') && subPart.endsWith('**')) {
             return [<strong key={`bold-${j}`} className="font-bold text-gray-900 dark:text-white">{subPart.slice(2, -2)}</strong>];
         }
 
-        // Final Links: [text](url)
         const linkRegex = /\[(.*?)\]\((.*?)\)/g;
         const linkParts = [];
         let lMatch;
@@ -131,26 +154,15 @@ const processTextMarkdown = (text) => {
                 <a
                     key={`link-${lMatch.index}`}
                     href={href}
-                    target={isInternal ? "_self" : "_blank"}
-                    rel={isInternal ? "" : "noopener noreferrer"}
-                    className="text-emerald-600 hover:underline font-medium"
-                    onClick={(e) => {
-                        if (isInternal) {
-                            e.preventDefault();
-                            const path = href.replace(/^\//, '');
-                            // App.jsx will handle resolving slugs/IDs in its URL useEffect
-                            // But since we want to navigate internally WITHOUT a reload:
-                            // We can manually set the history and state if App.jsx supports it.
-                            // Currently we just set current page.
-                            setCurrentPage(path);
-                            window.scrollTo(0, 0);
-                        }
-                    }}
+                    target={isInternal ? '_self' : '_blank'}
+                    rel={isInternal ? '' : 'noopener noreferrer'}
+                    className="text-emerald-600 hover:underline font-medium inline-flex items-center gap-1"
                 >
                     {lMatch[1]}
+                    {!isInternal && <ExternalLink className="w-3 h-3 inline" />}
                 </a>
             );
-            lLastIdx = linkRegex.lastIdx;
+            lLastIdx = linkRegex.lastIndex;
         }
         if (lLastIdx < subPart.length) {
             linkParts.push(subPart.slice(lLastIdx));
@@ -160,79 +172,219 @@ const processTextMarkdown = (text) => {
     });
 };
 
+// ─── Sub-Components ──────────────────────────────────────────────────────────
+
+const AuthorBlock = ({ post }) => (
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-6 bg-gradient-to-r from-slate-50 to-gray-50 dark:from-gray-800 dark:to-gray-800/60 rounded-2xl border border-slate-100 dark:border-gray-700 mb-10">
+        <div className="flex items-center gap-4 flex-1">
+            {/* Author Avatar */}
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white font-black text-lg flex-shrink-0 shadow-lg">
+                WH
+            </div>
+            <div>
+                <p className="font-bold text-gray-900 dark:text-white text-sm">
+                    {post.author?.name || 'WellTools Health Team'}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                    {post.author?.role || 'Health & Wellness Researchers'}
+                </p>
+                <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-0.5 font-medium">
+                    ✓ {post.author?.credentials || 'Research-backed content, medically reviewed'}
+                </p>
+            </div>
+        </div>
+        {/* Reviewed-by section */}
+        {post.reviewedBy && (
+            <div className="flex items-center gap-3 px-4 py-3 bg-white dark:bg-gray-900 rounded-xl border border-emerald-100 dark:border-emerald-900/40 shadow-sm">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-5 h-5 text-emerald-600" />
+                </div>
+                <div>
+                    <p className="text-xs font-bold text-gray-800 dark:text-gray-200 flex items-center gap-1">
+                        <CheckCircle className="w-3 h-3 text-emerald-500" />
+                        Medically Reviewed
+                    </p>
+                    <p className="text-xs text-gray-700 dark:text-gray-300 font-semibold">{post.reviewedBy.name}</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500">{post.reviewedBy.credentials}</p>
+                </div>
+            </div>
+        )}
+    </div>
+);
+
+const MidArticleCTA = ({ post }) => {
+    const toolLinks = post.ctaLinks || [
+        { label: '💤 Sleep Calculator', href: '/sleep' },
+        { label: '💧 Water Calculator', href: '/water' },
+        { label: '🔥 Calorie Calculator', href: '/calories' },
+        { label: '📊 BMI Calculator', href: '/bmi' },
+    ];
+
+    return (
+        <div className="my-12 p-7 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-3xl text-white shadow-2xl shadow-emerald-200 dark:shadow-emerald-900/30 relative overflow-hidden">
+            {/* Background decoration */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+            <div className="relative">
+                <div className="flex items-center gap-2 mb-2">
+                    <Calculator className="w-5 h-5" />
+                    <span className="text-sm font-bold uppercase tracking-wider opacity-90">Free Health Tools</span>
+                </div>
+                <h3 className="text-xl font-black mb-1">Put This Knowledge Into Practice</h3>
+                <p className="text-white/80 text-sm mb-5">Use our science-backed calculators — free, instant results.</p>
+                <div className="flex flex-wrap gap-2">
+                    {toolLinks.map((link, i) => (
+                        <a
+                            key={i}
+                            href={link.href}
+                            className="px-4 py-2 bg-white/20 hover:bg-white/30 backdrop-blur rounded-xl text-sm font-semibold transition-all hover:scale-105 border border-white/20"
+                        >
+                            {link.label}
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const EndArticleCTA = ({ setCurrentPage }) => (
+    <div className="mt-16 p-10 md:p-12 bg-gradient-to-br from-gray-900 via-emerald-950 to-teal-900 rounded-[2.5rem] text-white text-center relative overflow-hidden shadow-2xl">
+        {/* Decorative orbs */}
+        <div className="absolute top-0 left-1/4 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-teal-500/10 rounded-full blur-3xl" />
+        <div className="relative">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/20 border border-emerald-500/30 rounded-full text-emerald-300 text-sm font-semibold mb-6">
+                <BookOpen className="w-4 h-4" />
+                WellTools Health Suite
+            </div>
+            <h2 className="text-3xl md:text-4xl font-black mb-4">
+                Ready to optimize your health?
+            </h2>
+            <p className="text-gray-300 text-lg mb-8 max-w-xl mx-auto">
+                Our free, science-backed tools turn this knowledge into personalized action plans.
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl mx-auto">
+                {[
+                    { label: '💤 Sleep', page: 'sleep', sub: 'Optimize cycles' },
+                    { label: '🔥 Calories', page: 'calories', sub: 'Track intake' },
+                    { label: '💧 Water', page: 'water', sub: 'Stay hydrated' },
+                    { label: '📊 BMI', page: 'bmi', sub: 'Check weight' },
+                ].map((tool) => (
+                    <button
+                        key={tool.page}
+                        onClick={() => setCurrentPage(tool.page)}
+                        className="flex flex-col items-center gap-1 p-4 bg-white/10 hover:bg-white/20 border border-white/10 hover:border-emerald-400/50 rounded-2xl transition-all hover:scale-105 cursor-pointer"
+                    >
+                        <span className="font-bold text-sm">{tool.label}</span>
+                        <span className="text-xs text-gray-400">{tool.sub}</span>
+                    </button>
+                ))}
+            </div>
+        </div>
+    </div>
+);
+
+// ─── Main Component ──────────────────────────────────────────────────────────
+
 const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
-    // Inject Article Schema for SEO
+
+    // ── Schema Markup (Article + FAQ + MedicalWebPage) ──────────────────────
     useEffect(() => {
         if (!post) return;
 
+        // 1. Article Schema
         const articleSchema = {
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": post.title,
-            "image": post.image || "https://welltools.online/images/hero_fitness.png",
-            "datePublished": post.date || new Date().toISOString(),
-            "dateModified": post.lastUpdated || post.date || new Date().toISOString(),
-            "author": {
-                "@type": "Organization",
-                "name": "WellTools Health Team",
-                "url": "https://welltools.online/about"
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: post.title,
+            image: post.image || 'https://welltools.online/images/hero_fitness.png',
+            datePublished: post.date || new Date().toISOString(),
+            dateModified: post.lastUpdated || post.date || new Date().toISOString(),
+            author: {
+                '@type': 'Organization',
+                name: post.author?.name || 'WellTools Health Team',
+                url: 'https://welltools.online/about',
             },
-            "publisher": {
-                "@type": "Organization",
-                "name": "WellTools",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://welltools.online/favicon.svg"
-                }
+            ...(post.reviewedBy && {
+                reviewedBy: {
+                    '@type': 'Person',
+                    name: post.reviewedBy.name,
+                    jobTitle: post.reviewedBy.credentials,
+                },
+            }),
+            publisher: {
+                '@type': 'Organization',
+                name: 'WellTools',
+                logo: {
+                    '@type': 'ImageObject',
+                    url: 'https://welltools.online/favicon.svg',
+                },
             },
-            "description": post.excerpt || post.title,
-            "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": window.location.href
-            }
+            description: post.excerpt || post.title,
+            mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': window.location.href,
+            },
         };
 
-
-
+        // 2. Breadcrumb Schema
         const breadcrumbSchema = {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": "https://welltools.online"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Blog",
-                    "item": "https://welltools.online/blog"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": post.title,
-                    "item": window.location.href
-                }
-            ]
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://welltools.online' },
+                { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://welltools.online/blog' },
+                { '@type': 'ListItem', position: 3, name: post.title, item: window.location.href },
+            ],
         };
 
-        const schemas = [articleSchema, breadcrumbSchema];
+        // 3. MedicalWebPage Schema — for ALL articles
+        const medicalSchema = {
+            '@context': 'https://schema.org',
+            '@type': 'MedicalWebPage',
+            name: post.title,
+            url: window.location.href,
+            description: post.excerpt || post.title,
+            specialty: 'https://schema.org/DietNutrition',
+            lastReviewed: post.reviewedBy?.reviewDate || post.lastUpdated || post.date,
+            ...(post.reviewedBy && {
+                reviewedBy: {
+                    '@type': 'Person',
+                    name: post.reviewedBy.name,
+                    jobTitle: post.reviewedBy.credentials,
+                },
+            }),
+            about: {
+                '@type': 'MedicalEntity',
+                name: post.title,
+            },
+            audience: {
+                '@type': 'Audience',
+                audienceType: 'Health-conscious individuals',
+            },
+            publisher: {
+                '@type': 'Organization',
+                name: 'WellTools',
+                url: 'https://welltools.online',
+            },
+        };
 
+        const schemas = [articleSchema, breadcrumbSchema, medicalSchema];
+
+        // 4. FAQ Schema — only if post has FAQ
         if (post.faq && post.faq.length > 0) {
             const faqSchema = {
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                "mainEntity": post.faq.map(item => ({
-                    "@type": "Question",
-                    "name": item.question,
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": item.answer
-                    }
-                }))
+                '@context': 'https://schema.org',
+                '@type': 'FAQPage',
+                mainEntity: post.faq.map(item => ({
+                    '@type': 'Question',
+                    name: item.question,
+                    acceptedAnswer: {
+                        '@type': 'Answer',
+                        text: item.answer,
+                    },
+                })),
             };
             schemas.push(faqSchema);
         }
@@ -250,9 +402,14 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
     }, [post]);
 
     if (!post) return null;
+
+    const midCTA = <MidArticleCTA post={post} />;
+
     return (
         <div className="bg-white dark:bg-gray-900 pt-24 pb-16 px-4">
             <div className="max-w-4xl mx-auto">
+
+                {/* Back Button */}
                 <button
                     onClick={() => setCurrentPage('blog')}
                     className="mb-8 flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-emerald-600 font-bold transition-all group"
@@ -263,39 +420,74 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
                     </div>
                     {t.back_to_blog}
                 </button>
-                <header className="mb-12">
-                    <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] mb-8 tracking-tight">{post.title}</h1>
-                    <div className="flex items-center gap-6 text-gray-500 dark:text-gray-400 font-bold mb-4">
-                        <div className="flex items-center gap-2">
+
+                {/* Article Header */}
+                <header className="mb-8">
+                    <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] mb-8 tracking-tight">
+                        {post.title}
+                    </h1>
+
+                    {/* Meta row */}
+                    <div className="flex flex-wrap items-center gap-3 mb-6">
+                        <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 font-bold">
                             <Clock className="w-5 h-5 text-emerald-500" />
-                            <span>Last Updated: {post.lastUpdated || post.date}</span>
+                            <span className="text-sm">Last Updated: {post.lastUpdated || post.date}</span>
                         </div>
-                        <div className="px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-lg text-sm">
+
+                        {/* Health Verified badge */}
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-lg text-sm font-semibold border border-emerald-100 dark:border-emerald-900/50">
+                            <CheckCircle className="w-4 h-4" />
                             Health Verified
                         </div>
+
+                        {/* Reviewed by Specialist badge */}
+                        {post.reviewedBy && (
+                            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 rounded-lg text-sm font-semibold border border-blue-100 dark:border-blue-900/40">
+                                <Shield className="w-4 h-4" />
+                                Reviewed by {post.reviewedBy.name}
+                            </div>
+                        )}
                     </div>
                 </header>
 
+                {/* Author Credibility Block */}
+                <AuthorBlock post={post} />
+
+                {/* Table of Contents */}
                 <TableOfContents content={post.content} />
 
+                {/* Article Body */}
                 <article className="max-w-none text-gray-700 dark:text-gray-300">
-                    {parseMarkdown(post.content)}
+                    {parseMarkdown(post.content, midCTA)}
                 </article>
 
+                {/* End-of-Article CTA */}
+                <EndArticleCTA setCurrentPage={setCurrentPage} />
+
+                {/* FAQ Section */}
                 {post.faq && post.faq.length > 0 && (
-                    <div className="mt-20 p-8 md:p-12 bg-slate-50 dark:bg-gray-800 rounded-[2.5rem] border border-slate-200 dark:border-gray-700">
+                    <div className="mt-16 p-8 md:p-12 bg-slate-50 dark:bg-gray-800 rounded-[2.5rem] border border-slate-200 dark:border-gray-700">
                         <h2 className="text-3xl font-black text-gray-800 dark:text-white mb-8">{t.faq_title}</h2>
-                        <div className="space-y-6">
+                        <div className="space-y-4">
                             {post.faq.map((item, i) => (
-                                <div key={i} className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-gray-700">
-                                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">{item.question}</h3>
-                                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">{item.answer}</p>
-                                </div>
+                                <details
+                                    key={i}
+                                    className="group bg-white dark:bg-gray-900 rounded-2xl border border-slate-100 dark:border-gray-700 overflow-hidden"
+                                >
+                                    <summary className="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-gray-800 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+                                        <span className="text-lg pr-4">{item.question}</span>
+                                        <span className="text-emerald-500 text-2xl font-normal flex-shrink-0 group-open:rotate-45 transition-transform duration-200">+</span>
+                                    </summary>
+                                    <div className="px-6 pb-6 pt-0">
+                                        <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base border-t border-slate-100 dark:border-gray-700 pt-4">{item.answer}</p>
+                                    </div>
+                                </details>
                             ))}
                         </div>
                     </div>
                 )}
 
+                {/* Sources */}
                 {post.sources && post.sources.length > 0 && (
                     <div className="mt-12 p-8 md:p-10 bg-emerald-50/30 dark:bg-emerald-900/10 rounded-[2.5rem] border border-emerald-100 dark:border-emerald-900/30">
                         <h2 className="text-2xl font-black text-emerald-900 dark:text-emerald-400 mb-6 flex items-center gap-3">
@@ -315,6 +507,7 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
                                         <span className="text-gray-700 dark:text-gray-300 font-semibold group-hover:text-emerald-600 transition-colors line-clamp-1">
                                             {source.title}
                                         </span>
+                                        <ExternalLink className="w-3 h-3 ml-auto text-gray-300 group-hover:text-emerald-400 flex-shrink-0" />
                                     </a>
                                 </li>
                             ))}
@@ -322,6 +515,7 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
                     </div>
                 )}
 
+                {/* Related Articles */}
                 <RelatedArticles
                     currentPostId={post.id}
                     category={post.category}

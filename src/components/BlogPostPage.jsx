@@ -6,16 +6,12 @@ import CommentSection from './CommentSection';
 
 // ─── Markdown Parsing ────────────────────────────────────────────────────────
 
-let h2Count = 0; // track h2 headings for mid-article CTA injection
-let ctaInjected = false;
-let ctaComponent = null;
-
 const parseMarkdown = (text, ctaBlock) => {
     if (!text) return null;
 
-    h2Count = 0;
-    ctaInjected = false;
-    ctaComponent = ctaBlock || null;
+    let h2Count = 0;
+    let ctaInjected = false;
+    const ctaComponent = ctaBlock || null;
 
     const lines = text.split('\n');
     return lines.map((line, i) => {
@@ -496,7 +492,7 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
                         </div>
 
                         {/* Reviewed by Specialist badge */}
-                        {post.reviewedBy && (
+                        {post.reviewedBy?.name && (
                             <div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 rounded-lg text-sm font-semibold border border-blue-100 dark:border-blue-900/40">
                                 <Shield className="w-4 h-4" />
                                 Reviewed by {post.reviewedBy.name}

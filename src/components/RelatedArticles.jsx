@@ -7,21 +7,31 @@ const RelatedArticles = ({ currentPostId, category, setCurrentPage, setSelectedP
     useEffect(() => {
         // Dynamically import posts to avoid bundle bloat
         import('../data/posts.json').then(module => {
-            const allPosts = module.default.en || [];
+            const postsData = module.default;
+            const allPosts = postsData?.en || [];
+
+            if (!Array.isArray(allPosts)) {
+                setRelatedPosts([]);
+                return;
+            }
+
             // Filter by category, exclude current, limit to 3
             const related = allPosts
-                .filter(post => post.category === category && post.id !== currentPostId)
+                .filter(post => post && post.category === category && post.id !== currentPostId)
                 .slice(0, 3);
 
             // If not enough related by category, just fill with recent
             if (related.length < 3) {
                 const recent = allPosts
-                    .filter(post => post.id !== currentPostId && !related.includes(post))
+                    .filter(post => post && post.id !== currentPostId && !related.includes(post))
                     .slice(0, 3 - related.length);
                 setRelatedPosts([...related, ...recent]);
             } else {
                 setRelatedPosts(related);
             }
+        }).catch(err => {
+            console.error('Failed to load related articles:', err);
+            setRelatedPosts([]);
         });
     }, [currentPostId, category]);
 

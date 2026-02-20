@@ -34,46 +34,68 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
     return (
         <div className="pt-20 pb-16 px-4">
             <div className="max-w-7xl mx-auto">
-                {/* Modern Hero Section - Static */}
-                <div className="relative h-[420px] md:h-[600px] rounded-4xl md:rounded-[3rem] overflow-hidden mb-12 lg:mb-16 shadow-2xl animate-fade-in group">
-                    <div className="absolute inset-0">
-                        <img
-                            src={typeof heroImage === 'string' ? heroImage : heroImage.src}
-                            alt="WellTools - Your Daily Health & Wellness Companion"
-                            width={heroImage.width || "1200"}
-                            height={heroImage.height || "800"}
-                            className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-700"
-                            loading="eager"
-                            fetchpriority="high"
-                        />
-                        <div className="absolute inset-0 bg-linear-to-r from-gray-900/90 via-gray-900/60 to-transparent"></div>
-                        <div className="absolute inset-0 flex items-center px-4 sm:px-6 md:px-16">
-                            <div className="max-w-2xl">
-                                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-3 sm:mb-4 md:mb-6 tracking-tight leading-tight">
-                                    Free Health Calculators Online: <br className="hidden sm:block" />
-                                    <span className="bg-linear-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                                        BMI, Calories & Nutrition
-                                    </span>
-                                </h1>
-                                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 max-w-xl leading-relaxed mb-6 sm:mb-8 md:mb-10">
-                                    Access 9+ free health calculators online including BMI calculator free, calorie counter, macro calculator, and water tracker. Get instant, science-backed results to optimize your wellness journey.
-                                </p>
-                                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                                    <button
-                                        onClick={() => {
-                                            const el = document.getElementById('tools-grid');
-                                            el?.scrollIntoView({ behavior: 'smooth' });
-                                        }}
-                                        className="px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold text-sm sm:text-base md:text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
-                                    >
-                                        {t.explore_tools}
-                                    </button>
-                                    <button
-                                        onClick={() => setCurrentPage('meal-planner')}
-                                        className="px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 bg-white/10 backdrop-blur-md text-white border-2 border-white/20 rounded-2xl font-bold text-sm sm:text-base md:text-lg hover:bg-white/20 transition-all"
-                                    >
-                                        {t.meal_planner_title}
-                                    </button>
+                {/* Premium Hero Section */}
+                <div className="relative bg-linear-to-br from-gray-900 to-gray-800 rounded-[2.5rem] md:rounded-[4rem] overflow-hidden mb-12 lg:mb-20 shadow-2xl border border-white/5">
+                    {/* Decorative Background Elements */}
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl -mr-48 -mt-48"></div>
+                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl -ml-48 -mb-48"></div>
+
+                    <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center p-6 sm:p-8 md:p-16 lg:p-20">
+                        {/* Left Content */}
+                        <div className="z-10 text-center lg:text-left">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-sm font-bold mb-6 animate-fade-in">
+                                <Zap className="w-4 h-4" />
+                                <span>Free Professional Health Tools</span>
+                            </div>
+                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight leading-[1.1]">
+                                Science-Backed <br />
+                                <span className="bg-linear-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+                                    Health Insights
+                                </span>
+                            </h1>
+                            <p className="text-lg sm:text-xl text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10 font-medium">
+                                Access 9+ medically-validated calculators for BMI, calories, and nutrition. Get instant data to drive your wellness journey.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                                <button
+                                    onClick={() => {
+                                        const el = document.getElementById('tools-grid');
+                                        el?.scrollIntoView({ behavior: 'smooth' });
+                                    }}
+                                    className="px-8 py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-black text-lg shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:-translate-y-1 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+                                >
+                                    {t.explore_tools}
+                                    <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                </button>
+                                <button
+                                    onClick={() => setCurrentPage('meal-planner')}
+                                    className="px-8 py-4 bg-white/5 backdrop-blur-md text-white border border-white/10 rounded-2xl font-black text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                                >
+                                    {t.meal_planner_title}
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Right Image */}
+                        <div className="relative group lg:block">
+                            <div className="absolute inset-0 bg-linear-to-br from-emerald-500/20 to-teal-500/20 rounded-[2rem] md:rounded-[3rem] blur-2xl group-hover:scale-105 transition-transform duration-700"></div>
+                            <div className="relative rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 aspect-4/3 lg:aspect-square">
+                                <img
+                                    src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1200"
+                                    alt="WellTools Wellness Experience"
+                                    className="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-110"
+                                    loading="eager"
+                                />
+                                <div className="absolute inset-0 bg-linear-to-t from-gray-900/40 to-transparent"></div>
+                                {/* Floating Badge */}
+                                <div className="absolute bottom-6 left-6 right-6 p-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center gap-4">
+                                    <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
+                                        <Heart className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <p className="text-white font-bold text-sm">Join 50,000+ Users</p>
+                                        <p className="text-emerald-400 text-xs font-medium tracking-wide uppercase">Community Verified</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

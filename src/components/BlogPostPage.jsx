@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Clock, CheckCircle, Shield, User, ExternalLink, BookOpen, Calculator } from 'lucide-react';
+import { ArrowLeft, Clock, CheckCircle, Shield, User, ExternalLink, BookOpen, Calculator, Info, Lightbulb, AlertTriangle } from 'lucide-react';
 import TableOfContents from './TableOfContents';
 import RelatedArticles from './RelatedArticles';
 import CommentSection from './CommentSection';
@@ -83,6 +82,29 @@ const parseMarkdown = (text, ctaBlock) => {
 
         // Empty lines
         if (!line.trim()) return <div key={i} className="h-4" />;
+
+        // Callout Blocks (> [!TIP], > [!NOTE], etc)
+        if (line.trim().startsWith('> [!')) {
+            const typeMatch = line.match(/> \[!(.*?)\]/);
+            const type = typeMatch ? typeMatch[1].toUpperCase() : 'NOTE';
+            const content = line.split(']').slice(1).join(']').trim();
+            const styles = {
+                TIP: { icon: <Lightbulb className="w-5 h-5 text-amber-500" />, bg: 'bg-amber-50/50 dark:bg-amber-900/10', border: 'border-amber-200 dark:border-amber-900/30' },
+                IMPORTANT: { icon: <Info className="w-5 h-5 text-emerald-500" />, bg: 'bg-emerald-50/50 dark:bg-emerald-900/10', border: 'border-emerald-200 dark:border-emerald-900/30' },
+                WARNING: { icon: <AlertTriangle className="w-5 h-5 text-rose-500" />, bg: 'bg-rose-50/50 dark:bg-rose-900/10', border: 'border-rose-200 dark:border-rose-900/30' },
+                NOTE: { icon: <Info className="w-5 h-5 text-blue-500" />, bg: 'bg-blue-50/50 dark:bg-blue-900/10', border: 'border-blue-200 dark:border-blue-900/30' }
+            };
+            const style = styles[type] || styles.NOTE;
+            return (
+                <div key={i} className={`my-8 p-6 rounded-2xl border ${style.border} ${style.bg} flex gap-4 items-start`}>
+                    <div className="shrink-0 mt-1">{style.icon}</div>
+                    <div className="text-sm leading-relaxed text-gray-700 dark:text-gray-300 italic font-medium">
+                        <span className="font-black uppercase tracking-wider block mb-1 text-[10px] opacity-60">{type}</span>
+                        {parseInlineMarkdown(content)}
+                    </div>
+                </div>
+            );
+        }
 
         // Regular paragraphs
         return <p key={i} className="mb-4 leading-relaxed">{parseInlineMarkdown(line)}</p>;
@@ -194,19 +216,37 @@ const AuthorBlock = ({ post }) => (
             </div>
         </div>
         {/* Reviewed-by section */}
-        {post.reviewedBy && (
-            <div className="flex items-center gap-3 px-4 py-3 bg-white dark:bg-gray-900 rounded-xl border border-emerald-100 dark:border-emerald-900/40 shadow-sm">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center shrink-0">
-                    <Shield className="w-5 h-5 text-emerald-600" />
-                </div>
-                <div>
-                    <p className="text-xs font-bold text-gray-800 dark:text-gray-200 flex items-center gap-1">
-                        <CheckCircle className="w-3 h-3 text-emerald-500" />
-                        Medically Reviewed
-                    </p>
-                    <p className="text-xs text-gray-700 dark:text-gray-300 font-semibold">{post.reviewedBy.name}</p>
-                    <p className="text-xs text-gray-400 dark:text-gray-500">{post.reviewedBy.credentials}</p>
-                </div>
+        {(post.reviewedBy || post.factCheckedBy) && (
+            <div className="flex flex-col gap-2">
+                {post.reviewedBy && (
+                    <div className="flex items-center gap-3 px-4 py-3 bg-white dark:bg-gray-900 rounded-xl border border-emerald-100 dark:border-emerald-900/40 shadow-sm">
+                        <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center shrink-0">
+                            <Shield className="w-5 h-5 text-emerald-600" />
+                        </div>
+                        <div>
+                            <p className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest flex items-center gap-1 mb-0.5">
+                                <CheckCircle className="w-3 h-3" />
+                                Medically Reviewed
+                            </p>
+                            <p className="text-xs text-gray-900 dark:text-white font-bold">{post.reviewedBy.name}</p>
+                            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-medium">{post.reviewedBy.credentials}</p>
+                        </div>
+                    </div>
+                )}
+                {post.factCheckedBy && (
+                    <div className="flex items-center gap-3 px-4 py-3 bg-white dark:bg-gray-900 rounded-xl border border-blue-100 dark:border-blue-900/40 shadow-sm">
+                        <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center shrink-0">
+                            <Info className="w-5 h-5 text-blue-600" />
+                        </div>
+                        <div>
+                            <p className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest flex items-center gap-1 mb-0.5">
+                                <Shield className="w-3 h-3" />
+                                Fact Checked
+                            </p>
+                            <p className="text-xs text-gray-900 dark:text-white font-bold">{post.factCheckedBy.name}</p>
+                        </div>
+                    </div>
+                )}
             </div>
         )}
     </div>
@@ -221,25 +261,26 @@ const MidArticleCTA = ({ post, setCurrentPage }) => {
     ];
 
     return (
-        <div className="my-12 p-7 bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-3xl text-white shadow-2xl shadow-emerald-200 dark:shadow-emerald-900/30 relative overflow-hidden">
-            {/* Background decoration */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+        <div className="my-12 p-8 bg-linear-to-br from-emerald-600 via-teal-600 to-cyan-600 rounded-[2.5rem] text-white shadow-2xl shadow-emerald-500/20 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 blur-3xl rounded-full -mr-32 -mt-32 group-hover:bg-white/10 transition-colors" />
             <div className="relative">
-                <div className="flex items-center gap-2 mb-2">
-                    <Calculator className="w-5 h-5" />
-                    <span className="text-sm font-bold uppercase tracking-wider opacity-90">Free Health Tools</span>
+                <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-white/20 backdrop-blur-md rounded-xl">
+                        <Calculator className="w-5 h-5" />
+                    </div>
+                    <span className="text-xs font-black uppercase tracking-[0.2em] opacity-80">Take Action Now</span>
                 </div>
-                <h3 className="text-xl font-black mb-1">Put This Knowledge Into Practice</h3>
-                <p className="text-white/80 text-sm mb-5">Use our science-backed calculators — free, instant results.</p>
-                <div className="flex flex-wrap gap-2">
+                <h3 className="text-2xl font-black mb-2 leading-tight">Master Your Health with Free Science-Backed Tools</h3>
+                <p className="text-white/80 text-sm mb-8 max-w-lg">Don't just read — apply. Use our calculators to find your personalized metrics in seconds.</p>
+                <div className="flex flex-wrap gap-3">
                     {toolLinks.map((link, i) => (
                         <button
                             key={i}
                             onClick={() => { setCurrentPage(link.page || link.href?.replace('/', '')); window.scrollTo(0, 0); }}
-                            className="px-4 py-2 bg-white/20 hover:bg-white/30 backdrop-blur rounded-xl text-sm font-semibold transition-all hover:scale-105 border border-white/20 cursor-pointer"
+                            className="px-6 py-3 bg-white text-emerald-700 hover:bg-emerald-50 rounded-2xl text-sm font-black transition-all hover:scale-105 shadow-lg flex items-center gap-2 cursor-pointer"
                         >
                             {link.label}
+                            <ChevronRight className="w-4 h-4" />
                         </button>
                     ))}
                 </div>

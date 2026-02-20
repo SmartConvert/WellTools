@@ -5,6 +5,8 @@ const TableOfContents = ({ content }) => {
     const [headings, setHeadings] = useState([]);
     const [activeId, setActiveId] = useState('');
 
+    const [isExpanded, setIsExpanded] = useState(false);
+
     useEffect(() => {
         // Parse content to find H2 and H3
         const matches = [...content.matchAll(/#{2,3}\s+(.+)/g)];
@@ -39,14 +41,26 @@ const TableOfContents = ({ content }) => {
 
     if (headings.length === 0) return null;
 
+    const displayedHeadings = isExpanded ? headings : headings.slice(0, 5);
+
     return (
-        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 mb-8 border border-gray-100 dark:border-gray-700">
-            <h3 className="flex items-center gap-2 font-bold text-gray-900 dark:text-white mb-4">
-                <AlignLeft className="w-5 h-5 text-emerald-500" />
-                Table of Contents
-            </h3>
+        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 mb-8 border border-gray-100 dark:border-gray-700 transition-all">
+            <div className="flex items-center justify-between mb-4">
+                <h3 className="flex items-center gap-2 font-bold text-gray-900 dark:text-white">
+                    <AlignLeft className="w-5 h-5 text-emerald-500" />
+                    Table of Contents
+                </h3>
+                {headings.length > 5 && (
+                    <button
+                        onClick={() => setIsExpanded(!isExpanded)}
+                        className="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline cursor-pointer"
+                    >
+                        {isExpanded ? 'Show Less' : `Show All (${headings.length})`}
+                    </button>
+                )}
+            </div>
             <nav className="space-y-1">
-                {headings.map(({ id, text, level }) => (
+                {displayedHeadings.map(({ id, text, level }) => (
                     <a
                         key={id}
                         href={`#${id}`}

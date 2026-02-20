@@ -407,6 +407,13 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
 
     return (
         <div className="bg-white dark:bg-gray-900 pt-24 pb-16 px-4">
+            {/* AMP Auto Ads — only for new articles (2026-02-01+) and all future posts */}
+            {post.date && post.date >= '2026-02-01' && (
+                <amp-auto-ads
+                    type="adsense"
+                    data-ad-client="ca-pub-4160895122812433">
+                </amp-auto-ads>
+            )}
             <div className="max-w-4xl mx-auto">
 
                 {/* Back Button */}

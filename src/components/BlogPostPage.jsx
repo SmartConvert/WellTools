@@ -1,4 +1,5 @@
-import { ArrowLeft, Clock, CheckCircle, Shield, User, ExternalLink, BookOpen, Calculator, Info, Lightbulb, AlertTriangle } from 'lucide-react';
+import React from 'react';
+import { ArrowLeft, Clock, CheckCircle, Shield, User, ExternalLink, BookOpen, Calculator, Info, Lightbulb, AlertTriangle, ChevronRight } from 'lucide-react';
 import TableOfContents from './TableOfContents';
 import RelatedArticles from './RelatedArticles';
 import CommentSection from './CommentSection';
@@ -276,10 +277,16 @@ const MidArticleCTA = ({ post, setCurrentPage }) => {
                     {toolLinks.map((link, i) => (
                         <button
                             key={i}
-                            onClick={() => { setCurrentPage(link.page || link.href?.replace('/', '')); window.scrollTo(0, 0); }}
+                            onClick={() => {
+                                const target = link.page || link.href?.replace('/', '') || link.url?.replace('/', '');
+                                if (target) {
+                                    setCurrentPage(target);
+                                    window.scrollTo(0, 0);
+                                }
+                            }}
                             className="px-6 py-3 bg-white text-emerald-700 hover:bg-emerald-50 rounded-2xl text-sm font-black transition-all hover:scale-105 shadow-lg flex items-center gap-2 cursor-pointer"
                         >
-                            {link.label}
+                            {link.label || link.text}
                             <ChevronRight className="w-4 h-4" />
                         </button>
                     ))}

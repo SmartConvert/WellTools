@@ -5,7 +5,8 @@ import EmailCaptureForm from './EmailCaptureForm';
 
 // Import hero image with vite-imagetools directives
 // Generate WebP and AVIF, and resize for responsiveness
-import heroImage from '../assets/hero-final.jpg?as=webp&w=1200';
+// Use the premium clinic hero image for better brand expression
+const heroImage = "/images/hero-clinic.png";
 
 const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t }) => {
     const [currentLangPosts, setCurrentLangPosts] = React.useState([]);

@@ -212,12 +212,12 @@ const AuthorBlock = ({ post }) => (
     </div>
 );
 
-const MidArticleCTA = ({ post }) => {
+const MidArticleCTA = ({ post, setCurrentPage }) => {
     const toolLinks = post.ctaLinks || [
-        { label: '💤 Sleep Calculator', href: '/sleep' },
-        { label: '💧 Water Calculator', href: '/water' },
-        { label: '🔥 Calorie Calculator', href: '/calories' },
-        { label: '📊 BMI Calculator', href: '/bmi' },
+        { label: '💤 Sleep Calculator', page: 'sleep' },
+        { label: '💧 Water Calculator', page: 'water' },
+        { label: '🔥 Calorie Calculator', page: 'calories' },
+        { label: '📊 BMI Calculator', page: 'bmi' },
     ];
 
     return (
@@ -234,13 +234,13 @@ const MidArticleCTA = ({ post }) => {
                 <p className="text-white/80 text-sm mb-5">Use our science-backed calculators — free, instant results.</p>
                 <div className="flex flex-wrap gap-2">
                     {toolLinks.map((link, i) => (
-                        <a
+                        <button
                             key={i}
-                            href={link.href}
-                            className="px-4 py-2 bg-white/20 hover:bg-white/30 backdrop-blur rounded-xl text-sm font-semibold transition-all hover:scale-105 border border-white/20"
+                            onClick={() => { setCurrentPage(link.page || link.href?.replace('/', '')); window.scrollTo(0, 0); }}
+                            className="px-4 py-2 bg-white/20 hover:bg-white/30 backdrop-blur rounded-xl text-sm font-semibold transition-all hover:scale-105 border border-white/20 cursor-pointer"
                         >
                             {link.label}
-                        </a>
+                        </button>
                     ))}
                 </div>
             </div>
@@ -403,7 +403,7 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
 
     if (!post) return null;
 
-    const midCTA = <MidArticleCTA post={post} />;
+    const midCTA = <MidArticleCTA post={post} setCurrentPage={setCurrentPage} />;
 
     return (
         <div className="bg-white dark:bg-gray-900 pt-24 pb-16 px-4">

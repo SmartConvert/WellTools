@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowLeft, Clock, CheckCircle, Shield, User, ExternalLink, BookOpen, Calculator, Info, Lightbulb, AlertTriangle, ChevronRight } from 'lucide-react';
 import TableOfContents from './TableOfContents';
 import RelatedArticles from './RelatedArticles';

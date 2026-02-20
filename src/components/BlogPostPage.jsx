@@ -175,10 +175,10 @@ const processTextMarkdown = (text) => {
 // ─── Sub-Components ──────────────────────────────────────────────────────────
 
 const AuthorBlock = ({ post }) => (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-6 bg-gradient-to-r from-slate-50 to-gray-50 dark:from-gray-800 dark:to-gray-800/60 rounded-2xl border border-slate-100 dark:border-gray-700 mb-10">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-6 bg-linear-to-r from-slate-50 to-gray-50 dark:from-gray-800 dark:to-gray-800/60 rounded-2xl border border-slate-100 dark:border-gray-700 mb-10">
         <div className="flex items-center gap-4 flex-1">
             {/* Author Avatar */}
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white font-black text-lg flex-shrink-0 shadow-lg">
+            <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white font-black text-lg shrink-0 shadow-lg">
                 WH
             </div>
             <div>
@@ -196,7 +196,7 @@ const AuthorBlock = ({ post }) => (
         {/* Reviewed-by section */}
         {post.reviewedBy && (
             <div className="flex items-center gap-3 px-4 py-3 bg-white dark:bg-gray-900 rounded-xl border border-emerald-100 dark:border-emerald-900/40 shadow-sm">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center shrink-0">
                     <Shield className="w-5 h-5 text-emerald-600" />
                 </div>
                 <div>
@@ -221,7 +221,7 @@ const MidArticleCTA = ({ post, setCurrentPage }) => {
     ];
 
     return (
-        <div className="my-12 p-7 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-3xl text-white shadow-2xl shadow-emerald-200 dark:shadow-emerald-900/30 relative overflow-hidden">
+        <div className="my-12 p-7 bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-3xl text-white shadow-2xl shadow-emerald-200 dark:shadow-emerald-900/30 relative overflow-hidden">
             {/* Background decoration */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
             <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
@@ -249,7 +249,7 @@ const MidArticleCTA = ({ post, setCurrentPage }) => {
 };
 
 const EndArticleCTA = ({ setCurrentPage }) => (
-    <div className="mt-16 p-10 md:p-12 bg-gradient-to-br from-gray-900 via-emerald-950 to-teal-900 rounded-[2.5rem] text-white text-center relative overflow-hidden shadow-2xl">
+    <div className="mt-16 p-10 md:p-12 bg-linear-to-br from-gray-900 via-emerald-950 to-teal-900 rounded-[2.5rem] text-white text-center relative overflow-hidden shadow-2xl">
         {/* Decorative orbs */}
         <div className="absolute top-0 left-1/4 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-teal-500/10 rounded-full blur-3xl" />
@@ -483,7 +483,7 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
                                 >
                                     <summary className="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-gray-800 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
                                         <span className="text-lg pr-4">{item.question}</span>
-                                        <span className="text-emerald-500 text-2xl font-normal flex-shrink-0 group-open:rotate-45 transition-transform duration-200">+</span>
+                                        <span className="text-emerald-500 text-2xl font-normal shrink-0 group-open:rotate-45 transition-transform duration-200">+</span>
                                     </summary>
                                     <div className="px-6 pb-6 pt-0">
                                         <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base border-t border-slate-100 dark:border-gray-700 pt-4">{item.answer}</p>
@@ -514,7 +514,7 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
                                         <span className="text-gray-700 dark:text-gray-300 font-semibold group-hover:text-emerald-600 transition-colors line-clamp-1">
                                             {source.title}
                                         </span>
-                                        <ExternalLink className="w-3 h-3 ml-auto text-gray-300 group-hover:text-emerald-400 flex-shrink-0" />
+                                        <ExternalLink className="w-3 h-3 ml-auto text-gray-300 group-hover:text-emerald-400 shrink-0" />
                                     </a>
                                 </li>
                             ))}

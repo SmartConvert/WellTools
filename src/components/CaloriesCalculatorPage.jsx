@@ -113,9 +113,9 @@ const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeig
 
                         {calResult && (
                             <div id="calories-result" className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 animate-scale-in relative">
-                                <div className="p-6 bg-linear-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-2xl border-2 border-blue-200 dark:border-blue-800 text-center shadow-lg hover:scale-105 transition-all">
+                                <div className="p-6 bg-linear-to-br from-teal-50 to-teal-100 dark:from-teal-900/20 dark:to-teal-800/20 rounded-2xl border-2 border-teal-200 dark:border-teal-800 text-center shadow-lg hover:scale-105 transition-all">
                                     <p className="text-gray-600 dark:text-gray-400 font-bold mb-2">{t.maintain_weight}</p>
-                                    <p className="text-3xl font-black text-blue-600 dark:text-blue-400">{calResult.maintain}</p>
+                                    <p className="text-3xl font-black text-teal-600 dark:text-teal-400">{calResult.maintain}</p>
                                     <p className="text-sm font-semibold text-gray-500">{t.calories_day}</p>
                                 </div>
                                 <div className="p-6 bg-linear-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/20 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 text-center shadow-lg hover:scale-105 transition-all">
@@ -123,9 +123,9 @@ const CaloriesCalculatorPage = ({ calWeight, setCalWeight, calHeight, setCalHeig
                                     <p className="text-3xl font-black text-emerald-600 dark:text-emerald-400">{calResult.loss}</p>
                                     <p className="text-sm font-semibold text-gray-500">{t.calories_day}</p>
                                 </div>
-                                <div className="p-6 bg-rose-50 to-rose-100 dark:from-rose-900/20 dark:to-rose-800/20 rounded-2xl border-2 border-rose-200 dark:border-rose-800 text-center shadow-lg hover:scale-105 transition-all">
+                                <div className="p-6 bg-linear-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/20 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 text-center shadow-lg hover:scale-105 transition-all">
                                     <p className="text-gray-600 dark:text-gray-400 font-bold mb-2">{t.weight_gain}</p>
-                                    <p className="text-3xl font-black text-rose-600 dark:text-rose-400">{calResult.gain}</p>
+                                    <p className="text-3xl font-black text-emerald-600 dark:text-emerald-400">{calResult.gain}</p>
                                     <p className="text-sm font-semibold text-gray-500">{t.calories_day}</p>
                                 </div>
 

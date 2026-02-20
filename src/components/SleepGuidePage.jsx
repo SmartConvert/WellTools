@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { ArrowLeft, Moon, ShieldCheck, Zap, Info, CheckCircle2, CloudMoon } from 'lucide-react';
 import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
+import BackToTop from './BackToTop';
 
 const SleepGuidePage = ({ setCurrentPage, t }) => {
     useEffect(() => {
@@ -19,19 +20,19 @@ const SleepGuidePage = ({ setCurrentPage, t }) => {
         <div className="pt-24 pb-16 px-4 max-w-4xl mx-auto">
             <button
                 onClick={() => setCurrentPage('sleep')}
-                className="flex items-center gap-2 text-indigo-600 font-bold mb-8 hover:translate-x-[-4px] transition-transform"
+                className="flex items-center gap-2 text-emerald-600 font-bold mb-8 hover:translate-x-[-4px] transition-transform"
             >
                 <ArrowLeft className="w-5 h-5" />
                 Back to Calculator
             </button>
 
             <header className="mb-16">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full text-sm font-black mb-6 uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-sm font-black mb-6 uppercase tracking-wider">
                     <CloudMoon className="w-4 h-4" />
                     Pillar Guide
                 </div>
                 <h1 className="text-5xl md:text-6xl font-black text-gray-900 dark:text-white mb-6 leading-tight">
-                    The Sleep <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-500">Optimization Handbook</span>
+                    The Sleep <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-600 to-teal-500">Optimization Handbook</span>
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed font-medium capitalize">
                     Master your circadian rhythm, understand sleep cycles, and transform your nighttime routine for peak daytime performance.
@@ -48,7 +49,7 @@ const SleepGuidePage = ({ setCurrentPage, t }) => {
 
             <section className="prose prose-lg dark:prose-invert max-w-none">
                 <h2 className="text-3xl font-black mb-8 flex items-center gap-3">
-                    <ShieldCheck className="text-indigo-500" />
+                    <ShieldCheck className="text-emerald-500" />
                     Why Quality Sleep is Your Superpower
                 </h2>
                 <p className="mb-12 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
@@ -58,8 +59,8 @@ const SleepGuidePage = ({ setCurrentPage, t }) => {
                 <h3 className="text-2xl font-black mb-6">Understanding 90-Minute Cycles</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
                     {sleepCycles.map((cycle, idx) => (
-                        <div key={idx} className="p-6 bg-white dark:bg-gray-800 rounded-3xl border border-indigo-50 dark:border-indigo-900/40 shadow-xl shadow-indigo-100/50 dark:shadow-none">
-                            <h4 className="font-black text-indigo-600 dark:text-indigo-400 mb-2">{cycle.title}</h4>
+                        <div key={idx} className="p-6 bg-white dark:bg-gray-800 rounded-3xl border border-emerald-50 dark:border-emerald-900/40 shadow-xl shadow-emerald-100/50 dark:shadow-none">
+                            <h4 className="font-black text-emerald-600 dark:text-emerald-400 mb-2">{cycle.title}</h4>
                             <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                                 {cycle.desc}
                             </p>
@@ -79,8 +80,8 @@ const SleepGuidePage = ({ setCurrentPage, t }) => {
                         { time: "1 Hour", desc: "No more blue light (screens)." },
                         { time: "0 Times", desc: "The number of times you should hit the snooze button." }
                     ].map((item, idx) => (
-                        <div key={idx} className="flex gap-4 items-center bg-indigo-50/50 dark:bg-indigo-900/10 p-6 rounded-2xl border border-indigo-100 dark:border-indigo-900/30">
-                            <div className="px-4 py-2 bg-indigo-600 text-white rounded-xl font-black shrink-0">{item.time}</div>
+                        <div key={idx} className="flex gap-4 items-center bg-emerald-50/50 dark:bg-emerald-900/10 p-6 rounded-2xl border border-emerald-100 dark:border-emerald-900/30">
+                            <div className="px-4 py-2 bg-emerald-600 text-white rounded-xl font-black shrink-0">{item.time}</div>
                             <p className="text-gray-900 dark:text-white font-bold">{item.desc}</p>
                         </div>
                     ))}
@@ -107,6 +108,7 @@ const SleepGuidePage = ({ setCurrentPage, t }) => {
             </section>
 
             <RelatedTools currentToolId="sleep-guide" setCurrentPage={setCurrentPage} />
+            <BackToTop />
         </div>
     );
 };

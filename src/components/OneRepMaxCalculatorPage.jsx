@@ -14,7 +14,7 @@ const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps,
             <div className="max-w-3xl mx-auto">
                 <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
                     <div className="flex items-center gap-4 mb-8">
-                        <div className="w-16 h-16 bg-linear-to-br from-slate-600 to-slate-800 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="w-16 h-16 bg-linear-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg">
                             <Dumbbell className="w-8 h-8 text-white" />
                         </div>
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">One Rep Max Calculator</h2>
@@ -33,7 +33,7 @@ const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps,
                                     value={ormWeight}
                                     onChange={(e) => setOrmWeight(e.target.value)}
                                     placeholder="100"
-                                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-slate-500 focus:outline-none transition-colors text-lg"
+                                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg"
                                 />
                             </div>
                             <div>
@@ -43,14 +43,14 @@ const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps,
                                     value={ormReps}
                                     onChange={(e) => setOrmReps(e.target.value)}
                                     placeholder="5"
-                                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-slate-500 focus:outline-none transition-colors text-lg"
+                                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg"
                                 />
                             </div>
                         </div>
 
                         <button
                             onClick={calculateORM}
-                            className="w-full py-4 bg-linear-to-r from-slate-700 to-slate-900 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                            className="w-full py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
                         >
                             Calculate 1RM
                         </button>
@@ -60,14 +60,14 @@ const OneRepMaxCalculatorPage = ({ ormWeight, setOrmWeight, ormReps, setOrmReps,
                     </div>
 
                     {ormResult && (
-                        <div id="orm-result" className="mt-8 p-8 bg-linear-to-br from-slate-50 to-gray-50 dark:from-slate-900/20 dark:to-gray-900/20 rounded-2xl border-2 border-slate-200 dark:border-slate-800 animate-scale-in">
+                        <div id="orm-result" className="mt-8 p-8 bg-linear-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 animate-scale-in">
                             <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">Estimated Max:</h3>
                             <div className="text-center">
-                                <div className="inline-block p-8 bg-white dark:bg-gray-800 rounded-3xl shadow-lg border border-slate-100 dark:border-slate-900 relative overflow-hidden">
+                                <div className="inline-block p-8 bg-white dark:bg-gray-800 rounded-3xl shadow-lg border border-emerald-100 dark:border-emerald-900 relative overflow-hidden">
                                     <div className="absolute top-0 right-0 p-4 opacity-10">
-                                        <Trophy className="w-24 h-24 text-slate-900 dark:text-white" />
+                                        <Trophy className="w-24 h-24 text-emerald-900 dark:text-white" />
                                     </div>
-                                    <p className="text-6xl font-black text-slate-800 dark:text-slate-100 relative z-10">{ormResult.max} kg</p>
+                                    <p className="text-6xl font-black text-emerald-800 dark:text-emerald-100 relative z-10">{ormResult.max} kg</p>
                                 </div>
                             </div>
 

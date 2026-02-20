@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { ArrowLeft, Scale, Info, Target, AlertCircle, CheckCircle2, Zap, Layout } from 'lucide-react';
 import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
+import BackToTop from './BackToTop';
 
 const BMIGuidePage = ({ setCurrentPage, t }) => {
     useEffect(() => {
@@ -26,12 +27,12 @@ const BMIGuidePage = ({ setCurrentPage, t }) => {
             </button>
 
             <header className="mb-16">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm font-black mb-6 uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-sm font-black mb-6 uppercase tracking-wider">
                     <Layout className="w-4 h-4" />
                     Pillar Guide
                 </div>
                 <h1 className="text-5xl md:text-6xl font-black text-gray-900 dark:text-white mb-6 leading-tight">
-                    The Definitive Guide to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">BMI</span>
+                    The Definitive Guide to <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">BMI</span>
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed font-medium capitalize">
                     Understanding Body Mass Index, its limitations, and how to use it as a screening tool for your health journey.
@@ -48,7 +49,7 @@ const BMIGuidePage = ({ setCurrentPage, t }) => {
 
             <section className="prose prose-lg dark:prose-invert max-w-none">
                 <h2 className="text-3xl font-black mb-8 flex items-center gap-3">
-                    <Info className="text-blue-500" />
+                    <Info className="text-emerald-500" />
                     What is BMI?
                 </h2>
                 <p className="mb-12 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
@@ -108,6 +109,7 @@ const BMIGuidePage = ({ setCurrentPage, t }) => {
             </section>
 
             <RelatedTools currentToolId="bmi-guide" setCurrentPage={setCurrentPage} />
+            <BackToTop />
         </div>
     );
 };

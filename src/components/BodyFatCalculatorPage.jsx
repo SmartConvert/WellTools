@@ -21,7 +21,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                 <div className="max-w-3xl mx-auto">
                     <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
                         <div className="flex items-center gap-4 mb-8">
-                            <div className="bg-linear-to-r from-orange-500 to-orange-600 rounded-4xl p-8 text-white shadow-xl relative overflow-hidden group">
+                            <div className="bg-linear-to-r from-emerald-500 to-teal-600 rounded-4xl p-8 text-white shadow-xl relative overflow-hidden group">
                                 <Percent className="w-8 h-8 text-white" />
                             </div>
                             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
@@ -43,7 +43,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                                         onChange={(e) => setBfWeight(e.target.value)}
                                         placeholder="70"
                                         aria-label={`${t.weight} (${t.unit_kg})`}
-                                        className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-orange-500 focus:outline-none transition-colors"
+                                        className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors"
                                     />
                                 </div>
                                 <div>
@@ -54,7 +54,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                                         onChange={(e) => setBfHeight(e.target.value)}
                                         placeholder="175"
                                         aria-label={`${t.height} (${t.unit_cm})`}
-                                        className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-orange-500 focus:outline-none transition-colors"
+                                        className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors"
                                     />
                                 </div>
                             </div>
@@ -68,7 +68,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                                         onChange={(e) => setBfAge(e.target.value)}
                                         placeholder="25"
                                         aria-label={t.age}
-                                        className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-orange-500 focus:outline-none transition-colors"
+                                        className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors"
                                     />
                                 </div>
                                 <div>
@@ -77,7 +77,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                                         value={bfGender}
                                         onChange={(e) => setBfGender(e.target.value)}
                                         aria-label={t.gender}
-                                        className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-orange-500 focus:outline-none transition-colors"
+                                        className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors"
                                     >
                                         <option value="male">{t.male}</option>
                                         <option value="female">{t.female}</option>
@@ -85,7 +85,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                                 </div>
                             </div>
 
-                            <div className="bg-blue-50 dark:bg-blue-900/10 border-2 border-blue-200 dark:border-blue-800 rounded-2xl p-6">
+                            <div className="bg-teal-50 dark:bg-teal-900/10 border-2 border-teal-200 dark:border-teal-800 rounded-2xl p-6">
                                 <h3 className="font-bold text-gray-800 dark:text-white mb-4 text-lg">{t.measurements} ({t.unit_cm})</h3>
                                 <div className="space-y-4">
                                     <div>
@@ -95,7 +95,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                                             value={bfNeck}
                                             onChange={(e) => setBfNeck(e.target.value)}
                                             aria-label={t.neck}
-                                            className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                                            className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors"
                                         />
                                     </div>
                                     <div>
@@ -105,7 +105,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                                             value={bfWaist}
                                             onChange={(e) => setBfWaist(e.target.value)}
                                             aria-label={t.waist}
-                                            className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                                            className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors"
                                         />
                                     </div>
                                     {bfGender === 'female' && (
@@ -116,7 +116,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                                                 value={bfHip}
                                                 onChange={(e) => setBfHip(e.target.value)}
                                                 aria-label={t.hip}
-                                                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                                                className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors"
                                             />
                                         </div>
                                     )}
@@ -125,7 +125,7 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
 
                             <button
                                 onClick={calculateBodyFat}
-                                className="w-full py-4 bg-linear-to-r from-orange-500 to-red-500 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+                                className="w-full py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
                             >
                                 {t.calculate}
                             </button>

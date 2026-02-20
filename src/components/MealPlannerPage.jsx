@@ -119,7 +119,7 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
             <div className="max-w-5xl mx-auto">
                 <div className="text-center mb-12 animate-fade-in">
                     <div className="flex items-center justify-center gap-4 mb-6">
-                        <div className="w-16 h-16 bg-linear-to-br from-orange-400 to-rose-500 rounded-2xl flex items-center justify-center shadow-xl">
+                        <div className="w-16 h-16 bg-linear-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-xl">
                             <Utensils className="w-8 h-8 text-white" />
                         </div>
                     </div>
@@ -160,9 +160,9 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
                             <button
                                 key={item.id}
                                 onClick={() => setGoal(item.id)}
-                                className={`p-6 rounded-2xl border-2 transition-all flex flex-col items-center gap-3 ${goal === item.id ? (item.id === 'lose' ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20' : item.id === 'maintain' ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-violet-500 bg-violet-50 dark:bg-violet-900/20') : 'border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 text-gray-400'}`}
+                                className={`p-6 rounded-2xl border-2 transition-all flex flex-col items-center gap-3 ${goal === item.id ? (item.id === 'lose' ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20' : item.id === 'maintain' ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/20' : 'border-blue-500 bg-blue-50 dark:bg-blue-900/20') : 'border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 text-gray-400'}`}
                             >
-                                <item.icon className={`w-8 h-8 ${goal === item.id ? (item.id === 'lose' ? 'text-emerald-500' : item.id === 'maintain' ? 'text-blue-500' : 'text-violet-500') : ''}`} />
+                                <item.icon className={`w-8 h-8 ${goal === item.id ? (item.id === 'lose' ? 'text-emerald-500' : item.id === 'maintain' ? 'text-teal-500' : 'text-blue-500') : ''}`} />
                                 <span className={`font-bold ${goal === item.id ? 'text-gray-900 dark:text-white' : ''}`}>{item.label}</span>
                             </button>
                         ))}

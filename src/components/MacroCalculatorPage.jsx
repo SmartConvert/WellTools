@@ -21,7 +21,7 @@ const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMa
                 <div className="max-w-3xl mx-auto">
                     <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
                         <div className="flex items-center gap-4 mb-8">
-                            <div className="w-16 h-16 bg-linear-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center shadow-lg">
+                            <div className="w-16 h-16 bg-linear-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg">
                                 <Utensils className="w-8 h-8 text-white" />
                             </div>
                             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
@@ -41,7 +41,7 @@ const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMa
                                     value={macroCalories}
                                     onChange={(e) => setMacroCalories(e.target.value)}
                                     placeholder="2000"
-                                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-green-500 focus:outline-none transition-colors text-lg"
+                                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg"
                                 />
                             </div>
 
@@ -52,7 +52,7 @@ const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMa
                                         <button
                                             key={d}
                                             onClick={() => setMacroDiet(d)}
-                                            className={`py-3 rounded-xl text-sm font-bold capitalize transition-all border-2 ${macroDiet === d ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300' : 'border-transparent bg-gray-100 dark:bg-gray-900 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800'}`}
+                                            className={`py-3 rounded-xl text-sm font-bold capitalize transition-all border-2 ${macroDiet === d ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300' : 'border-transparent bg-gray-100 dark:bg-gray-900 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800'}`}
                                         >
                                             {d.replace('-', ' ')}
                                         </button>
@@ -62,7 +62,7 @@ const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMa
 
                             <button
                                 onClick={calculateMacros}
-                                className="w-full py-4 bg-linear-to-r from-green-500 to-emerald-500 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                                className="w-full py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
                             >
                                 Calculate Macros
                             </button>
@@ -73,7 +73,7 @@ const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMa
 
                         {macroResult && (
                             <div id="macro-result" className="mt-8 animate-scale-in space-y-6">
-                                <div className="p-8 bg-linear-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl border-2 border-green-200 dark:border-green-800">
+                                <div className="p-8 bg-linear-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800">
                                     <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">Your Daily Targets:</h3>
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                                         <div className="p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-red-100 dark:border-red-900/50">

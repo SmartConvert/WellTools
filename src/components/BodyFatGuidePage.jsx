@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { ArrowLeft, ShieldCheck, Target, Zap, Waves, Activity, Info, CheckCircle2 } from 'lucide-react';
 import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
+import BackToTop from './BackToTop';
 
 const BodyFatGuidePage = ({ setCurrentPage, t }) => {
     useEffect(() => {
@@ -22,7 +23,7 @@ const BodyFatGuidePage = ({ setCurrentPage, t }) => {
         {
             title: "Healthy Body Fat Ranges",
             content: "What is 'healthy' varies by gender and age. For men, a healthy range is typically 14-24%. For women, it's 21-31%. Athletes often maintain lower levels (6-13% for men, 14-20% for women), but extremely low body fat can be dangerous and impact hormonal health.",
-            icon: <Activity className="w-8 h-8 text-rose-500" />
+            icon: <Activity className="w-8 h-8 text-teal-500" />
         }
     ];
 
@@ -80,7 +81,7 @@ const BodyFatGuidePage = ({ setCurrentPage, t }) => {
                 </div>
 
                 <h2 className="text-3xl font-black mb-8 flex items-center gap-3">
-                    <Waves className="text-blue-500" />
+                    <Waves className="text-teal-500" />
                     Three Science-Backed Ways to Lower Body Fat
                 </h2>
                 <div className="space-y-6 mb-16">
@@ -120,6 +121,7 @@ const BodyFatGuidePage = ({ setCurrentPage, t }) => {
             </section>
 
             <RelatedTools currentToolId="body-fat-guide" setCurrentPage={setCurrentPage} />
+            <BackToTop />
         </div>
     );
 };

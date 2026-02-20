@@ -5,8 +5,8 @@ import EmailCaptureForm from './EmailCaptureForm';
 
 // Import hero image with vite-imagetools directives
 // Generate WebP and AVIF, and resize for responsiveness
-// Use the premium clinic hero image for better brand expression
-const heroImage = "/images/hero-clinic.png";
+import heroImage from '../assets/hero-clinic.png?as=metadata&format=webp;avif&w=1200;800;400';
+
 
 const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t }) => {
     const [currentLangPosts, setCurrentLangPosts] = React.useState([]);
@@ -22,13 +22,13 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
     const tools = [
         { id: 'bmi', icon: <Scale className="w-8 h-8" />, title: 'BMI Calculator Free', desc: 'Calculate your Body Mass Index instantly with our free BMI calculator. Get health risk assessments and personalized weight recommendations.', color: 'from-emerald-400 to-teal-500' },
         { id: 'calories', icon: <Activity className="w-8 h-8" />, title: 'Daily Calorie Calculator', desc: 'Discover your personalized daily calorie needs based on age, weight, height, and activity level using the Mifflin-St Jeor equation.', color: 'from-emerald-400 to-teal-500' },
-        { id: 'water', icon: <Droplet className="w-8 h-8" />, title: 'Water Intake Calculator', desc: 'Calculate your optimal daily water intake based on weight, activity, and climate. Stay hydrated with science-backed recommendations.', color: 'from-blue-400 to-cyan-500' },
-        { id: 'ideal-weight', icon: <Scale className="w-8 h-8" />, title: 'Ideal Weight Calculator', desc: 'Find your ideal body weight using multiple medical formulas (Robinson, Miller, Devine). Get personalized weight range goals.', color: 'from-rose-400 to-pink-500' },
-        { id: 'sleep', icon: <Moon className="w-8 h-8" />, title: 'Sleep Calculator', desc: 'Optimize your sleep schedule based on 90-minute sleep cycles. Wake up refreshed with our free sleep calculator.', color: 'from-violet-400 to-purple-500' },
-        { id: 'body-fat', icon: <Percent className="w-8 h-8" />, title: 'Body Fat Calculator', desc: 'Estimate your body fat percentage using Navy Method or BMI-based formulas. Track body composition beyond weight.', color: 'from-orange-400 to-red-500' },
-        { id: 'bmr', icon: <Zap className="w-8 h-8" />, title: 'BMR Calculator', desc: 'Calculate your Basal Metabolic Rate - the calories you burn at rest. Essential for weight loss and muscle gain planning.', color: 'from-amber-400 to-orange-500' },
-        { id: 'macro', icon: <Utensils className="w-8 h-8" />, title: 'Macro Calculator', desc: 'Determine your optimal macronutrient split (protein, carbs, fats) for weight loss, muscle gain, or maintenance goals.', color: 'from-green-400 to-emerald-500' },
-        { id: '1rm', icon: <Dumbbell className="w-8 h-8" />, title: '1RM Calculator', desc: 'Estimate your one-rep max strength for any exercise. Plan progressive overload and track strength gains safely.', color: 'from-slate-600 to-gray-700' }
+        { id: 'water', icon: <Droplet className="w-8 h-8" />, title: 'Water Intake Calculator', desc: 'Calculate your optimal daily water intake based on weight, activity, and climate. Stay hydrated with science-backed recommendations.', color: 'from-emerald-400 to-teal-500' },
+        { id: 'ideal-weight', icon: <Scale className="w-8 h-8" />, title: 'Ideal Weight Calculator', desc: 'Find your healthy weight range using medical formulas (Robinson, Miller, Devine). Get personalized weight range goals.', color: 'from-emerald-400 to-teal-500' },
+        { id: 'sleep', icon: <Moon className="w-8 h-8" />, title: 'Sleep Calculator', desc: 'Optimize your sleep schedule based on 90-minute sleep cycles. Wake up refreshed with our free sleep calculator.', color: 'from-emerald-400 to-teal-500' },
+        { id: 'body-fat', icon: <Percent className="w-8 h-8" />, title: 'Body Fat Calculator', desc: 'Estimate your body fat percentage using Navy Method or BMI-based formulas. Track body composition beyond weight.', color: 'from-emerald-400 to-teal-500' },
+        { id: 'bmr', icon: <Zap className="w-8 h-8" />, title: 'BMR Calculator', desc: 'Calculate your Basal Metabolic Rate - the calories you burn at rest. Essential for weight loss and muscle gain planning.', color: 'from-emerald-400 to-teal-500' },
+        { id: 'macro', icon: <Utensils className="w-8 h-8" />, title: 'Macro Calculator', desc: 'Determine your optimal macronutrient split (protein, carbs, fats) for weight loss, muscle gain, or maintenance goals.', color: 'from-emerald-400 to-teal-500' },
+        { id: '1rm', icon: <Dumbbell className="w-8 h-8" />, title: '1RM Calculator', desc: 'Estimate your one-rep max strength for any exercise. Plan progressive overload and track strength gains safely.', color: 'from-emerald-400 to-teal-500' }
     ];
 
     return (
@@ -38,10 +38,10 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                 <div className="relative h-[420px] md:h-[600px] rounded-4xl md:rounded-[3rem] overflow-hidden mb-12 lg:mb-16 shadow-2xl animate-fade-in group">
                     <div className="absolute inset-0">
                         <img
-                            src={heroImage}
+                            src={typeof heroImage === 'string' ? heroImage : heroImage.src}
                             alt="WellTools - Your Daily Health & Wellness Companion"
-                            width="1200"
-                            height="800"
+                            width={heroImage.width || "1200"}
+                            height={heroImage.height || "800"}
                             className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-700"
                             loading="eager"
                             fetchpriority="high"

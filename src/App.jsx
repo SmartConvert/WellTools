@@ -4,6 +4,7 @@ import { translations } from './translations';
 
 import ExitIntentPopup from './components/ExitIntentPopup';
 import SchemaMarkup from './components/SchemaMarkup';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const PAGE_SLUGS = {
   'bmi': 'bmi-calculator-for-women-and-men',
@@ -782,9 +783,11 @@ const DailyHealthTools = () => {
     <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans">
       <NavBar setCurrentPage={setCurrentPage} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} t={t} theme={theme} setTheme={setTheme} />
       <main className="min-h-[calc(100-80px)]">
-        <Suspense fallback={<LoadingSpinner />}>
-          {renderPage()}
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<LoadingSpinner />}>
+            {renderPage()}
+          </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer setCurrentPage={setCurrentPage} t={t} />
       <ExitIntentPopup />

@@ -23,7 +23,7 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                     {/* Recommendation by Age */}
                     <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
                         <div className="flex items-center gap-4 mb-8">
-                            <div className="w-16 h-16 bg-linear-to-br from-violet-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
+                            <div className="w-16 h-16 bg-linear-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg">
                                 <Moon className="w-8 h-8 text-white" />
                             </div>
                             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
@@ -40,13 +40,13 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                                     onChange={(e) => setSleepAge(e.target.value)}
                                     placeholder="30"
                                     aria-label={t.age}
-                                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-violet-500 focus:outline-none transition-colors text-lg"
+                                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-lg"
                                 />
                             </div>
 
                             <button
                                 onClick={calculateSleep}
-                                className="w-full py-4 bg-linear-to-r from-violet-500 to-purple-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+                                className="w-full py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
                             >
                                 {t.calculate}
                             </button>
@@ -77,7 +77,7 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                     {/* Sleep Cycle Calculator */}
                     <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-50 dark:border-gray-700">
                         <div className="flex items-center gap-4 mb-6">
-                            <div className="w-12 h-12 bg-linear-to-br from-indigo-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                            <div className="w-12 h-12 bg-linear-to-br from-teal-400 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
                                 <Clock className="w-6 h-6 text-white" />
                             </div>
                             <h2 className="text-2xl font-bold text-gray-800 dark:text-white">{t.sleep_calc_cycles}</h2>
@@ -95,13 +95,13 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                                     value={sleepBedtime}
                                     onChange={(e) => setSleepBedtime(e.target.value)}
                                     aria-label={t.sleep_bedtime}
-                                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-indigo-500 focus:outline-none transition-colors text-xl font-bold"
+                                    className="w-full px-6 py-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-emerald-500 focus:outline-none transition-colors text-xl font-bold"
                                 />
                             </div>
 
                             <button
                                 onClick={calculateSleepCycles}
-                                className="w-full py-4 bg-linear-to-r from-indigo-500 to-blue-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+                                className="w-full py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
                             >
                                 {t.calculate}
                             </button>
@@ -112,9 +112,9 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                                 <h3 className="text-xl font-bold text-gray-800 dark:text-white text-center mb-4">{t.sleep_wake_up}:</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     {sleepWakeupTimes.map((time, idx) => (
-                                        <div key={idx} className="p-6 bg-linear-to-br from-indigo-50 to-blue-50 dark:from-indigo-900/30 dark:to-blue-900/30 rounded-2xl border-2 border-indigo-100 dark:border-indigo-800 text-center transform hover:scale-105 transition-all">
-                                            <p className="text-3xl font-black text-indigo-600 dark:text-indigo-400 mb-1">{time.time}</p>
-                                            <p className="text-sm font-bold text-indigo-400 dark:text-indigo-500 uppercase tracking-wider">{time.hours} {t.hours}</p>
+                                        <div key={idx} className="p-6 bg-linear-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/30 rounded-2xl border-2 border-emerald-100 dark:border-emerald-800 text-center transform hover:scale-105 transition-all">
+                                            <p className="text-3xl font-black text-emerald-600 dark:text-emerald-400 mb-1">{time.time}</p>
+                                            <p className="text-sm font-bold text-emerald-400 dark:text-emerald-500 uppercase tracking-wider">{time.hours} {t.hours}</p>
                                         </div>
                                     ))}
                                 </div>

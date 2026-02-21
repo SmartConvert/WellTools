@@ -29,7 +29,8 @@ const PAGE_SLUGS = {
   'privacy': 'privacy-policy',
   'terms': 'terms-of-use',
   'disclaimer': 'medical-disclaimer',
-  'editorial-policy': 'editorial-policy'
+  'editorial-policy': 'editorial-policy',
+  'fasting': 'intermittent-fasting-schedule-calculator'
 };
 
 const generateSlug = (text) => {
@@ -82,6 +83,7 @@ const HowItWorksPage = lazyWithRetry(() => import('./components/HowItWorksPage')
 const AboutPage = lazyWithRetry(() => import('./components/AboutPage'));
 const ExpertPage = lazyWithRetry(() => import('./components/ExpertPage'));
 const ContactPage = lazyWithRetry(() => import('./components/ContactPage'));
+const FastingSchedulePage = lazyWithRetry(() => import('./components/FastingSchedulePage'));
 
 // Correct way to lazy load multiple exports in React 18
 const TermsOfUsePage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.TermsOfUsePage })));
@@ -764,6 +766,7 @@ const DailyHealthTools = () => {
       case 'macro': return <MacroCalculatorPage macroCalories={macroCalories} setMacroCalories={setMacroCalories} macroDiet={macroDiet} setMacroDiet={setMacroDiet} calculateMacros={calculateMacros} macroResult={macroResult} macroError={macroError} setCurrentPage={setCurrentPage} t={t} />;
       case '1rm': return <OneRepMaxCalculatorPage ormWeight={ormWeight} setOrmWeight={setOrmWeight} ormReps={ormReps} setOrmReps={setOrmReps} calculateORM={calculateORM} ormResult={ormResult} ormError={ormError} setCurrentPage={setCurrentPage} t={t} />;
       case 'meal-planner': return <MealPlannerPage selectedMealCategory={activeTab} setSelectedMealCategory={setActiveTab} t={t} />;
+      case 'fasting': return <FastingSchedulePage setCurrentPage={setCurrentPage} t={t} />;
       case 'blog': return <BlogPage setCurrentPage={setCurrentPage} setSelectedPost={setSelectedPost} t={t} />;
       case 'blog-post': return <BlogPostPage post={selectedPost} setCurrentPage={setCurrentPage} setSelectedPost={setSelectedPost} t={t} />;
       case 'tracking': return <DailyTrackingPage activeTab={activeTab} setActiveTab={setActiveTab} trackingData={trackingData} newWeight={newWeight} setNewWeight={setNewWeight} addWeightEntry={addWeightEntry} newWater={newWater} setNewWater={setNewWater} addWaterEntry={addWaterEntry} newSleep={newSleep} setNewSleep={setNewSleep} addSleepEntry={addSleepEntry} deleteEntry={deleteEntry} setCurrentPage={setCurrentPage} t={t} />;

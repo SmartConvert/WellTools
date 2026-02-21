@@ -888,6 +888,96 @@ export const calculatorContent = {
             ]
         }
     },
+    fasting: {
+        en: {
+            hero_title: 'Intermittent Fasting Schedule & Calculator',
+            h1_title: 'Intermittent Fasting Schedule: Plan Your Eating Window',
+            h2_title: 'Calculate 16:8, OMAD, and Custom Fasting Protocols',
+            meta_title: 'Intermittent Fasting Schedule Calculator: 16:8, 5:2 & OMAD | WellTools',
+            meta_description: 'Create your perfect intermittent fasting daily schedule. Calculate your exact eating and fasting windows for 16:8, 14:10, and OMAD to trigger autophagy and fat loss.',
+            hero_subtitle: 'Align your eating habits with your circadian rhythm for optimal metabolic health.',
+            hero_emoji: '⏱️',
+            hero_color: 'from-blue-500 to-indigo-600',
+            related_tools: [
+                { id: 'macro', name: 'Macro Calculator' },
+                { id: 'calories', name: 'Calorie Calculator' },
+                { id: 'water', name: 'Water Intake Calculator' }
+            ],
+
+            // Formula Explanation Section
+            formula_title: 'The Science of Fasting: Insulin & Autophagy',
+            formula_explanation: 'Intermittent Fasting (IF) is not a diet; it is an eating pattern. When you eat, your body releases insulin to store energy. When you abstain from food, insulin drops, signaling the body to burn stored fat for energy. After roughly 14-16 hours of fasting, a cellular cleanup process called "autophagy" begins, where cells recycle damaged components. This tool helps you visualize and schedule these critical physiological shifts.',
+            formula_text: 'Fasting Window (Fat Burning/Repair) vs. Eating Window (Building/Storing)',
+            formula_example: '16:8 Protocol Example: You stop eating at 8:00 PM. Your 16-hour fast ends the next day at 12:00 PM (Noon), giving you an 8-hour eating window until 8:00 PM.',
+            formula_accuracy: 'Timing is crucial. Studies show that aligning your eating window with daylight hours (Circadian Rhythm Fasting) significantly improves insulin sensitivity compared to late-night eating.',
+
+            // Step-by-Step Example
+            example_title: 'Popular Protocol Examples',
+            examples: [
+                {
+                    name: 'The 16:8 Method (Leangains)',
+                    stats: '16 Hours Fasting | 8 Hours Eating',
+                    calculation: 'Skip breakfast. Eat from 12:00 PM to 8:00 PM.',
+                    result: 'Goal: Daily Fat Loss & Convenience',
+                    interpretation: 'The most sustainable protocol for most people. It fits easily into modern social lives and provides a daily 16-hour break for your digestive system.'
+                },
+                {
+                    name: 'OMAD (One Meal A Day / 23:1)',
+                    stats: '23 Hours Fasting | 1 Hour Eating',
+                    calculation: 'Eat one large meal at 6:00 PM.',
+                    result: 'Goal: Maximum Autophagy & Simplicity',
+                    interpretation: 'A more advanced protocol. It provides extreme caloric restriction naturally and maximizes the autophagy cellular repair process.'
+                }
+            ],
+
+            // Comparison Table
+            comparison_table_title: 'Comparing Fasting Protocols',
+            macro_ratios: [
+                { goal: '12:12 (Circadian)', split: 'Beginner', description: 'Eat for 12 hours, fast for 12. Excellent for metabolic maintenance and gut rest.' },
+                { goal: '14:10', split: 'Intermediate', description: 'A great stepping stone. Associated with improved sleep and gentle weight loss.' },
+                { goal: '16:8', split: 'Standard', description: 'The gold standard. Hits the threshold where fat burning and autophagy begin.' },
+                { goal: '18:6', split: 'Advanced', description: 'A tighter window that forces the body to rely deeper on fat stores.' },
+                { goal: 'OMAD (23:1)', split: 'Expert', description: 'One meal a day. Extreme convenience, high autophagy, but requires nutritional planning.' }
+            ],
+
+            seo_what_title: 'What Happens During a Fast?',
+            seo_what_content: 'When you stop eating, your body enters a series of distinct phases:\n\n**0-4 Hours**: Blood sugar rises and falls as your last meal is digested.\n**4-8 Hours**: Blood sugar stabilizes. Digestion concludes.\n**8-12 Hours**: The liver depletes its glycogen (sugar) stores. You might feel hungry here.\n**12-18 Hours**: Ketosis begins. Your body starts aggressively burning stored fat for fuel. Autophagy (cellular cleanup) initiates.\n**18-24 Hours**: Human Growth Hormone (HGH) skyrockets to preserve muscle mass.',
+
+            seo_why_title: 'Why Practice Intermittent Fasting?',
+            seo_why_content: 'Beyond simple weight loss via calorie reduction, IF offers unique hormonal benefits. It drastically lowers baseline insulin levels, preventing and sometimes reversing Type 2 Diabetes. It reduces systemic inflammation, which is linked to aging and chronic disease. Furthermore, many practitioners report sharp mental clarity during the fasted state, an evolutionary trait designed to help our ancestors find food.',
+
+            seo_how_title: 'How to Build Your Schedule',
+            seo_how_steps: [
+                'Choose a protocol that fits your lifestyle (16:8 is best to start).',
+                'Input your desired "Wake Up" or "First Meal" time into the calculator.',
+                'The tool will instantly build your visual Timeline.',
+                'Export the schedule graphic to your phone as a daily reminder.',
+                'During the "Fasting Window," consume ONLY water, black coffee, or plain tea.'
+            ],
+
+            seo_tips_title: 'Pro Tips for Fasting Success',
+            seo_tips: [
+                '💧 **Hydration is Crucial**: You lose water when depleting glycogen. Drink heavily and add a pinch of salt if you feel a headache.',
+                '☕ **The Coffee Trick**: Black coffee or plain green tea suppresses appetite and can even accelerate the fat-burning effects of fasting.',
+                '🛑 **What Breaks a Fast?**: Anything with calories or sweet taste. Diet sodas, milk, sugar, and BCAAs will stop autophagy and spike insulin.',
+                '🍽️ **Break it Gently**: Don\'t break a 16-hour fast with a heavy pizza. Start with lean protein and vegetables to avoid an insulin crash.',
+                '🏋️ **Fasted Training**: Exercising at the end of your fast (before your first meal) forces maximum fat oxidation.'
+            ],
+
+            seo_faqs: [
+                { question: 'Will fasting cause muscle loss?', answer: 'No. The body protects muscle by increasing Growth Hormone during short-term fasting. As long as you eat enough protein during your eating window, your muscles are safe.' },
+                { question: 'Can women fast like men?', answer: 'Women are more sensitive to caloric restriction due to reproductive hormones (kisspeptin). Women should often start with gentler protocols like 14:10 or 12:12 and avoid fasting every single day.' },
+                { question: 'Does toothpaste or gum break my fast?', answer: 'Brushing your teeth is fine. Sugar-free gum is debatable; the sweet taste can trigger a cephalic phase insulin response in some people, so it\'s safest to avoid it.' },
+                { question: 'Why am I not losing weight on 16:8?', answer: 'Fasting is not magic. If you eat 3,000 calories during your 8-hour window but your body only needs 2,000, you will still gain weight. Fasting is a tool to control hunger, but calories still dictate weight loss.' }
+            ],
+
+            medical_sources: [
+                'The New England Journal of Medicine: "Effects of Intermittent Fasting on Health, Aging, and Disease".',
+                'Cell Metabolism: "Time-Restricted Eating to Improve Cardiovascular Health".',
+                'Johns Hopkins Medicine: "Intermittent Fasting: What is it, and how does it work?".'
+            ]
+        }
+    },
     'meal-planner': {
         en: { meta_title: 'Meal Planner - Personalized Diet Plans | WellTools', meta_description: 'Create a custom meal plan based on your calories and macros. Healthy, delicious recipes tailored to your weight loss or muscle gain goals.' }
     },

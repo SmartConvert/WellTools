@@ -28,7 +28,8 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
         { id: 'body-fat', icon: <Percent className="w-8 h-8" />, title: 'Body Fat Calculator', desc: 'Estimate your body fat percentage using Navy Method or BMI-based formulas. Track body composition beyond weight.', color: 'from-emerald-400 to-teal-500' },
         { id: 'bmr', icon: <Zap className="w-8 h-8" />, title: 'BMR Calculator', desc: 'Calculate your Basal Metabolic Rate - the calories you burn at rest. Essential for weight loss and muscle gain planning.', color: 'from-emerald-400 to-teal-500' },
         { id: 'macro', icon: <Utensils className="w-8 h-8" />, title: 'Macro Calculator', desc: 'Determine your optimal macronutrient split (protein, carbs, fats) for weight loss, muscle gain, or maintenance goals.', color: 'from-emerald-400 to-teal-500' },
-        { id: '1rm', icon: <Dumbbell className="w-8 h-8" />, title: '1RM Calculator', desc: 'Estimate your one-rep max strength for any exercise. Plan progressive overload and track strength gains safely.', color: 'from-emerald-400 to-teal-500' }
+        { id: '1rm', icon: <Dumbbell className="w-8 h-8" />, title: '1RM Calculator', desc: 'Estimate your one-rep max strength for any exercise. Plan progressive overload and track strength gains safely.', color: 'from-emerald-400 to-teal-500' },
+        { id: 'fasting', icon: <Clock className="w-8 h-8" />, title: 'Fasting Schedule', desc: 'Create your perfect intermittent fasting schedule. Calculate exact eating and fasting windows.', color: 'from-blue-500 to-indigo-600' }
     ];
 
     return (

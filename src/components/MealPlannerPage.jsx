@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Utensils, TrendingDown, Activity, Scale as ScaleIcon, Info, Plus } from 'lucide-react';
+import { Utensils, TrendingDown, Activity, Scale as ScaleIcon, Info, Plus, Download, Loader2 } from 'lucide-react';
 import ToolInfoSection from './ToolInfoSection';
 import { mealCategories } from '../data/meals';
 import { parseLocalizedNumber } from '../utils/numbers';
+import { exportAsImage } from '../utils/exportUtils';
 
 const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
     const [goal, setGoal] = useState(calResult ? (calResult.goal || 'maintain') : 'maintain');
+    const [currentPlan, setCurrentPlan] = useState({ total: 2000, items: [] });
     const [manualCalories, setManualCalories] = useState('2000');
     const [isManualMode, setIsManualMode] = useState(false);
     const [isGenerating, setIsGenerating] = useState(false);
+    const [isExporting, setIsExporting] = useState(false);
 
     // Professional Food Recommendations based on Goal
     const getFoodRecommendations = (targetGoal) => {
@@ -42,7 +45,7 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
 
     const foodRecs = getFoodRecommendations(isManualMode ? (parseLocalizedNumber(manualCalories) > 2500 ? 'gain' : parseLocalizedNumber(manualCalories) < 1600 ? 'lose' : 'maintain') : goal);
 
-    const [currentPlan, setCurrentPlan] = useState({ total: 0, items: [] });
+
 
     const generateDynamicPlan = useCallback(() => {
         setIsGenerating(true);
@@ -261,7 +264,7 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
                 </div>
 
                 {/* Suggested Menu Card */}
-                <div id="meal-plan-result" className={`bg-white dark:bg-gray-800 rounded-[2.5rem] p-8 md:p-12 shadow-2xl border border-gray-100 dark:border-gray-700 mb-12 animate-fade-in group hover:border-emerald-500/30 transition-all duration-500 ${isGenerating ? 'opacity-50 pointer-events-none' : ''}`}>
+                <div id="meal-plan-export-node" className={`bg-white dark:bg-gray-800 rounded-[2.5rem] p-8 md:p-12 shadow-2xl border border-gray-100 dark:border-gray-700 mb-12 animate-fade-in group hover:border-emerald-500/30 transition-all duration-500 ${isGenerating ? 'opacity-50 pointer-events-none' : ''}`}>
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 pb-8 border-b border-gray-100 dark:border-gray-700">
                         <div>
                             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1 tracking-tight">{t.today_menu}</h2>
@@ -275,10 +278,19 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
                         <div className="flex flex-wrap items-center gap-3">
                             <button
                                 onClick={generateDynamicPlan}
-                                className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 transition-all font-bold group/btn shadow-lg"
+                                className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 transition-all font-bold group/btn shadow-lg disabled:opacity-50"
+                                disabled={isExporting}
                             >
                                 <Plus className="w-5 h-5 group-hover/btn:rotate-90 transition-transform" />
                                 {t.generate_new}
+                            </button>
+                            <button
+                                onClick={handleExport}
+                                disabled={isExporting || isGenerating}
+                                className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-700 text-emerald-600 dark:text-emerald-400 border-2 border-emerald-100 dark:border-gray-600 rounded-2xl hover:bg-emerald-50 dark:hover:bg-gray-600 hover:border-emerald-200 transition-all font-bold disabled:opacity-50"
+                            >
+                                {isExporting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
+                                Export Plan
                             </button>
                         </div>
                     </div>
@@ -303,7 +315,7 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
                                                     {meal.actualCalories} kcal
                                                 </span>
                                                 <span className="text-[10px] uppercase font-black text-gray-400 tracking-widest">
-                                                    {meal.portion === "1.0" ? t.portion_standard : `${meal.portion}x ${t.potion_adjusted}`}
+                                                    {meal.portion === "1.0" ? t.portion_standard : `${meal.portion}x ${t.potion_adjusted} `}
                                                 </span>
                                             </div>
                                         </div>

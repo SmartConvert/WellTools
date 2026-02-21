@@ -77,7 +77,8 @@
             "id": 37,
             "group": "body_preservation",
             "title": "Hormonal Health: Signs of Imbalance & Natural Fixes",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-21"
         },
         {
             "id": 38,

@@ -8,10 +8,8 @@ import TrustBadge from './TrustBadge';
 import PostResultCTA from './PostResultCTA';
 import AffiliateBlock from './AffiliateBlock';
 import { calculatorContent } from '../data/seoContent';
-import { exportAsImage } from '../utils/exportUtils';
 
 const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMacroDiet, calculateMacros, macroResult, macroError, setCurrentPage, t }) => {
-    const [isExporting, setIsExporting] = useState(false);
 
     // Get SEO content for H2
     const content = calculatorContent['macro']?.['en'];
@@ -76,7 +74,7 @@ const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMa
 
                         {macroResult && (
                             <div className="mt-8 animate-scale-in space-y-6">
-                                <div id="macro-result-export" className="p-8 bg-linear-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 relative">
+                                <div className="p-8 bg-linear-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 relative">
                                     <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">Your Daily Targets:</h3>
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                                         <div className="p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-red-100 dark:border-red-900/50">
@@ -91,21 +89,6 @@ const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMa
                                             <p className="text-3xl font-black text-yellow-500">{macroResult.fats}g</p>
                                             <p className="text-sm font-bold text-gray-500 uppercase tracking-wide">Fats</p>
                                         </div>
-                                    </div>
-
-                                    <div className="mt-6 flex justify-center">
-                                        <button
-                                            onClick={async () => {
-                                                setIsExporting(true);
-                                                await exportAsImage('macro-result-export', `welltools-macros-${macroResult.protein}p-${macroResult.carbs}c-${macroResult.fats}f.png`);
-                                                setIsExporting(false);
-                                            }}
-                                            disabled={isExporting}
-                                            className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 border-2 border-emerald-200 dark:border-emerald-800 rounded-xl hover:bg-emerald-50 dark:hover:bg-gray-700 hover:border-emerald-300 transition-all font-bold shadow-sm disabled:opacity-50"
-                                        >
-                                            {isExporting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
-                                            Save as Image
-                                        </button>
                                     </div>
                                 </div>
                                 <PostResultCTA toolId="macro" setCurrentPage={setCurrentPage} />

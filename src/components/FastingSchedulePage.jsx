@@ -8,7 +8,6 @@ import TrustBadge from './TrustBadge';
 import PostResultCTA from './PostResultCTA';
 import AffiliateBlock from './AffiliateBlock';
 import { calculatorContent } from '../data/seoContent';
-import { exportAsImage } from '../utils/exportUtils';
 
 const PROTOCOLS = [
     { id: '12:12', name: '12:12 Circadian', eat: 12, fast: 12, desc: 'Beginner-friendly gut rest' },
@@ -21,7 +20,6 @@ const PROTOCOLS = [
 const FastingSchedulePage = ({ setCurrentPage, t }) => {
     const [protocol, setProtocol] = useState(PROTOCOLS[2]); // Default 16:8
     const [firstMealTime, setFirstMealTime] = useState('12:00'); // Default start eating at noon
-    const [isExporting, setIsExporting] = useState(false);
     const [schedule, setSchedule] = useState(null);
 
     // Get SEO content for H2
@@ -130,8 +128,8 @@ const FastingSchedulePage = ({ setCurrentPage, t }) => {
                         {/* Visual Results Section */}
                         {schedule && (
                             <div className="mt-12 animate-scale-in">
-                                <div id="fasting-export-node" className="p-1 bg-white dark:bg-gray-800 rounded-3xl">
-                                    {/* The visual container we will export */}
+                                <div className="p-1 bg-white dark:bg-gray-800 rounded-3xl">
+                                    {/* The visual container */}
                                     <div className="bg-linear-to-b from-slate-900 to-indigo-950 rounded-3xl p-6 md:p-10 shadow-2xl border border-indigo-900/50 text-white relative overflow-hidden">
 
                                         {/* Background Decoration */}
@@ -201,27 +199,6 @@ const FastingSchedulePage = ({ setCurrentPage, t }) => {
 
                                         </div>
                                     </div>
-                                </div>
-
-                                <div className="mt-8 flex justify-center">
-                                    <button
-                                        onClick={async () => {
-                                            setIsExporting(true);
-                                            // Make background dark for export if it's not already handled perfectly by html2canvas
-                                            const node = document.getElementById('fasting-export-node');
-                                            const originalBg = node.style.backgroundColor;
-
-                                            await exportAsImage('fasting-export-node', `welltools-fasting-${protocol.name.replace(':', '-')}.png`);
-
-                                            node.style.backgroundColor = originalBg;
-                                            setIsExporting(false);
-                                        }}
-                                        disabled={isExporting}
-                                        className="flex items-center gap-2 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl transition-all font-bold shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 disabled:opacity-70 transform hover:-translate-y-1"
-                                    >
-                                        {isExporting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
-                                        Save Schedule as Image
-                                    </button>
                                 </div>
                                 <PostResultCTA toolId="fasting" setCurrentPage={setCurrentPage} />
                                 <AffiliateBlock toolId="fasting" />

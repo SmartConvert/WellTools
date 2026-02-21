@@ -88,16 +88,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                                     loading="eager"
                                 />
                                 <div className="absolute inset-0 bg-linear-to-t from-gray-900/40 to-transparent"></div>
-                                {/* Floating Badge */}
-                                <div className="absolute bottom-6 left-6 right-6 p-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center gap-4">
-                                    <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
-                                        <Heart className="w-6 h-6 text-white" />
-                                    </div>
-                                    <div>
-                                        <p className="text-white font-bold text-sm">Join 50,000+ Users</p>
-                                        <p className="text-emerald-400 text-xs font-medium tracking-wide uppercase">Community Verified</p>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>

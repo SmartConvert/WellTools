@@ -51,11 +51,49 @@ export const exportAsImage = async (elementId, filename = 'welltools-result.png'
             backgroundColor: null, // Transparent background if rounded corners
             logging: false,
             onclone: (clonedDoc) => {
-                // Remove rounded corners or shadows that might clip badly, 
-                // though html2canvas handles most modern CSS fine.
                 const clonedElement = clonedDoc.getElementById(elementId);
                 if (clonedElement) {
                     clonedElement.style.borderRadius = '24px'; // Ensure crisp corners
+
+                    // html2canvas doesn't support oklch/modern CSS color functions yet.
+                    // Tailwind v4 uses oklch heavily for shadows, borders, text, and bg.
+                    // We need to recursively strip or replace them in the clone.
+                    const replaceOklch = (node) => {
+                        if (node.nodeType === Node.ELEMENT_NODE) {
+                            const style = window.getComputedStyle(node);
+
+                            // Check typical properties that might have okl
+                            ['color', 'backgroundColor', 'borderColor', 'boxShadow'].forEach(prop => {
+                                let val = style[prop];
+                                if (val && val.includes('okl')) {
+                                    // As a crude fallback for html2canvas to not crash, 
+                                    // replace the okl wrapper with a generic gray or let it inherit if we can't parse it.
+                                    // A cleaner approach is forcing the cloned node inline styles to rgb equivalents 
+                                    // based on original computed style, but CSSOM returns unresolved okl strings sometimes.
+
+                                    // Safe fallback: generic gray/transparent for shadows, or inherit for text
+                                    if (prop === 'boxShadow') node.style.boxShadow = 'none';
+                                    if (prop === 'backgroundColor') node.style.backgroundColor = '#ffffff'; // force white bg
+                                    if (prop === 'borderColor') node.style.borderColor = '#e5e7eb'; // cool-gray-200
+                                    if (prop === 'color' && val.includes('okl')) node.style.color = '#1f2937'; // gray-800
+                                }
+                            });
+
+                            // Check raw inline styles too
+                            ['color', 'backgroundColor', 'borderColor', 'boxShadow'].forEach(prop => {
+                                let val = node.style[prop];
+                                if (val && val.includes('okl')) {
+                                    if (prop === 'boxShadow') node.style.boxShadow = 'none';
+                                    if (prop === 'backgroundColor') node.style.backgroundColor = '#ffffff';
+                                    if (prop === 'borderColor') node.style.borderColor = '#e5e7eb';
+                                    if (prop === 'color') node.style.color = '#1f2937';
+                                }
+                            });
+                        }
+                        node.childNodes.forEach(replaceOklch);
+                    };
+
+                    replaceOklch(clonedElement);
                 }
             }
         });

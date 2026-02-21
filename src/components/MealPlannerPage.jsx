@@ -45,7 +45,11 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
 
     const foodRecs = getFoodRecommendations(isManualMode ? (parseLocalizedNumber(manualCalories) > 2500 ? 'gain' : parseLocalizedNumber(manualCalories) < 1600 ? 'lose' : 'maintain') : goal);
 
-
+    const handleExport = async () => {
+        setIsExporting(true);
+        await exportAsImage('meal-plan-export-node', `welltools-mealplan-${currentPlan.total}kcal.png`);
+        setIsExporting(false);
+    };
 
     const generateDynamicPlan = useCallback(() => {
         setIsGenerating(true);

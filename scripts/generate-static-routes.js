@@ -8,6 +8,8 @@ const __dirname = path.dirname(__filename);
 const distDir = path.resolve(__dirname, '../dist');
 const indexFile = path.join(distDir, 'index.html');
 
+const POSTS_FILE = path.resolve(__dirname, '../src/data/posts.json');
+
 // List of all valid SEO routes manually defined in App.jsx
 const routes = [
     'bmi-calculator-for-women-and-men',
@@ -36,6 +38,16 @@ const routes = [
     'editorial-policy'
 ];
 
+const generateSlug = (text) => {
+    if (!text) return '';
+    return text
+        .toLowerCase()
+        .replace(/[^\w\u0621-\u064A\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+};
+
 async function generateStaticRoutes() {
     console.log('🔄 Generating static route folders for Cloudflare Pages...');
 
@@ -46,20 +58,46 @@ async function generateStaticRoutes() {
 
     const indexContent = fs.readFileSync(indexFile, 'utf8');
 
+    // 1. Process Static Routes
     for (const route of routes) {
         const routeDir = path.join(distDir, route);
-
-        // Create the directory if it doesn't exist
         if (!fs.existsSync(routeDir)) {
             fs.mkdirSync(routeDir, { recursive: true });
         }
-
-        // Write a copy of index.html inside the directory
-        // This allows Cloudflare to serve /fasting-calculator/index.html natively
-        // The SPA JavaScript will then hydrate and render the correct component based on the URL path.
-        const routeIndexFile = path.join(routeDir, 'index.html');
-        fs.writeFileSync(routeIndexFile, indexContent);
+        fs.writeFileSync(path.join(routeDir, 'index.html'), indexContent);
         console.log(`✅ Created ${route}/index.html`);
+    }
+
+    // 2. Process Dynamic Blog Routes
+    if (fs.existsSync(POSTS_FILE)) {
+        const postsData = JSON.parse(fs.readFileSync(POSTS_FILE, 'utf8'));
+        const allPosts = postsData.en || [];
+
+        console.log(`📝 Processing ${allPosts.length} blog posts...`);
+
+        for (const post of allPosts) {
+            const slug = generateSlug(post.title);
+            if (!slug) continue;
+
+            const blogRoute = `blog/${slug}`;
+            const legacyRoute = slug;
+
+            // Create /blog/[slug]/index.html
+            const blogDir = path.join(distDir, blogRoute);
+            if (!fs.existsSync(blogDir)) {
+                fs.mkdirSync(blogDir, { recursive: true });
+            }
+            fs.writeFileSync(path.join(blogDir, 'index.html'), indexContent);
+
+            // Create /[slug]/index.html (Legacy Support)
+            const legacyDir = path.join(distDir, legacyRoute);
+            if (!fs.existsSync(legacyDir)) {
+                fs.mkdirSync(legacyDir, { recursive: true });
+            }
+            fs.writeFileSync(path.join(legacyDir, 'index.html'), indexContent);
+
+            console.log(`✅ Created routes for: ${slug}`);
+        }
     }
 
     console.log('🎉 Static routes generation complete!');

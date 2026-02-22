@@ -60,11 +60,22 @@ async function updateSitemap() {
 `;
         });
 
+        const generateSlug = (text) => {
+            if (!text) return '';
+            return text
+                .toLowerCase()
+                .replace(/[^\w\u0621-\u064A\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .trim();
+        };
+
         // Add Dynamic Blog Post URLs
-        // Format: /?lang=en&post=ID
+        // Format: /blog/slug
         if (postsData.en) {
             postsData.en.forEach(post => {
-                const postUrl = `${BASE_URL}/?post=${post.id}`;
+                const slug = generateSlug(post.title);
+                const postUrl = `${BASE_URL}/blog/${slug}`;
                 sitemapContent += `  <url>
     <loc>${postUrl}</loc>
     <changefreq>monthly</changefreq>

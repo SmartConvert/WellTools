@@ -56,8 +56,8 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang = 'en' }) => {
                                         loading="lazy"
                                         onError={(e) => {
                                             e.target.onerror = null;
-                                            e.target.src = '/images/welltools-hero-banner.png';
-                                            e.target.className = "w-3/4 h-auto object-contain opacity-50 mix-blend-multiply dark:mix-blend-lighten";
+                                            e.target.src = '/images/hero_wellness.png';
+                                            e.target.className = "w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700";
                                         }}
                                     />
                                     <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

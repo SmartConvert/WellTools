@@ -242,9 +242,14 @@ async function generatePost() {
            - 3-4 related blog post links (use /blog/[topic-slug])
            - 1-2 guide page links (/bmi-guide, /sleep-guide, etc.)
            - Use descriptive anchor text, NOT "click here"
-        11. **Related Resources Section**:
+        11. **In-Article Images (MANDATORY)**:
+           - Insert exactly 2-3 images within the "content" markdown.
+           - Format: ![Descriptive Alt Text](https://image.pollinations.ai/prompt/[URL_ENCODED_PROMPT])
+           - The [URL_ENCODED_PROMPT] should be a detailed English prompt for a photorealistic health-related image (natural light, 8k).
+           - Place these images strategically after H2 sections to break up text.
+        12. **Related Resources Section**:
            - Bullet list of 4-6 internal links with brief descriptions
-        12. **Medical Disclaimer**: Standard medical disclaimer in ${lang.name}.
+        13. **Medical Disclaimer**: Standard medical disclaimer in ${lang.name}.
 
         OUTPUT FORMAT: Single Valid JSON Object.
         {

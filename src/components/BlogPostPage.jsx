@@ -61,8 +61,8 @@ const parseMarkdown = (text, ctaBlock) => {
                         loading="lazy"
                         onError={(e) => {
                             e.target.onerror = null;
-                            e.target.src = '/images/welltools-hero-banner.png'; // Fallback to local hero banner
-                            e.target.className = "w-full md:w-3/4 h-auto object-contain p-8 opacity-80 mix-blend-multiply dark:mix-blend-lighten";
+                            e.target.src = '/images/hero_wellness.png'; // Fallback to local wellness hero
+                            e.target.className = "w-full md:w-3/4 h-auto object-contain p-8 opacity-40 mix-blend-multiply dark:mix-blend-lighten grayscale";
                         }}
                     />
                     {altText && (
@@ -138,8 +138,8 @@ const parseInlineMarkdown = (text) => {
                     loading="lazy"
                     onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src = '/images/welltools-hero-banner.png';
-                        e.target.className = "w-full md:w-3/4 h-auto object-contain p-8 opacity-80 mix-blend-multiply dark:mix-blend-lighten";
+                        e.target.src = '/images/hero_wellness.png';
+                        e.target.className = "w-full md:w-3/4 h-auto object-contain p-8 opacity-40 mix-blend-multiply dark:mix-blend-lighten grayscale";
                     }}
                 />
                 {altText && (
@@ -517,6 +517,23 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
                             </div>
                         )}
                     </div>
+
+                    {/* Featured Image (Hero) */}
+                    {post.image && (
+                        <div className="mb-12 rounded-[2.5rem] overflow-hidden shadow-2xl bg-gray-100 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 aspect-video relative group">
+                            <img
+                                src={post.image}
+                                alt={post.imageAlt || post.title}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = '/images/hero_wellness.png';
+                                    e.target.className = "w-full h-full object-cover opacity-40 grayscale";
+                                }}
+                            />
+                            <div className="absolute inset-0 bg-linear-to-t from-gray-900/40 to-transparent pointer-events-none" />
+                        </div>
+                    )}
                 </header>
 
                 {/* Author Credibility Block */}

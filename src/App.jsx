@@ -266,49 +266,61 @@ const DailyHealthTools = () => {
   }, []);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const postId = params.get('post');
-    const path = window.location.pathname.replace(/^\/+/, ''); // Get path without leading slash
-    const pageId = params.get('page'); // Keep support for old ?page= temporarily
+    const handleLocationChange = () => {
+      const params = new URLSearchParams(window.location.search);
+      const postId = params.get('post');
+      const path = window.location.pathname.replace(/^\/+/, ''); // Get path without leading slash
+      const pageId = params.get('page'); // Keep support for old ?page= temporarily
 
-    // Inverse Slug Lookup
-    const idFromSlug = Object.keys(PAGE_SLUGS).find(key => PAGE_SLUGS[key] === path);
+      // Inverse Slug Lookup
+      const idFromSlug = Object.keys(PAGE_SLUGS).find(key => PAGE_SLUGS[key] === path);
 
-    if (postId) {
-      import('./data/posts.json').then(module => {
-        const postsData = module.default;
-        const allPosts = postsData.en || [];
-        const foundPost = allPosts.find(p => p.id === postId);
-        if (foundPost) {
-          setSelectedPost(foundPost);
-          setCurrentPage('blog-post');
-        }
-      });
-    } else if (path && path !== '') {
-      // Check if it's a blog post path: /blog/slug
-      if (path.startsWith('blog/')) {
-        const blogSlug = path.replace('blog/', '');
+      if (postId) {
         import('./data/posts.json').then(module => {
           const postsData = module.default;
           const allPosts = postsData.en || [];
-          const foundPost = allPosts.find(p => generateSlug(p.title) === blogSlug);
+          const foundPost = allPosts.find(p => p.id === postId);
           if (foundPost) {
             setSelectedPost(foundPost);
             setCurrentPage('blog-post');
           }
         });
-      } else {
-        // Valid internal IDs for legacy support
-        const validIds = Object.keys(PAGE_SLUGS);
-        if (idFromSlug) {
-          setCurrentPage(idFromSlug);
-        } else if (validIds.includes(path)) {
-          setCurrentPage(path);
+      } else if (path && path !== '') {
+        // Check if it's a blog post path: /blog/slug
+        if (path.startsWith('blog/')) {
+          const blogSlug = path.replace('blog/', '');
+          import('./data/posts.json').then(module => {
+            const postsData = module.default;
+            const allPosts = postsData.en || [];
+            const foundPost = allPosts.find(p => generateSlug(p.title) === blogSlug);
+            if (foundPost) {
+              setSelectedPost(foundPost);
+              setCurrentPage('blog-post');
+            }
+          });
+        } else {
+          // Valid internal IDs for legacy support
+          const validIds = Object.keys(PAGE_SLUGS);
+          if (idFromSlug) {
+            setCurrentPage(idFromSlug);
+          } else if (validIds.includes(path)) {
+            setCurrentPage(path);
+          }
         }
+      } else if (pageId) {
+        setCurrentPage(pageId);
+      } else {
+        // Default route
+        setCurrentPage('home');
       }
-    } else if (pageId) {
-      setCurrentPage(pageId);
-    }
+    };
+
+    // Initial load
+    handleLocationChange();
+
+    // Listen for history changes (SPA internal links)
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
   }, []);
 
   useEffect(() => {

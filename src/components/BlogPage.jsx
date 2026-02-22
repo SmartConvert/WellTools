@@ -48,12 +48,17 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang = 'en' }) => {
                         <article key={post.id} className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col">
                             {/* Blog Post Image */}
                             {post.image && (
-                                <div className="relative h-56 overflow-hidden">
+                                <div className="relative h-56 overflow-hidden bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
                                     <img
                                         src={post.image}
                                         alt={post.imageAlt || post.title}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                         loading="lazy"
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = '/images/welltools-hero-banner.png';
+                                            e.target.className = "w-3/4 h-auto object-contain opacity-50 mix-blend-multiply dark:mix-blend-lighten";
+                                        }}
                                     />
                                     <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </div>

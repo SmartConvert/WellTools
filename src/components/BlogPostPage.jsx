@@ -53,15 +53,20 @@ const parseMarkdown = (text, ctaBlock) => {
             const altText = imageMatch[1];
             const imageUrl = imageMatch[2];
             return (
-                <figure key={i} className="my-10 rounded-2xl overflow-hidden shadow-xl">
+                <figure key={i} className="my-10 rounded-2xl overflow-hidden shadow-xl bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center">
                     <img
                         src={imageUrl}
                         alt={altText}
                         className="w-full h-auto object-cover"
                         loading="lazy"
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = '/images/welltools-hero-banner.png'; // Fallback to local hero banner
+                            e.target.className = "w-full md:w-3/4 h-auto object-contain p-8 opacity-80 mix-blend-multiply dark:mix-blend-lighten";
+                        }}
                     />
                     {altText && (
-                        <figcaption className="text-sm text-gray-500 dark:text-gray-400 text-center py-3 px-4 bg-gray-50 dark:bg-gray-800 italic">
+                        <figcaption className="w-full text-sm text-gray-500 dark:text-gray-400 text-center py-3 px-4 bg-gray-50 dark:bg-gray-900/50 italic border-t border-gray-100 dark:border-gray-800">
                             📷 {altText}
                         </figcaption>
                     )}
@@ -125,15 +130,20 @@ const parseInlineMarkdown = (text) => {
         const altText = match[1];
         const imageUrl = match[2];
         parts.push(
-            <figure key={`img-${match.index}`} className="my-10 rounded-2xl overflow-hidden shadow-xl">
+            <figure key={`img-${match.index}`} className="my-10 rounded-2xl overflow-hidden shadow-xl bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center">
                 <img
                     src={imageUrl}
                     alt={altText}
                     className="w-full h-auto object-cover"
                     loading="lazy"
+                    onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = '/images/welltools-hero-banner.png';
+                        e.target.className = "w-full md:w-3/4 h-auto object-contain p-8 opacity-80 mix-blend-multiply dark:mix-blend-lighten";
+                    }}
                 />
                 {altText && (
-                    <figcaption className="text-sm text-gray-500 dark:text-gray-400 text-center py-3 px-4 bg-gray-50 dark:bg-gray-800 italic">
+                    <figcaption className="w-full text-sm text-gray-500 dark:text-gray-400 text-center py-3 px-4 bg-gray-50 dark:bg-gray-900/50 italic border-t border-gray-100 dark:border-gray-800">
                         📷 {altText}
                     </figcaption>
                 )}
@@ -175,10 +185,18 @@ const processTextMarkdown = (text) => {
                     href={href}
                     target={isInternal ? '_self' : '_blank'}
                     rel={isInternal ? '' : 'noopener noreferrer'}
-                    className="text-emerald-600 hover:underline font-medium inline-flex items-center gap-1"
+                    className="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 hover:underline font-bold inline-flex items-center gap-1 transition-colors"
+                    onClick={(e) => {
+                        if (isInternal) {
+                            e.preventDefault();
+                            window.history.pushState({}, '', href);
+                            window.dispatchEvent(new Event('popstate'));
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    }}
                 >
                     {lMatch[1]}
-                    {!isInternal && <ExternalLink className="w-3 h-3 inline" />}
+                    {!isInternal && <ExternalLink className="w-3 h-3 inline opacity-70" />}
                 </a>
             );
             lLastIdx = linkRegex.lastIndex;

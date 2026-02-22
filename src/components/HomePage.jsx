@@ -326,6 +326,45 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                     </div>
                 )}
 
+                {/* Premium Impact Stats Section */}
+                <div className="mb-20 lg:mb-28 px-4 relative z-10">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="bg-linear-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-[3rem] p-1 border border-indigo-500/30 shadow-2xl overflow-hidden relative group">
+                            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20 group-hover:opacity-40 transition-opacity duration-1000 mix-blend-overlay"></div>
+
+                            <div className="bg-slate-900/80 backdrop-blur-2xl rounded-[2.8rem] p-8 md:p-14 relative overflow-hidden">
+                                {/* Decorative Orbs */}
+                                <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-emerald-500/10 rounded-full blur-[8rem] -mr-[20rem] -mt-[20rem] pointer-events-none group-hover:bg-emerald-500/20 transition-colors duration-1000"></div>
+                                <div className="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-indigo-500/10 rounded-full blur-[8rem] -ml-[20rem] -mb-[20rem] pointer-events-none group-hover:bg-indigo-500/20 transition-colors duration-1000"></div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-white relative z-10">
+                                    <div className="text-center transform hover:scale-105 transition-transform duration-500">
+                                        <div className="w-16 h-16 bg-emerald-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(16,185,129,0.3)]">
+                                            <Activity className="w-8 h-8 text-emerald-400" />
+                                        </div>
+                                        <div className="text-5xl md:text-6xl font-black bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-teal-400 mb-2">9+</div>
+                                        <p className="text-lg text-emerald-100/70 font-bold uppercase tracking-widest">Medical Calculators</p>
+                                    </div>
+                                    <div className="text-center transform hover:scale-105 transition-transform duration-500 md:border-x border-white/10 px-4">
+                                        <div className="w-16 h-16 bg-cyan-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(6,182,212,0.3)]">
+                                            <Scale className="w-8 h-8 text-cyan-400" />
+                                        </div>
+                                        <div className="text-5xl md:text-6xl font-black bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-blue-400 mb-2">100%</div>
+                                        <p className="text-lg text-cyan-100/70 font-bold uppercase tracking-widest">Science-Backed</p>
+                                    </div>
+                                    <div className="text-center transform hover:scale-105 transition-transform duration-500">
+                                        <div className="w-16 h-16 bg-indigo-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(99,102,241,0.3)]">
+                                            <Heart className="w-8 h-8 text-indigo-400" />
+                                        </div>
+                                        <div className="text-5xl md:text-6xl font-black bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-violet-400 mb-2">Free</div>
+                                        <p className="text-lg text-indigo-100/70 font-bold uppercase tracking-widest">Forever Access</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Tools Grid */}
                 <div id="tools-grid" className="mb-16 lg:mb-24">
                     <div className="text-center mb-10 md:mb-16 px-4">
@@ -340,13 +379,16 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                         {tools.map((tool) => (
-                            <div
+                            <a
                                 key={tool.id}
-                                onClick={() => {
-                                    setCurrentPage(tool.id);
-                                    window.scrollTo(0, 0);
+                                href={`/${tool.id}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    window.history.pushState({}, '', `/${tool.id}`);
+                                    window.dispatchEvent(new Event('popstate'));
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
-                                className="group cursor-pointer bg-white dark:bg-gray-800 p-8 md:p-10 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-50 dark:border-gray-700 relative overflow-hidden flex flex-col h-full"
+                                className="group cursor-pointer bg-white dark:bg-gray-800 p-8 md:p-10 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-50 dark:border-gray-700 relative overflow-hidden flex flex-col h-full block"
                             >
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
                                 <div className={`w-16 h-16 bg-linear-to-br ${tool.color} rounded-2xl flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
@@ -357,7 +399,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                                 <div className="flex items-center text-emerald-600 dark:text-emerald-400 font-bold group-hover:gap-2 transition-all">
                                     {t.explore_tool} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </div>
-                            </div>
+                            </a>
                         ))}
                     </div>
                 </div>

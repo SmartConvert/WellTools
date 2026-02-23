@@ -167,3 +167,51 @@ export const PrivacyPolicyPage = ({ setCurrentPage, t }) => (
         </div>
     </div>
 );
+
+export const CookiePolicyPage = ({ setCurrentPage, t }) => (
+    <div className="pt-24 pb-16 px-4 bg-gray-50 dark:bg-gray-950 min-h-screen">
+        <div className="max-w-4xl mx-auto">
+            <LegalHeader title="Cookie Policy" icon={Globe} color="from-purple-500 to-pink-600" />
+
+            <div className="space-y-8">
+                <LegalSection title="1. What Are Cookies?">
+                    <p>Cookies are small text files stored on your device when you visit a website. They are widely used to make websites work more efficiently and to provide statistical information to the owners of the site.</p>
+                </LegalSection>
+
+                <LegalSection title="2. How We Use Cookies" icon={CheckCircle}>
+                    <p>WellTools uses cookies for the following purposes:</p>
+                    <ul className="list-disc pl-6 space-y-2">
+                        <li><strong>Essential Cookies:</strong> Required to enable core site functionality and security features.</li>
+                        <li><strong>Analytics Cookies:</strong> We use Google Analytics to understand how visitors interact with our website. This helps us improve our content and user experience.</li>
+                        <li><strong>Advertising Cookies:</strong> We use Google Adsense to serve personalized advertisements. These cookies track your browsing habits across different websites to show ads relevant to your interests.</li>
+                    </ul>
+                </LegalSection>
+
+                <LegalSection title="3. Third-Party Cookies">
+                    <p>In addition to our own cookies, we may also use various third-party cookies to report website usage statistics and deliver advertisements. Our primary third-party partners include:</p>
+                    <ul className="list-disc pl-6 space-y-2">
+                        <li><strong>Google Analytics:</strong> For traffic analysis.</li>
+                        <li><strong>Google AdSense:</strong> For advertisement targeting.</li>
+                    </ul>
+                </LegalSection>
+
+                <LegalSection title="4. How to Manage Cookies" icon={Shield}>
+                    <p>You can control and/or delete cookies as you wish. You can delete all cookies that are already on your computer and you can set most browsers to prevent them from being placed.</p>
+                    <p>To opt-out of personalized advertising from Google, you can visit <a href="https://myadcenter.google.com/" className="text-emerald-500 hover:underline" target="_blank" rel="noopener noreferrer">Google's Ad Settings</a>.</p>
+                </LegalSection>
+
+                <LegalSection title="5. Contact Us" icon={Mail}>
+                    <p>If you have any questions about our use of cookies, please contact us at:</p>
+                    <p className="font-bold text-emerald-600">contact@welltools.online</p>
+                </LegalSection>
+            </div>
+
+            <button
+                onClick={() => { setCurrentPage('home'); window.scrollTo(0, 0); }}
+                className="mt-12 px-10 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-2xl font-bold shadow-xl hover:shadow-2xl transition-all border border-gray-100 dark:border-gray-700 flex items-center gap-2 mx-auto"
+            >
+                Return to Homepage
+            </button>
+        </div>
+    </div>
+);

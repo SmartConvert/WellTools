@@ -25,6 +25,12 @@ const AboutPage = ({ setCurrentPage, t }) => (
                     <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
                         We are on a mission to democratize health data. By providing free, professional-grade diagnostic tools and research-backed content, we empower individuals to take control of their physical and mental well-being.
                     </p>
+                    <div className="mb-6 p-6 bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-emerald-100/50 dark:border-gray-700">
+                        <h3 className="text-lg font-black text-gray-900 dark:text-white mb-2">Who We Serve (Our Target Audience)</h3>
+                        <p className="text-gray-600 dark:text-gray-400 font-medium">
+                            WellTools is built for health-conscious individuals, fitness enthusiasts, and anyone looking for reliable, science-based methods to track their nutrition, weight, and general wellness without the confusion of medical jargon.
+                        </p>
+                    </div>
                     <div className="space-y-4 font-bold text-gray-900 dark:text-white">
                         <div className="flex items-center gap-3">
                             <CheckCircle className="w-5 h-5 text-emerald-500" />
@@ -110,24 +116,24 @@ const AboutPage = ({ setCurrentPage, t }) => (
                             name: 'Mark Stevens',
                             role: 'Founder & Fitness Architect',
                             bio: 'Certified strength specialist with 15+ years experience in biomechanics.',
-                            icon: < Award className="w-6 h-6 text-emerald-500" />
+                            image: 'https://ui-avatars.com/api/?name=Mark+Stevens&background=10b981&color=fff&size=128&rounded=true&font-size=0.33&bold=true'
                         },
                         {
                             name: 'Dr. Sarah Johnson',
                             role: 'Head of Nutrition',
                             bio: 'Registered Dietitian (RD) specializing in metabolism and weight management.',
-                            icon: < BookOpen className="w-6 h-6 text-emerald-500" />
+                            image: 'https://ui-avatars.com/api/?name=Dr+Sarah+Johnson&background=0ea5e9&color=fff&size=128&rounded=true&font-size=0.33&bold=true'
                         },
                         {
                             name: 'Elena Rodriguez',
                             role: 'Health Editor',
                             bio: 'Holistic health coach focused on making medical research easy to understand.',
-                            icon: < Shield className="w-6 h-6 text-emerald-500" />
+                            image: 'https://ui-avatars.com/api/?name=Elena+Rodriguez&background=f43f5e&color=fff&size=128&rounded=true&font-size=0.33&bold=true'
                         }
                     ].map((member, idx) => (
-                        <div key={idx} className="bg-white dark:bg-gray-800 p-8 rounded-4xl shadow-xl border border-gray-50 dark:border-gray-700 text-center">
-                            <div className="w-16 h-16 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                                {member.icon}
+                        <div key={idx} className="bg-white dark:bg-gray-800 p-8 rounded-4xl shadow-xl border border-gray-50 dark:border-gray-700 text-center hover:-translate-y-2 transition-transform duration-300">
+                            <div className="w-24 h-24 rounded-4xl shadow-xl overflow-hidden mx-auto mb-6 border-4 border-white dark:border-gray-800">
+                                <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
                             </div>
                             <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2">{member.name}</h3>
                             <p className="text-emerald-600 font-black text-sm uppercase tracking-widest mb-4">{member.role}</p>

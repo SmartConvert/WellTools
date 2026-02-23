@@ -212,21 +212,31 @@ const processTextMarkdown = (text) => {
 // ─── Sub-Components ──────────────────────────────────────────────────────────
 
 const AuthorBlock = ({ post }) => (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-6 bg-linear-to-r from-slate-50 to-gray-50 dark:from-gray-800 dark:to-gray-800/60 rounded-2xl border border-slate-100 dark:border-gray-700 mb-10">
-        <div className="flex items-center gap-4 flex-1">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 p-8 bg-linear-to-r from-slate-50 to-gray-50 dark:from-gray-800 dark:to-gray-800/60 rounded-3xl border border-slate-100 dark:border-gray-700 my-10 shadow-sm">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 flex-1">
             {/* Author Avatar */}
-            <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white font-black text-lg shrink-0 shadow-lg">
-                WH
+            <div className="w-20 h-20 rounded-[2rem] bg-linear-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white font-black text-2xl shrink-0 shadow-xl overflow-hidden">
+                {post.author?.image ? (
+                    <img src={post.author.image} alt={post.author.name} className="w-full h-full object-cover" />
+                ) : (
+                    "WH"
+                )}
             </div>
             <div>
-                <p className="font-bold text-gray-900 dark:text-white text-sm">
+                <p className="font-black text-gray-900 dark:text-white text-xl mb-1">
                     {post.author?.name || 'WellTools Health Team'}
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                    {post.author?.role || 'Health & Wellness Researchers'}
-                </p>
-                <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-0.5 font-medium">
-                    ✓ {post.author?.credentials || 'Research-backed content, medically reviewed'}
+                <div className="flex flex-wrap gap-2 mb-2">
+                    <span className="text-xs px-2.5 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 rounded-lg font-bold">
+                        {post.author?.role || 'Health & Wellness Researchers'}
+                    </span>
+                    <span className="text-xs px-2.5 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-lg font-bold flex items-center gap-1">
+                        <CheckCircle className="w-3 h-3" />
+                        {post.author?.credentials || 'Medically Reviewed Content'}
+                    </span>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl">
+                    {post.author?.bio || "The WellTools team consists of certified nutritionists, fitness experts, and medical researchers dedicated to providing accurate, actionable health data."}
                 </p>
             </div>
         </div>
@@ -490,6 +500,15 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
                     {t.back_to_blog}
                 </button>
 
+                {/* Breadcrumbs */}
+                <nav className="mb-8 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 font-medium overflow-x-auto whitespace-nowrap pb-2 scrollbar-hide">
+                    <button onClick={() => setCurrentPage('home')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Home</button>
+                    <ChevronRight className="w-4 h-4 opacity-50 shrink-0" />
+                    <button onClick={() => setCurrentPage('blog')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Blog</button>
+                    <ChevronRight className="w-4 h-4 opacity-50 shrink-0" />
+                    <span className="text-gray-900 dark:text-gray-200 truncate">{post.title}</span>
+                </nav>
+
                 {/* Article Header */}
                 <header className="mb-8">
                     <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] mb-8 tracking-tight">
@@ -546,6 +565,20 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
                 <article className="max-w-none text-gray-700 dark:text-gray-300">
                     {parseMarkdown(post.content, midCTA)}
                 </article>
+
+                {/* Detailed Author Bio */}
+                <AuthorBlock post={post} />
+
+                {/* Strict Medical Disclaimer */}
+                <div className="my-12 p-8 bg-rose-50 dark:bg-rose-900/10 border-l-8 border-rose-500 rounded-2xl shadow-sm">
+                    <h3 className="text-xl font-bold text-rose-800 dark:text-rose-400 mb-3 flex items-center gap-2">
+                        <AlertTriangle className="w-6 h-6" />
+                        Medical Disclaimer
+                    </h3>
+                    <p className="text-rose-700 dark:text-rose-300 leading-relaxed font-medium">
+                        This content is for educational and informational purposes only and does not constitute medical advice, diagnosis, or treatment. Always seek the advice of a qualified healthcare provider with any questions you may have regarding a medical condition. Do not disregard professional medical advice or delay in seeking it because of something you have read on WellTools.
+                    </p>
+                </div>
 
                 {/* End-of-Article CTA */}
                 <EndArticleCTA setCurrentPage={setCurrentPage} />

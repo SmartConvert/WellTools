@@ -5,6 +5,7 @@ import { translations } from './translations';
 import ExitIntentPopup from './components/ExitIntentPopup';
 import SchemaMarkup from './components/SchemaMarkup';
 import ErrorBoundary from './components/ErrorBoundary';
+import CookieConsentBanner from './components/CookieConsentBanner';
 
 const PAGE_SLUGS = {
   'bmi': 'bmi-calculator-for-women-and-men',
@@ -30,7 +31,8 @@ const PAGE_SLUGS = {
   'terms': 'terms-of-use',
   'disclaimer': 'medical-disclaimer',
   'editorial-policy': 'editorial-policy',
-  'fasting': 'intermittent-fasting-schedule-calculator'
+  'fasting': 'intermittent-fasting-schedule-calculator',
+  'cookie-policy': 'cookie-policy'
 };
 
 const generateSlug = (text) => {
@@ -89,6 +91,7 @@ const FastingSchedulePage = lazyWithRetry(() => import('./components/FastingSche
 const TermsOfUsePage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.TermsOfUsePage })));
 const DisclaimerPage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.DisclaimerPage })));
 const PrivacyPolicyPage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.PrivacyPolicyPage })));
+const CookiePolicyPage = lazyWithRetry(() => import('./components/LegalPages').then(m => ({ default: m.CookiePolicyPage })));
 const EditorialPolicyPage = lazyWithRetry(() => import('./components/EditorialPolicyPage'));
 const NotFoundPage = lazyWithRetry(() => import('./components/NotFoundPage'));
 
@@ -110,14 +113,22 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, t, theme, s
             <button onClick={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
               {t.nav_home}
             </button>
-            <button onClick={() => { setCurrentPage('tracking'); window.scrollTo(0, 0); }} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
-              {t.daily_tracking}
-            </button>
-            <button onClick={() => { setCurrentPage('meal-planner'); window.scrollTo(0, 0); }} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
-              {t.meal_planner_title}
-            </button>
             <button onClick={() => { setCurrentPage('blog'); window.scrollTo(0, 0); }} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
               {t.nav_blog}
+            </button>
+            <button onClick={() => {
+              setCurrentPage('home');
+              setTimeout(() => {
+                document.getElementById('tools-grid')?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
+              Tools
+            </button>
+            <button onClick={() => { setCurrentPage('about'); window.scrollTo(0, 0); }} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
+              {t.nav_about}
+            </button>
+            <button onClick={() => { setCurrentPage('contact'); window.scrollTo(0, 0); }} className="text-gray-900 dark:text-gray-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-semibold">
+              {t.nav_contact}
             </button>
           </div>
         </div>
@@ -150,17 +161,27 @@ const NavBar = ({ setCurrentPage, setMobileMenuOpen, mobileMenuOpen, t, theme, s
             <Heart className="w-5 h-5 text-emerald-500" />
             {t.nav_home}
           </button>
-          <button onClick={() => { setCurrentPage('tracking'); setMobileMenuOpen(false); window.scrollTo(0, 0); }} className="flex items-center gap-3 w-full text-start px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-2xl transition-all font-bold">
-            <Heart className="w-5 h-5 text-emerald-500" />
-            {t.daily_tracking}
-          </button>
-          <button onClick={() => { setCurrentPage('meal-planner'); setMobileMenuOpen(false); window.scrollTo(0, 0); }} className="flex items-center gap-3 w-full text-start px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-2xl transition-all font-bold">
-            <Heart className="w-5 h-5 text-emerald-500" />
-            {t.meal_planner_title}
-          </button>
           <button onClick={() => { setCurrentPage('blog'); setMobileMenuOpen(false); window.scrollTo(0, 0); }} className="flex items-center gap-3 w-full text-start px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-2xl transition-all font-bold">
             <Heart className="w-5 h-5 text-emerald-500" />
             {t.nav_blog}
+          </button>
+          <button onClick={() => {
+            setCurrentPage('home');
+            setMobileMenuOpen(false);
+            setTimeout(() => {
+              document.getElementById('tools-grid')?.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+          }} className="flex items-center gap-3 w-full text-start px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-2xl transition-all font-bold">
+            <Heart className="w-5 h-5 text-emerald-500" />
+            Tools
+          </button>
+          <button onClick={() => { setCurrentPage('about'); setMobileMenuOpen(false); window.scrollTo(0, 0); }} className="flex items-center gap-3 w-full text-start px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-2xl transition-all font-bold">
+            <Heart className="w-5 h-5 text-emerald-500" />
+            {t.nav_about}
+          </button>
+          <button onClick={() => { setCurrentPage('contact'); setMobileMenuOpen(false); window.scrollTo(0, 0); }} className="flex items-center gap-3 w-full text-start px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-2xl transition-all font-bold">
+            <Heart className="w-5 h-5 text-emerald-500" />
+            {t.nav_contact}
           </button>
 
 
@@ -215,9 +236,11 @@ const Footer = ({ setCurrentPage, t }) => (
         <p className="text-gray-500 dark:text-gray-400 font-medium">© 2026 WellTools. Built for better health.</p>
         <div className="flex flex-wrap gap-4 md:gap-8 justify-center">
           <button onClick={() => { setCurrentPage('privacy'); window.scrollTo(0, 0); }} className="text-sm text-gray-400 hover:text-emerald-500 transition-colors font-bold uppercase tracking-widest">{t.privacy}</button>
-          <button onClick={() => { setCurrentPage('editorial-policy'); window.scrollTo(0, 0); }} className="text-sm text-gray-400 hover:text-emerald-500 transition-colors font-bold uppercase tracking-widest">{t.editorial_policy}</button>
           <button onClick={() => { setCurrentPage('terms'); window.scrollTo(0, 0); }} className="text-sm text-gray-400 hover:text-emerald-500 transition-colors font-bold uppercase tracking-widest">{t.terms}</button>
-          <button onClick={() => { setCurrentPage('disclaimer'); window.scrollTo(0, 0); }} className="text-sm text-gray-400 hover:text-emerald-500 transition-colors font-bold uppercase tracking-widest">{t.disclaimer}</button>
+          <button onClick={() => { setCurrentPage('disclaimer'); window.scrollTo(0, 0); }} className="text-sm text-amber-500/80 hover:text-amber-500 transition-colors font-bold uppercase tracking-widest">Medical Disclaimer ⚠️</button>
+          <button onClick={() => { setCurrentPage('cookie-policy'); window.scrollTo(0, 0); }} className="text-sm text-gray-400 hover:text-emerald-500 transition-colors font-bold uppercase tracking-widest">Cookie Policy</button>
+          <button onClick={() => { setCurrentPage('about'); window.scrollTo(0, 0); }} className="text-sm text-gray-400 hover:text-emerald-500 transition-colors font-bold uppercase tracking-widest">{t.nav_about}</button>
+          <button onClick={() => { setCurrentPage('contact'); window.scrollTo(0, 0); }} className="text-sm text-gray-400 hover:text-emerald-500 transition-colors font-bold uppercase tracking-widest">{t.nav_contact}</button>
         </div>
       </div>
     </div>
@@ -790,6 +813,7 @@ const DailyHealthTools = () => {
       case 'terms': return <TermsOfUsePage setCurrentPage={setCurrentPage} t={t} />;
       case 'disclaimer': return <DisclaimerPage setCurrentPage={setCurrentPage} t={t} />;
       case 'editorial-policy': return <EditorialPolicyPage setCurrentPage={setCurrentPage} t={t} />;
+      case 'cookie-policy': return <CookiePolicyPage setCurrentPage={setCurrentPage} t={t} />;
       default: return <NotFoundPage setCurrentPage={setCurrentPage} t={t} />;
     }
   };
@@ -805,7 +829,7 @@ const DailyHealthTools = () => {
         </ErrorBoundary>
       </main>
       <Footer setCurrentPage={setCurrentPage} t={t} />
-      <ExitIntentPopup />
+      <CookieConsentBanner setCurrentPage={setCurrentPage} />
       <SchemaMarkup toolId={currentPage} />
     </div>
   );

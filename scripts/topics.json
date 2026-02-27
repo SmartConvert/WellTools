@@ -98,7 +98,8 @@
             "id": 40,
             "group": "body_preservation",
             "title": "Stress Management: Cortisol's Impact on Weight & Longevity",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-27"
         },
         {
             "id": 5,

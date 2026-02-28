@@ -202,6 +202,13 @@ async function generatePost() {
         - It must describe a high-quality, cinematic, photorealistic image.
         - Style: 8k, photorealistic, premium medical/fitness photography. NO TEXT IN IMAGE.
 
+        IN-ARTICLE IMAGES (CRITICAL FORMAT):
+        When inserting images in the content markdown, use EXACTLY this format:
+        ![Descriptive Alt Text](https://image.pollinations.ai/prompt/PROMPT_HERE?width=1200&height=630&nologo=true&model=flux)
+        Where PROMPT_HERE is a URL-encoded English description (use %20 for spaces).
+        Example: ![Woman practicing yoga at sunrise](https://image.pollinations.ai/prompt/Woman%20practicing%20yoga%20at%20sunrise%20photorealistic%208k?width=1200&height=630&nologo=true&model=flux)
+        Place exactly 2 images in the content, after the 2nd and 5th H2 sections.
+
         CONTENT STRUCTURE (MANDATORY FORMATTING - USE GITHUB MARKDOWN):
         1. **H1 Headline**: The main article title.
         2. **Introduction (150-200 words)**: Formulate a relatable problem, introduce the science, and promise a clear solution. Use the primary keyword in the first sentence. Write exactly 3 paragraphs.
@@ -285,11 +292,28 @@ async function generatePost() {
 
             const newContent = JSON.parse(cleanedText);
 
-            // Construct Image URL using high-quality prompt with Unsplash style keywords
+            // --- POST-PROCESS: Fix in-article Pollinations.ai image URLs ---
+            // The AI sometimes generates bare URLs without query params. Add them.
+            if (newContent.content) {
+                newContent.content = newContent.content.replace(
+                    /!\[([^\]]+)\]\(https:\/\/image\.pollinations\.ai\/prompt\/([^)]+?)\)/g,
+                    (match, alt, promptPart) => {
+                        // If URL already has query params, don't double-add them
+                        if (promptPart.includes('?')) return match;
+                        // Ensure prompt part itself doesn't have spaces
+                        const cleanPrompt = promptPart.replace(/ /g, '%20');
+                        return `![${alt}](https://image.pollinations.ai/prompt/${cleanPrompt}?width=1200&height=630&nologo=true&model=flux)`;
+                    }
+                );
+            }
+
+            // Construct Hero Image URL using high-quality prompt with Unsplash style keywords
             const basePrompt = newContent.imagePrompt || selectedTopic.title + " high quality 8k photography";
-            const enhancedPrompt = `${basePrompt}, photorealistic, 8k, cinematic lighting, unsplash style, authentic, natural light`;
+            // Keep it concise (under 200 chars) to avoid CDN timeouts
+            const trimmedPrompt = basePrompt.slice(0, 180);
+            const enhancedPrompt = `${trimmedPrompt}, photorealistic, 8k, cinematic`;
             const encodedPrompt = encodeURIComponent(enhancedPrompt);
-            const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1200&height=800&nologo=true&model=flux`;
+            const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1200&height=630&nologo=true&model=flux`;
 
             const postObj = {
                 id: baseId,

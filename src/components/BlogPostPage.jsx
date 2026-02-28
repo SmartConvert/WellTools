@@ -136,7 +136,7 @@ const parseMarkdown = (text, ctaBlock) => {
 const parseInlineMarkdown = (text) => {
     if (typeof text !== 'string') return text;
 
-    // Process Images: ![alt](url) - render them properly
+    // Process Images FIRST: ![alt](url) - handle them so they don't get caught by the link parser
     const imageRegex = /!\[(.*?)\]\((.*?)\)/g;
     const parts = [];
     let lastIndex = 0;
@@ -148,9 +148,12 @@ const parseInlineMarkdown = (text) => {
             parts.push(processTextMarkdown(textBefore));
         }
         const altText = match[1];
-        const imageUrl = match[2];
+        // Ensure image URLs with spaces are handled cleanly (AI sometimes adds them)
+        const rawUrl = match[2];
+        const imageUrl = rawUrl.startsWith('http') ? rawUrl : rawUrl.replace(/ /g, '%20');
+
         parts.push(
-            <figure key={`img-${match.index}`} className="my-10 rounded-2xl overflow-hidden shadow-xl bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center">
+            <figure key={`img-${match.index}-${lastIndex}`} className="my-10 rounded-2xl overflow-hidden shadow-xl bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center">
                 <img
                     src={imageUrl}
                     alt={altText}
@@ -182,30 +185,38 @@ const parseInlineMarkdown = (text) => {
 const processTextMarkdown = (text) => {
     if (!text) return text;
 
-    const subParts = text.split(/(\*\*.*?\*\*)/g);
-    return subParts.flatMap((subPart, j) => {
-        if (subPart.startsWith('**') && subPart.endsWith('**')) {
-            return [<strong key={`bold-${j}`} className="font-bold text-gray-900 dark:text-white">{subPart.slice(2, -2)}</strong>];
-        }
+    // Split on **bold** text while keeping the delimiters to process links inside or outside
+    const subParts = text.split(/(\*\*.*?\*\*)/g).filter(Boolean);
 
+    return subParts.flatMap((subPart, j) => {
+        const isBold = subPart.startsWith('**') && subPart.endsWith('**');
+        const contentToParse = isBold ? subPart.slice(2, -2) : subPart;
+
+        // Find links inside this exact chunk of text
         const linkRegex = /\[(.*?)\]\((.*?)\)/g;
         const linkParts = [];
         let lMatch;
         let lLastIdx = 0;
-        while ((lMatch = linkRegex.exec(subPart)) !== null) {
+
+        while ((lMatch = linkRegex.exec(contentToParse)) !== null) {
             if (lMatch.index > lLastIdx) {
-                linkParts.push(subPart.slice(lLastIdx, lMatch.index));
+                linkParts.push(contentToParse.slice(lLastIdx, lMatch.index));
             }
-            const href = lMatch[2];
+
+            const linkText = lMatch[1] || '';
+            const rawHref = lMatch[2] || '';
+
+            // Clean AI-hallucinated characters from the href (like a trailing bold asterix inside the URL)
+            const href = rawHref.replace(/[*"']/g, '').trim();
             const isInternal = href.startsWith('/');
 
             linkParts.push(
                 <a
-                    key={`link-${lMatch.index}`}
+                    key={`link-${j}-${lMatch.index}`}
                     href={href}
                     target={isInternal ? '_self' : '_blank'}
                     rel={isInternal ? '' : 'noopener noreferrer'}
-                    className="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 hover:underline font-bold inline-flex items-center gap-1 transition-colors"
+                    className={`text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 hover:underline inline-flex items-baseline gap-1 transition-colors relative z-10 ${isBold ? 'font-black' : 'font-bold'}`}
                     onClick={(e) => {
                         if (isInternal) {
                             e.preventDefault();
@@ -215,17 +226,25 @@ const processTextMarkdown = (text) => {
                         }
                     }}
                 >
-                    {lMatch[1]}
-                    {!isInternal && <ExternalLink className="w-3 h-3 inline opacity-70" />}
+                    {linkText}
+                    {!isInternal && <ExternalLink className="w-3 h-3 inline opacity-70 flex-shrink-0" />}
                 </a>
             );
             lLastIdx = linkRegex.lastIndex;
         }
-        if (lLastIdx < subPart.length) {
-            linkParts.push(subPart.slice(lLastIdx));
+
+        // If no links were found, just return the text
+        if (linkParts.length === 0) {
+            return isBold ? <strong key={`bold-${j}`} className="font-bold text-gray-900 dark:text-white">{contentToParse}</strong> : contentToParse;
         }
 
-        return linkParts.length > 0 ? linkParts : [subPart];
+        // Add any remaining text after the last link
+        if (lLastIdx < contentToParse.length) {
+            linkParts.push(contentToParse.slice(lLastIdx));
+        }
+
+        // Wrap the whole thing in strong if it came from a bold block
+        return isBold ? <strong key={`bold-${j}`} className="font-bold text-gray-900 dark:text-white">{linkParts}</strong> : linkParts;
     });
 };
 

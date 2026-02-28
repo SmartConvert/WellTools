@@ -177,100 +177,78 @@ async function generatePost() {
         TARGET AUDIENCE: Health-conscious individuals seeking science-backed advice.
         LANGUAGE: ${lang.name} (${lang.nuance})
         DIRECTION: ${lang.dir}
+        WORD COUNT CONSTRAINT: MUST BE BETWEEN 1200 AND 2500 WORDS.
+        READING LEVEL: Simple, clear, and accessible for a general audience (Grade 8-9). Use active voice.
 
         STRICT QUALITY GUIDELINES (E-E-A-T):
-        1. **Expertise**: Content must demonstrate deep understanding of physiology/nutrition.
-        2. **Accuracy**: No pseudoscience. Stick to consensus medical facts.
-        3. **Tone**: Empathetic but authoritative. Professional yet motivating.
-        4. **Formatting**: Use proper Markdown (H1, H2, H3, bolding for emphasis).
-        5. **Word Count**: MANDATORY 1800-3000 words for comprehensive coverage.
-        6. **Readability**: Short paragraphs (3-4 lines max), bullet points, numbered lists.
-        7. **No Fluff**: Get straight to the point. Respect the reader's time.
+        1. **Expertise**: Content must demonstrate a deep understanding of physiology/nutrition.
+        2. **Accuracy**: No pseudoscience. Stick to consensus medical facts. Cite everything.
+        3. **Author Block**: You must generate a realistic Author profile (Name, Role, short 1-sentence bio) representing a WellTools expert (e.g., "Dr. Sarah Johnson, Registered Dietitian" or "Mark Stevens, Fitness Architect").
+        4. **Reviewer Block**: Include data for \`reviewedBy\` in the JSON to simulate medical fact-checking (e.g., "Dr. Emily Chen, MD").
+        5. **No Fluff**: Get straight to the point. Respect the reader's time.
 
         KEYWORD RESEARCH & STRATEGY (CRITICAL):
-        Before writing, you must:
         1. Identify 5-7 high-impact, long-tail keywords (3-5 words each) relevant to the topic.
-           - Example: "how to reduce chronic inflammation naturally" NOT "inflammation"
-           - Example: "best anti-inflammatory foods for gut health" NOT "anti-inflammatory foods"
-        2. **MANDATORY INTEGRATION**: You must naturally insert these keywords into:
-           - The SEO Meta Title (primary keyword)
-           - The H1 Headline (primary keyword in first 60 characters)
-           - The first 100 words (primary keyword at least once)
-           - At least THREE H2 Subheadings (include variations of keywords)
-           - The Meta Description (primary + secondary keyword)
-        3. List these specific long-tail keywords in the JSON output "keywords" array (5-7 items).
+        2. **MANDATORY INTEGRATION**: You must insert these keywords naturally into:
+           - The SEO Meta Title (primary keyword, MUST be 50-60 characters total length).
+           - The Meta Description (primary + secondary keyword, MUST be 140-160 characters).
+           - The H1 Headline (primary keyword in first 60 characters).
+           - The first 100 words (primary keyword at least once).
+           - At least THREE H2 Subheadings.
+        3. List these specific long-tail keywords in the JSON output "keywords" array.
 
         IMAGE GENERATION RULE:
         You must generate a "Photographic Image Prompt" in ENGLISH.
         - It must describe a high-quality, cinematic, photorealistic image.
-        - Lighting: Natural, soft, golden hour, or studio lighting.
-        - Style: 8k resolution, highly detailed, professional photography, macro or wide shot as appropriate.
-        - Subject: Healthy food, active people, medical concepts, or nature (depending on topic).
-        - NO TEXT IN IMAGE.
+        - Style: 8k, photorealistic, premium medical/fitness photography. NO TEXT IN IMAGE.
 
-        CONTENT STRUCTURE (MANDATORY 1800-3000 WORDS):
-        1. **SEO Meta Title**: Compelling, 50-60 chars, MUST include primary long-tail keyword.
-        2. **Meta Description**: High CTR, 150-160 chars, includes primary + secondary keyword.
-        3. **H1 Headline**: The main article title with primary keyword in first 60 characters.
-        4. **Introduction (150-200 words)**: 
-           - Hook with relatable problem
-           - Include primary keyword in first 100 words
-           - Promise clear solution
-           - Keep paragraphs to 2-3 sentences max
-        5. **Deep Dive Body (1200-1800 words)**: 
-           - 6-8 major sections with H2 headings (include keyword variations)
-           - Each H2 section: 200-300 words
-           - Use H3 subheadings for subsections (10-15 total H3s)
-           - Short paragraphs (3-4 lines maximum)
-           - Bullet points for lists of 3+ items
-           - Numbered lists for step-by-step processes
-           - Bold key terms and concepts
-        6. **Actionable Steps Section (200-300 words)**:
-           - "Your [Number]-Day Action Plan" or "Step-by-Step Guide"
-           - Numbered list with detailed, practical steps
-        7. **Common Mistakes Section (150-200 words)**:
-           - "[Number] Mistakes to Avoid When [Topic]"
-           - Numbered list with explanations
-        8. **WellTools Expert Tips (100-150 words)**:
-           - Unique insights
-           - Tool integration recommendations
-        9. **FAQ Section**: 7 real-world questions with detailed answers (50-100 words each).
-           - Questions should be long-tail queries people actually search
-           - Answers should be comprehensive, not one-liners
-        10. **Internal Linking (8-12 links total)**:
-           - 3-4 calculator links with contextual anchor text
-           - 3-4 related blog post links (use /blog/[topic-slug])
-           - 1-2 guide page links (/bmi-guide, /sleep-guide, etc.)
-           - Use descriptive anchor text, NOT "click here"
-        11. **In-Article Images (MANDATORY)**:
-           - Insert exactly 2-3 images within the "content" markdown.
-           - Format: ![Descriptive Alt Text](https://image.pollinations.ai/prompt/[URL_ENCODED_PROMPT])
-           - The [URL_ENCODED_PROMPT] should be a detailed English prompt for a photorealistic health-related image (natural light, 8k).
-           - Place these images strategically after H2 sections to break up text.
-        12. **Related Resources Section**:
-           - Bullet list of 4-6 internal links with brief descriptions
-        13. **Medical Disclaimer**: Standard medical disclaimer in ${lang.name}.
+        CONTENT STRUCTURE (MANDATORY FORMATTING - USE GITHUB MARKDOWN):
+        1. **H1 Headline**: The main article title.
+        2. **Introduction (150-200 words)**: Formulate a relatable problem, introduce the science, and promise a clear solution. Use the primary keyword in the first sentence. Write exactly 3 paragraphs.
+        3. **Deep Dive Body (1200-1800 words)**: 
+           - You MUST write EXACTLY 8 major sections separated by H2 headings.
+           - EACH H2 section MUST contain 3 to 4 substantial paragraphs of deeply researched content.
+           - Use H3 subheadings frequently to break down complex medical/fitness concepts.
+           - **Formatting**: Short paragraphs (3-4 sentences), extensive use of bullet points, and bold text for emphasis.
+        4. **Visual Enhancements (MANDATORY)**:
+           - **Callouts**: Inject at least 3 markdown callouts using this exact syntax:
+             > [!TIP] \n> Practical actionable advice here. (Write 3-4 sentences inside)
+             > [!IMPORTANT] \n> Crucial medical context here. (Write 3-4 sentences inside)
+             > [!WARNING] \n> Common mistake to avoid here. (Write 3-4 sentences inside)
+           - **Comparison Table**: Create at least 1 Markdown table comparing concepts, foods, or routines (e.g., \`| Feature | Option A | Option B |\`) with detailed rows.
+        5. **Interactive Elements Focus**: Explicitly mention and link to at least 2 relevant WellTools calculators (e.g., BMI Calculator, BMR Calculator, Sleep Calculator, Target Heart Rate) using markdown links (e.g., \`[BMI Calculator](/bmi)\`).
+        6. **Myth vs Fact Section (150-200 words)**: A dedicated H2 section debunking 3 common misconceptions, providing paragraph-length explanations for each.
+        7. **Summary / Key Takeaways**: Bulleted list of 5 main points at the end.
+        8. **In-Article Images**: Insert exactly 2 images within the "content" markdown using: \`![Alt Text](https://image.pollinations.ai/prompt/[URL_ENCODED_PROMPT_IN_ENGLISH])\`. Placed after major H2s.
 
         OUTPUT FORMAT: Single Valid JSON Object.
         {
-          "title": "SEO Optimized Title",
+          "title": "SEO Optimized Title (50-60 chars)",
           "category": "${selectedTopic.group}",
-          "excerpt": "Meta Description",
-          "imagePrompt": "precise, visual description of a photorealistic image for the post (e.g., \"overhead shot of fresh vegetables on wood table, soft window light, high resolution\"). Focus on natural, authentic, Unsplash-style photography. Avoid text in image.",
+          "excerpt": "Meta Description (140-160 chars)",
+          "imagePrompt": "precise english visual description for the hero image...",
           "imageAlt": "SEO optimized alt text in ${lang.name}",
-          "content": "Full markdown content starting with H1...",
-          "keywords": ["keyword1", "keyword2", "keyword3"],
+          "content": "Full markdown content starting with H1... MUST INCLUDE callouts (> [!TIP]), Markdown Tables, H2s, H3s, bullet points, and 2 in-line image links.",
+          "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"],
+          "author": {
+            "name": "Expert Name",
+            "role": "Expert Credentials",
+            "bio": "Short 1-sentence professional bio."
+          },
+          "reviewedBy": {
+            "name": "Dr. Reviewer Name",
+            "credentials": "MD / Facharzt / etc."
+          },
+          "factCheckedBy": {
+            "name": "Fact Checker Name"
+          },
           "faq": [
-            {"question": "Long-tail question 1", "answer": "Detailed answer 1 (50-100 words)"},
-            {"question": "Long-tail question 2", "answer": "Detailed answer 2 (50-100 words)"},
-            {"question": "Long-tail question 3", "answer": "Detailed answer 3 (50-100 words)"},
-            {"question": "Long-tail question 4", "answer": "Detailed answer 4 (50-100 words)"},
-            {"question": "Long-tail question 5", "answer": "Detailed answer 5 (50-100 words)"},
-            {"question": "Long-tail question 6", "answer": "Detailed answer 6 (50-100 words)"},
-            {"question": "Long-tail question 7", "answer": "Detailed answer 7 (50-100 words)"}
+            {"question": "Long-tail question 1", "answer": "Detailed answer 1"},
+            {"question": "Long-tail question 2", "answer": "Detailed answer 2"}
           ],
           "sources": [
-            {"title": "Reputable Source (e.g., PubMed, Mayo Clinic)", "url": "https://..."}
+            {"title": "WHO: Topic Name", "url": "https://www.who.int/..."},
+            {"title": "NIH: Medical Study", "url": "https://pubmed.ncbi.nlm.nih.gov/..."}
           ]
         }
         `;

@@ -84,19 +84,22 @@
             "id": 38,
             "group": "body_preservation",
             "title": "Hydration & Cognitive Function: The Water-Brain Connection",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-28"
         },
         {
             "id": 39,
             "group": "body_preservation",
             "title": "Intermittent Fasting: Autophagy & Cellular Repair Explained",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-28"
         },
         {
             "id": 40,
             "group": "body_preservation",
             "title": "Stress Management: Cortisol's Impact on Weight & Longevity",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-02-28"
         },
         {
             "id": 5,

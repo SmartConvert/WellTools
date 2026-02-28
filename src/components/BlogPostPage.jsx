@@ -89,7 +89,18 @@ const parseMarkdown = (text, ctaBlock) => {
         if (line.trim().startsWith('> [!')) {
             const typeMatch = line.match(/> \[!(.*?)\]/);
             const type = typeMatch ? typeMatch[1].toUpperCase() : 'NOTE';
-            const content = line.split(']').slice(1).join(']').trim();
+            // The AI often outputs multi-line callouts like:
+            // > [!IMPORTANT]
+            // > Important text here...
+            // Let's grab the content from the same line if it exists.
+            let content = line.split(']').slice(1).join(']').replace(/^>/, '').trim();
+
+            // If the content is empty on the first line, we need to look ahead
+            // However, our parseMarkdown function goes line-by-line.
+            // A simpler fix since we only have single lines here, is to handle the next line if it starts with "> ".
+            // But since this maps line-by-line, the easiest way is to adjust the CSS or handle it in the prompt.
+            // Let's just render the current line's content if there is any.
+            // Wait, looking at the code, `content` was parsing everything after `]`.
             const styles = {
                 TIP: { icon: <Lightbulb className="w-5 h-5 text-amber-500" />, bg: 'bg-amber-50/50 dark:bg-amber-900/10', border: 'border-amber-200 dark:border-amber-900/30' },
                 IMPORTANT: { icon: <Info className="w-5 h-5 text-emerald-500" />, bg: 'bg-emerald-50/50 dark:bg-emerald-900/10', border: 'border-emerald-200 dark:border-emerald-900/30' },
@@ -105,6 +116,15 @@ const parseMarkdown = (text, ctaBlock) => {
                         {parseInlineMarkdown(content)}
                     </div>
                 </div>
+            );
+        }
+
+        // Handle continuation lines of blockquotes
+        if (line.trim().startsWith('> ') && !line.trim().startsWith('> [!')) {
+            return (
+                <p key={i} className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300 italic font-medium ml-10">
+                    {parseInlineMarkdown(line.replace(/^>\s*/, ''))}
+                </p>
             );
         }
 

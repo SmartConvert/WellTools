@@ -119,7 +119,8 @@
             "id": 7,
             "group": "health_calculators",
             "title": "Fat Intake Calculator",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-01"
         },
         {
             "id": 8,

@@ -126,7 +126,8 @@
             "id": 8,
             "group": "health_calculators",
             "title": "Carbohydrates Calculator",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-03"
         },
         {
             "id": 9,

@@ -133,7 +133,8 @@
             "id": 9,
             "group": "health_calculators",
             "title": "BMR Calculator",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-05"
         },
         {
             "id": 10,

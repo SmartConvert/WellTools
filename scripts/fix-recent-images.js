@@ -29,30 +29,32 @@ async function fixRecentImages() {
             // 1. Fix Hero Image
             if (post.image && post.image.includes('pollinations.ai')) {
                 const urlObj = new URL(post.image);
-                // Extract the prompt path e.g. /prompt/A%20cat
-                const promptPath = urlObj.pathname.replace('/prompt/', '');
+                // Extract the prompt path e.g. /prompt/A%20cat or /p/A%20cat
+                let promptPath = urlObj.pathname;
+                if (promptPath.startsWith('/prompt/')) promptPath = promptPath.replace('/prompt/', '');
+                if (promptPath.startsWith('/p/')) promptPath = promptPath.replace('/p/', '');
 
-                // Add a random seed to bypass cache
-                const newHeroUrl = `https://image.pollinations.ai/prompt/${promptPath}?width=1200&height=630&nologo=true&seed=${generateSeed()}&model=flux`;
+                // Add a random seed to bypass cache and use new domain
+                const newHeroUrl = `https://pollinations.ai/p/${promptPath}?width=1200&height=630&nologo=true&seed=${generateSeed()}&model=flux`;
                 post.image = newHeroUrl;
-                console.log(`  ✅ Hero image updated with seed`);
+                console.log(`  ✅ Hero image updated with seed and new domain`);
             }
 
             // 2. Fix In-line Images
             if (post.content) {
                 let updatedCount = 0;
                 post.content = post.content.replace(
-                    /!\[([^\]]+)\]\(https:\/\/image\.pollinations\.ai\/prompt\/([^)]+?)\)/g,
+                    /!\[([^\]]+)\]\(https:\/\/(?:image\.)?pollinations\.ai\/(?:prompt|p)\/([^)]+?)\)/g,
                     (match, alt, promptPart) => {
                         // Clean up existing query params if found to build fresh
                         let cleanPrompt = promptPart.split('?')[0];
                         // Ensure prompt part itself doesn't have spaces
                         cleanPrompt = cleanPrompt.replace(/ /g, '%20');
                         updatedCount++;
-                        return `![${alt}](https://image.pollinations.ai/prompt/${cleanPrompt}?width=1200&height=630&nologo=true&seed=${generateSeed()}&model=flux)`;
+                        return `![${alt}](https://pollinations.ai/p/${cleanPrompt}?width=1200&height=630&nologo=true&seed=${generateSeed()}&model=flux)`;
                     }
                 );
-                console.log(`  ✅ ${updatedCount} in-line images updated with seed`);
+                console.log(`  ✅ ${updatedCount} in-line images updated with seed and new domain`);
             }
         }
 

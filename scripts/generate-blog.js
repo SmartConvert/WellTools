@@ -214,9 +214,9 @@ async function generatePost() {
 
         IN-ARTICLE IMAGES (CRITICAL FORMAT):
         When inserting images in the content markdown, use EXACTLY this format:
-        ![Descriptive Alt Text](https://image.pollinations.ai/prompt/PROMPT_HERE?width=1200&height=630&nologo=true&model=flux)
+        ![Descriptive Alt Text](https://pollinations.ai/p/PROMPT_HERE?width=1200&height=630&nologo=true&model=flux)
         Where PROMPT_HERE is a URL-encoded English description (use %20 for spaces, max 15 words).
-        Example: ![Woman practicing yoga at sunrise](https://image.pollinations.ai/prompt/Woman%20practicing%20yoga%20at%20sunrise?width=1200&height=630&nologo=true&model=flux)
+        Example: ![Woman practicing yoga at sunrise](https://pollinations.ai/p/Woman%20practicing%20yoga%20at%20sunrise?width=1200&height=630&nologo=true&model=flux)
         Place exactly 2 images in the content, after the 2nd and 5th H2 sections.
 
         CONTENT STRUCTURE (MANDATORY FORMATTING - USE GITHUB MARKDOWN):
@@ -308,13 +308,13 @@ async function generatePost() {
 
             if (newContent.content) {
                 newContent.content = newContent.content.replace(
-                    /!\[([^\]]+)\]\(https:\/\/image\.pollinations\.ai\/prompt\/([^)]+?)\)/g,
+                    /!\[([^\]]+)\]\(https:\/\/pollinations\.ai\/p\/([^)]+?)\)/g,
                     (match, alt, promptPart) => {
                         // Clean up existing query params if found to build fresh
                         let cleanPrompt = promptPart.split('?')[0];
                         // Ensure prompt part itself doesn't have spaces
                         cleanPrompt = cleanPrompt.replace(/ /g, '%20');
-                        return `![${alt}](https://image.pollinations.ai/prompt/${cleanPrompt}?width=1200&height=630&nologo=true&seed=${generateSeed()}&model=flux)`;
+                        return `![${alt}](https://pollinations.ai/p/${cleanPrompt}?width=1200&height=630&nologo=true&seed=${generateSeed()}&model=flux)`;
                     }
                 );
             }
@@ -325,7 +325,7 @@ async function generatePost() {
             const trimmedPrompt = basePrompt.slice(0, 150);
             const enhancedPrompt = `${trimmedPrompt}, photorealistic, cinematic`;
             const encodedPrompt = encodeURIComponent(enhancedPrompt);
-            const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1200&height=630&nologo=true&seed=${generateSeed()}&model=flux`;
+            const imageUrl = `https://pollinations.ai/p/${encodedPrompt}?width=1200&height=630&nologo=true&seed=${generateSeed()}&model=flux`;
 
 
             const postObj = {

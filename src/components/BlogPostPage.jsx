@@ -400,90 +400,103 @@ const EndArticleCTA = ({ setCurrentPage }) => (
 
 const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
 
-    // ── Schema Markup (Article + FAQ + MedicalWebPage) ──────────────────────
+    // ── Schema Markup (MedicalArticle + FAQ + Breadcrumb) ────────────────────
     useEffect(() => {
         if (!post) return;
 
-        // 1. Article Schema
+        const SITE_URL = 'https://welltools.online';
+        const pageUrl = window.location.href;
+
+        // Resolve potentially relative image URLs to absolute
+        const resolveImageUrl = (url) => {
+            if (!url) return `${SITE_URL}/images/hero_wellness.png`;
+            if (url.startsWith('http')) return url;
+            return `${SITE_URL}${url.startsWith('/') ? '' : '/'}${url}`;
+        };
+
+        const heroImage = resolveImageUrl(post.image);
+        const wordCount = post.content ? post.content.split(/\s+/).length : undefined;
+
+        // 1. MedicalArticle Schema (covers Article requirements + health relevance signal)
         const articleSchema = {
             '@context': 'https://schema.org',
-            '@type': 'Article',
+            '@type': 'MedicalArticle',
             headline: post.title,
-            image: post.image || 'https://welltools.online/images/hero_fitness.png',
-            datePublished: post.date || new Date().toISOString(),
-            dateModified: post.lastUpdated || post.date || new Date().toISOString(),
-            author: {
-                '@type': 'Organization',
-                name: post.author?.name || 'WellTools Health Team',
-                url: 'https://welltools.online/about',
+            name: post.title,
+            description: post.excerpt || post.title,
+            image: [heroImage],
+            datePublished: post.date ? `${post.date}T00:00:00Z` : new Date().toISOString(),
+            dateModified: post.lastUpdated ? `${post.lastUpdated}T00:00:00Z` : (post.date ? `${post.date}T00:00:00Z` : new Date().toISOString()),
+            ...(wordCount && { wordCount }),
+            inLanguage: 'en-US',
+            url: pageUrl,
+            mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': pageUrl,
             },
-            ...(post.reviewedBy && {
-                reviewedBy: {
-                    '@type': 'Person',
-                    name: post.reviewedBy.name,
-                    jobTitle: post.reviewedBy.credentials,
-                },
-            }),
+            author: {
+                '@type': 'Person',
+                name: post.author?.name || 'WellTools Health Team',
+                jobTitle: post.author?.role || 'Health & Wellness Writer',
+                ...(post.author?.bio && { description: post.author.bio }),
+                url: `${SITE_URL}/about`,
+            },
             publisher: {
                 '@type': 'Organization',
                 name: 'WellTools',
+                url: SITE_URL,
                 logo: {
                     '@type': 'ImageObject',
-                    url: 'https://welltools.online/favicon.svg',
+                    url: `${SITE_URL}/favicon.svg`,
+                    width: 512,
+                    height: 512,
                 },
             },
-            description: post.excerpt || post.title,
-            mainEntityOfPage: {
-                '@type': 'WebPage',
-                '@id': window.location.href,
-            },
+            ...(post.reviewedBy?.name && {
+                reviewedBy: {
+                    '@type': 'Person',
+                    name: post.reviewedBy.name,
+                    ...(post.reviewedBy.credentials && { jobTitle: post.reviewedBy.credentials }),
+                },
+                medicalAudience: {
+                    '@type': 'MedicalAudience',
+                    audienceType: 'Patients',
+                },
+            }),
+            ...(post.keywords?.length && {
+                keywords: post.keywords.join(', '),
+            }),
         };
 
-        // 2. Breadcrumb Schema
+        // 2. BreadcrumbList Schema
         const breadcrumbSchema = {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://welltools.online' },
-                { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://welltools.online/blog' },
-                { '@type': 'ListItem', position: 3, name: post.title, item: window.location.href },
+                {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Home',
+                    item: SITE_URL,
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: 'Blog',
+                    item: `${SITE_URL}/blog-health-and-fitness-tips`,
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 3,
+                    name: post.title,
+                    item: pageUrl,
+                },
             ],
         };
 
-        // 3. MedicalWebPage Schema — for ALL articles
-        const medicalSchema = {
-            '@context': 'https://schema.org',
-            '@type': 'MedicalWebPage',
-            name: post.title,
-            url: window.location.href,
-            description: post.excerpt || post.title,
-            specialty: 'https://schema.org/DietNutrition',
-            lastReviewed: post.reviewedBy?.reviewDate || post.lastUpdated || post.date,
-            ...(post.reviewedBy && {
-                reviewedBy: {
-                    '@type': 'Person',
-                    name: post.reviewedBy.name,
-                    jobTitle: post.reviewedBy.credentials,
-                },
-            }),
-            about: {
-                '@type': 'MedicalEntity',
-                name: post.title,
-            },
-            audience: {
-                '@type': 'Audience',
-                audienceType: 'Health-conscious individuals',
-            },
-            publisher: {
-                '@type': 'Organization',
-                name: 'WellTools',
-                url: 'https://welltools.online',
-            },
-        };
+        // 3. FAQPage Schema — only if post has FAQ entries
+        const schemas = [articleSchema, breadcrumbSchema];
 
-        const schemas = [articleSchema, breadcrumbSchema, medicalSchema];
-
-        // 4. FAQ Schema — only if post has FAQ
         if (post.faq && post.faq.length > 0) {
             const faqSchema = {
                 '@context': 'https://schema.org',
@@ -500,6 +513,7 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
             schemas.push(faqSchema);
         }
 
+        // Inject all schemas as a single <script> tag
         const script = document.createElement('script');
         script.type = 'application/ld+json';
         script.id = `article-schema-${post.id}`;

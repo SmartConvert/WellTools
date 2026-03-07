@@ -91,30 +91,39 @@ async function getWorkingModel(genAI) {
 }
 
 async function generateWithPerplexity(prompt) {
-    console.log("  🌐 Using Perplexity API (sonar-reasoning)...");
+    const isOpenRouter = PERPLEXITY_API_KEY.startsWith("sk-or-");
+    const endpoint = isOpenRouter
+        ? "https://openrouter.ai/api/v1/chat/completions"
+        : "https://api.perplexity.ai/chat/completions";
+
+    const modelName = isOpenRouter ? "perplexity/sonar" : "sonar-reasoning";
+
+    console.log(`  🌐 Using API (${modelName}) via ${isOpenRouter ? 'OpenRouter' : 'Perplexity'}...`);
+
     try {
         const payload = {
-            model: "sonar", // Changed to standard sonar for maximum compatibility
+            model: modelName,
+            max_tokens: 6000,
             messages: [
                 { role: "system", content: "You are a professional blog post generator. Output strictly JSON formatting." },
                 { role: "user", content: prompt }
             ]
-            // Removed response_format to avoid 400 errors if not supported
         };
 
-        const response = await fetch("https://api.perplexity.ai/chat/completions", {
+        const response = await fetch(endpoint, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${PERPLEXITY_API_KEY}`,
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "HTTP-Referer": "https://welltools.online",
+                "X-Title": "WellTools"
             },
             body: JSON.stringify(payload)
         });
 
         if (!response.ok) {
             const errorBody = await response.text();
-            throw new Error(`Perplexity API Error: ${response.status} ${response.statusText} - ${errorBody}`);
+            throw new Error(`API Error: ${response.status} ${response.statusText} - ${errorBody}`);
         }
 
         const data = await response.json();
@@ -345,9 +354,10 @@ async function generatePost() {
 
         } catch (error) {
             console.error(`  ❌ Failed ${lang.name}:`, error.message);
-            // We continue to next language even if one fails, to try to get partial results? 
-            // Or exit? strict process suggests exit to ensure consistency.
-            // But for robustness, let's log and continue, but mark topic as NOT completed if all fail.
+            // Critical Fix: If generation fails, we must exit immediately to prevent 
+            // the GitHub Action from falsely marking the topic as completed.
+            console.error("  🚨 CRITICAL ERROR: Aborting generation to preserve topic queue.");
+            process.exit(1);
         }
     }
 

@@ -106,14 +106,13 @@
             "group": "health_calculators",
             "title": "Sleep Hours Calculator",
             "completed": true,
-            "completedDate": "2026-02-09"
+            "completedDate": "2026-03-07"
         },
         {
             "id": 6,
             "group": "health_calculators",
             "title": "Protein Intake Calculator",
-            "completed": true,
-            "completedDate": "2026-02-11"
+            "completed": false
         },
         {
             "id": 7,

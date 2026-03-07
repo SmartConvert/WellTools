@@ -140,7 +140,8 @@
             "id": 10,
             "group": "health_calculators",
             "title": "TDEE Calculator",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-07"
         },
         {
             "id": 21,

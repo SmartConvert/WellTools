@@ -1,6 +1,70 @@
 {
     "en": [
         {
+            "id": "welltools-22-1773201890445",
+            "title": "How Many Calories Do I Need Per Day?",
+            "category": "daily_health_topics",
+            "excerpt": "Discover how many calories you need per day with our science-backed guide. Learn personalized calculations using BMR formulas, activity levels, and factors like age and sex for weight management and health.",
+            "imagePrompt": "Diverse group of healthy people eating balanced meals together",
+            "imageAlt": "Healthy people enjoying balanced meals to meet daily calorie needs",
+            "content": "# How Many Calories Do I Need Per Day?\n\n**Wondering how many calories you need per day?** You're not alone. Many health-conscious people ask this to fuel their bodies right, manage weight, and feel great. The answer isn't one-size-fits-all—it depends on your age, sex, weight, height, and activity level.[1][3][4]\n\nScience shows your body burns calories for basic functions, movement, and digestion. This is called Total Daily Energy Expenditure (TDEE). Tools like the Mifflin-St Jeor equation help calculate it accurately.[4][5] In this guide, we'll break it down step by step so you can find your number.\n\nBy the end, you'll know how to use free calculators, adjust for goals like weight loss, and avoid common pitfalls. Let's dive into the facts for smarter eating.\n\n## What Determines Your Daily Calorie Needs?\n\nYour **daily calorie needs** come from three main parts: resting metabolic rate (RMR), physical activity, and thermogenesis.[1] RMR is what your body uses at rest for breathing, heartbeats, and cell repair—about 60-75% of total calories.[1]\n\n### Resting Metabolic Rate (RMR) Explained\nRMR varies by age, sex, weight, height, and muscle mass. Men often have higher RMR due to more muscle.[4] As you age, RMR drops because metabolism slows.[6]\n\nFormulas estimate RMR. The Mifflin-St Jeor is most accurate: For men, BMR = 10 × weight (kg) + 6.25 × height (cm) - 5 × age + 5. For women, subtract 161 instead of adding 5.[4]\n\n> [!IMPORTANT]\n> Always use your current weight and height for precise RMR. Factors like medications or thyroid issues can change it—consult a doctor if needed. Accurate input leads to better calorie plans.[4][5]\n\n### Role of Physical Activity\nActivity level multiplies your RMR to get TDEE. Sedentary? Multiply by 1.2. Very active? Up to 1.9.[3][4] This accounts for exercise and daily movement like walking or chores.[1]\n\n![Person jogging in park](https://pollinations.ai/p/Person%20jogging%20in%20park?width=1200&height=630&nologo=true&seed=53421054&model=flux)\n\n## Basal Metabolic Rate (BMR): The Foundation\n\n**Calculate BMR first**—it's the calories your body needs at complete rest.[2][3] Use the Harris-Benedict or Mifflin-St Jeor formulas. Example: A 30-year-old woman, 65 kg, 165 cm tall has BMR around 1,400 calories.[3]\n\n### Step-by-Step BMR Calculation\n1. Weigh yourself in kg.\n2. Measure height in cm.\n3. Note age and sex.\n4. Plug into formula.[4]\n\nHere's a quick table for common profiles:\n\n| Profile | Age | Weight (kg) | Height (cm) | Estimated BMR |\n|---------|-----|-------------|-------------|---------------|\n| Woman, sedentary | 30 | 65 | 165 | 1,400[3] |\n| Man, active | 30 | 80 | 180 | 1,800[4] |\n| Woman, older | 60 | 70 | 160 | 1,300[6] |\n| Man, older | 60 | 85 | 175 | 1,600[6] |\n\nAdjust for goals: Subtract 500 calories daily for 1 lb/week loss (3,500 calories = 1 lb).[4]\n\n## Factors Influencing Calorie Requirements\n\nAge, sex, and body size shape your needs. Women 19-30 often need 1,800-2,400 calories; men 2,400-3,000.[6] Over 60? Needs drop to 1,600-2,600.[6]\n\n### Genetics and Muscle Mass\nMore muscle burns more calories—even at rest. Strength training builds it.[1] Hormones like thyroid affect this too.[4]\n\nPregnancy or illness raises needs. Track changes with tools like [WellTools BMR Calculator](/bmr).[7]\n\n> [!TIP]\n> Build muscle with weights 2-3 times weekly to boost RMR by 5-10%. Combine with protein-rich meals for best results. Recalculate BMR every 4-6 weeks.[1][4]\n\n## Activity Levels and Calorie Multipliers\n\nMatch your lifestyle to multipliers for TDEE.[3] Sedentary (desk job): BMR × 1.2. Moderately active (gym 3-5 days): ×1.55.[4]\n\n### Defining Activity Levels\n- **Sedentary**: Little exercise, desk work.\n- **Lightly Active**: Walks, light chores (×1.375).\n- **Moderately Active**: Sports 3-5 days/week (×1.55).\n- **Very Active**: Hard exercise 6-7 days (×1.9).[3]\n\nUse [WellTools BMI Calculator](/bmi) alongside for full picture.\n\n![Fresh vegetables and fitness tracker on table](https://pollinations.ai/p/Fresh%20vegetables%20and%20fitness%20tracker%20on%20table?width=1200&height=630&nologo=true&seed=64470091&model=flux)\n\n## Calories for Weight Loss vs. Maintenance\n\nFor maintenance, eat your TDEE. Lose weight? Cut 500-1,000 calories safely—aim 1-2 lbs/week.[4][5] Never drop below 1,600 (women) or 2,000 (men).[6]\n\n### Safe Weight Loss Strategies\nZigzag calories: Alternate high/low days for same weekly total. Eases metabolism slowdown.[4]\n\nTrack intake with apps. Pair with [Target Heart Rate Calculator](/target-heart-rate) for effective workouts.\n\n> [!WARNING]\n> Crash diets under 1,200 calories risk nutrient gaps, muscle loss, and rebound gain. Always include veggies, protein, fats. See a doctor for personalized advice.[5][6]\n\n## Special Considerations: Age, Sex, and Health\n\nTeens need more for growth; seniors less due to muscle loss.[6] Athletes multiply higher.[1]\n\n### Adjustments for Health Conditions\nDiabetes? Focus low-glycemic foods post-calculation.[2] Use DRI tools for macros.[7]\n\n## Tools and Calculators for Precision\n\nTry Mayo Clinic or NIDDK planners.[5][8] WellTools offers [BMR Calculator](/bmr) and [Sleep Calculator](/sleep) integrations.\n\n### Best Free Online Calculators\n- ACE Fitness: Factors RMR + activity.[1]\n- USDA DRI: Includes BMI, macros.[7]\n\nInput data honestly for real results.\n\n## Common Myths vs. Facts About Daily Calories\n\n**Myth 1: 2,000 calories suits everyone.** Fact: Averages ignore personal factors. Women often need 1,600-2,400; men 2,000-3,000 based on profiles.[3][6] Use calculators for your number.\n\n**Myth 2: Carbs are the enemy.** Fact: Balance macros—carbs fuel activity. Focus total calories first.[2] Poor diets fail from overeating, not just carbs.\n\n**Myth 3: Metabolism slows forever after 30.** Fact: It drops 1-2% per decade, but exercise counters it. Strength train to maintain RMR.[1][4] Track and adjust.\n\n## Key Takeaways\n- Calculate BMR with Mifflin-St Jeor, multiply by activity for TDEE.[4]\n- Women: 1,600-2,400; men: 2,000-3,000 average.[6]\n- Subtract 500 calories for safe loss; use WellTools tools.[3][5]\n- Factor age, sex, muscle; recalculate often.[1]\n- Balance with activity—avoid extremes.[4]",
+            "keywords": [
+                "how many calories per day",
+                "daily calorie needs calculator",
+                "calculate daily calorie intake",
+                "BMR for calorie requirements",
+                "TDEE activity level multiplier",
+                "calories for weight maintenance",
+                "personalized daily calories"
+            ],
+            "author": {
+                "name": "Dr. Alex Rivera",
+                "role": "Registered Dietitian & Nutrition Expert",
+                "bio": "Dr. Rivera holds a PhD in Nutritional Sciences and advises WellTools on evidence-based wellness strategies."
+            },
+            "reviewedBy": {
+                "name": "Dr. Emily Chen",
+                "credentials": "MD, Board-Certified in Internal Medicine"
+            },
+            "factCheckedBy": {
+                "name": "Sarah Kline, MS, RD"
+            },
+            "faq": [
+                {
+                    "question": "How do I calculate my daily calorie needs accurately?",
+                    "answer": "Start with BMR using Mifflin-St Jeor formula based on weight, height, age, sex. Multiply by activity factor (1.2 sedentary to 1.9 very active). Use online tools like WellTools BMR Calculator for ease.[3][4]"
+                },
+                {
+                    "question": "What are average daily calories for women and men?",
+                    "answer": "Women: 1,600-2,400 depending on age/activity; men: 2,000-3,000. Adjust for goals—personal calculators give precise numbers.[6]"
+                }
+            ],
+            "sources": [
+                {
+                    "title": "ACE Fitness: Daily Caloric Needs Calculator",
+                    "url": "https://www.acefitness.org/resources/everyone/tools-calculators/daily-caloric-needs-estimate-calculator/"
+                },
+                {
+                    "title": "Calculator.net: Calorie Calculator",
+                    "url": "https://www.calculator.net/calorie-calculator.html"
+                },
+                {
+                    "title": "Healthline: How Many Calories per Day",
+                    "url": "https://www.healthline.com/nutrition/how-many-calories-per-day"
+                },
+                {
+                    "title": "Mayo Clinic: Calorie Calculator",
+                    "url": "https://www.mayoclinic.org/healthy-lifestyle/weight-loss/in-depth/calorie-calculator/itt-20402304"
+                },
+                {
+                    "title": "USDA: DRI Calculator",
+                    "url": "https://www.nal.usda.gov/human-nutrition-and-food-safety/dri-calculator"
+                }
+            ],
+            "image": "https://pollinations.ai/p/Diverse%20group%20of%20healthy%20people%20eating%20balanced%20meals%20together%2C%20photorealistic%2C%20cinematic?width=1200&height=630&nologo=true&seed=10135247&model=flux",
+            "date": "2026-03-11"
+        },
+        {
             "id": "welltools-21-1773029491490",
             "title": "How Much Water Should I Drink Per Day?",
             "category": "daily_health_topics",

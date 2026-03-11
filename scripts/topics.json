@@ -154,7 +154,8 @@
             "id": 22,
             "group": "daily_health_topics",
             "title": "How many calories do I need per day?",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-11"
         },
         {
             "id": 23,

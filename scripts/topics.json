@@ -161,7 +161,8 @@
             "id": 23,
             "group": "daily_health_topics",
             "title": "Why do I feel tired all the time?",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-13"
         },
         {
             "id": 26,

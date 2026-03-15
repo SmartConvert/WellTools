@@ -168,7 +168,8 @@
             "id": 26,
             "group": "daily_health_topics",
             "title": "How to lose weight safely",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-15"
         },
         {
             "id": 27,

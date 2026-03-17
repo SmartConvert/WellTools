@@ -175,7 +175,8 @@
             "id": 27,
             "group": "daily_health_topics",
             "title": "How to reduce belly fat",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-17"
         },
         {
             "id": 28,

@@ -182,7 +182,8 @@
             "id": 28,
             "group": "daily_health_topics",
             "title": "Best foods for energy",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-19"
         }
     ]
 }

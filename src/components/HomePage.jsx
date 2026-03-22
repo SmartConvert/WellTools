@@ -32,62 +32,86 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
     return (
         <div className="pt-20 pb-16 px-4 bg-slate-50 dark:bg-slate-950 transition-colors duration-500">
             <div className="max-w-7xl mx-auto">
-                {/* Premium Hero Section */}
-                <div className="relative bg-slate-900 rounded-[2.5rem] md:rounded-[4rem] overflow-hidden mb-16 lg:mb-24 shadow-2xl border border-white/10 group">
-                    {/* Dynamic Animated Orbs for Premium Background */}
-                    <div className="absolute top-0 right-1/4 w-[30rem] h-[30rem] bg-emerald-500/20 rounded-full blur-[100px] mix-blend-screen opacity-50 group-hover:opacity-80 transition-opacity duration-1000"></div>
-                    <div className="absolute bottom-0 left-1/4 w-[30rem] h-[30rem] bg-cyan-500/20 rounded-full blur-[100px] mix-blend-screen opacity-50 group-hover:opacity-80 transition-opacity duration-1000"></div>
+                {/* Premium Hero Section - Global SaaS Style */}
+                <div className="relative mb-24 lg:mb-32">
+                    {/* Ambient Glows replacing the heavy box card */}
+                    <div className="absolute top-[-10%] right-[-5%] w-[30rem] md:w-[40rem] h-[30rem] md:h-[40rem] bg-emerald-500/15 dark:bg-emerald-500/10 rounded-full blur-[100px] md:blur-[120px] mix-blend-multiply dark:mix-blend-screen pointer-events-none"></div>
+                    <div className="absolute bottom-[-10%] left-[-10%] w-[30rem] md:w-[40rem] h-[30rem] md:h-[40rem] bg-cyan-500/15 dark:bg-cyan-500/10 rounded-full blur-[100px] md:blur-[120px] mix-blend-multiply dark:mix-blend-screen pointer-events-none"></div>
 
-                    <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center p-6 sm:p-8 md:p-16 lg:p-20 z-10">
+                    <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center pt-8 sm:pt-16 z-10 w-full">
                         {/* Left Content */}
-                        <div className="text-center lg:text-left">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-sm font-bold mb-6 hover:bg-emerald-500/20 transition-colors cursor-pointer">
-                                <Sparkles className="w-4 h-4" />
+                        <div className="text-center lg:text-left flex flex-col items-center lg:items-start z-10">
+                            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-full border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm font-semibold shadow-sm mb-8 hover:scale-105 transition-transform cursor-pointer">
+                                <Sparkles className="w-4 h-4 text-emerald-500" />
                                 <span>Free Professional Health Tools</span>
                             </div>
-                            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] font-black text-white mb-6 tracking-tighter leading-[1.05]">
-                                Science-Backed <br />
-                                <span className="bg-linear-to-r from-emerald-400 via-cyan-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(52,211,153,0.3)]">
+                            
+                            <h1 className="text-[3.5rem] sm:text-7xl lg:text-[5.5rem] font-black text-slate-900 dark:text-white mb-6 tracking-[-0.04em] leading-[1.05]">
+                                Science-Backed<br />
+                                <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 via-teal-400 to-cyan-500">
                                     Health Insights
                                 </span>
                             </h1>
-                            <p className="text-lg sm:text-xl text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10 font-medium">
+                            
+                            <p className="text-lg sm:text-xlg lg:text-2xl text-slate-600 dark:text-slate-400 max-w-xl font-medium leading-relaxed mb-10">
                                 Access 9+ medically-validated calculators for BMI, calories, and nutrition. Get instant data to drive your wellness journey.
                             </p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            
+                            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                                 <button
                                     onClick={() => {
                                         const el = document.getElementById('tools-grid');
                                         el?.scrollIntoView({ behavior: 'smooth' });
                                     }}
-                                    className="relative overflow-hidden group px-8 py-4 bg-linear-to-r from-emerald-500 to-cyan-600 text-white rounded-2xl font-black text-lg shadow-[0_0_40px_rgba(16,185,129,0.3)] hover:shadow-[0_0_60px_rgba(16,185,129,0.5)] hover:-translate-y-1 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                                    className="group px-8 py-4 bg-slate-900 text-white dark:bg-white dark:text-slate-900 rounded-2xl font-black text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto"
                                 >
-                                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
-                                    <span className="relative flex items-center gap-2">
-                                        {t.explore_tools}
-                                        <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                    </span>
+                                    {t.explore_tools}
+                                    <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </button>
                                 <button
                                     onClick={() => setCurrentPage('meal-planner')}
-                                    className="px-8 py-4 bg-white/5 backdrop-blur-xl text-white border border-white/20 rounded-2xl font-black text-lg hover:bg-white/10 hover:-translate-y-1 hover:border-white/40 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xl"
+                                    className="px-8 py-4 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white rounded-2xl font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:-translate-y-1 transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto shadow-sm"
                                 >
                                     {t.meal_planner_title}
                                 </button>
                             </div>
                         </div>
 
-                        {/* Right Image */}
-                        <div className="relative lg:block transform lg:translate-y-0 transition-transform duration-1000">
-                            <div className="absolute inset-0 bg-linear-to-br from-emerald-500/30 to-cyan-500/30 rounded-[2.5rem] blur-3xl group-hover:scale-110 transition-transform duration-1000"></div>
-                            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10 aspect-[4/3] lg:aspect-square transform group-hover:-translate-y-4 group-hover:rotate-1 transition-all duration-700 ease-out">
-                                <img
-                                    src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&q=80&w=1200"
-                                    alt="Healthy Nutrition - Fresh Salmon and Lemon"
-                                    className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-1000"
-                                    loading="eager"
-                                />
-                                <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                        {/* Right Image - Floating Premium Frame */}
+                        <div className="relative w-full max-w-xl lg:max-w-2xl mx-auto lg:ml-auto z-10 pt-10 lg:pt-0">
+                            {/* Decorative Floating Elements */}
+                            <div className="absolute -top-6 -left-4 sm:-left-8 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 animate-[bounce_8s_infinite] z-20 flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-500/20 flex items-center justify-center text-emerald-500">
+                                    <Activity className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Metabolism</div>
+                                    <div className="text-base font-black text-slate-900 dark:text-white">Optimized</div>
+                                </div>
+                            </div>
+                            
+                            <div className="absolute -bottom-10 -right-4 sm:-right-6 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 animate-[bounce_10s_infinite_reverse] z-20 flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-500/20 flex items-center justify-center text-cyan-500">
+                                    <Scale className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Ideal BMI</div>
+                                    <div className="text-base font-black text-slate-900 dark:text-white leading-tight">22.4 <span className="text-emerald-500 text-sm ml-1">Perfect</span></div>
+                                </div>
+                            </div>
+
+                            {/* Main Image Container */}
+                            <div className="p-2 sm:p-4 bg-white/40 dark:bg-slate-800/40 backdrop-blur-3xl rounded-[2.5rem] sm:rounded-[3rem] border border-white/60 dark:border-slate-700/50 shadow-[0_20px_60px_-15px_rgba(16,185,129,0.15)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] transform -rotate-2 hover:rotate-0 transition-all duration-700 hover:scale-[1.02] group">
+                                <div className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden aspect-[4/3] shadow-inner bg-slate-100 dark:bg-slate-900">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&q=80&w=1200"
+                                        alt="Healthy Nutrition - Fresh Salmon and Lemon"
+                                        className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-1000"
+                                        loading="eager"
+                                    />
+                                    {/* Subtle Overlay for contrast */}
+                                    <div className="absolute inset-0 bg-linear-to-tr from-slate-900/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                                </div>
                             </div>
                         </div>
                     </div>

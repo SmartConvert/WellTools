@@ -104,8 +104,8 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                             <div className="p-2 sm:p-4 bg-white/40 dark:bg-slate-800/40 backdrop-blur-3xl rounded-[2.5rem] sm:rounded-[3rem] border border-white/60 dark:border-slate-700/50 shadow-[0_20px_60px_-15px_rgba(16,185,129,0.15)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] transform -rotate-2 hover:rotate-0 transition-all duration-700 hover:scale-[1.02] group">
                                 <div className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden aspect-[4/3] shadow-inner bg-slate-100 dark:bg-slate-900">
                                     <img
-                                        src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&q=80&w=1200"
-                                        alt="Healthy Nutrition - Fresh Salmon and Lemon"
+                                        src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?auto=format&fit=crop&q=80&w=1200"
+                                        alt="Modern smartwatch displaying health and fitness activity metrics"
                                         className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-1000"
                                         loading="eager"
                                     />

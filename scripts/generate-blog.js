@@ -186,87 +186,69 @@ async function generatePost() {
         TARGET AUDIENCE: Health-conscious individuals seeking science-backed advice.
         LANGUAGE: ${lang.name} (${lang.nuance})
         DIRECTION: ${lang.dir}
-        WORD COUNT CONSTRAINT: MUST BE BETWEEN 1200 AND 2500 WORDS.
+        WORD COUNT CONSTRAINT: MUST BE BETWEEN 2000 AND 3500 WORDS.
         READING LEVEL: Simple, clear, and accessible for a general audience (Grade 8-9). Use active voice.
 
         STRICT QUALITY GUIDELINES (E-E-A-T):
         1. **Expertise**: Content must demonstrate a deep understanding of physiology/nutrition.
-        2. **Accuracy**: No pseudoscience. Stick to consensus medical facts. Cite everything.
-        3. **Author Block**: You must generate a realistic Author profile (Name, Role, short 1-sentence bio) representing a WellTools expert (e.g., "Dr. Sarah Johnson, Registered Dietitian" or "Mark Stevens, Fitness Architect").
-        4. **Reviewer Block**: Include data for \`reviewedBy\` in the JSON to simulate medical fact-checking (e.g., "Dr. Emily Chen, MD").
+        2. **Accuracy**: No pseudoscience. Stick to consensus medical facts. You MUST include real, verifiable scientific sources (e.g., WHO, NIH, PubMed) in the "sources" JSON array.
+        3. **Author Block**: You must generate a realistic Author profile (Name, Role, short 1-sentence bio) representing a WellTools expert.
+        4. **Reviewer Block**: Include data for \`reviewedBy\` in the JSON to simulate medical fact-checking.
         5. **No Fluff**: Get straight to the point. Respect the reader's time.
 
         KEYWORD RESEARCH & STRATEGY (CRITICAL):
         1. Identify 5-7 high-impact, long-tail keywords (3-5 words each) relevant to the topic.
         2. **MANDATORY INTEGRATION**: You must insert these keywords naturally into:
-           - The SEO Meta Title (primary keyword, MUST be 50-60 characters total length).
+           - The SEO Meta Title (primary keyword, MUST start with or include a NUMBER like "7 Ways..." or "5 Best...", MUST be 50-60 characters total length).
            - The Meta Description (primary + secondary keyword, MUST be 140-160 characters).
-           - The H1 Headline (primary keyword in first 60 characters).
+           - The H1 Headline (MUST also include the primary keyword and the number).
            - The first 100 words (primary keyword at least once).
            - At least THREE H2 Subheadings.
         3. List these specific long-tail keywords in the JSON output "keywords" array.
 
         IMAGE GENERATION RULE:
-        You must generate a concise "Photographic Image Prompt" in ENGLISH (Maximum 20 words).
-        - Focus strictly on the VISUAL subject (e.g., "A healthy woman drinking water from a glass").
-        - Do not include meta-descriptions like "photorealistic" or "8k".
+        You must generate a concise "Photographic Image Prompt" in ENGLISH (Maximum 20 words) for the hero image.
+        - Focus STRICTLY on REAL FOOD or REAL PHYSICAL ACTIVITIES depending on the topic. Must look like a real photograph of a subject in action (e.g., "A fresh salad with avocado and grilled chicken" or "A person jogging in a sunny park"). Avoid abstract or medical-only visuals.
         - NO TEXT IN IMAGE.
 
-        IN-ARTICLE IMAGES (CRITICAL FORMAT):
-        When inserting images in the content markdown, use EXACTLY this format:
-        ![Descriptive Alt Text](https://pollinations.ai/p/PROMPT_HERE?width=1200&height=630&nologo=true&model=flux)
-        Where PROMPT_HERE is a URL-encoded English description (use %20 for spaces, max 15 words).
-        Example: ![Woman practicing yoga at sunrise](https://pollinations.ai/p/Woman%20practicing%20yoga%20at%20sunrise?width=1200&height=630&nologo=true&model=flux)
-        Place exactly 2 images in the content, after the 2nd and 5th H2 sections.
+        IN-ARTICLE IMAGES & INFOGRAPHICS (CRITICAL FORMAT):
+        1. **Photographic Images**: Insert exactly 2 real food/activity images in the content. Format (Markdown Image Links):
+           ![Descriptive Alt Text](https://pollinations.ai/p/PROMPT_HERE?width=1200&height=630&nologo=true&model=flux)
+           Where PROMPT_HERE is a URL-encoded English description of a real food or activity, max 15 words.
+        2. **Infographics**: Instead of a photo, you must generate 1 simple Infographic image. Prompt the image to be a clean diagram or illustration without text. Example prompt:
+           ![Topic Infographic](https://pollinations.ai/p/A%20clean%20minimalist%20infographic%20illustration%20about%20fitness%20metrics%20no%20text?width=800&height=1200&nologo=true&model=flux)
+           Place this infographic after the 3rd H2 section. Place the other 2 photographic images after the 2nd and 5th H2s.
 
         CONTENT STRUCTURE (MANDATORY FORMATTING - USE GITHUB MARKDOWN):
-        1. **H1 Headline**: The main article title.
-        2. **Introduction (150-200 words)**: Formulate a relatable problem, introduce the science, and promise a clear solution. Use the primary keyword in the first sentence. Write exactly 3 paragraphs.
-        3. **Deep Dive Body (1200-1800 words)**: 
+        1. **H1 Headline**: The main article title containing a number.
+        2. **Introduction (150-200 words)**: Formulate a relatable problem, introduce the science, and promise a clear solution. Write exactly 3 paragraphs.
+        3. **Deep Dive Body (1500-2500 words)**: 
            - You MUST write EXACTLY 8 major sections separated by H2 headings.
-           - EACH H2 section MUST contain 3 to 4 substantial paragraphs of deeply researched content.
+           - EACH H2 section MUST contain 4 to 5 substantial paragraphs of deeply researched content.
            - Use H3 subheadings frequently to break down complex medical/fitness concepts.
-           - **Formatting**: Short paragraphs (3-4 sentences), extensive use of bullet points, and bold text for emphasis.
-        4. **Visual Enhancements (MANDATORY)**:
-           - **Callouts**: Inject at least 3 markdown callouts using this exact syntax:
-             > [!TIP] \n> Practical actionable advice here. (Write 3-4 sentences inside)
-             > [!IMPORTANT] \n> Crucial medical context here. (Write 3-4 sentences inside)
-             > [!WARNING] \n> Common mistake to avoid here. (Write 3-4 sentences inside)
-           - **Comparison Table**: Create at least 1 Markdown table comparing concepts, foods, or routines (e.g., \`| Feature | Option A | Option B |\`) with detailed rows.
-        5. **Interactive Elements Focus**: Explicitly mention and link to at least 2 relevant WellTools calculators (e.g., BMI Calculator, BMR Calculator, Sleep Calculator, Target Heart Rate) using markdown links (e.g., \`[BMI Calculator](/bmi)\`).
-        6. **Myth vs Fact Section (150-200 words)**: A dedicated H2 section debunking 3 common misconceptions, providing paragraph-length explanations for each.
+           - **Formatting**: Short paragraphs, bullet points, bold text for emphasis.
+        4. **Visual Enhancements**:
+           - **Callouts**: Inject at least 3 markdown callouts (> [!TIP], > [!IMPORTANT], > [!WARNING]).
+           - **Comparison Table**: Create at least 1 Markdown table comparing concepts, foods, or routines with detailed rows.
+        5. **Interactive Elements Focus**: Explicitly mention and link to AT LEAST 4 to 5 relevant WellTools calculators (e.g., BMI Calculator, BMR Calculator, Sleep, Water, Ideal Weight, Macro, Body Fat, 1RM) using markdown links (e.g., \`[BMI Calculator](/bmi)\`). Weave these naturally into the related paragraphs.
+        6. **Myth vs Fact Section (150-200 words)**: A dedicated H2 section debunking 3 common misconceptions.
         7. **Summary / Key Takeaways**: Bulleted list of 5 main points at the end.
-        8. **In-Article Images**: Insert exactly 2 images within the "content" markdown using: \`![Alt Text](https://image.pollinations.ai/prompt/[URL_ENCODED_PROMPT_IN_ENGLISH])\`. Placed after major H2s.
+        8. **Images**: Insert the 1 Infographic and 2 photographic images exactly as specified above using Pollinations.ai links.
 
         OUTPUT FORMAT: Single Valid JSON Object.
         {
-          "title": "SEO Optimized Title (50-60 chars)",
+          "title": "SEO Optimized Numbered Title (50-60 chars)",
           "category": "${selectedTopic.group}",
           "excerpt": "Meta Description (140-160 chars)",
-          "imagePrompt": "precise english visual description for the hero image...",
+          "imagePrompt": "precise english visual description for hero image involving real food or activity...",
           "imageAlt": "SEO optimized alt text in ${lang.name}",
-          "content": "Full markdown content starting with H1... MUST INCLUDE callouts (> [!TIP]), Markdown Tables, H2s, H3s, bullet points, and 2 in-line image links.",
-          "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"],
-          "author": {
-            "name": "Expert Name",
-            "role": "Expert Credentials",
-            "bio": "Short 1-sentence professional bio."
-          },
-          "reviewedBy": {
-            "name": "Dr. Reviewer Name",
-            "credentials": "MD / Facharzt / etc."
-          },
-          "factCheckedBy": {
-            "name": "Fact Checker Name"
-          },
-          "faq": [
-            {"question": "Long-tail question 1", "answer": "Detailed answer 1"},
-            {"question": "Long-tail question 2", "answer": "Detailed answer 2"}
-          ],
-          "sources": [
-            {"title": "WHO: Topic Name", "url": "https://www.who.int/..."},
-            {"title": "NIH: Medical Study", "url": "https://pubmed.ncbi.nlm.nih.gov/..."}
-          ]
+          "content": "Full markdown content starting with H1... MUST INCLUDE callouts, Markdown Tables, H2s, H3s, bullet points, internal links to 4+ calculators, 1 infographic image, and 2 photo images.",
+          "keywords": ["keyword1", "keyword2", "keyword3"],
+          "author": { "name": "Expert Name", "role": "Credentials", "bio": "Short 1-sentence bio." },
+          "reviewedBy": { "name": "Dr. Name", "credentials": "MD" },
+          "factCheckedBy": { "name": "Checker Name" },
+          "faq": [ {"question": "Q1", "answer": "A1"} ],
+          "sources": [ {"title": "WHO: Topic Name", "url": "https://www.who.int/..."} ]
         }
         `;
 
@@ -343,12 +325,12 @@ async function generatePost() {
             // Validate word count
             const wordCount = newContent.content.split(/\s+/).length;
             console.log(`    📊 Word count: ${wordCount} words`);
-            if (wordCount < 1800) {
-                console.warn(`    ⚠️ WARNING: Article is below 1800 words (${wordCount}). Consider regenerating for better SEO.`);
-            } else if (wordCount > 3000) {
-                console.warn(`    ⚠️ WARNING: Article exceeds 3000 words (${wordCount}). Consider condensing.`);
+            if (wordCount < 2000) {
+                console.warn(`    ⚠️ WARNING: Article is below 2000 words (${wordCount}). Consider regenerating for better SEO.`);
+            } else if (wordCount > 3500) {
+                console.warn(`    ⚠️ WARNING: Article exceeds 3500 words (${wordCount}). Consider condensing.`);
             } else {
-                console.log(`    ✅ Word count within optimal range (1800-3000)`);
+                console.log(`    ✅ Word count within optimal range (2000-3500)`);
             }
 
             console.log(`    ✅ Done: ${lang.name}`);

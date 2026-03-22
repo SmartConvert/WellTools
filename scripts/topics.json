@@ -147,37 +147,43 @@
             "id": 21,
             "group": "daily_health_topics",
             "title": "How much water should I drink per day?",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-09"
         },
         {
             "id": 22,
             "group": "daily_health_topics",
             "title": "How many calories do I need per day?",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-11"
         },
         {
             "id": 23,
             "group": "daily_health_topics",
             "title": "Why do I feel tired all the time?",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-13"
         },
         {
             "id": 26,
             "group": "daily_health_topics",
             "title": "How to lose weight safely",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-15"
         },
         {
             "id": 27,
             "group": "daily_health_topics",
             "title": "How to reduce belly fat",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-17"
         },
         {
             "id": 28,
             "group": "daily_health_topics",
             "title": "Best foods for energy",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-03-19"
         }
     ]
 }

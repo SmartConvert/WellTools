@@ -7,29 +7,25 @@
             "id": 1,
             "group": "health_calculators",
             "title": "BMI Calculator",
-            "completed": true,
-            "completedDate": "2026-02-04"
+            "completed": false
         },
         {
             "id": 2,
             "group": "health_calculators",
             "title": "Daily Calorie Needs Calculator",
-            "completed": true,
-            "completedDate": "2026-02-04"
+            "completed": false
         },
         {
             "id": 3,
             "group": "health_calculators",
             "title": "Water Intake Calculator",
-            "completed": true,
-            "completedDate": "2026-02-05"
+            "completed": false
         },
         {
             "id": 4,
             "group": "health_calculators",
             "title": "Ideal Weight Calculator",
-            "completed": true,
-            "completedDate": "2026-02-07"
+            "completed": false
         },
         {
             "id": 31,
@@ -98,22 +94,19 @@
             "id": 40,
             "group": "body_preservation",
             "title": "Stress Management: Cortisol's Impact on Weight & Longevity",
-            "completed": true,
-            "completedDate": "2026-02-28"
+            "completed": false
         },
         {
             "id": 5,
             "group": "health_calculators",
             "title": "Sleep Hours Calculator",
-            "completed": true,
-            "completedDate": "2026-03-07"
+            "completed": false
         },
         {
             "id": 6,
             "group": "health_calculators",
             "title": "Protein Intake Calculator",
-            "completed": true,
-            "completedDate": "2026-03-07"
+            "completed": false
         },
         {
             "id": 7,

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/update-sitemap.js && vite build && node scripts/generate-static-routes.js",
+    "test": "node scripts/health-monitor.cjs",
+    "build": "npm run test && node scripts/update-sitemap.js && vite build && node scripts/generate-static-routes.js",
     "preview": "vite preview"
   },
   "dependencies": {

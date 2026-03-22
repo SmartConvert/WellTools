@@ -6,7 +6,6 @@ import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
 import TrustBadge from './TrustBadge';
 import PostResultCTA from './PostResultCTA';
-import AffiliateBlock from './AffiliateBlock';
 import { calculatorContent } from '../data/seoContent';
 
 const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGender, calculateIdealWeight, idealResult, idealError, setCurrentPage, t }) => {
@@ -86,7 +85,6 @@ const IdealWeightPage = ({ idealHeight, setIdealHeight, idealGender, setIdealGen
                                     </div>
                                 </div>
                                 <PostResultCTA toolId="ideal-weight" setCurrentPage={setCurrentPage} />
-                                <AffiliateBlock toolId="ideal-weight" />
                             </div>
                         )}
 

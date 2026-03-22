@@ -206,19 +206,6 @@ async function generatePost() {
            - At least THREE H2 Subheadings.
         3. List these specific long-tail keywords in the JSON output "keywords" array.
 
-        IMAGE GENERATION RULE:
-        You must generate a concise "Photographic Image Prompt" in ENGLISH (Maximum 20 words) for the hero image.
-        - Focus STRICTLY on REAL FOOD or REAL PHYSICAL ACTIVITIES depending on the topic. Must look like a real photograph of a subject in action (e.g., "A fresh salad with avocado and grilled chicken" or "A person jogging in a sunny park"). Avoid abstract or medical-only visuals.
-        - NO TEXT IN IMAGE.
-
-        IN-ARTICLE IMAGES & INFOGRAPHICS (CRITICAL FORMAT):
-        1. **Photographic Images**: Insert exactly 2 real food/activity images in the content. Format (Markdown Image Links):
-           ![Descriptive Alt Text](https://pollinations.ai/p/PROMPT_HERE?width=1200&height=630&nologo=true&model=flux)
-           Where PROMPT_HERE is a URL-encoded English description of a real food or activity, max 15 words.
-        2. **Infographics**: Instead of a photo, you must generate 1 simple Infographic image. Prompt the image to be a clean diagram or illustration without text. Example prompt:
-           ![Topic Infographic](https://pollinations.ai/p/A%20clean%20minimalist%20infographic%20illustration%20about%20fitness%20metrics%20no%20text?width=800&height=1200&nologo=true&model=flux)
-           Place this infographic after the 3rd H2 section. Place the other 2 photographic images after the 2nd and 5th H2s.
-
         CONTENT STRUCTURE (MANDATORY FORMATTING - USE GITHUB MARKDOWN):
         1. **H1 Headline**: The main article title containing a number.
         2. **Introduction (150-200 words)**: Formulate a relatable problem, introduce the science, and promise a clear solution. Write exactly 3 paragraphs.
@@ -233,16 +220,15 @@ async function generatePost() {
         5. **Interactive Elements Focus**: Explicitly mention and link to AT LEAST 4 to 5 relevant WellTools calculators (e.g., BMI Calculator, BMR Calculator, Sleep, Water, Ideal Weight, Macro, Body Fat, 1RM) using markdown links (e.g., \`[BMI Calculator](/bmi)\`). Weave these naturally into the related paragraphs.
         6. **Myth vs Fact Section (150-200 words)**: A dedicated H2 section debunking 3 common misconceptions.
         7. **Summary / Key Takeaways**: Bulleted list of 5 main points at the end.
-        8. **Images**: Insert the 1 Infographic and 2 photographic images exactly as specified above using Pollinations.ai links.
+        8. **Images**: DO NOT INJECT ANY EXTERNAL OR MARKDOWN IMAGE LINKS. NO IMAGES WHATSOEVER.
 
         OUTPUT FORMAT: Single Valid JSON Object.
         {
           "title": "SEO Optimized Numbered Title (50-60 chars)",
           "category": "${selectedTopic.group}",
           "excerpt": "Meta Description (140-160 chars)",
-          "imagePrompt": "precise english visual description for hero image involving real food or activity...",
           "imageAlt": "SEO optimized alt text in ${lang.name}",
-          "content": "Full markdown content starting with H1... MUST INCLUDE callouts, Markdown Tables, H2s, H3s, bullet points, internal links to 4+ calculators, 1 infographic image, and 2 photo images.",
+          "content": "Full markdown content starting with H1... MUST INCLUDE callouts, Markdown Tables, H2s, H3s, bullet points, internal links to 4+ calculators. DO NOT INJECT ANY IMAGES.",
           "keywords": ["keyword1", "keyword2", "keyword3"],
           "author": { "name": "Expert Name", "role": "Credentials", "bio": "Short 1-sentence bio." },
           "reviewedBy": { "name": "Dr. Name", "credentials": "MD" },
@@ -284,30 +270,57 @@ async function generatePost() {
 
             const newContent = JSON.parse(cleanedText);
 
-            // --- POST-PROCESS: Fix in-article Pollinations.ai image URLs ---
-            // The AI sometimes generates bare URLs without query params. Add them and a random seed.
-            const generateSeed = () => Math.floor(Math.random() * 100000000);
+            // --- POST-PROCESS: Select Unsplash Hero Image ---
+            const topicImages = {
+                'inflammation': 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=1200',
+                'microbiome': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1200',
+                'muscle': 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=1200',
+                'protein': 'https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&q=80&w=1200',
+                'aging': 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=1200',
+                'sleep': 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&q=80&w=1200',
+                'weight': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1200',
+                'water': 'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&q=80&w=1200',
+                'hydration': 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&q=80&w=1200',
+                'calories': 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=1200',
+                'fasting': 'https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&q=80&w=1200',
+                'default': 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&q=80&w=1200'
+            };
 
-            if (newContent.content) {
-                newContent.content = newContent.content.replace(
-                    /!\[([^\]]+)\]\(https:\/\/pollinations\.ai\/p\/([^)]+?)\)/g,
-                    (match, alt, promptPart) => {
-                        // Clean up existing query params if found to build fresh
-                        let cleanPrompt = promptPart.split('?')[0];
-                        // Ensure prompt part itself doesn't have spaces
-                        cleanPrompt = cleanPrompt.replace(/ /g, '%20');
-                        return `![${alt}](https://pollinations.ai/p/${cleanPrompt}?width=1200&height=630&nologo=true&seed=${generateSeed()}&model=flux)`;
-                    }
-                );
+            function getRelevantImage(text) {
+                const t = text.toLowerCase();
+                for (const [topic, url] of Object.entries(topicImages)) {
+                    if (t.includes(topic)) return url;
+                }
+                return topicImages.default;
             }
 
-            // Construct Hero Image URL using high-quality prompt with Unsplash style keywords
-            const basePrompt = newContent.imagePrompt || selectedTopic.title + " photography";
-            // Keep it concise (under 200 chars) to avoid CDN timeouts
-            const trimmedPrompt = basePrompt.slice(0, 150);
-            const enhancedPrompt = `${trimmedPrompt}, photorealistic, cinematic`;
-            const encodedPrompt = encodeURIComponent(enhancedPrompt);
-            const imageUrl = `https://pollinations.ai/p/${encodedPrompt}?width=1200&height=630&nologo=true&seed=${generateSeed()}&model=flux`;
+            const imageUrl = getRelevantImage(selectedTopic.title);
+
+            // Fetch 2 unique images for the article body
+            const allUrls = Object.values(topicImages);
+            function getRandomImages(count, exclude) {
+                const pool = allUrls.filter(u => u !== exclude);
+                const shuffled = pool.sort(() => 0.5 - Math.random());
+                return shuffled.slice(0, count);
+            }
+
+            if (newContent.content && !newContent.content.includes('![')) {
+                let lines = newContent.content.split('\\n');
+                const h2Indices = [];
+                for (let i = 0; i < lines.length; i++) {
+                    if (lines[i].startsWith('## ')) h2Indices.push(i);
+                }
+                
+                if (h2Indices.length >= 4) {
+                    const img1Index = h2Indices[1];
+                    const img2Index = h2Indices[Math.min(4, h2Indices.length - 1)];
+                    const injections = getRandomImages(2, imageUrl);
+                    
+                    lines.splice(img2Index + 1, 0, `\\n![WellTools Health Guide](${injections[1]})\\n`);
+                    lines.splice(img1Index + 1, 0, `\\n![WellTools Nutrition Info](${injections[0]})\\n`);
+                    newContent.content = lines.join('\\n');
+                }
+            }
 
 
             const postObj = {

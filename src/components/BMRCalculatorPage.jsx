@@ -6,7 +6,6 @@ import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
 import TrustBadge from './TrustBadge';
 import PostResultCTA from './PostResultCTA';
-import AffiliateBlock from './AffiliateBlock';
 import { calculatorContent } from '../data/seoContent';
 
 const BMRCalculatorPage = ({ bmrWeight, setBmrWeight, bmrHeight, setBmrHeight, bmrAge, setBmrAge, bmrGender, setBmrGender, calculateBMR, bmrResult, bmrError, setCurrentPage, t }) => {
@@ -110,7 +109,6 @@ const BMRCalculatorPage = ({ bmrWeight, setBmrWeight, bmrHeight, setBmrHeight, b
                                     </div>
                                 </div>
                                 <PostResultCTA toolId="bmr" setCurrentPage={setCurrentPage} />
-                                <AffiliateBlock toolId="bmr" />
                             </div>
                         )}
 

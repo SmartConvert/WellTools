@@ -6,7 +6,6 @@ import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
 import TrustBadge from './TrustBadge';
 import PostResultCTA from './PostResultCTA';
-import AffiliateBlock from './AffiliateBlock';
 import { calculatorContent } from '../data/seoContent';
 
 const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, bfAge, setBfAge, bfGender, setBfGender, bfNeck, setBfNeck, bfWaist, setBfWaist, bfHip, setBfHip, calculateBodyFat, bfResult, bfError, setCurrentPage, t }) => {
@@ -148,7 +147,6 @@ const BodyFatCalculatorPage = ({ bfWeight, setBfWeight, bfHeight, setBfHeight, b
                                 </div>
 
                                 <PostResultCTA toolId="body-fat" setCurrentPage={setCurrentPage} />
-                                <AffiliateBlock toolId="body-fat" />
                             </div>
                         )}
 

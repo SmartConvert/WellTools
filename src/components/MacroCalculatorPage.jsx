@@ -6,7 +6,6 @@ import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
 import TrustBadge from './TrustBadge';
 import PostResultCTA from './PostResultCTA';
-import AffiliateBlock from './AffiliateBlock';
 import { calculatorContent } from '../data/seoContent';
 
 const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMacroDiet, calculateMacros, macroResult, macroError, setCurrentPage, t }) => {
@@ -92,7 +91,6 @@ const MacroCalculatorPage = ({ macroCalories, setMacroCalories, macroDiet, setMa
                                     </div>
                                 </div>
                                 <PostResultCTA toolId="macro" setCurrentPage={setCurrentPage} />
-                                <AffiliateBlock toolId="macro" />
                             </div>
                         )}
 

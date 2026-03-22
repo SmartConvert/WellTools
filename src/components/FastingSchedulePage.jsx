@@ -6,7 +6,6 @@ import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
 import TrustBadge from './TrustBadge';
 import PostResultCTA from './PostResultCTA';
-import AffiliateBlock from './AffiliateBlock';
 import { calculatorContent } from '../data/seoContent';
 
 const PROTOCOLS = [
@@ -201,7 +200,6 @@ const FastingSchedulePage = ({ setCurrentPage, t }) => {
                                     </div>
                                 </div>
                                 <PostResultCTA toolId="fasting" setCurrentPage={setCurrentPage} />
-                                <AffiliateBlock toolId="fasting" />
                             </div>
                         )}
 

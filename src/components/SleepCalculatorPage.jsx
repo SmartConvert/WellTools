@@ -7,7 +7,6 @@ import RelatedTools from './RelatedTools';
 import TrustBadge from './TrustBadge';
 import SleepResultInterpretation from './SleepResultInterpretation';
 import PostResultCTA from './PostResultCTA';
-import AffiliateBlock from './AffiliateBlock';
 import { calculatorContent } from '../data/seoContent';
 
 const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResult, sleepBedtime, setSleepBedtime, calculateSleepCycles, sleepWakeupTimes, sleepError, setCurrentPage, t }) => {
@@ -69,7 +68,6 @@ const SleepCalculatorPage = ({ sleepAge, setSleepAge, calculateSleep, sleepResul
                                 </div>
 
                                 <PostResultCTA toolId="sleep" setCurrentPage={setCurrentPage} />
-                                <AffiliateBlock toolId="sleep" />
                             </div>
                         )}
                     </div>

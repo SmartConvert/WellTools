@@ -6,7 +6,6 @@ import MedicalDisclaimer from './MedicalDisclaimer';
 import RelatedTools from './RelatedTools';
 import TrustBadge from './TrustBadge';
 import PostResultCTA from './PostResultCTA';
-import AffiliateBlock from './AffiliateBlock';
 import WaterResultInterpretation from './WaterResultInterpretation';
 import { calculatorContent } from '../data/seoContent';
 
@@ -81,7 +80,6 @@ const WaterCalculatorPage = ({ waterWeight, setWaterWeight, waterActivity, setWa
                                 <WaterResultInterpretation waterResult={waterResult} activityLevel={waterActivity} />
 
                                 <PostResultCTA toolId="water" setCurrentPage={setCurrentPage} />
-                                <AffiliateBlock toolId="water" />
                             </div>
                         )}
 

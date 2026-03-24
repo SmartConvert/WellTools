@@ -70,7 +70,7 @@ function checkBlogPosts() {
         }
 
         // Content Length (SEO Audit)
-        const wordCount = (post.content || '').split(/\\s+/).length;
+        const wordCount = (post.content || '').split(/\s+/).length;
         if (wordCount < 1000) {
             LOG.warn(`Post '${post.title}' has very low word count (${wordCount} words). Minimum recommended is 1500.`);
             warnings++;

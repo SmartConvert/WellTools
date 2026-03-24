@@ -1,5 +1,88 @@
 // SEO-rich content for all calculator pages in 3 languages
 export const calculatorContent = {
+    'food-scanner': {
+        en: {
+            hero_title: 'AI Food Scanner & Macro Calculator',
+            h1_title: 'AI Food Scanner: Instantly Analyze Your Meals',
+            h2_title: 'Get Accurate Calories and Macros from a Single Photo',
+            meta_title: 'AI Food Scanner | Instant Macro & Calorie Calculator from Photos | WellTools',
+            meta_description: 'Upload a picture of your dish and get an instant, AI-powered nutritional breakdown of its macronutrients and calories using Gemini Vision capabilities.',
+            hero_subtitle: 'Take a picture of your meal and let our Next-Gen AI analyze the ingredients, calories, and exact macronutrients instantly.',
+            hero_emoji: '📸',
+            hero_color: 'from-emerald-400 to-teal-500',
+            related_tools: [
+                { id: 'macro', name: 'Macro Calculator' },
+                { id: 'calories', name: 'Calorie Calculator' },
+                { id: 'meal-planner', name: 'Meal Planner' }
+            ],
+            formula_title: 'Powered by Advanced Computer Vision',
+            formula_explanation: 'Our AI Food Scanner utilizes Google\'s Gemini 2.0 Flash Vision model to analyze the visual properties of your meal. It identifies individual ingredients, estimates portion sizes based on relative scaling, and references a massive database of nutritional information to calculate the exact macro breakdown in real-time.',
+            formula_text: 'Image Upload -> Vision Recognition -> Ingredient Segmentation -> Nutritional Calculation',
+            formula_example: 'Example: Uploading a picture of a grilled chicken salad. The AI detects 150g chicken breast, 50g mixed greens, 15g olive oil dressing, and 20g croutons, returning a precise calculation of 380 kcal, 35g protein, 15g carbs, and 20g fat.',
+            formula_accuracy: 'Accuracy depends on image clarity and visibility of ingredients. Hidden ingredients (like heavy oils or hidden sugars in sauces) are estimated based on standard culinary recipes.',
+            example_title: 'How It Changes Your Dieting Experience',
+            examples: [
+                {
+                    name: 'Eating Out at Restaurants',
+                    stats: 'No barcode? No problem.',
+                    calculation: 'Snap a photo of your restaurant meal.',
+                    result: 'Instant Macros',
+                    interpretation: 'Stop guessing how many calories are in that restaurant dish. Get a highly educated, AI-backed estimate instantly so you can stay on track without anxiety.'
+                },
+                {
+                    name: 'Home Cooked Meals',
+                    stats: 'Sick of weighing every ingredient?',
+                    calculation: 'Snap the final plated dish.',
+                    result: 'Effortless Tracking',
+                    interpretation: 'While weighing ingredients raw is best for absolute precision, scanning the final plate is perfect for maintaining your weight and adopting a sustainable, long-term lifestyle.'
+                }
+            ],
+            comparison_table_title: 'Food Scanner vs Traditional Tracking',
+            activity_levels: [
+                { level: 'AI Food Scanner', multiplier: '< 5 Seconds', description: 'Just point, shoot, and review the data. Perfect for dining out or quick meals.' },
+                { level: 'Manual App Entry', multiplier: '3-5 Minutes', description: 'Requires searching for each ingredient, estimating weights, and doing the math yourself.' },
+                { level: 'Barcode Scanning', multiplier: 'Fast (if packaged)', description: 'Only works for packaged, processed foods. Useless for fresh meals or restaurants.' }
+            ],
+            seo_what_title: 'What is an AI Food Scanner?',
+            seo_what_content: 'An AI Food Scanner is a revolutionary tool that uses advanced machine learning and computer vision to "see" and understand food the way a nutritionist would. It identifies the type of food, estimates the volume or weight based on visual cues, and cross-references this data with comprehensive nutritional databases to provide you with an estimated calorie count and macronutrient breakdown (protein, carbohydrates, and fats).',
+            seo_why_title: 'Why Use AI for Macro Tracking?',
+            seo_why_content: 'Traditional calorie tracking is tedious. It requires weighing every ingredient, searching through messy app databases, and doing complex math, which often leads to burnout and people quitting their diets. AI removes this friction. By making tracking as simple as taking a photo, it encourages consistency. Consistency, not absolute obsessive perfection, is the true secret to long-term weight loss and health.',
+            seo_how_title: 'Tips for the Best Scan Results',
+            seo_how_steps: [
+                'Ensure good lighting. Natural light or bright indoor lighting works best.',
+                'Take the photo from a top-down angle (45 to 90 degrees) to show the full plate.',
+                'Ensure the entire meal or plate is visible in the frame.',
+                'If there are hidden elements (like a heavy dressing mixed in), mentally account for a slight margin of error.',
+                'For complex meals (like a burrito where the inside isn\'t visible), the AI will estimate based on the typical composition of that food item.'
+            ],
+            seo_tips_title: 'Integrating the Scanner into Your Routine',
+            seo_tips: [
+                '📸 **The 80/20 Rule**: Use the scanner for 80% of your meals (eating out, quick lunches) and rely on strict weighing for 20% (if you are preparing a highly specific cutting meal).',
+                '🧠 **Learn Portion Sizes**: Over time, using the scanner will train your brain to visually recognize what 200 calories of pasta or 30g of protein looks like.',
+                '🍽️ **Mindful Eating**: The simple act of pausing to take a photo of your food forces you to be mindful of what you are about to eat, reducing mindless snacking.',
+                '🔥 **Combine with TDEE**: Use this tool in conjunction with our Calorie Calculator to ensure your daily scanned meals align with your macro goals.'
+            ],
+            seo_faqs: [
+                {
+                    question: 'How accurate is the AI?',
+                    answer: 'The AI is highly accurate at identifying standard foods and estimating portions. However, it cannot "see" how much oil was used to cook a steak or if a sauce has hidden sugar. It provides a highly educated estimate, usually within a 10-20% margin of error, which is more than sufficient for general weight management.'
+                },
+                {
+                    question: 'Can it scan packaged foods?',
+                    answer: 'Yes, but for packaged foods with a barcode, traditional scanning is usually better because it pulls the exact manufacturer data. The AI scanner shines when dealing with fresh, unpacked, or restaurant meals.'
+                },
+                {
+                    question: 'Does it save my photos?',
+                    answer: 'No. Your photos are processed securely via the Cloudflare edge network and Google Gemini API in real-time. We do not store your food images on our servers to protect your privacy.'
+                }
+            ],
+            medical_sources: [
+                'Journal of Medical Internet Research (Assessing the Validity of Image-Based Dietary Assessment).',
+                'American Journal of Clinical Nutrition.',
+                'Advances in Nutrition (Computer Vision Guidelines for Dietary Assessment).'
+            ]
+        }
+    },
     bmi: {
         en: {
             hero_title: 'BMI Calculator for Women & Men',

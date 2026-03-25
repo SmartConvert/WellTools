@@ -102,8 +102,8 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                      <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium text-lg">All the tools you need to optimize your physiology, 100% free.</p>
                 </div>
                 
-                {/* Mobile: 1 col, Tablet: 2 cols, Desktop: 3/4 cols. Card design is much flatter! */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
+                {/* Mobile: 2 cols, Tablet: 2 cols, Desktop: 3/4 cols. Card design is compact! */}
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5">
                      {tools.map((tool) => (
                          <a
                             key={tool.id}
@@ -114,7 +114,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                                 window.dispatchEvent(new Event('popstate'));
                                 window.scrollTo(0, 0);
                             }}
-                            className="group flex flex-col sm:flex-row items-start sm:items-center gap-4 p-5 md:p-6 bg-white dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-emerald-300 dark:hover:border-emerald-700 hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer overflow-hidden"
+                            className="group flex flex-col items-start gap-3 p-4 md:p-6 bg-white dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-emerald-300 dark:hover:border-emerald-700 hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer overflow-hidden"
                          >
                             <div className={`w-12 h-12 shrink-0 ${tool.bg} ${tool.color} rounded-xl flex items-center justify-center transition-transform group-hover:scale-110`}>
                                 {React.cloneElement(tool.icon, { className: "w-6 h-6" })}

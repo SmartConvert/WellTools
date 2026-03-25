@@ -21,9 +21,6 @@ export async function onRequestPost({ request, env }) {
         }
 
         const apiKey = env.GEMINI_API_KEY;
-        const modelUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-        // Ensure the base64 string is raw data (stripping the "data:image/jpeg;base64," header if the frontend sent it)
         const base64Data = imageBase64.replace(/^data:image\/(png|jpeg|webp|jpg);base64,/, "");
 
         const promptText = `
@@ -42,43 +39,76 @@ export async function onRequestPost({ request, env }) {
         Return ONLY valid JSON.
         `;
 
-        const payload = {
-            contents: [
-                {
-                    parts: [
-                        { text: promptText },
-                        {
-                            inline_data: {
-                                mime_type: mimeType || "image/jpeg",
-                                data: base64Data
+        let modelUrl, payload, headers;
+
+        // Support both OpenRouter and Native Google API keys
+        if (apiKey.startsWith('sk-or-v1-')) {
+            modelUrl = "https://openrouter.ai/api/v1/chat/completions";
+            headers = {
+                "Authorization": `Bearer ${apiKey}`,
+                "Content-Type": "application/json",
+                "HTTP-Referer": "https://welltools.net",
+                "X-Title": "WellTools Meal Scanner"
+            };
+            payload = {
+                model: "google/gemini-2.0-flash-001",
+                response_format: { type: "json_object" },
+                messages: [
+                    {
+                        role: "user",
+                        content: [
+                            { type: "text", text: promptText },
+                            { type: "image_url", image_url: { url: `data:${mimeType || 'image/jpeg'};base64,${base64Data}` } }
+                        ]
+                    }
+                ]
+            };
+        } else {
+            modelUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            headers = { "Content-Type": "application/json" };
+            payload = {
+                contents: [
+                    {
+                        parts: [
+                            { text: promptText },
+                            {
+                                inline_data: {
+                                    mime_type: mimeType || "image/jpeg",
+                                    data: base64Data
+                                }
                             }
-                        }
-                    ]
+                        ]
+                    }
+                ],
+                generationConfig: {
+                    temperature: 0.1,
+                    response_mime_type: "application/json"
                 }
-            ],
-            generationConfig: {
-                temperature: 0.1,
-                response_mime_type: "application/json"
-            }
-        };
+            };
+        }
 
         const response = await fetch(modelUrl, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: headers,
             body: JSON.stringify(payload)
         });
 
-        const geminiData = await response.json();
+        const apiData = await response.json();
 
         if (!response.ok) {
-            console.error("Gemini API Error:", geminiData);
-            return new Response(JSON.stringify({ error: geminiData.error?.message || "Gemini API Error" }), { 
+            console.error("API Error:", apiData);
+            return new Response(JSON.stringify({ error: apiData.error?.message || "Vision API Error" }), { 
                 status: response.status,
                 headers: { "Content-Type": "application/json" }
             });
         }
 
-        const rawText = geminiData.candidates[0]?.content?.parts[0]?.text;
+        let rawText = "";
+        if (apiKey.startsWith('sk-or-v1-')) {
+            rawText = apiData.choices?.[0]?.message?.content;
+        } else {
+            rawText = apiData.candidates?.[0]?.content?.parts?.[0]?.text;
+        }
         
         if (!rawText) {
              return new Response(JSON.stringify({ error: "AI returned an empty response." }), { 
@@ -87,11 +117,9 @@ export async function onRequestPost({ request, env }) {
             });
         }
 
-        /* 
-         * Because we passed response_mime_type: "application/json", 
-         * Gemini guarantees the response is exactly JSON. No markdown stripping needed.
-         */
-        let parsedData = JSON.parse(rawText.trim());
+        // Clean markdown backticks if OpenRouter returned them
+        rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+        let parsedData = JSON.parse(rawText);
 
         return new Response(JSON.stringify(parsedData), {
             status: 200,

@@ -77,7 +77,7 @@ function FoodScannerPage() {
     };
 
     return (
-        <div className="min-h-[80vh] flex flex-col justify-center bg-slate-900 text-white font-sans py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen flex flex-col justify-center bg-slate-900 text-white font-sans pt-28 pb-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl w-full mx-auto space-y-8">
                 {/* Header */}
                 <div className="text-center">

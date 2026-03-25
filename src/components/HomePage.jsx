@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, ChevronRight, Activity, Percent, Scale, Droplet, Moon, Clock, Heart, Apple, TrendingDown, Calendar, BarChart3, LineChart as LineChartIcon, Utensils, Zap, Dumbbell, ShieldCheck, Sparkles } from 'lucide-react';
+import { ChevronRight, ArrowRight, Activity, Percent, Scale, Droplet, Moon, Clock, Heart, Apple, TrendingDown, Calendar, BarChart3, LineChart as LineChartIcon, Utensils, Zap, Dumbbell, ShieldCheck, Sparkles, Navigation } from 'lucide-react';
 import TestimonialsSection from './TestimonialsSection';
 import EmailCaptureForm from './EmailCaptureForm';
-
-import heroImage from '../assets/hero-clinic.png?as=metadata&format=webp;avif&w=1200;800;400';
 
 const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t }) => {
     const [currentLangPosts, setCurrentLangPosts] = React.useState([]);
@@ -17,371 +15,214 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
     }, [t.lang]);
 
     const tools = [
-        { id: 'food-scanner', icon: <Sparkles className="w-8 h-8" />, title: 'AI Food Scanner', desc: 'Take a picture of your meal and let our Next-Gen AI analyze the ingredients, calories, and exact macronutrients instantly.', color: 'from-emerald-400 to-teal-500', shadowColor: 'shadow-emerald-500/40' },
-        { id: 'bmi', icon: <Scale className="w-8 h-8" />, title: 'BMI Calculator Free', desc: 'Calculate your Body Mass Index instantly with our free BMI calculator. Get health risk assessments and personalized weight recommendations.', color: 'from-cyan-400 to-blue-500', shadowColor: 'shadow-cyan-500/40' },
-        { id: 'calories', icon: <Activity className="w-8 h-8" />, title: 'Daily Calorie Calculator', desc: 'Discover your personalized daily calorie needs based on age, weight, height, and activity level using the Mifflin-St Jeor equation.', color: 'from-blue-400 to-indigo-500', shadowColor: 'shadow-blue-500/40' },
-        { id: 'water', icon: <Droplet className="w-8 h-8" />, title: 'Water Intake Calculator', desc: 'Calculate your optimal daily water intake based on weight, activity, and climate. Stay hydrated with science-backed recommendations.', color: 'from-blue-400 to-indigo-500', shadowColor: 'shadow-blue-500/40' },
-        { id: 'ideal-weight', icon: <Scale className="w-8 h-8" />, title: 'Ideal Weight Calculator', desc: 'Find your healthy weight range using medical formulas (Robinson, Miller, Devine). Get personalized weight range goals.', color: 'from-teal-400 to-emerald-500', shadowColor: 'shadow-teal-500/40' },
-        { id: 'sleep', icon: <Moon className="w-8 h-8" />, title: 'Sleep Calculator', desc: 'Optimize your sleep schedule based on 90-minute sleep cycles. Wake up refreshed with our free sleep calculator.', color: 'from-indigo-400 to-violet-500', shadowColor: 'shadow-indigo-500/40' },
-        { id: 'body-fat', icon: <Percent className="w-8 h-8" />, title: 'Body Fat Calculator', desc: 'Estimate your body fat percentage using Navy Method or BMI-based formulas. Track body composition beyond weight.', color: 'from-fuchsia-400 to-pink-500', shadowColor: 'shadow-fuchsia-500/40' },
-        { id: 'bmr', icon: <Zap className="w-8 h-8" />, title: 'BMR Calculator', desc: 'Calculate your Basal Metabolic Rate - the calories you burn at rest. Essential for weight loss and muscle gain planning.', color: 'from-amber-400 to-orange-500', shadowColor: 'shadow-amber-500/40' },
-        { id: 'macro', icon: <Utensils className="w-8 h-8" />, title: 'Macro Calculator', desc: 'Determine your optimal macronutrient split (protein, carbs, fats) for weight loss, muscle gain, or maintenance goals.', color: 'from-rose-400 to-red-500', shadowColor: 'shadow-rose-500/40' },
-        { id: '1rm', icon: <Dumbbell className="w-8 h-8" />, title: '1RM Calculator', desc: 'Estimate your one-rep max strength for any exercise. Plan progressive overload and track strength gains safely.', color: 'from-slate-600 to-gray-800', shadowColor: 'shadow-slate-600/40' },
-        { id: 'fasting', icon: <Clock className="w-8 h-8" />, title: 'Fasting Schedule', desc: 'Create your perfect intermittent fasting schedule. Calculate exact eating and fasting windows.', color: 'from-violet-400 to-purple-600', shadowColor: 'shadow-violet-500/40' }
+        { id: 'bmi', icon: <Scale />, title: 'BMI Calculator', desc: 'Assess your body mass instantly.', color: 'text-cyan-500', bg: 'bg-cyan-50 dark:bg-cyan-500/10' },
+        { id: 'calories', icon: <Activity />, title: 'Daily Calories', desc: 'Find your target energy needs.', color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-500/10' },
+        { id: 'water', icon: <Droplet />, title: 'Water Intake', desc: 'Stay hydrated with precision.', color: 'text-blue-400', bg: 'bg-blue-50 dark:bg-blue-400/10' },
+        { id: 'ideal-weight', icon: <Scale />, title: 'Ideal Weight', desc: 'Calculate your healthy range.', color: 'text-teal-500', bg: 'bg-teal-50 dark:bg-teal-500/10' },
+        { id: 'sleep', icon: <Moon />, title: 'Sleep Cycles', desc: 'Optimize your waking times.', color: 'text-indigo-500', bg: 'bg-indigo-50 dark:bg-indigo-500/10' },
+        { id: 'body-fat', icon: <Percent />, title: 'Body Fat', desc: 'Measure your composition.', color: 'text-fuchsia-500', bg: 'bg-fuchsia-50 dark:bg-fuchsia-500/10' },
+        { id: 'bmr', icon: <Zap />, title: 'BMR Calculator', desc: 'Your resting metabolic rate.', color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-500/10' },
+        { id: 'macro', icon: <Utensils />, title: 'Macro Split', desc: 'Perfect your diet balance.', color: 'text-rose-500', bg: 'bg-rose-50 dark:bg-rose-500/10' },
+        { id: '1rm', icon: <Dumbbell />, title: '1-Rep Max', desc: 'Track your strength gains.', color: 'text-slate-600 dark:text-slate-400', bg: 'bg-slate-100 dark:bg-slate-800' },
+        { id: 'fasting', icon: <Clock />, title: 'Fasting Timer', desc: 'Plan your feeding windows.', color: 'text-violet-500', bg: 'bg-violet-50 dark:bg-violet-500/10' }
     ];
 
     return (
-        <div className="pt-20 pb-16 px-4 bg-slate-50 dark:bg-slate-950 transition-colors duration-500">
-            <div className="max-w-7xl mx-auto">
-                {/* Premium Hero Section - Global SaaS Style */}
-                <div className="relative mb-24 lg:mb-32">
-                    {/* Ambient Glows replacing the heavy box card */}
-                    <div className="absolute top-[-10%] right-[-5%] w-[30rem] md:w-[40rem] h-[30rem] md:h-[40rem] bg-emerald-500/15 dark:bg-emerald-500/10 rounded-full blur-[100px] md:blur-[120px] mix-blend-multiply dark:mix-blend-screen pointer-events-none"></div>
-                    <div className="absolute bottom-[-10%] left-[-10%] w-[30rem] md:w-[40rem] h-[30rem] md:h-[40rem] bg-cyan-500/15 dark:bg-cyan-500/10 rounded-full blur-[100px] md:blur-[120px] mix-blend-multiply dark:mix-blend-screen pointer-events-none"></div>
+        <div className="pt-24 pb-16 bg-white dark:bg-[#0b0f19] transition-colors duration-300">
+            
+            {/* HER0 SECTION - Centered & Lightweight */}
+            <div className="relative max-w-5xl mx-auto px-4 sm:px-6 text-center mb-16 sm:mb-24 z-10 pt-6 md:pt-10">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-full text-sm font-bold mb-8 transition-transform hover:scale-105">
+                    <Sparkles className="w-4 h-4" />
+                    <span>Free Medical-Grade Tools</span>
+                </div>
+                
+                <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-[-0.03em] leading-[1.1] mb-6">
+                    Science-Backed <br className="hidden sm:block" />
+                    <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-cyan-500">Health Insights</span>
+                </h1>
+                
+                <p className="max-w-xl mx-auto text-lg md:text-xl text-slate-600 dark:text-slate-400 font-medium leading-relaxed mb-10">
+                    Take out the guesswork. Use professional health calculators, nutrition tools, and AI trackers to perfectly optimize your body.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button
+                        onClick={() => {
+                            document.getElementById('tools-grid')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="w-full sm:w-auto px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-lg shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all flex justify-center items-center gap-2"
+                    >
+                        {t.explore_tools}
+                        <ArrowRight className="w-5 h-5" />
+                    </button>
+                    <button
+                         onClick={() => setCurrentPage('meal-planner')}
+                        className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white rounded-xl font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-all flex justify-center items-center"
+                    >
+                        {t.meal_planner_title}
+                    </button>
+                </div>
+            </div>
 
-                    <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center pt-8 sm:pt-16 z-10 w-full">
-                        {/* Left Content */}
-                        <div className="text-center lg:text-left flex flex-col items-center lg:items-start z-10">
-                            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-full border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm font-semibold shadow-sm mb-8 hover:scale-105 transition-transform cursor-pointer">
-                                <Sparkles className="w-4 h-4 text-emerald-500" />
-                                <span>Free Professional Health Tools</span>
+            {/* AI Food Scanner Featured Strip */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-20 lg:mb-24">
+                <div 
+                    onClick={() => {
+                        window.history.pushState({}, '', '/food-scanner');
+                        window.dispatchEvent(new Event('popstate'));
+                        window.scrollTo(0, 0);
+                    }}
+                    className="group cursor-pointer bg-linear-to-br from-emerald-500 to-teal-600 rounded-[2rem] p-1.5 relative overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                >
+                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=1200')] bg-cover bg-center mix-blend-overlay opacity-30 group-hover:opacity-40 transition-opacity duration-700"></div>
+                    <div className="bg-slate-900/40 backdrop-blur-md rounded-[1.6rem] p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10 w-full">
+                        <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-6 text-center sm:text-left w-full">
+                            <div className="w-16 h-16 bg-white/20 backdrop-blur-lg rounded-2xl flex items-center justify-center border border-white/20 shrink-0 shadow-inner">
+                                <Sparkles className="w-8 h-8 text-white" />
                             </div>
-                            
-                            <h1 className="text-[3.5rem] sm:text-7xl lg:text-[5.5rem] font-black text-slate-900 dark:text-white mb-6 tracking-[-0.04em] leading-[1.05]">
-                                Science-Backed<br />
-                                <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 via-teal-400 to-cyan-500">
-                                    Health Insights
-                                </span>
-                            </h1>
-                            
-                            <p className="text-lg sm:text-xlg lg:text-2xl text-slate-600 dark:text-slate-400 max-w-xl font-medium leading-relaxed mb-10">
-                                Access 9+ medically-validated calculators for BMI, calories, and nutrition. Get instant data to drive your wellness journey.
-                            </p>
-                            
-                            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                                <button
-                                    onClick={() => {
-                                        const el = document.getElementById('tools-grid');
-                                        el?.scrollIntoView({ behavior: 'smooth' });
-                                    }}
-                                    className="group px-8 py-4 bg-slate-900 text-white dark:bg-white dark:text-slate-900 rounded-2xl font-black text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto"
-                                >
-                                    {t.explore_tools}
-                                    <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </button>
-                                <button
-                                    onClick={() => setCurrentPage('meal-planner')}
-                                    className="px-8 py-4 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white rounded-2xl font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:-translate-y-1 transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto shadow-sm"
-                                >
-                                    {t.meal_planner_title}
-                                </button>
+                            <div className="text-white">
+                                <h3 className="text-2xl font-black mb-2">New: AI Food Scanner</h3>
+                                <p className="text-emerald-50 font-medium opacity-90 text-sm sm:text-base leading-snug">Upload any meal photo. Let Google Gemini instantly calculate its macros & calories.</p>
                             </div>
                         </div>
-
-                        {/* Right Image - Floating Premium Frame */}
-                        <div className="relative w-full max-w-xl lg:max-w-2xl mx-auto lg:ml-auto z-10 pt-10 lg:pt-0">
-                            {/* Decorative Floating Elements */}
-                            <div className="absolute -top-6 -left-4 sm:-left-8 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 animate-[bounce_8s_infinite] z-20 flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-500/20 flex items-center justify-center text-emerald-500">
-                                    <Activity className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Metabolism</div>
-                                    <div className="text-base font-black text-slate-900 dark:text-white">Optimized</div>
-                                </div>
-                            </div>
-                            
-                            <div className="absolute -bottom-10 -right-4 sm:-right-6 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 animate-[bounce_10s_infinite_reverse] z-20 flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-500/20 flex items-center justify-center text-cyan-500">
-                                    <Scale className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Ideal BMI</div>
-                                    <div className="text-base font-black text-slate-900 dark:text-white leading-tight">22.4 <span className="text-emerald-500 text-sm ml-1">Perfect</span></div>
-                                </div>
-                            </div>
-
-                            {/* Main Image Container */}
-                            <div className="p-2 sm:p-4 bg-white/40 dark:bg-slate-800/40 backdrop-blur-3xl rounded-[2.5rem] sm:rounded-[3rem] border border-white/60 dark:border-slate-700/50 shadow-[0_20px_60px_-15px_rgba(16,185,129,0.15)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] transform -rotate-2 hover:rotate-0 transition-all duration-700 hover:scale-[1.02] group">
-                                <div className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden aspect-[4/3] shadow-inner bg-slate-100 dark:bg-slate-900">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?auto=format&fit=crop&q=80&w=1200"
-                                        alt="Modern smartwatch displaying health and fitness activity metrics"
-                                        className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-1000"
-                                        loading="eager"
-                                    />
-                                    {/* Subtle Overlay for contrast */}
-                                    <div className="absolute inset-0 bg-linear-to-tr from-slate-900/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                                </div>
-                            </div>
+                        <div className="shrink-0 w-full md:w-auto">
+                            <span className="w-full md:w-auto bg-white text-emerald-600 font-bold px-8 py-3.5 rounded-xl flex items-center justify-center gap-2 group-hover:scale-105 transition-transform duration-300 shadow-md">
+                                Try It Now <ArrowRight className="w-4 h-4" />
+                            </span>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                {/* How It Works Section */}
-                <div className="mb-20 lg:mb-32 px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
-                            How <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-cyan-500">WellTools</span> Works
-                        </h2>
-                        <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-lg md:text-xl font-medium">
-                            Get personalized health insights instantly without any friction.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto relative">
-                        {/* Connecting Line */}
-                        <div className="hidden md:block absolute top-[4.5rem] left-[15%] right-[15%] h-1 bg-linear-to-r from-emerald-500/20 via-cyan-500/20 to-indigo-500/20 rounded-full"></div>
-
-                        {/* Step 1 */}
-                        <div className="relative group text-center">
-                            <div className="w-24 h-24 bg-white dark:bg-slate-800 rounded-[2rem] flex items-center justify-center text-3xl font-black mx-auto mb-8 shadow-xl border border-emerald-100 dark:border-emerald-500/20 group-hover:-translate-y-2 group-hover:shadow-emerald-500/20 transition-all duration-300 relative z-10">
-                                <span className="bg-linear-to-br from-emerald-400 to-teal-500 text-transparent bg-clip-text">1</span>
-                                <div className="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-emerald-400 transition-colors"></div>
-                            </div>
-                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-emerald-500 transition-colors">
-                                Choose Your Tool
-                            </h3>
-                            <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
-                                Select from 9+ free health calculators: BMI, calories, macros, water intake, sleep, and more.
-                            </p>
-                        </div>
-
-                        {/* Step 2 */}
-                        <div className="relative group text-center">
-                            <div className="w-24 h-24 bg-white dark:bg-slate-800 rounded-[2rem] flex items-center justify-center text-3xl font-black mx-auto mb-8 shadow-xl border border-cyan-100 dark:border-cyan-500/20 group-hover:-translate-y-2 group-hover:shadow-cyan-500/20 transition-all duration-300 relative z-10">
-                                <span className="bg-linear-to-br from-cyan-400 to-blue-500 text-transparent bg-clip-text">2</span>
-                                <div className="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-cyan-400 transition-colors"></div>
-                            </div>
-                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-cyan-500 transition-colors">
-                                Enter Your Data
-                            </h3>
-                            <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
-                                Input your height, weight, age, and activity level. All calculations happen instantly in your browser.
-                            </p>
-                        </div>
-
-                        {/* Step 3 */}
-                        <div className="relative group text-center">
-                            <div className="w-24 h-24 bg-white dark:bg-slate-800 rounded-[2rem] flex items-center justify-center text-3xl font-black mx-auto mb-8 shadow-xl border border-indigo-100 dark:border-indigo-500/20 group-hover:-translate-y-2 group-hover:shadow-indigo-500/20 transition-all duration-300 relative z-10">
-                                <span className="bg-linear-to-br from-indigo-400 to-purple-500 text-transparent bg-clip-text">3</span>
-                                <div className="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-indigo-400 transition-colors"></div>
-                            </div>
-                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-indigo-500 transition-colors">
-                                Get Instant Insights
-                            </h3>
-                            <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
-                                Receive personalized health metrics, medical interpretations, and actionable recommendations.
-                            </p>
-                        </div>
-                    </div>
+            {/* Lightweight Minimalist Tools Grid */}
+            <div id="tools-grid" className="max-w-7xl mx-auto px-4 sm:px-6 mb-20 lg:mb-24">
+                <div className="text-center mb-10 md:mb-12">
+                     <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-4">Complete Health Toolkit</h2>
+                     <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium text-lg">All the tools you need to optimize your physiology, 100% free.</p>
                 </div>
-
-                {/* Why Choose WellTools Feature Cards */}
-                <div className="mb-20 lg:mb-32">
-                    <div className="text-center mb-16 px-4">
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
-                            The <span className="text-emerald-500">WellTools</span> Advantage
-                        </h2>
-                        <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-lg md:text-xl font-medium">
-                            The most trusted free health calculators online with medical-grade accuracy
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
-                        {[
-                            {
-                                icon: <ShieldCheck className="w-8 h-8" />,
-                                title: "Medical Accuracy",
-                                desc: "Validated formulas like Mifflin-St Jeor and Katch-McArdle.",
-                                comparison: "vs. outdated tools",
-                                color: "emerald"
-                            },
-                            {
-                                icon: <Heart className="w-8 h-8" />,
-                                title: "No Ads Overload",
-                                desc: "Clean interface without intrusive ads. Your health data stays safe.",
-                                comparison: "vs. ad-heavy competitors",
-                                color: "cyan"
-                            },
-                            {
-                                icon: <BookOpen className="w-8 h-8" />,
-                                title: "Medical References",
-                                desc: "Every calculation backed by peer-reviewed research (PubMed, WHO).",
-                                comparison: "vs. unsourced calculators",
-                                color: "indigo"
-                            },
-                            {
-                                icon: <Activity className="w-8 h-8" />,
-                                title: "Free Forever",
-                                desc: "All 9+ health calculators are completely free. No paywalls.",
-                                comparison: "vs. premium apps",
-                                color: "fuchsia"
-                            }
-                        ].map((feature, i) => (
-                            <div key={i} className="group relative p-8 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden z-10">
-                                <div className={`absolute -right-10 -top-10 w-32 h-32 bg-${feature.color}-500/10 rounded-full blur-2xl group-hover:bg-${feature.color}-500/20 transition-colors duration-500`}></div>
-                                
-                                <div className={`w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center text-${feature.color}-500 mb-8 shadow-sm border border-${feature.color}-100 dark:border-${feature.color}-900 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
-                                    {feature.icon}
-                                </div>
-                                <h3 className={`text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-${feature.color}-500 transition-colors`}>{feature.title}</h3>
-                                <p className="text-slate-600 dark:text-slate-400 font-medium mb-6 leading-relaxed">
-                                    {feature.desc}
-                                </p>
-                                <div className={`inline-flex items-center text-sm font-bold text-${feature.color}-600 dark:text-${feature.color}-400 bg-${feature.color}-50 dark:bg-${feature.color}-500/10 px-3 py-1.5 rounded-lg`}>
-                                    ✓ {feature.comparison}
-                                </div>
+                
+                {/* Mobile: 1 col, Tablet: 2 cols, Desktop: 3/4 cols. Card design is much flatter! */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
+                     {tools.map((tool) => (
+                         <a
+                            key={tool.id}
+                            href={`/${tool.id}`}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                window.history.pushState({}, '', `/${tool.id}`);
+                                window.dispatchEvent(new Event('popstate'));
+                                window.scrollTo(0, 0);
+                            }}
+                            className="group flex flex-col sm:flex-row items-start sm:items-center gap-4 p-5 md:p-6 bg-white dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-emerald-300 dark:hover:border-emerald-700 hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer overflow-hidden"
+                         >
+                            <div className={`w-12 h-12 shrink-0 ${tool.bg} ${tool.color} rounded-xl flex items-center justify-center transition-transform group-hover:scale-110`}>
+                                {React.cloneElement(tool.icon, { className: "w-6 h-6" })}
                             </div>
-                        ))}
-                    </div>
+                            <div className="flex flex-col justify-center">
+                                <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors leading-tight mb-1">{tool.title}</h3>
+                                <p className="text-sm text-slate-500 dark:text-slate-400 font-medium leading-snug line-clamp-2 sm:line-clamp-1 xl:line-clamp-2">{tool.desc}</p>
+                            </div>
+                         </a>
+                     ))}
                 </div>
+            </div>
 
-                {/* Premium Impact Stats Section */}
-                <div className="mb-20 lg:mb-32 px-4 relative z-10">
-                    <div className="max-w-7xl mx-auto">
-                        <div className="bg-linear-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-[3rem] shadow-[0_20px_60px_-15px_rgba(79,70,229,0.4)] overflow-hidden relative group border border-white/10">
-                            {/* Glowing Background Overlay */}
-                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-500/20 via-transparent to-transparent opacity-60"></div>
-
-                            <div className="p-10 md:p-16 relative overflow-hidden">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-white relative z-10">
-                                    <div className="text-center transform flex flex-col items-center">
-                                        <div className="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-linear-to-b from-emerald-300 to-emerald-600 mb-4 drop-shadow-sm">9+</div>
-                                        <p className="text-lg text-emerald-100 font-bold uppercase tracking-widest">Medical Calculators</p>
-                                    </div>
-                                    <div className="text-center transform flex flex-col items-center md:border-x border-white/10 px-4">
-                                        <div className="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-linear-to-b from-cyan-300 to-cyan-600 mb-4 drop-shadow-sm">100%</div>
-                                        <p className="text-lg text-cyan-100 font-bold uppercase tracking-widest">Science-Backed</p>
-                                    </div>
-                                    <div className="text-center transform flex flex-col items-center">
-                                        <div className="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-linear-to-b from-indigo-300 to-indigo-600 mb-4 drop-shadow-sm">Free</div>
-                                        <p className="text-lg text-indigo-100 font-bold uppercase tracking-widest">Forever Access</p>
-                                    </div>
-                                </div>
+            {/* Combined Clean Features Section */}
+            <div className="bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800 py-16 mb-20 lg:mb-24">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800">
+                        <div className="px-4 py-4 md:py-0">
+                            <div className="w-12 h-12 mx-auto bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-xl flex items-center justify-center mb-5">
+                                <ShieldCheck className="w-6 h-6" />
                             </div>
+                            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Medical Accuracy</h3>
+                            <p className="text-slate-600 dark:text-slate-400 text-sm font-medium">Valid formulas used by clinics worldwide.</p>
+                        </div>
+                        <div className="px-4 pt-8 md:pt-0 md:py-0">
+                            <div className="w-12 h-12 mx-auto bg-cyan-100 dark:bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 rounded-xl flex items-center justify-center mb-5">
+                                <Zap className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Instant Results</h3>
+                            <p className="text-slate-600 dark:text-slate-400 text-sm font-medium">No sign-up required. Compute in your browser instantly.</p>
+                        </div>
+                        <div className="px-4 pt-8 md:pt-0 md:py-0">
+                            <div className="w-12 h-12 mx-auto bg-indigo-100 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center mb-5">
+                                <Heart className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">100% Free Forever</h3>
+                            <p className="text-slate-600 dark:text-slate-400 text-sm font-medium">Premium insights without the paywalls or intrusive ads.</p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                {/* Tools Grid (Glassmorphism) */}
-                <div id="tools-grid" className="mb-20 lg:mb-32">
-                    <div className="text-center mb-16 px-4">
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
-                            Explore Our Free Health Calculators
-                        </h2>
-                        <p className="text-slate-600 dark:text-slate-300 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-medium">
-                            Track BMI, daily calories, macronutrients, hydration, and overall wellness. Each tool uses medical-grade formulas to deliver instant, personalized results.
-                        </p>
-                    </div>
+            {/* Testimonials */}
+            <TestimonialsSection />
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4">
-                        {tools.map((tool) => (
-                            <a
-                                key={tool.id}
-                                href={`/${tool.id}`}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    window.history.pushState({}, '', `/${tool.id}`);
-                                    window.dispatchEvent(new Event('popstate'));
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                }}
-                                className="group cursor-pointer bg-white dark:bg-slate-900 p-8 md:p-10 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-100 dark:border-slate-800 relative overflow-hidden flex flex-col h-full block transform hover:-translate-y-2 hover:scale-[1.02]"
-                            >
-                                <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${tool.color}"></div>
-                                
-                                <div className={`w-16 h-16 bg-linear-to-br ${tool.color} rounded-2xl flex items-center justify-center mb-8 shadow-lg ${tool.shadowColor} group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500`}>
-                                    {React.cloneElement(tool.icon, { className: "w-8 h-8 text-white relative z-10" })}
-                                </div>
-                                <h3 className="text-2xl font-bold font-sans text-slate-900 dark:text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-emerald-500 group-hover:to-cyan-500 transition-colors tracking-tight">{tool.title}</h3>
-                                <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed grow mb-8">{tool.desc}</p>
-                                <div className="flex items-center text-slate-900 dark:text-white font-bold group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors">
-                                    {t.explore_tool} <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
-                                </div>
-                            </a>
-                        ))}
-                    </div>
-                </div>
+            {/* Email Capture Section */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-20 lg:mb-24 mt-20">
+                <EmailCaptureForm position="inline" />
+            </div>
 
-                {/* Testimonials Section */}
-                <TestimonialsSection />
-
-                {/* Email Capture Section */}
-                <div className="mb-20 lg:mb-32 px-4">
-                    <EmailCaptureForm position="inline" />
-                </div>
-
-                {/* Latest Blog Posts Feature */}
-                {currentLangPosts && currentLangPosts.length > 0 && (
-                    <div className="mb-20 lg:mb-32 px-4">
-                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-                            <div className="text-center md:text-left">
-                                <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white flex items-center justify-center md:justify-start gap-3 mb-4">
-                                    <BookOpen className="w-8 h-8 text-emerald-500" />
-                                    {t.latest_blog_title}
-                                </h2>
-                                <p className="text-slate-600 dark:text-slate-400 font-medium max-w-2xl text-lg">
-                                    Science-based health tips, meal plans, and daily wellness guidance.
-                                </p>
-                            </div>
-                            <button
-                                onClick={() => setCurrentPage('blog')}
-                                className="hidden md:flex items-center gap-2 text-white bg-slate-900 dark:bg-white dark:text-slate-900 px-6 py-3 rounded-xl font-bold hover:shadow-lg hover:-translate-y-1 transition-all"
-                            >
-                                {t.nav_blog} <ChevronRight className="w-5 h-5" />
-                            </button>
-                        </div>
-
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                            {(() => {
-                                const featuredIds = ['bmi-athlete-truth', 'increase-bmr-naturally'];
-                                const featuredPosts = currentLangPosts.filter(p => featuredIds.includes(p.id));
-                                featuredPosts.sort((a, b) => featuredIds.indexOf(a.id) - featuredIds.indexOf(b.id));
-                                const displayPosts = featuredPosts.length > 0 ? featuredPosts : currentLangPosts.slice(0, 2);
-
-                                return displayPosts.map((post) => (
-                                    <div
-                                        key={post.id}
-                                        onClick={() => {
-                                            setSelectedPost(post);
-                                            setCurrentPage('blog-post');
-                                            window.scrollTo(0, 0);
-                                        }}
-                                        className="group cursor-pointer bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row"
-                                    >
-                                        {post.image && (
-                                            <div className="relative h-56 sm:h-auto sm:w-2/5 overflow-hidden">
-                                                <img
-                                                    src={post.image}
-                                                    alt={post.imageAlt || post.title}
-                                                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                                    loading="lazy"
-                                                />
-                                                <div className="absolute inset-0 bg-linear-to-t sm:bg-linear-to-r from-black/50 to-transparent"></div>
-                                            </div>
-                                        )}
-
-                                        <div className="p-8 sm:w-3/5 flex flex-col justify-center">
-                                            <div className="text-xs font-bold text-emerald-500 uppercase tracking-wider mb-2">{post.category || 'Health'}</div>
-                                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-emerald-500 transition-colors line-clamp-2 md:line-clamp-3">{post.title}</h3>
-                                            <p className="text-slate-600 dark:text-slate-400 font-medium mb-6 line-clamp-2">{post.excerpt}</p>
-                                            <div className="flex items-center text-slate-900 dark:text-white font-bold group-hover:text-emerald-500 transition-colors mt-auto">
-                                                {t.read_article} <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                ));
-                            })()}
+            {/* Clean Blog Cards Section */}
+            {currentLangPosts && currentLangPosts.length > 0 && (
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-12">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8 border-b border-slate-200 dark:border-slate-800 pb-6">
+                        <div>
+                            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-1">Wellness Hub</h2>
+                            <p className="text-slate-600 dark:text-slate-400 font-medium text-sm sm:text-base">Evidence-based advice for your health journey.</p>
                         </div>
                         <button
                             onClick={() => setCurrentPage('blog')}
-                            className="md:hidden mt-8 w-full flex items-center justify-center gap-2 text-white bg-slate-900 dark:bg-white dark:text-slate-900 px-6 py-4 rounded-xl font-bold hover:shadow-lg hover:-translate-y-1 transition-all"
+                            className="text-slate-900 dark:text-white font-bold hover:text-emerald-500 dark:hover:text-emerald-400 flex items-center gap-1 transition-colors text-sm sm:text-base"
                         >
-                            {t.nav_blog} <ChevronRight className="w-5 h-5" />
+                            View All Articles <ArrowRight className="w-4 h-4 ml-1" />
                         </button>
                     </div>
-                )}
-            </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {(() => {
+                            const featuredIds = ['bmi-athlete-truth', 'increase-bmr-naturally'];
+                            const featuredPosts = currentLangPosts.filter(p => featuredIds.includes(p.id));
+                            featuredPosts.sort((a, b) => featuredIds.indexOf(a.id) - featuredIds.indexOf(b.id));
+                            const displayPosts = featuredPosts.length > 0 ? featuredPosts : currentLangPosts.slice(0, 2);
+
+                            return displayPosts.map((post) => (
+                                <div
+                                    key={post.id}
+                                    onClick={() => {
+                                        setSelectedPost(post);
+                                        setCurrentPage('blog-post');
+                                        window.scrollTo(0, 0);
+                                    }}
+                                    className="group cursor-pointer flex flex-col bg-white dark:bg-slate-900/40 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300 h-full"
+                                >
+                                    {post.image && (
+                                        <div className="h-48 sm:h-56 w-full overflow-hidden shrink-0">
+                                            <img
+                                                src={post.image}
+                                                alt={post.imageAlt || post.title}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                    )}
+                                    <div className="p-6 flex flex-col grow">
+                                        <div className="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-3">{post.category || 'Health'}</div>
+                                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-emerald-500 line-clamp-2 leading-snug transition-colors">{post.title}</h3>
+                                        <p className="text-slate-600 dark:text-slate-400 text-sm font-medium line-clamp-2 mb-4 grow">{post.excerpt}</p>
+                                        <div className="text-slate-900 dark:text-white font-bold text-sm inline-flex items-center group-hover:text-emerald-500 transition-colors">
+                                            {t.read_article} <ChevronRight className="w-4 h-4 ml-1" />
+                                        </div>
+                                    </div>
+                                </div>
+                            ));
+                        })()}
+                    </div>
+                </div>
+            )}
+            
         </div>
     );
 };

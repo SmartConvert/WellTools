@@ -64,7 +64,7 @@ export async function onRequestPost({ request, env }) {
                 ]
             };
         } else {
-            modelUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+            modelUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
             headers = { "Content-Type": "application/json" };
             payload = {
                 contents: [

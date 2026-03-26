@@ -4,7 +4,7 @@ import { ShieldCheck, Award, FileText } from 'lucide-react';
 const TrustBadge = ({ setCurrentPage }) => {
     return (
         <div className="mt-8 mb-8 p-6 bg-blue-50 dark:bg-blue-900/10 rounded-2xl border border-blue-100 dark:border-blue-800 flex flex-col md:flex-row items-start md:items-center gap-4">
-            <div className="bg-blue-100 dark:bg-blue-800 p-3 rounded-full flex-shrink-0">
+            <div className="bg-blue-100 dark:bg-blue-800 p-3 rounded-full shrink-0">
                 <ShieldCheck className="w-8 h-8 text-blue-600 dark:text-blue-300" />
             </div>
             <div>

@@ -227,7 +227,7 @@ const processTextMarkdown = (text) => {
                     }}
                 >
                     {linkText}
-                    {!isInternal && <ExternalLink className="w-3 h-3 inline opacity-70 flex-shrink-0" />}
+                    {!isInternal && <ExternalLink className="w-3 h-3 inline opacity-70 shrink-0" />}
                 </a>
             );
             lLastIdx = linkRegex.lastIndex;

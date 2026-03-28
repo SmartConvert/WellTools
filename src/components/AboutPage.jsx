@@ -80,7 +80,7 @@ const AboutPage = ({ setCurrentPage, t }) => (
                     <div className="relative group rounded-5xl overflow-hidden shadow-2xl skew-y-3 transform hover:skew-y-0 transition-all duration-700">
                         <div className="absolute inset-0 bg-emerald-500/10 group-hover:bg-transparent transition-colors z-10 pointer-events-none"></div>
                         <img 
-                            src="https://image.pollinations.ai/prompt/professional%20diverse%20medical%20team%20of%20doctors%20and%20nutritionists%20smiling%20confidently%20in%20a%20modern%20bright%20hospital%2C%20high%20quality%20photorealistic%204k%20photography?width=1000&height=1200&nologo=true"
+                            src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1000&auto=format&fit=crop"
                             alt="WellTools Medical Team"
                             className="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-700"
                             loading="lazy"

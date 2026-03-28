@@ -6,6 +6,7 @@ import ExitIntentPopup from './components/ExitIntentPopup';
 import SchemaMarkup from './components/SchemaMarkup';
 import ErrorBoundary from './components/ErrorBoundary';
 import CookieConsentBanner from './components/CookieConsentBanner';
+import HomePage from './components/HomePage';
 
 const PAGE_SLUGS = {
   'bmi': 'bmi-calculator-for-women-and-men',
@@ -65,7 +66,6 @@ const lazyWithRetry = (componentImport) => {
 };
 
 // Lazy load all page components for code splitting
-const HomePage = lazyWithRetry(() => import('./components/HomePage'));
 const BMICalculatorPage = lazyWithRetry(() => import('./components/BMICalculatorPage'));
 const BMIGuidePage = lazyWithRetry(() => import('./components/BMIGuidePage'));
 const CaloriesCalculatorPage = lazyWithRetry(() => import('./components/CaloriesCalculatorPage'));

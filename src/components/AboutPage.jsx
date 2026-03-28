@@ -133,7 +133,7 @@ const AboutPage = ({ setCurrentPage, t }) => (
                     ].map((member, idx) => (
                         <div key={idx} className="bg-white dark:bg-gray-800 p-8 rounded-4xl shadow-xl border border-gray-50 dark:border-gray-700 text-center hover:-translate-y-2 transition-transform duration-300">
                             <div className="w-24 h-24 rounded-4xl shadow-xl overflow-hidden mx-auto mb-6 border-4 border-white dark:border-gray-800">
-                                <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                                <img src={member.image} alt={member.name} className="w-full h-full object-cover" loading="lazy" />
                             </div>
                             <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2">{member.name}</h3>
                             <p className="text-emerald-600 font-black text-sm uppercase tracking-widest mb-4">{member.role}</p>

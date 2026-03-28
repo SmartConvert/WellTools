@@ -38,10 +38,12 @@ if (!GEMINI_API_KEY && !PERPLEXITY_API_KEY) {
 const genAI = GEMINI_API_KEY ? new GoogleGenAI({ apiKey: GEMINI_API_KEY }) : null;
 
 const MODELS_TO_TRY = [
-    "gemini-3.1-flash",
-    "gemini-3.1-pro",
-    "gemini-3.0-flash",
-    "gemini-3.1-flash-lite"
+    "gemini-2.5-flash",          // Stable, best price-performance for production
+    "gemini-2.5-pro",            // Stable, most advanced
+    "gemini-2.5-flash-lite",     // Stable, fastest & cheapest
+    "gemini-3.1-pro-preview",    // Preview, latest generation
+    "gemini-3-flash-preview",    // Preview, frontier-class
+    "gemini-3.1-flash-lite-preview" // Preview, cost-efficient
 ];
 
 async function getWorkingModel(genAI) {

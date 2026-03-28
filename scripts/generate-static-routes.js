@@ -35,7 +35,9 @@ const routes = [
     'privacy-policy',
     'terms-of-use',
     'medical-disclaimer',
-    'editorial-policy'
+    'editorial-policy',
+    'food-scanner',
+    'cookie-policy'
 ];
 
 const generateSlug = (text) => {

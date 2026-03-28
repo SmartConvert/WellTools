@@ -13,27 +13,30 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
     const [dietaryPreference, setDietaryPreference] = useState('none');
     const [error, setError] = useState(null);
 
-    // Professional Food Recommendations based on Goal
-    const getFoodRecommendations = (targetGoal) => {
+    // Professional Food Recommendations based Goal and Diet Type
+    const getFoodRecommendations = (targetGoal, dietType) => {
+        let baseRecs;
         switch (targetGoal) {
             case 'lose':
-                return {
+                baseRecs = {
                     title: t.food_recommendations_loss || "Foods for Weight Loss",
                     protein: ["Chicken Breast", "Egg Whites", "White Fish", "Tofu", "Greek Yogurt"],
                     carbs: ["Quinoa", "Oats", "Berries", "Leafy Greens", "Cauliflower"],
                     fats: ["Avocado (limited)", "Almonds (measured)", "Olive Oil (teaspoon)"],
                     avoid: ["Sugary Drinks", "Processed Snacks", "White Bread", "Fried Foods"]
                 };
+                break;
             case 'gain':
-                return {
+                baseRecs = {
                     title: t.food_recommendations_gain || "Foods for Muscle Gain",
                     protein: ["Steak", "Whole Eggs", "Salmon", "Chicken Thighs", "Protein Shakes"],
                     carbs: ["Rice", "Potatoes", "Pasta", "Bananas", "Whole Wheat Bread"],
                     fats: ["Peanut Butter", "Whole Milk", "Cheese", "Nuts", "Avocado"],
                     avoid: ["Empty Calories", "Excessive Junk Food", "Alcohol"]
                 };
+                break;
             default: // maintain
-                return {
+                baseRecs = {
                     title: t.food_recommendations_maintain || "Balanced Diet Foods",
                     protein: ["Lean Meats", "Fish", "Beans", "Eggs", "Dairy"],
                     carbs: ["Fruits", "Vegetables", "Whole Grains", "Legumes"],
@@ -41,9 +44,29 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
                     avoid: ["Excessive Sugar", "Trans Fats", "Highly Processed Foods"]
                 };
         }
+
+        // Apply Dietary Adjustments
+        if (dietType === 'vegan') {
+            baseRecs.protein = ["Tofu & Tempeh", "Lentils", "Black Beans", "Seitan", "Plant Protein Powder"];
+            baseRecs.fats = baseRecs.fats.filter(f => !f.toLowerCase().includes('fish') && !f.toLowerCase().includes('cheese') && !f.toLowerCase().includes('milk') && !f.toLowerCase().includes('butter'));
+            if (!baseRecs.fats.includes("Chia Seeds")) baseRecs.fats.push("Chia Seeds");
+            baseRecs.avoid.push("All Animal Products", "Dairy & Eggs", "Honey");
+        } else if (dietType === 'vegetarian') {
+            baseRecs.protein = ["Eggs", "Greek Yogurt", "Tofu", "Lentils", "Whey Protein"];
+            baseRecs.fats = baseRecs.fats.filter(f => !f.toLowerCase().includes('fish'));
+            baseRecs.avoid.push("Meat & Poultry", "Fish & Seafood");
+        } else if (dietType === 'keto') {
+            baseRecs.carbs = ["Leafy Greens", "Broccoli", "Cauliflower", "Zucchini", "Avocado"];
+            baseRecs.avoid.push("High-Carb Foods", "Sugars", "Most Fruits");
+        }
+
+        return baseRecs;
     };
 
-    const foodRecs = getFoodRecommendations(isManualMode ? (parseLocalizedNumber(manualCalories) > 2500 ? 'gain' : parseLocalizedNumber(manualCalories) < 1600 ? 'lose' : 'maintain') : goal);
+    const foodRecs = getFoodRecommendations(
+        isManualMode ? (parseLocalizedNumber(manualCalories) > 2500 ? 'gain' : parseLocalizedNumber(manualCalories) < 1600 ? 'lose' : 'maintain') : goal,
+        dietaryPreference
+    );
 
     const generateDynamicPlan = useCallback(async () => {
         setIsGenerating(true);
@@ -96,7 +119,7 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
 
     useEffect(() => {
         generateDynamicPlan();
-    }, [goal, isManualMode]);
+    }, [goal, isManualMode, dietaryPreference]);
 
     return (
         <div className="pt-24 pb-16 px-4">

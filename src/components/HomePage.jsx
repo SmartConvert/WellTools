@@ -17,12 +17,12 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
     const tools = [
         { id: 'bmi', icon: <Scale />, title: 'BMI Calculator', desc: 'Assess your body mass instantly.', color: 'text-cyan-500', bg: 'bg-cyan-50 dark:bg-cyan-500/10' },
         { id: 'calories', icon: <Activity />, title: 'Daily Calories', desc: 'Find your target energy needs.', color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-500/10' },
-        { id: 'water', icon: <Droplet />, title: 'Water Intake', desc: 'Stay hydrated with precision.', color: 'text-blue-400', bg: 'bg-blue-50 dark:bg-blue-400/10' },
+        { id: 'water', icon: <Droplet />, title: 'Water Intake', desc: 'Calculate your daily water needs.', color: 'text-blue-400', bg: 'bg-blue-50 dark:bg-blue-400/10' },
         { id: 'ideal-weight', icon: <Scale />, title: 'Ideal Weight', desc: 'Calculate your healthy range.', color: 'text-teal-500', bg: 'bg-teal-50 dark:bg-teal-500/10' },
-        { id: 'sleep', icon: <Moon />, title: 'Sleep Cycles', desc: 'Optimize your waking times.', color: 'text-indigo-500', bg: 'bg-indigo-50 dark:bg-indigo-500/10' },
+        { id: 'sleep', icon: <Moon />, title: 'Sleep Cycles', desc: 'Find your perfect REM sleep times.', color: 'text-indigo-500', bg: 'bg-indigo-50 dark:bg-indigo-500/10' },
         { id: 'body-fat', icon: <Percent />, title: 'Body Fat', desc: 'Measure your composition.', color: 'text-fuchsia-500', bg: 'bg-fuchsia-50 dark:bg-fuchsia-500/10' },
         { id: 'bmr', icon: <Zap />, title: 'BMR Calculator', desc: 'Your resting metabolic rate.', color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-500/10' },
-        { id: 'macro', icon: <Utensils />, title: 'Macro Split', desc: 'Perfect your diet balance.', color: 'text-rose-500', bg: 'bg-rose-50 dark:bg-rose-500/10' },
+        { id: 'macro', icon: <Utensils />, title: 'Macro Split', desc: 'Calculate your perfect daily macros.', color: 'text-rose-500', bg: 'bg-rose-50 dark:bg-rose-500/10' },
         { id: '1rm', icon: <Dumbbell />, title: '1-Rep Max', desc: 'Track your strength gains.', color: 'text-slate-600 dark:text-slate-400', bg: 'bg-slate-100 dark:bg-slate-800' },
         { id: 'fasting', icon: <Clock />, title: 'Fasting Timer', desc: 'Plan your feeding windows.', color: 'text-violet-500', bg: 'bg-violet-50 dark:bg-violet-500/10' }
     ];
@@ -38,8 +38,8 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                 </div>
                 
                 <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-[-0.03em] leading-[1.1] mb-6">
-                    Science-Backed <br className="hidden sm:block" />
-                    <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-cyan-500">Health Insights</span>
+                    Scan Your Meals. <br className="hidden sm:block" />
+                    <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-cyan-500">Track Your Health.</span>
                 </h1>
                 
                 <p className="max-w-xl mx-auto text-lg md:text-xl text-slate-600 dark:text-slate-400 font-medium leading-relaxed mb-10">
@@ -49,12 +49,11 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
                     <button
                         onClick={() => {
-                            document.getElementById('tools-grid')?.scrollIntoView({ behavior: 'smooth' });
+                            document.getElementById('ai-food-scanner')?.scrollIntoView({ behavior: 'smooth' });
                         }}
                         className="w-full sm:w-auto px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-lg shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all flex justify-center items-center gap-2"
                     >
-                        {t.explore_tools}
-                        <ArrowRight className="w-5 h-5" />
+                        Try AI Food Scanner 📸
                     </button>
                     <button
                          onClick={() => setCurrentPage('meal-planner')}
@@ -66,7 +65,7 @@ const HomePage = ({ setCurrentPage, setSelectedMealCategory, setSelectedPost, t 
             </div>
 
             {/* AI Food Scanner Featured Strip */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-20 lg:mb-24">
+            <div id="ai-food-scanner" className="max-w-7xl mx-auto px-4 sm:px-6 mb-20 lg:mb-24">
                 <div 
                     onClick={() => {
                         window.history.pushState({}, '', '/food-scanner');

@@ -20,7 +20,6 @@ const PAGE_SLUGS = {
   'body-fat-guide': 'body-fat-percentage-chart-and-health-guide',
   'bmr': 'bmr-calculator-mifflin-st-jeor',
   'macro': 'macro-calculator-for-muscle-gain-and-fat-loss',
-  'food-scanner': 'ai-food-scanner-macro-calculator',
   '1rm': 'one-rep-max-calculator-for-weightlifting',
   'meal-planner': 'custom-meal-planner-and-nutrition-guide',
   'blog': 'blog-health-and-fitness-tips',

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { ArrowLeft, Clock, CheckCircle, Shield, User, ExternalLink, BookOpen, Calculator, Info, Lightbulb, AlertTriangle, ChevronRight } from 'lucide-react';
 import TableOfContents from './TableOfContents';
 import RelatedArticles from './RelatedArticles';
-import CommentSection from './CommentSection';
 
 // ─── Markdown Parsing ────────────────────────────────────────────────────────
 
@@ -687,8 +686,6 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
                     setCurrentPage={setCurrentPage}
                     setSelectedPost={setSelectedPost}
                 />
-
-                <CommentSection postId={post.id} />
             </div>
         </div>
     );

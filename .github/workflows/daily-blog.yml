@@ -41,5 +41,6 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore: automated blog post and sitemap update"
+            git pull --rebase origin master
             git push
           fi

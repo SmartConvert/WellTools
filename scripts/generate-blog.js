@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from 'url';
@@ -35,19 +35,13 @@ if (!GEMINI_API_KEY && !PERPLEXITY_API_KEY) {
     process.exit(1);
 }
 
-const genAI = GEMINI_API_KEY ? new GoogleGenerativeAI(GEMINI_API_KEY) : null;
+const genAI = GEMINI_API_KEY ? new GoogleGenAI({ apiKey: GEMINI_API_KEY }) : null;
 
 const MODELS_TO_TRY = [
-    "gemini-2.0-flash",
-    "gemini-2.0-flash-exp",
-    "gemini-1.5-flash",
-    "gemini-1.5-flash-002",
-    "gemini-1.5-flash-001",
-    "gemini-1.5-flash-8b",
-    "gemini-1.5-pro",
-    "gemini-1.5-pro-002",
-    "gemini-1.5-pro-001",
-    "gemini-pro"
+    "gemini-3.1-flash",
+    "gemini-3.1-pro",
+    "gemini-3.0-flash",
+    "gemini-3.1-flash-lite"
 ];
 
 async function getWorkingModel(genAI) {
@@ -59,13 +53,14 @@ async function getWorkingModel(genAI) {
         while (retries <= MAX_RETRIES) {
             try {
                 console.log(`Testing model: ${modelName} (Attempt ${retries + 1})...`);
-                const model = genAI.getGenerativeModel({ model: modelName });
-                const result = await model.generateContent("hi");
-                const response = await result.response;
+                const result = await genAI.models.generateContent({
+                    model: modelName,
+                    contents: [{ role: 'user', parts: [{ text: "hi" }] }]
+                });
 
-                if (response.text()) {
+                if (result.text) {
                     console.log(`✅ Selected working model: ${modelName}`);
-                    return model;
+                    return modelName;
                 }
             } catch (error) {
                 console.warn(`❌ Model ${modelName} attempt ${retries + 1} failed. Reason: ${error.message}`);
@@ -245,16 +240,20 @@ async function generatePost() {
                     if (!text) throw new Error("Perplexity returned empty response");
                 } catch (pe) {
                     console.log(`  ⚠️ Perplexity failed (${pe.message}), falling back to Gemini...`);
-                    const model = await getWorkingModel(genAI);
-                    const result = await model.generateContent(prompt);
-                    const response = await result.response;
-                    text = response.text();
+                    const modelName = await getWorkingModel(genAI);
+                    const result = await genAI.models.generateContent({
+                        model: modelName,
+                        contents: [{ role: 'user', parts: [{ text: prompt }] }]
+                    });
+                    text = result.text;
                 }
             } else {
-                const model = await getWorkingModel(genAI);
-                const result = await model.generateContent(prompt);
-                const response = await result.response;
-                text = response.text();
+                const modelName = await getWorkingModel(genAI);
+                const result = await genAI.models.generateContent({
+                    model: modelName,
+                    contents: [{ role: 'user', parts: [{ text: prompt }] }]
+                });
+                text = result.text;
             }
 
             if (!text) throw new Error("No content generated.");

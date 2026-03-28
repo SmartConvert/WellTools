@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+// import { GoogleGenAI } from "@google/genai"; // Placeholder for future Gemini integration
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from 'url';

@@ -334,5 +334,14 @@ export const translations = {
         privacy_collection_desc: 'We do not collect any personally identifiable information (PII) on our servers.',
         privacy_storage_title: '2. Local Storage',
         privacy_storage_desc: 'Our tracking features use your browser\'s Local Storage to save your data.',
+
+        // Dietary Preferences
+        dietary_preference: 'Dietary Preference',
+        diet_none: 'None (Standard)',
+        diet_vegetarian: 'Vegetarian',
+        diet_vegan: 'Vegan',
+        diet_gluten_free: 'Gluten-Free',
+        diet_keto: 'Keto',
+        diet_halal: 'Halal',
     }
 };

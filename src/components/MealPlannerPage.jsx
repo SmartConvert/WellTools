@@ -6,10 +6,12 @@ import { parseLocalizedNumber } from '../utils/numbers';
 
 const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
     const [goal, setGoal] = useState(calResult ? (calResult.goal || 'maintain') : 'maintain');
-    const [currentPlan, setCurrentPlan] = useState({ total: 2000, items: [] });
+    const [currentPlan, setCurrentPlan] = useState({ total: 0, items: [] });
     const [manualCalories, setManualCalories] = useState('2000');
     const [isManualMode, setIsManualMode] = useState(false);
     const [isGenerating, setIsGenerating] = useState(false);
+    const [dietaryPreference, setDietaryPreference] = useState('none');
+    const [error, setError] = useState(null);
 
     // Professional Food Recommendations based on Goal
     const getFoodRecommendations = (targetGoal) => {
@@ -43,71 +45,54 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
 
     const foodRecs = getFoodRecommendations(isManualMode ? (parseLocalizedNumber(manualCalories) > 2500 ? 'gain' : parseLocalizedNumber(manualCalories) < 1600 ? 'lose' : 'maintain') : goal);
 
-    const generateDynamicPlan = useCallback(() => {
+    const generateDynamicPlan = useCallback(async () => {
         setIsGenerating(true);
+        setError(null);
 
-        // Brief delay to simulate AI calculation
-        setTimeout(() => {
-            const mapping = {
-                lose: 'weightLoss',
-                maintain: 'healthy',
-                gain: 'weightGain'
-            };
+        const targetCals = isManualMode ? (parseLocalizedNumber(manualCalories) || 2000) : (goal === 'lose' ? 1600 : goal === 'gain' ? 2800 : 2000);
 
-            const categoryKey = mapping[goal] || 'healthy';
-
-            // Get all possible meals across categories for more diversity in manual mode
-            let allMeals = [];
-            Object.values(mealCategories).forEach(cat => {
-                allMeals = [...allMeals, ...cat.meals];
+        try {
+            const response = await fetch('/api/generate-meal-plan', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    targetCals: targetCals,
+                    goal: goal,
+                    dietaryPreference: dietaryPreference,
+                    language: t.lang || 'en'
+                })
             });
 
-            const targetCals = isManualMode ? (parseLocalizedNumber(manualCalories) || 0) : 0;
-            const mealTypes = [t.breakfast, t.lunch, t.dinner, t.snack];
-            const splits = [0.25, 0.35, 0.30, 0.10]; // Portion percentages
+            const data = await response.json();
 
-            let planItems = [];
-            let currentTotal = 0;
-
-            if (isManualMode && targetCals > 0) {
-                // Smart AI Mode: Select meals and adjust portions
-                mealTypes.forEach((type, i) => {
-                    const typeTarget = targetCals * splits[i];
-                    // Find a random meal
-                    const randomMeal = allMeals[Math.floor(Math.random() * allMeals.length)];
-                    const portionFactor = (typeTarget / randomMeal.calories).toFixed(1);
-
-                    planItems.push({
-                        ...randomMeal,
-                        type: type,
-                        portion: portionFactor,
-                        actualCalories: Math.round(randomMeal.calories * portionFactor)
-                    });
-                    currentTotal += Math.round(randomMeal.calories * portionFactor);
-                });
-            } else {
-                // Classic Mode
-                const category = mealCategories[categoryKey];
-                if (!category) return;
-                const shuffled = [...category.meals].sort(() => 0.5 - Math.random());
-                const selected = shuffled.slice(0, 4);
-
-                planItems = selected.map((meal, i) => ({
-                    ...meal,
-                    type: mealTypes[i] || t.meal,
-                    portion: "1.0",
-                    actualCalories: meal.calories
-                }));
-                currentTotal = planItems.reduce((sum, item) => sum + item.actualCalories, 0);
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to generate meal plan.');
             }
 
             setCurrentPlan({
-                total: currentTotal,
-                items: planItems
+                total: data.total,
+                items: data.items
             });
+        } catch (err) {
+            console.error(err);
+            setError(err.message || 'Error communicating with AI. Please try again.');
+            
+            // Fallback plan if AI fails
+            setCurrentPlan({
+                total: targetCals,
+                items: [
+                    { name: 'AI Unavailable - Fallback Breakfast', type: t.breakfast || 'Breakfast', portion: "1.0", actualCalories: Math.round(targetCals * 0.25) },
+                    { name: 'AI Unavailable - Fallback Lunch', type: t.lunch || 'Lunch', portion: "1.0", actualCalories: Math.round(targetCals * 0.35) },
+                    { name: 'AI Unavailable - Fallback Dinner', type: t.dinner || 'Dinner', portion: "1.0", actualCalories: Math.round(targetCals * 0.30) },
+                    { name: 'AI Unavailable - Fallback Snack', type: t.snack || 'Snack', portion: "1.0", actualCalories: Math.round(targetCals * 0.10) }
+                ]
+            });
+        } finally {
             setIsGenerating(false);
-        }, 800);
-    }, [goal, t, isManualMode, manualCalories]);
+        }
+    }, [goal, t, isManualMode, manualCalories, dietaryPreference]);
 
     useEffect(() => {
         generateDynamicPlan();
@@ -131,7 +116,7 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
                 </div>
 
                 {/* Mode Selection Toggle */}
-                <div className="flex justify-center mb-8">
+                <div className="flex justify-center mb-6">
                     <div className="inline-flex p-1 bg-gray-100 dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700">
                         <button
                             onClick={() => setIsManualMode(false)}
@@ -145,6 +130,25 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
                         >
                             {t.precise_target}
                         </button>
+                    </div>
+                </div>
+
+                {/* Dietary Preference Selection */}
+                <div className="flex justify-center mb-8">
+                    <div className="flex flex-col items-center">
+                        <label className="text-sm font-bold text-gray-500 mb-2">{t.dietary_preference || 'Dietary Preference'}</label>
+                        <select
+                            value={dietaryPreference}
+                            onChange={(e) => setDietaryPreference(e.target.value)}
+                            className="bg-gray-50 dark:bg-gray-800 border-2 border-transparent focus:border-emerald-500 rounded-xl px-4 py-2 text-gray-900 dark:text-white font-medium focus:outline-hidden transition-all shadow-sm"
+                        >
+                            <option value="none">{t.diet_none || 'None (Standard)'}</option>
+                            <option value="vegetarian">{t.diet_vegetarian || 'Vegetarian'}</option>
+                            <option value="vegan">{t.diet_vegan || 'Vegan'}</option>
+                            <option value="gluten-free">{t.diet_gluten_free || 'Gluten-Free'}</option>
+                            <option value="keto">{t.diet_keto || 'Keto'}</option>
+                            <option value="halal">{t.diet_halal || 'Halal'}</option>
+                        </select>
                     </div>
                 </div>
 
@@ -274,13 +278,21 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
                         <div className="flex flex-wrap items-center gap-3">
                             <button
                                 onClick={generateDynamicPlan}
+                                disabled={isGenerating}
                                 className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 transition-all font-bold group/btn shadow-lg disabled:opacity-50"
                             >
-                                <Plus className="w-5 h-5 group-hover/btn:rotate-90 transition-transform" />
+                                {isGenerating ? <Loader2 className="w-5 h-5 animate-spin" /> : <Plus className="w-5 h-5 group-hover/btn:rotate-90 transition-transform" />}
                                 {t.generate_new}
                             </button>
                         </div>
                     </div>
+
+                    {error && (
+                        <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl text-red-600 dark:text-red-400 flex items-center gap-3">
+                            <Info className="w-5 h-5 shrink-0" />
+                            <p className="text-sm font-medium">{error}</p>
+                        </div>
+                    )}
 
                     {isGenerating ? (
                         <div className="flex flex-col items-center justify-center py-12">
@@ -296,13 +308,13 @@ const MealPlannerPage = ({ t, setCurrentPage, calResult }) => {
                                     </div>
                                     <div className="flex-1">
                                         <div className="flex justify-between items-start mb-1">
-                                            <h4 className="font-bold text-gray-900 dark:text-white text-lg">{t[meal.name] || meal.name.replace(/_/g, ' ')}</h4>
+                                            <h4 className="font-bold text-gray-900 dark:text-white text-lg">{meal.name}</h4>
                                             <div className="text-right">
                                                 <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 block">
                                                     {meal.actualCalories} kcal
                                                 </span>
                                                 <span className="text-[10px] uppercase font-black text-gray-400 tracking-widest">
-                                                    {meal.portion === "1.0" ? t.portion_standard : `${meal.portion}x ${t.potion_adjusted} `}
+                                                    {meal.portion === "1.0" ? (t.portion_standard || '1x std portion') : `${meal.portion}x ${t.potion_adjusted || 'adjusted'} `}
                                                 </span>
                                             </div>
                                         </div>

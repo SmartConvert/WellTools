@@ -260,25 +260,35 @@ async function generatePost() {
 
             if (!text) throw new Error("No content generated.");
 
-            // Strip <think> tags if present from reasoning models
+            // ── Step 1: strip <think> tags (reasoning models) ─────────────
             let cleanedText = text.trim();
             if (cleanedText.includes("<think>")) {
                 cleanedText = cleanedText.replace(/<think>[\s\S]*?<\/think>/g, "").trim();
             }
 
-            // Cleanup JSON using robust Regex
-            let jsonString = cleanedText;
-            const jsonRegex = /{[\s\S]*}/;
-            const match = cleanedText.match(jsonRegex);
-            if (match) {
-                jsonString = match[0];
+            // ── Step 2: strip markdown code fences (```json ... ``` or ``` ... ```) ──
+            cleanedText = cleanedText
+                .replace(/^```(?:json)?\s*/i, "")
+                .replace(/\s*```\s*$/i, "")
+                .trim();
+
+            // ── Step 3: extract the outermost JSON object ─────────────────
+            const jsonStart = cleanedText.indexOf("{");
+            const jsonEnd   = cleanedText.lastIndexOf("}");
+            if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
+                cleanedText = cleanedText.substring(jsonStart, jsonEnd + 1);
             }
 
+            // ── Step 4: repair common AI JSON issues ──────────────────────
+            // Remove trailing commas before } or ]
+            cleanedText = cleanedText.replace(/,\s*([}\]])/g, "$1");
+
+            // ── Step 5: parse ─────────────────────────────────────────────
             let newContent;
             try {
-                newContent = JSON.parse(jsonString);
+                newContent = JSON.parse(cleanedText);
             } catch (err) {
-                console.error("Failed to parse JSON. Raw output:", jsonString.substring(0, 200) + "...");
+                console.error("Failed to parse JSON. Raw output:", cleanedText.substring(0, 500) + "...");
                 throw new Error("Invalid JSON returned by AI");
             }
 

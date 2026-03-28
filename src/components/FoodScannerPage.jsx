@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 function FoodScannerPage() {
     const [imagePreview, setImagePreview] = useState(null);
@@ -6,7 +6,21 @@ function FoodScannerPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [result, setResult] = useState(null);
     const [error, setError] = useState(null);
+    
+    // Camera state and refs
+    const [isCameraMode, setIsCameraMode] = useState(false);
     const fileInputRef = useRef(null);
+    const videoRef = useRef(null);
+    const streamRef = useRef(null);
+
+    // Cleanup camera stream on unmount
+    useEffect(() => {
+        return () => {
+            if (streamRef.current) {
+                streamRef.current.getTracks().forEach(track => track.stop());
+            }
+        };
+    }, []);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -31,6 +45,54 @@ function FoodScannerPage() {
         reader.readAsDataURL(file);
     };
 
+    const stopCamera = () => {
+        if (streamRef.current) {
+            streamRef.current.getTracks().forEach(track => track.stop());
+            streamRef.current = null;
+        }
+        setIsCameraMode(false);
+    };
+
+    const startCamera = async () => {
+        setIsCameraMode(true);
+        setError(null);
+        setResult(null);
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: 'environment' }
+            });
+            streamRef.current = stream;
+            // Delay assignment slightly to ensure video element is rendered
+            setTimeout(() => {
+                if (videoRef.current) {
+                    videoRef.current.srcObject = stream;
+                }
+            }, 50);
+        } catch (err) {
+            console.error("Camera access error:", err);
+            setIsCameraMode(false);
+            setError("Unable to access camera. Please check your browser permissions.");
+        }
+    };
+
+    const capturePhoto = () => {
+        if (videoRef.current) {
+            const canvas = document.createElement('canvas');
+            canvas.width = videoRef.current.videoWidth;
+            canvas.height = videoRef.current.videoHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+            
+            setImagePreview(dataUrl);
+            setImageBase64(dataUrl);
+            stopCamera();
+            
+            // Auto submit captured photo
+            handleScan(dataUrl);
+        }
+    };
+
     const handleDragOver = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -44,8 +106,9 @@ function FoodScannerPage() {
         }
     };
 
-    const handleScan = async () => {
-        if (!imageBase64) return;
+    const handleScan = async (imageToScan = null) => {
+        const image = typeof imageToScan === 'string' ? imageToScan : imageBase64;
+        if (!image) return;
         setIsLoading(true);
         setError(null);
         setResult(null);
@@ -57,7 +120,7 @@ function FoodScannerPage() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    imageBase64: imageBase64
+                    imageBase64: image
                 })
             });
 
@@ -104,8 +167,33 @@ function FoodScannerPage() {
                         id="file-upload"
                     />
 
-                    {!imagePreview ? (
-                        <label htmlFor="file-upload" className="flex flex-col items-center justify-center cursor-pointer space-y-4 py-12">
+                    {isCameraMode ? (
+                        <div className="flex flex-col items-center justify-center space-y-6">
+                            <div className="relative w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl border border-slate-700 bg-black flex items-center justify-center min-h-[240px]">
+                                <video 
+                                    ref={videoRef} 
+                                    autoPlay 
+                                    playsInline 
+                                    className="w-full h-auto object-cover" 
+                                />
+                            </div>
+                            <div className="flex flex-col sm:flex-row gap-4 w-full max-w-sm">
+                                <button 
+                                    onClick={capturePhoto} 
+                                    className="flex-1 py-3.5 rounded-xl bg-linear-to-r from-teal-500 to-emerald-500 text-white font-bold text-lg shadow-lg shadow-teal-500/20 hover:shadow-teal-500/40 hover:scale-105 transition-all"
+                                >
+                                    Snap Photo
+                                </button>
+                                <button 
+                                    onClick={stopCamera} 
+                                    className="flex-1 py-3.5 rounded-xl bg-slate-700 text-white font-bold text-lg hover:bg-slate-600 transition-all border border-slate-600"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    ) : !imagePreview ? (
+                        <div className="flex flex-col items-center justify-center space-y-6 py-8">
                             <div className="w-20 h-20 rounded-full border border-slate-700 bg-slate-800 flex items-center justify-center shadow-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -113,10 +201,31 @@ function FoodScannerPage() {
                                 </svg>
                             </div>
                             <div className="text-center">
-                                <p className="text-xl font-medium text-slate-200">Tap to upload or drag & drop</p>
+                                <p className="text-xl font-medium text-slate-200">Select an option to scan your meal</p>
                                 <p className="text-sm text-slate-500 mt-2">JPG, PNG or WEBP from your phone or PC</p>
                             </div>
-                        </label>
+                            <div className="flex flex-col sm:flex-row gap-4 w-full max-w-sm mt-4">
+                                <button 
+                                    onClick={startCamera}
+                                    className="flex-1 py-3.5 rounded-xl bg-slate-800 border border-slate-600 text-white font-semibold hover:bg-slate-700 hover:border-slate-500 transition-all flex items-center justify-center gap-2 group"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-teal-400 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    Take Photo
+                                </button>
+                                <button 
+                                    onClick={() => fileInputRef.current.click()}
+                                    className="flex-1 py-3.5 rounded-xl bg-slate-800 border border-slate-600 text-white font-semibold hover:bg-slate-700 hover:border-slate-500 transition-all flex items-center justify-center gap-2 group"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-teal-400 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                    </svg>
+                                    Upload Image
+                                </button>
+                            </div>
+                        </div>
                     ) : (
                         <div className="flex flex-col items-center space-y-6">
                             <div className="relative w-full max-w-sm h-64 md:h-80 rounded-2xl overflow-hidden shadow-2xl border border-slate-700 group cursor-pointer" onClick={() => fileInputRef.current.click()}>

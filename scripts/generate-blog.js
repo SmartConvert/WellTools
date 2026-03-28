@@ -283,13 +283,84 @@ async function generatePost() {
             // Remove trailing commas before } or ]
             cleanedText = cleanedText.replace(/,\s*([}\]])/g, "$1");
 
-            // ── Step 5: parse ─────────────────────────────────────────────
+            // ── Step 5: multi-strategy robust parse ───────────────────────
             let newContent;
+
+            // Strategy A: standard JSON.parse
             try {
                 newContent = JSON.parse(cleanedText);
-            } catch (err) {
-                console.error("Failed to parse JSON. Raw output:", cleanedText.substring(0, 500) + "...");
-                throw new Error("Invalid JSON returned by AI");
+            } catch (_) { /* try next */ }
+
+            // Strategy B: fix raw newlines/tabs inside JSON string values
+            // (Gemini often writes literal newlines in "content" field)
+            if (!newContent) {
+                try {
+                    const fixed = cleanedText.replace(
+                        /"((?:[^"\\]|\\.)*)"/gs,
+                        (match, inner) => {
+                            const escaped = inner
+                                .replace(/\n/g, "\\n")
+                                .replace(/\r/g, "\\r")
+                                .replace(/\t/g, "\\t");
+                            return `"${escaped}"`;
+                        }
+                    );
+                    newContent = JSON.parse(fixed);
+                } catch (_) { /* try next */ }
+            }
+
+            // Strategy C: tolerant eval-style parse (safe – no user input)
+            if (!newContent) {
+                try {
+                    newContent = Function(`"use strict"; return (${cleanedText})`)();
+                } catch (_) { /* try next */ }
+            }
+
+            // Strategy D: field-by-field regex extraction as last resort
+            if (!newContent) {
+                console.warn("  ⚠️ All JSON strategies failed. Attempting field-by-field extraction...");
+                try {
+                    const extract = (key) => {
+                        // Matches "key": "value" where value may span multiple lines
+                        const re = new RegExp(`"${key}"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"`, "s");
+                        const m = cleanedText.match(re);
+                        return m ? m[1].replace(/\\n/g, "\n").replace(/\\"/g, '"') : "";
+                    };
+                    const extractArr = (key) => {
+                        const re = new RegExp(`"${key}"\\s*:\\s*(\\[[\\s\\S]*?\\])`, "s");
+                        const m = cleanedText.match(re);
+                        if (!m) return [];
+                        try { return JSON.parse(m[1]); } catch { return []; }
+                    };
+                    const extractObj = (key) => {
+                        const re = new RegExp(`"${key}"\\s*:\\s*({[\\s\\S]*?})`, "s");
+                        const m = cleanedText.match(re);
+                        if (!m) return {};
+                        try { return JSON.parse(m[1]); } catch { return {}; }
+                    };
+
+                    newContent = {
+                        title:         extract("title"),
+                        category:      extract("category"),
+                        excerpt:       extract("excerpt"),
+                        imageAlt:      extract("imageAlt"),
+                        content:       extract("content"),
+                        keywords:      extractArr("keywords"),
+                        author:        extractObj("author"),
+                        reviewedBy:    extractObj("reviewedBy"),
+                        factCheckedBy: extractObj("factCheckedBy"),
+                        faq:           extractArr("faq"),
+                        sources:       extractArr("sources"),
+                    };
+
+                    if (!newContent.title || !newContent.content) {
+                        throw new Error("Extraction yielded empty title/content");
+                    }
+                    console.log("  ✅ Field-by-field extraction succeeded.");
+                } catch (extractErr) {
+                    console.error("Failed to parse JSON. Raw output:", cleanedText.substring(0, 500) + "...");
+                    throw new Error("Invalid JSON returned by AI");
+                }
             }
 
             // --- POST-PROCESS: Select Unsplash Hero Image ---

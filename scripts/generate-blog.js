@@ -182,45 +182,44 @@ async function generatePost() {
         You are a world-class Health & Wellness Editor for "WellTools", a premium health platform.
         Your task is to write a high-value, SEO-optimized, and medically accurate article in ${lang.name}.
 
-        CORE TOPIC: "${selectedTopic.title}"
+        CORE TOPIC: You have TOTAL FREEDOM to choose the specific article topic! Pick any fascinating, highly-searched topic within the general framework of Health, Nutrition, or Fitness. Create your own engaging Title. (Ignore the default topic "${selectedTopic.title}").
         TARGET AUDIENCE: Health-conscious individuals seeking science-backed advice.
         LANGUAGE: ${lang.name} (${lang.nuance})
         DIRECTION: ${lang.dir}
-        WORD COUNT CONSTRAINT: MUST BE BETWEEN 2000 AND 3500 WORDS.
-        READING LEVEL: Simple, clear, and accessible for a general audience (Grade 8-9). Use active voice.
+        WORD COUNT CONSTRAINT: MUST BE AT LEAST 2200 WORDS. Make it deeply detailed.
+        READING LEVEL: Basic English (A2-B1). Use simple sentence structure and common vocabulary.
 
-        STRICT QUALITY GUIDELINES (E-E-A-T):
-        1. **Expertise**: Content must demonstrate a deep understanding of physiology/nutrition.
-        2. **Accuracy**: No pseudoscience. Stick to consensus medical facts. You MUST include real, verifiable scientific sources (e.g., WHO, NIH, PubMed) in the "sources" JSON array.
-        3. **Author Block**: You must generate a realistic Author profile (Name, Role, short 1-sentence bio) representing a WellTools expert.
-        4. **Reviewer Block**: Include data for \`reviewedBy\` in the JSON to simulate medical fact-checking.
+        STRICT QUALITY GUIDELINES & PROJECT RULES:
+        1. **Tone**: Simple, friendly, non-medical.
+        2. **PROHIBITED CONTENT**: Absolutely NO medical diagnosis, treatment advice, or medication recommendations. If discussing symptoms, always say "Consult a doctor if symptoms persist" instead of naming drugs.
+        3. **Mandatory Disclaimer**: You MUST weave this exact sentence into the conclusion naturally: "This website provides general health information and does not replace professional medical advice."
+        4. **Author Block**: You must generate a realistic Author profile (Name, Role, short 1-sentence bio) representing a WellTools writer.
         5. **No Fluff**: Get straight to the point. Respect the reader's time.
 
         KEYWORD RESEARCH & STRATEGY (CRITICAL):
-        1. Identify 5-7 high-impact, long-tail keywords (3-5 words each) relevant to the topic.
+        1. Identify 3-5 high-impact, long-tail keywords (3-5 words each) relevant to the topic.
         2. **MANDATORY INTEGRATION**: You must insert these keywords naturally into:
            - The SEO Meta Title (primary keyword, MUST start with or include a NUMBER like "7 Ways..." or "5 Best...", MUST be 50-60 characters total length).
            - The Meta Description (primary + secondary keyword, MUST be 140-160 characters).
            - The H1 Headline (MUST also include the primary keyword and the number).
            - The first 100 words (primary keyword at least once).
-           - At least THREE H2 Subheadings.
+           - At least TWO H2 Subheadings.
         3. List these specific long-tail keywords in the JSON output "keywords" array.
 
         CONTENT STRUCTURE (MANDATORY FORMATTING - USE GITHUB MARKDOWN):
         1. **H1 Headline**: The main article title containing a number.
-        2. **Introduction (150-200 words)**: Formulate a relatable problem, introduce the science, and promise a clear solution. Write exactly 3 paragraphs.
-        3. **Deep Dive Body (1500-2500 words)**: 
-           - You MUST write EXACTLY 8 major sections separated by H2 headings.
-           - EACH H2 section MUST contain 4 to 5 substantial paragraphs of deeply researched content.
-           - Use H3 subheadings frequently to break down complex medical/fitness concepts.
-           - **Formatting**: Short paragraphs, bullet points, bold text for emphasis.
+        2. **Introduction**: Formulate a relatable problem and promise a clear solution.
+        3. **Body Paragraphs**: 
+           - Break down the content into 4-6 simple sections separated by H2 headings.
+           - Ensure deep coverage using structured headings, short paragraphs, and bullet points.
         4. **Visual Enhancements**:
-           - **Callouts**: Inject at least 3 markdown callouts (> [!TIP], > [!IMPORTANT], > [!WARNING]).
-           - **Comparison Table**: Create at least 1 Markdown table comparing concepts, foods, or routines with detailed rows.
-        5. **Interactive Elements Focus**: Explicitly mention and link to AT LEAST 4 to 5 relevant WellTools calculators (e.g., BMI Calculator, BMR Calculator, Sleep, Water, Ideal Weight, Macro, Body Fat, 1RM) using markdown links (e.g., \`[BMI Calculator](/bmi)\`). Weave these naturally into the related paragraphs.
-        6. **Myth vs Fact Section (150-200 words)**: A dedicated H2 section debunking 3 common misconceptions.
-        7. **Summary / Key Takeaways**: Bulleted list of 5 main points at the end.
-        8. **Images**: DO NOT INJECT ANY EXTERNAL OR MARKDOWN IMAGE LINKS. NO IMAGES WHATSOEVER.
+           - **Callouts**: Inject at least 2 markdown callouts (> [!TIP], > [!IMPORTANT]).
+        5. **Interactive Elements Focus**: Link to 2-3 relevant WellTools calculators (e.g., [BMI Calculator](/bmi), [BMR Calculator](/bmr), [Water Intake](/water), [Ideal Weight](/ideal-weight), [Macro](/macro)) naturally in the text.
+        6. **FAQ Section**: Add 3-4 common questions and simple answers at the end.
+        7. **Images**: You MUST inject 3 to 4 images throughout the article related to the topic of the current section. 
+           Use the following URL format for images in Markdown, replacing YOUR-IMAGE-PROMPT with a 3-5 word hyphen-separated description of the image:
+           ![Image Alt Text](https://image.pollinations.ai/prompt/YOUR-IMAGE-PROMPT?width=1200&height=800&nologo=true)
+           Example: ![Healthy Snacks](https://image.pollinations.ai/prompt/healthy-snacks-on-a-wooden-table?width=1200&height=800&nologo=true)
 
         OUTPUT FORMAT: Single Valid JSON Object.
         {
@@ -228,7 +227,7 @@ async function generatePost() {
           "category": "${selectedTopic.group}",
           "excerpt": "Meta Description (140-160 chars)",
           "imageAlt": "SEO optimized alt text in ${lang.name}",
-          "content": "Full markdown content starting with H1... MUST INCLUDE callouts, Markdown Tables, H2s, H3s, bullet points, internal links to 4+ calculators. DO NOT INJECT ANY IMAGES.",
+          "content": "Full markdown content starting with H1... MUST INCLUDE Markdown Images, callouts, Markdown Tables, H2s, H3s, bullet points, internal links to 4+ calculators.",
           "keywords": ["keyword1", "keyword2", "keyword3"],
           "author": { "name": "Expert Name", "role": "Credentials", "bio": "Short 1-sentence bio." },
           "reviewedBy": { "name": "Dr. Name", "credentials": "MD" },
@@ -260,15 +259,27 @@ async function generatePost() {
 
             if (!text) throw new Error("No content generated.");
 
-            // Cleanup JSON
+            // Strip <think> tags if present from reasoning models
             let cleanedText = text.trim();
-            if (cleanedText.includes("```json")) {
-                cleanedText = cleanedText.split("```json")[1].split("```")[0].trim();
-            } else if (cleanedText.includes("```")) {
-                cleanedText = cleanedText.split("```")[1].split("```")[0].trim();
+            if (cleanedText.includes("<think>")) {
+                cleanedText = cleanedText.replace(/<think>[\s\S]*?<\/think>/g, "").trim();
             }
 
-            const newContent = JSON.parse(cleanedText);
+            // Cleanup JSON using robust Regex
+            let jsonString = cleanedText;
+            const jsonRegex = /{[\s\S]*}/;
+            const match = cleanedText.match(jsonRegex);
+            if (match) {
+                jsonString = match[0];
+            }
+
+            let newContent;
+            try {
+                newContent = JSON.parse(jsonString);
+            } catch (err) {
+                console.error("Failed to parse JSON. Raw output:", jsonString.substring(0, 200) + "...");
+                throw new Error("Invalid JSON returned by AI");
+            }
 
             // --- POST-PROCESS: Select Unsplash Hero Image ---
             const topicImages = {
@@ -296,31 +307,8 @@ async function generatePost() {
 
             const imageUrl = getRelevantImage(selectedTopic.title);
 
-            // Fetch 2 unique images for the article body
-            const allUrls = Object.values(topicImages);
-            function getRandomImages(count, exclude) {
-                const pool = allUrls.filter(u => u !== exclude);
-                const shuffled = pool.sort(() => 0.5 - Math.random());
-                return shuffled.slice(0, count);
-            }
-
-            if (newContent.content && !newContent.content.includes('![')) {
-                let lines = newContent.content.split('\\n');
-                const h2Indices = [];
-                for (let i = 0; i < lines.length; i++) {
-                    if (lines[i].startsWith('## ')) h2Indices.push(i);
-                }
-                
-                if (h2Indices.length >= 4) {
-                    const img1Index = h2Indices[1];
-                    const img2Index = h2Indices[Math.min(4, h2Indices.length - 1)];
-                    const injections = getRandomImages(2, imageUrl);
-                    
-                    lines.splice(img2Index + 1, 0, `\\n![WellTools Health Guide](${injections[1]})\\n`);
-                    lines.splice(img1Index + 1, 0, `\\n![WellTools Nutrition Info](${injections[0]})\\n`);
-                    newContent.content = lines.join('\\n');
-                }
-            }
+            // AI now generates internal images via pollinations.ai!
+            // We just keep the existing code that adds an image field to the postObj for the card thumbnail.
 
 
             const postObj = {

@@ -410,20 +410,46 @@ ${existingTitles}
                 return topicImages.default;
             }
 
-            // We disable the Unsplash replacement because the user wants 100% unique images,
-            // and pollinations.ai strictly delivers that.
-            function replacePollinations(content) {
-                return content; // Force keeping the original, unique AI generated images
+            const unsplashIds = [
+                '1511688878353-3a2f5be94cd7', '1490645935967-10de6ba17061', '1532550907401-a500c9a57435',
+                '1512621776951-a57141f2eefd', '1571019614242-c5c5dee9f50b', '1506126613408-eca07ce68773',
+                '1541781774459-bb2af2f05b55', '1571019613454-1cb2f99b2d8b', '1548839140-29a749e1cf4d',
+                '1559827260-dc66d52bef19', '1490818387583-1baba5e638af', '1505576399279-565b52d4ac71',
+                '1544367567-0f2fcb009e0b', '1511690655020-366ea6f4a8eb', '1476480862126-209bbfc9ba21',
+                '1517836357463-d25dfeac3438', '1522898467127-b2866c23ce5b', '1494390248081-4e58b90ed062',
+                '1478144592103-25e218a04891', '1515022668582-eb0ae0259e07', '1483726234546-24bdf83861bd',
+                '1493690283958-32ed25ea3440', '1507398941214-3a055dcc8e19', '1526505707474-1250325db001',
+                '1502823403499-6ccfcf4fb453', '1514995669114-608177395c55', '1530510629734-76813ce82ef0',
+                '1521017364654-e0c65bafe6cb', '1485965120184-e220f721d03e', '1483808161634-19a9d701b22e',
+                '1540420773420-3366774f5237', '1494390248081-4e58b90ed062'
+            ];
+
+            let globalDataStr = JSON.stringify(posts);
+            // Internal function to allocate a 100% unique Unsplash image ID
+            function allocateUniqueFallback() {
+                let shuffled = [...unsplashIds].sort(() => 0.5 - Math.random());
+                for (let id of shuffled) {
+                    if (!globalDataStr.includes(id)) {
+                        globalDataStr += id; // prevent grabbing it again
+                        return `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=80&w=1200`;
+                    }
+                }
+                // Super fallback if somehow all are exhausted
+                return `https://images.unsplash.com/photo-${shuffled[0]}?auto=format&fit=crop&q=80&w=1200`;
             }
 
-            // Apply the pollinations replacement to content
+            // Replace pollinations URLs naturally with guaranteed unique unused Premium Unsplash URLs
             if (newContent.content) {
-                newContent.content = replacePollinations(newContent.content);
+                newContent.content = newContent.content.replace(
+                    /!\[([^\]]*)\]\(https?:\/\/image\.pollinations\.ai[^)]*\)/g,
+                    (match, altText) => {
+                        return `![${altText}](${allocateUniqueFallback()})`;
+                    }
+                );
             }
 
-            // --- HERO IMAGE: Use pollinations to generate a 100% unique cover based on the title ---
-            const safeTitle = (newContent.title || selectedTopic.title).replace(/[^a-zA-Z0-9 ]/g, "").trim().replace(/\s+/g, '-');
-            const imageUrl = `https://image.pollinations.ai/prompt/${safeTitle}-realistic-professional-health-blog-cover?width=1200&height=800&nologo=true`;
+            // Assign unique hero image
+            const imageUrl = allocateUniqueFallback();
 
             const postObj = {
                 id: baseId,

@@ -386,6 +386,7 @@ ${existingTitles}
                 'water': 'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&q=80&w=1200',
                 'hydration': 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&q=80&w=1200',
                 'calories': 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=1200',
+                'calorie': 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=1200',
                 'fasting': 'https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&q=80&w=1200',
                 'gut': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1200',
                 'stress': 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=1200',
@@ -395,6 +396,9 @@ ${existingTitles}
                 'vitamin': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1200',
                 'exercise': 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=1200',
                 'heart': 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&q=80&w=1200',
+                'bmi': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1200',
+                'fat': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1200',
+                'tired': 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&q=80&w=1200',
                 'default': 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&q=80&w=1200'
             };
 
@@ -428,10 +432,11 @@ ${existingTitles}
                             }
                         }
 
-                        // Fallback: use Unsplash source API with extracted keywords
+                        // Fallback: use a random topic image instead of broken source.unsplash.com
                         if (unsplashUrl === topicImages.default) {
-                            const kwEncoded = encodeURIComponent(keywords.split(' ').slice(0, 3).join(','));
-                            unsplashUrl = `https://source.unsplash.com/1200x800/?${kwEncoded}`;
+                            const keys = Object.keys(topicImages).filter(k => k !== 'default');
+                            const randomKey = keys[Math.floor(Math.random() * keys.length)];
+                            unsplashUrl = topicImages[randomKey];
                         }
 
                         console.log(`    🖼️  Replaced pollinations image: "${altText}" → Unsplash`);

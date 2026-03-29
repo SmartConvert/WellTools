@@ -294,7 +294,7 @@ const DailyHealthTools = () => {
     const handleLocationChange = () => {
       const params = new URLSearchParams(window.location.search);
       const postId = params.get('post');
-      const path = window.location.pathname.replace(/^\/+/, ''); // Get path without leading slash
+      const path = window.location.pathname.replace(/^\/+/, '').replace(/\/+$/, ''); // Get clean path without leading/trailing slashes
       const pageId = params.get('page'); // Keep support for old ?page= temporarily
 
       // Inverse Slug Lookup

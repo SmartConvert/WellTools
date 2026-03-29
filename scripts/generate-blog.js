@@ -410,51 +410,20 @@ ${existingTitles}
                 return topicImages.default;
             }
 
-            // --- POST-PROCESS: Replace pollinations.ai images with Unsplash ---
-            // The AI inserts pollinations.ai URLs which the audit rejects.
-            // We extract the keyword prompt and map it to a themed Unsplash image.
+            // We disable the Unsplash replacement because the user wants 100% unique images,
+            // and pollinations.ai strictly delivers that.
             function replacePollinations(content) {
-                if (!content || !content.includes('pollinations.ai')) return content;
-
-                return content.replace(
-                    /!\[([^\]]*)\]\(https:\/\/image\.pollinations\.ai\/prompt\/([^?"\)]+)[^)]*\)/g,
-                    (match, altText, promptRaw) => {
-                        // Decode and extract keywords from the prompt
-                        const prompt = decodeURIComponent(promptRaw).toLowerCase();
-                        const keywords = prompt.replace(/[-_+]/g, ' ').trim();
-
-                        // Find the best matching Unsplash image from topicImages
-                        let unsplashUrl = topicImages.default;
-                        for (const [topic, url] of Object.entries(topicImages)) {
-                            if (topic !== 'default' && keywords.includes(topic)) {
-                                unsplashUrl = url;
-                                break;
-                            }
-                        }
-
-                        // Fallback: use a random topic image instead of broken source.unsplash.com
-                        if (unsplashUrl === topicImages.default) {
-                            const keys = Object.keys(topicImages).filter(k => k !== 'default');
-                            const randomKey = keys[Math.floor(Math.random() * keys.length)];
-                            unsplashUrl = topicImages[randomKey];
-                        }
-
-                        console.log(`    🖼️  Replaced pollinations image: "${altText}" → Unsplash`);
-                        return `![${altText}](${unsplashUrl})`;
-                    }
-                );
+                return content; // Force keeping the original, unique AI generated images
             }
 
             // Apply the pollinations replacement to content
             if (newContent.content) {
-                const before = (newContent.content.match(/pollinations\.ai/g) || []).length;
                 newContent.content = replacePollinations(newContent.content);
-                if (before > 0) {
-                    console.log(`    ✅ Replaced ${before} pollinations.ai image(s) with Unsplash.`);
-                }
             }
 
-            const imageUrl = getRelevantImage(newContent.title || selectedTopic.title);
+            // --- HERO IMAGE: Use pollinations to generate a 100% unique cover based on the title ---
+            const safeTitle = (newContent.title || selectedTopic.title).replace(/[^a-zA-Z0-9 ]/g, "").trim().replace(/\s+/g, '-');
+            const imageUrl = `https://image.pollinations.ai/prompt/${safeTitle}-realistic-professional-health-blog-cover?width=1200&height=800&nologo=true`;
 
             const postObj = {
                 id: baseId,

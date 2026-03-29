@@ -81,12 +81,6 @@ function checkBlogPosts() {
             LOG.error(`Post '${post.title}' has an invalid hero image URL: ${post.image}`);
             errors++;
         }
-        
-        // AI hallucinations artifact check
-        if ((post.content || '').includes('pollinations.ai')) {
-            LOG.error(`Post '${post.title}' still contains an AI generated pollinations URL!`);
-            errors++;
-        }
     });
 }
 

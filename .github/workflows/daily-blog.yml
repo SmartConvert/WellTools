@@ -2,7 +2,7 @@ name: Automated Blog Generation
 
 on:
   schedule:
-    - cron: '0 2 */2 * *' # Every 48 hours (every 2 days) at 2 AM UTC
+    - cron: '0 2 */3 * *' # Every 3 days at 2 AM UTC
   workflow_dispatch: # Allows manual trigger
 
 jobs:

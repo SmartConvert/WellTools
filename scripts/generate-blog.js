@@ -196,7 +196,7 @@ ${existingTitles}
         READING LEVEL: Basic English (A2-B1). Use simple sentence structure and common vocabulary.
 
         STRICT QUALITY GUIDELINES & PROJECT RULES:
-        1. **Tone**: Simple, friendly, non-medical.
+        1. **Tone**: ${selectedTopic.tone ? selectedTopic.tone : 'Simple, friendly, non-medical.'}
         2. **PROHIBITED CONTENT**: Absolutely NO medical diagnosis, treatment advice, or medication recommendations. If discussing symptoms, always say "Consult a doctor if symptoms persist" instead of naming drugs.
         3. **Mandatory Disclaimer**: You MUST weave this exact sentence into the conclusion naturally: "This website provides general health information and does not replace professional medical advice."
         4. **Author Block**: You must generate a realistic Author profile (Name, Role, short 1-sentence bio) representing a WellTools writer.
@@ -206,7 +206,7 @@ ${existingTitles}
         1. Identify 3-5 high-impact, long-tail keywords (3-5 words each) relevant to the topic.
         2. **MANDATORY INTEGRATION**: You must insert these keywords naturally into:
            - The SEO Meta Title (primary keyword, MUST start with or include a NUMBER like "7 Ways..." or "5 Best...", MUST be 50-60 characters total length).
-           - The Meta Description (primary + secondary keyword, MUST be 140-160 characters).
+           - The Meta Description (primary + secondary keyword, MUST be 140-160 characters. ${selectedTopic.tone ? 'Must be catchy and answer the search intent of the user.' : ''}).
            - The H1 Headline (MUST also include the primary keyword and the number).
            - The first 100 words (primary keyword at least once).
            - At least TWO H2 Subheadings.
@@ -220,7 +220,7 @@ ${existingTitles}
            - Ensure deep coverage using structured headings, short paragraphs, and bullet points.
         4. **Visual Enhancements**:
            - **Callouts**: Inject at least 2 markdown callouts (> [!TIP], > [!IMPORTANT]).
-        5. **Interactive Elements Focus**: Link to 2-3 relevant WellTools calculators (e.g., [BMI Calculator](/bmi), [BMR Calculator](/bmr), [Water Intake](/water), [Ideal Weight](/ideal-weight), [Macro](/macro)) naturally in the text.
+        5. **Interactive Elements Focus**: ${selectedTopic.requiredCalculator ? `CRITICAL: You MUST naturally embed contextual links directing readers to the [${selectedTopic.requiredCalculator}](/${selectedTopic.requiredCalculator.toLowerCase().replace(/ /g, '-')}) in the text.` : 'Link to 2-3 relevant WellTools calculators (e.g., [BMI Calculator](/bmi), [BMR Calculator](/bmr), [Water Intake](/water), [Ideal Weight](/ideal-weight), [Macro](/macro)) naturally in the text.'}
         6. **FAQ Section**: Add 3-4 common questions and simple answers at the end.
         7. **Images**: You MUST inject 3 to 4 images throughout the article related to the topic of the current section. 
            Use the following URL format for images in Markdown, replacing YOUR-IMAGE-PROMPT with a 3-5 word hyphen-separated description of the image:

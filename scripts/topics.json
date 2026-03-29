@@ -4,6 +4,46 @@
     "total_pages": 56,
     "topics": [
         {
+            "id": 1001,
+            "group": "daily_health_topics",
+            "title": "The Ultimate Guide to Calorie Deficiency: Why You're Not Losing Weight Despite Exercising?",
+            "completed": false,
+            "requiredCalculator": "Food Scanner",
+            "tone": "Professional, highly medical-focused and authoritative."
+        },
+        {
+            "id": 1002,
+            "group": "daily_health_topics",
+            "title": "Protein, Carbohydrate, and Fat Explained: How to Calculate Your Ideal Macronutrient Ratio.",
+            "completed": false,
+            "requiredCalculator": "Macro Calculator For Muscle Gain And Fat Loss",
+            "tone": "Professional, highly medical-focused and authoritative."
+        },
+        {
+            "id": 1003,
+            "group": "daily_health_topics",
+            "title": "Is Your BMI Misleading? The Difference Between Weight Loss and Fat Loss.",
+            "completed": false,
+            "requiredCalculator": "BMI Calculator For Women And Men",
+            "tone": "Professional, highly medical-focused and authoritative."
+        },
+        {
+            "id": 1004,
+            "group": "daily_health_topics",
+            "title": "The Hidden Reason You're Always Tired: How to Accurately Calculate Your Sleep Cycles.",
+            "completed": false,
+            "requiredCalculator": "Sleep Calculator And Sleep Cycles",
+            "tone": "Professional, highly medical-focused and authoritative."
+        },
+        {
+            "id": 1005,
+            "group": "daily_health_topics",
+            "title": "Does Drinking More Water Really Help You Lose Weight? A Scientific Explanation.",
+            "completed": false,
+            "requiredCalculator": "Daily Water Intake Calculator By Weight",
+            "tone": "Professional, highly medical-focused and authoritative."
+        },
+        {
             "id": 1,
             "group": "health_calculators",
             "title": "BMI Calculator",

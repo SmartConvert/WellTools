@@ -167,6 +167,9 @@ async function generatePost() {
         posts = { en: [] };
     }
 
+    // Build a list of already-published titles to prevent any repetition
+    const existingTitles = (posts.en || []).map(p => `- ${p.title}`).join('\n');
+
     // Initialize arrays if they don't exist
     languages.forEach(lang => {
         if (!posts[lang.code]) posts[lang.code] = [];
@@ -179,7 +182,13 @@ async function generatePost() {
         You are a world-class Health & Wellness Editor for "WellTools", a premium health platform.
         Your task is to write a high-value, SEO-optimized, and medically accurate article in ${lang.name}.
 
-        CORE TOPIC: You have TOTAL FREEDOM to choose the specific article topic! Pick any fascinating, highly-searched topic within the general framework of Health, Nutrition, or Fitness. Create your own engaging Title. (Ignore the default topic "${selectedTopic.title}").
+        ASSIGNED TOPIC (MANDATORY): "${selectedTopic.title}"
+        You MUST write specifically about this topic. Do NOT change or ignore it.
+        The article angle, title, and all content must be directly related to: "${selectedTopic.title}".
+
+        ⛔ ALREADY PUBLISHED TOPICS — DO NOT REPEAT OR OVERLAP WITH THESE:
+${existingTitles}
+
         TARGET AUDIENCE: Health-conscious individuals seeking science-backed advice.
         LANGUAGE: ${lang.name} (${lang.nuance})
         DIRECTION: ${lang.dir}
@@ -245,7 +254,8 @@ async function generatePost() {
                     const modelName = await getWorkingModel(genAI);
                     const result = await genAI.models.generateContent({
                         model: modelName,
-                        contents: [{ role: 'user', parts: [{ text: prompt }] }]
+                        contents: [{ role: 'user', parts: [{ text: prompt }] }],
+                        config: { responseMimeType: 'application/json' }
                     });
                     text = result.text;
                 }
@@ -253,7 +263,8 @@ async function generatePost() {
                 const modelName = await getWorkingModel(genAI);
                 const result = await genAI.models.generateContent({
                     model: modelName,
-                    contents: [{ role: 'user', parts: [{ text: prompt }] }]
+                    contents: [{ role: 'user', parts: [{ text: prompt }] }],
+                    config: { responseMimeType: 'application/json' }
                 });
                 text = result.text;
             }

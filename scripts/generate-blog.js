@@ -376,6 +376,14 @@ async function generatePost() {
                 'hydration': 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&q=80&w=1200',
                 'calories': 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=1200',
                 'fasting': 'https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&q=80&w=1200',
+                'gut': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1200',
+                'stress': 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=1200',
+                'diet': 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=1200',
+                'fitness': 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=1200',
+                'nutrition': 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=1200',
+                'vitamin': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1200',
+                'exercise': 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=1200',
+                'heart': 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&q=80&w=1200',
                 'default': 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&q=80&w=1200'
             };
 
@@ -387,16 +395,55 @@ async function generatePost() {
                 return topicImages.default;
             }
 
-            const imageUrl = getRelevantImage(selectedTopic.title);
+            // --- POST-PROCESS: Replace pollinations.ai images with Unsplash ---
+            // The AI inserts pollinations.ai URLs which the audit rejects.
+            // We extract the keyword prompt and map it to a themed Unsplash image.
+            function replacePollinations(content) {
+                if (!content || !content.includes('pollinations.ai')) return content;
 
-            // AI now generates internal images via pollinations.ai!
-            // We just keep the existing code that adds an image field to the postObj for the card thumbnail.
+                return content.replace(
+                    /!\[([^\]]*)\]\(https:\/\/image\.pollinations\.ai\/prompt\/([^?"\)]+)[^)]*\)/g,
+                    (match, altText, promptRaw) => {
+                        // Decode and extract keywords from the prompt
+                        const prompt = decodeURIComponent(promptRaw).toLowerCase();
+                        const keywords = prompt.replace(/[-_+]/g, ' ').trim();
 
+                        // Find the best matching Unsplash image from topicImages
+                        let unsplashUrl = topicImages.default;
+                        for (const [topic, url] of Object.entries(topicImages)) {
+                            if (topic !== 'default' && keywords.includes(topic)) {
+                                unsplashUrl = url;
+                                break;
+                            }
+                        }
+
+                        // Fallback: use Unsplash source API with extracted keywords
+                        if (unsplashUrl === topicImages.default) {
+                            const kwEncoded = encodeURIComponent(keywords.split(' ').slice(0, 3).join(','));
+                            unsplashUrl = `https://source.unsplash.com/1200x800/?${kwEncoded}`;
+                        }
+
+                        console.log(`    🖼️  Replaced pollinations image: "${altText}" → Unsplash`);
+                        return `![${altText}](${unsplashUrl})`;
+                    }
+                );
+            }
+
+            // Apply the pollinations replacement to content
+            if (newContent.content) {
+                const before = (newContent.content.match(/pollinations\.ai/g) || []).length;
+                newContent.content = replacePollinations(newContent.content);
+                if (before > 0) {
+                    console.log(`    ✅ Replaced ${before} pollinations.ai image(s) with Unsplash.`);
+                }
+            }
+
+            const imageUrl = getRelevantImage(newContent.title || selectedTopic.title);
 
             const postObj = {
                 id: baseId,
                 ...newContent,
-                image: imageUrl, // Use the enhanced image URL
+                image: imageUrl,
                 date: date
             };
 

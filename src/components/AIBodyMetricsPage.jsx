@@ -268,31 +268,55 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
                       Upload a full-body photo to reveal your biometrical blueprint and dual-pathway roadmap.
                   </p>
 
-                  <div className="flex flex-col sm:flex-row items-center gap-6 w-full max-w-lg">
-                      <label className="flex-1 w-full cursor-pointer group/btn relative">
+                  <div className="w-full max-w-sm mx-auto">
+                      <label className="w-full cursor-pointer group/btn relative block">
                           <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
                           <div className="absolute inset-0 bg-emerald-500 rounded-2xl blur-lg opacity-25 group-hover/btn:opacity-40 transition-opacity"></div>
                           <div className="relative bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white px-8 py-5 rounded-2xl font-black shadow-lg flex items-center justify-center gap-3 transition-all">
                               <Upload className="w-6 h-6" /> Upload Body Photo
                           </div>
                       </label>
-                      
-                      <label className="flex-1 w-full cursor-pointer group/btn relative">
-                          <input type="file" accept="image/*" capture="environment" onChange={handleImageUpload} className="hidden" />
-                          <div className="absolute inset-0 bg-gray-900 dark:bg-white rounded-2xl blur-lg opacity-10 group-hover/btn:opacity-20 transition-opacity"></div>
-                          <div className="relative bg-white dark:bg-gray-700 border-2 border-gray-100 dark:border-gray-600 hover:border-emerald-500 dark:hover:border-emerald-500 text-gray-900 dark:text-white px-8 py-5 rounded-2xl font-black shadow-sm flex items-center justify-center gap-3 transition-all active:scale-95">
-                              <CameraIcon className="w-6 h-6 text-emerald-500" /> Open Camera
+                  </div>
+
+                  {/* Privacy & How it Works Section */}
+                  <div className="mt-12 w-full pt-10 border-t border-gray-100 dark:border-gray-700/50">
+                      <div className="flex flex-col md:flex-row items-start gap-10 text-left">
+                          <div className="flex-1 space-y-6">
+                              <h3 className="text-xl font-black text-gray-900 dark:text-white flex items-center gap-2">
+                                  <Info className="w-5 h-5 text-emerald-500" /> How to Use
+                              </h3>
+                              <ul className="space-y-4 text-sm text-gray-500 dark:text-gray-400 font-medium">
+                                  <li className="flex gap-3">
+                                      <span className="flex-none w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xs font-black">1</span>
+                                      <span>Upload a clear, front-facing photo of your full body. For best results, wear form-fitting clothing.</span>
+                                  </li>
+                                  <li className="flex gap-3">
+                                      <span className="flex-none w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xs font-black">2</span>
+                                      <span>Our built-in AI will detect 33 anatomical landmarks and calculate your skeletal proportions.</span>
+                                  </li>
+                                  <li className="flex gap-3">
+                                      <span className="flex-none w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xs font-black">3</span>
+                                      <span>Receive a dual-pathway report for both weight loss and muscle building tailored to your body type.</span>
+                                  </li>
+                              </ul>
                           </div>
-                      </label>
+
+                          <div className="flex-1 p-6 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-3xl border border-emerald-100/50 dark:border-emerald-700/20">
+                              <h3 className="text-xl font-black text-emerald-700 dark:text-emerald-400 flex items-center gap-2 mb-4">
+                                  <Shield className="w-5 h-5" /> Privacy Assurance
+                              </h3>
+                              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-medium mb-4">
+                                  We prioritize your privacy above all. All image processing is performed <strong>100% locally</strong> on your own device.
+                              </p>
+                              <div className="flex items-center gap-3 text-xs font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
+                                  <CheckCircle2 className="w-4 h-4" /> No Cloud Uploads
+                                  <CheckCircle2 className="w-4 h-4 ml-2" /> No Data Stored
+                              </div>
+                          </div>
+                      </div>
                   </div>
 
-                  {/* Privacy Badge Integrated Inside */}
-                  <div className="mt-12 inline-flex items-center gap-3 px-6 py-3 bg-gray-50 dark:bg-gray-900/40 rounded-full border border-gray-100 dark:border-gray-700 text-sm font-bold text-emerald-600 dark:text-emerald-400 animate-pulse-slow">
-                      <Shield className="w-5 h-5" />
-                      <span>100% Client-Side Processing • Your Data Never Leaves This Device</span>
-                  </div>
-
-                  <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-8 w-full pt-12 border-t border-gray-50 dark:border-gray-700/50">
+                  <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-8 w-full pt-8 border-t border-gray-50 dark:border-gray-700/50">
                       <div className="flex flex-col items-center gap-1.5 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all">
                           <Activity className="w-6 h-6 mb-1 text-emerald-500" />
                           <span className="text-[10px] uppercase tracking-widest font-black text-gray-500 dark:text-gray-400">Skeleton Map</span>

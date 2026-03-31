@@ -63,7 +63,7 @@ const parseMarkdown = (text, ctaBlock) => {
                         onError={(e) => {
                             const sig = Math.abs(altText.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0));
                             e.target.onerror = null;
-                            e.target.src = `https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=60&w=1200&sig=${sig}`;
+                            e.target.src = `https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1200&sig=${sig + 300}`;
                             e.target.className = "w-full h-auto object-cover transition-all duration-700";
                         }}
                     />
@@ -164,7 +164,7 @@ const parseInlineMarkdown = (text) => {
                     onError={(e) => {
                         const sig = Math.abs(altText.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0));
                         e.target.onerror = null;
-                        e.target.src = `https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=60&w=1200&sig=${sig}`;
+                        e.target.src = `https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1200&sig=${sig + 400}`;
                         e.target.className = "w-full h-auto object-cover transition-all duration-700";
                     }}
                 />
@@ -579,7 +579,7 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
 
                         {/* Reviewed by Specialist badge */}
                         {post.reviewedBy?.name && (
-                            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 rounded-lg text-sm font-semibold border border-blue-100 dark:border-blue-900/40">
+                            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:blue-400 rounded-lg text-sm font-semibold border border-blue-100 dark:border-blue-900/40">
                                 <Shield className="w-4 h-4" />
                                 Reviewed by {post.reviewedBy.name}
                             </div>

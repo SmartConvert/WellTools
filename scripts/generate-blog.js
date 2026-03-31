@@ -374,43 +374,24 @@ ${existingTitles}
                 }
             }
 
-            // --- POST-PROCESS: Sanitize and Enhance AI Images (Pollinations.ai) ---
-            function sanitizePollinationsUrl(rawUrl, altText) {
-                if (!rawUrl) return allocateUniqueFallback(); // Ultimate fallback
-                if (rawUrl.includes('unsplash.com')) return rawUrl;
-                
-                // Extract prompt or use alt text
-                let prompt = altText || "wellness and health";
-                const promptMatch = rawUrl.match(/\/prompt\/([^?)\s]+)/);
-                if (promptMatch) {
-                    try {
-                        prompt = decodeURIComponent(promptMatch[1]);
-                    } catch (e) {
-                        prompt = promptMatch[1];
-                    }
-                }
-                
-                // Clean and encode
-                const cleanPrompt = prompt.trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
-                const encodedPrompt = encodeURIComponent(cleanPrompt);
-                
-                // Add a random seed to ensure uniqueness even for similar prompts
-                const seed = Math.floor(Math.random() * 1000000);
-                return `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1200&height=800&nologo=true&model=flux&seed=${seed}`;
+            // --- POST-PROCESS: Standardize Images to Unsplash ---
+            const getUnsplashImage = (topic, alt) => {
+                const seed = Math.floor(Math.random() * 2000);
+                return `https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1200&sig=${seed}`;
             }
 
-            // Standardize pollinations URLs in the content
+            // Standardize content images to use Unsplash
             if (newContent.content) {
                 newContent.content = newContent.content.replace(
-                    /!\[([^\]]*)\]\((https?:\/\/(?:image\.)?pollinations\.ai\/[^)]+)\)/g,
+                    /!\[([^\]]*)\]\((https?:\/\/[^)]+)\)/g,
                     (match, alt, url) => {
-                        return `![${alt}](${sanitizePollinationsUrl(url, alt)})`;
+                        const seed = Math.floor(Math.random() * 2000);
+                        return `![${alt}](https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=1200&sig=${seed})`;
                     }
                 );
             }
 
-            const imageUrl = sanitizePollinationsUrl(`https://image.pollinations.ai/prompt/${encodeURIComponent(newContent.title || selectedTopic.title)}`, newContent.title || selectedTopic.title);
-
+            const imageUrl = getUnsplashImage(newContent.title || selectedTopic.title, newContent.imageAlt);
 
             const postObj = {
                 id: baseId,

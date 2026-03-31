@@ -55,10 +55,9 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang = 'en' }) => {
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                         loading="lazy"
                                         onError={(e) => {
-                                            const keywords = `${post.category || 'wellness'} ${post.title.split(' ').slice(0, 3).join(' ')}`.replace(/\s+/g, ',');
                                             const sig = Math.abs(post.title.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0));
                                             e.target.onerror = null;
-                                            e.target.src = `https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=60&w=1200&sig=${sig}`;
+                                            e.target.src = `https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1200&sig=${sig + 500}`;
                                             e.target.className = "w-full h-full object-cover transition-all duration-700";
                                         }}
                                     />

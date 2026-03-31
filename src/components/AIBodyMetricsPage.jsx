@@ -308,14 +308,20 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
                 </div>
               ) : (
                 <>
-                  {/* Hidden underlying video feed serving MediaPipe */}
-                  <video ref={videoRef} className="hidden" playsInline></video>
-                  {/* Visible futuristic visual canvas */}
-                  <canvas 
-                    ref={canvasRef} 
+                  {/* Video feed — positioned behind canvas, must NOT be display:none */}
+                  <video
+                    ref={videoRef}
+                    playsInline
+                    muted
+                    className="absolute inset-0 w-full h-full object-cover z-0"
+                    style={{ opacity: 0 }}
+                  />
+                  {/* Futuristic scanning canvas overlay */}
+                  <canvas
+                    ref={canvasRef}
                     className="absolute inset-0 w-full h-full object-cover z-10"
-                    width={640} 
-                    height={480} 
+                    width={640}
+                    height={480}
                   />
                   
                   {/* UI Guide Overlay */}

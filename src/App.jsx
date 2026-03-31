@@ -225,6 +225,7 @@ const Footer = ({ setCurrentPage, t }) => (
             <li><button onClick={() => { setCurrentPage('bmi'); window.scrollTo(0, 0); }} className="hover:text-emerald-500 transition-colors uppercase text-sm tracking-tighter">BMI Calculator</button></li>
             <li><button onClick={() => { setCurrentPage('calories'); window.scrollTo(0, 0); }} className="hover:text-emerald-500 transition-colors uppercase text-sm tracking-tighter">Calorie Tracker</button></li>
             <li><button onClick={() => { setCurrentPage('meal-planner'); window.scrollTo(0, 0); }} className="hover:text-emerald-500 transition-colors uppercase text-sm tracking-tighter">Meal Planner</button></li>
+            <li><button onClick={() => { setCurrentPage('food-scanner'); window.scrollTo(0, 0); }} className="hover:text-emerald-500 transition-colors uppercase text-sm tracking-tighter text-emerald-600 dark:text-emerald-500 font-bold">AI Food Scanner</button></li>
           </ul>
         </div>
         <div>

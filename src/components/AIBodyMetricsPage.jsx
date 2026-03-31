@@ -299,12 +299,12 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
                 <div className="w-12 h-12 bg-white dark:bg-gray-800 rounded-xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform">
                   <Activity className="w-6 h-6 text-emerald-500" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Optimize Weight Loss</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Optimize Weight Loss (Burn Fat)</h3>
                 <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6">
                   Focus on localized fat reduction and metabolic deficit mapping. Best for revealing muscle definition.
                 </p>
-                <div className="mt-auto flex items-center text-emerald-600 dark:text-emerald-400 font-bold text-sm">
-                  Select Protocol <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <div className="mt-auto flex items-center justify-center w-full bg-emerald-500 text-gray-900 font-black text-sm py-3 px-6 rounded-xl hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+                  Select Protocol <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1" />
                 </div>
               </button>
 
@@ -315,23 +315,41 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
                 <div className="w-12 h-12 bg-white dark:bg-gray-800 rounded-xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform">
                   <Activity className="w-6 h-6 text-emerald-500" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Facilitate Hypertrophy</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Facilitate Hypertrophy (Build Muscle)</h3>
                 <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6">
                   Focus on structural symmetry and skeletal muscle potential tracking. Best for muscle mass acquisition.
                 </p>
-                <div className="mt-auto flex items-center text-emerald-600 dark:text-emerald-400 font-bold text-sm">
-                  Select Protocol <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <div className="mt-auto flex items-center justify-center w-full bg-emerald-500 text-gray-900 font-black text-sm py-3 px-6 rounded-xl hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+                  Select Protocol <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1" />
                 </div>
               </button>
 
             </div>
 
+            {/* Visual Proof / Explainer UI */}
+            <div className="mt-16 pt-16 border-t border-gray-100 dark:border-gray-700 text-center animate-in zoom-in-95 duration-700">
+               <div className="inline-flex bg-gray-900 rounded-3xl p-2 md:p-4 mb-4 shadow-2xl border border-gray-800 relative mx-auto group">
+                   <div className="absolute -inset-1 bg-linear-to-r from-emerald-500 to-teal-500 rounded-3xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                   <div className="relative bg-black rounded-2xl aspect-[16/9] w-full min-w-[300px] md:min-w-[400px] max-w-lg flex items-center justify-center overflow-hidden border border-gray-800">
+                        {/* 3D Mesh GIF Placeholder */}
+                        <div className="flex flex-col items-center justify-center text-emerald-500/50">
+                           <Activity className="w-12 h-12 mb-3 animate-pulse" />
+                           <span className="text-xs uppercase tracking-widest font-black text-emerald-500/50 text-center px-4">Mesh GIF Placeholder</span>
+                        </div>
+                   </div>
+               </div>
+               <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 tracking-wide mt-2">
+                   <Shield className="w-3 h-3 inline mr-1 text-emerald-500" />
+                   EXAMPLE OF PRIVACY-PRESERVING 3D MESH OVERLAY IN ACTION
+               </p>
+            </div>
+
             {/* How It Works Section */}
-            <div className="mt-16 pt-16 border-t border-gray-100 dark:border-gray-700">
+            <div className="mt-16">
                 <div className="text-center mb-10">
                     <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-4">How The Clinical Engine Works</h3>
                     <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-sm leading-relaxed font-medium">
-                        Our advanced somatic engine uses secure, on-device spatial mapping to extract precise physical landmarks directly in your browser. All processing is strictly local—your camera feed is never transmitted or stored.
+                        Our advanced somatic engine uses secure, on-device spatial mapping to extract precise physical landmarks directly in your browser. All processing is strictly local—your imagery is never transmitted or stored.
                     </p>
                 </div>
                 

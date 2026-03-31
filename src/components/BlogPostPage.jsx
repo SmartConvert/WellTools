@@ -47,10 +47,12 @@ const parseMarkdown = (text, ctaBlock) => {
         }
 
         // Images (Block level)
-        const imageMatch = line.match(/^!\[(.*?)\]\((.*?)\)$/);
+        const trimmedLine = line.trim();
+        const imageMatch = trimmedLine.match(/^!\[(.*?)\]\((.*?)\)$/);
         if (imageMatch) {
             const altText = imageMatch[1];
-            const imageUrl = imageMatch[2];
+            const rawUrl = imageMatch[2];
+            const imageUrl = rawUrl.trim().replace(/ /g, '%20');
             return (
                 <figure key={i} className="my-10 rounded-2xl overflow-hidden shadow-xl bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center">
                     <img
@@ -149,7 +151,7 @@ const parseInlineMarkdown = (text) => {
         const altText = match[1];
         // Ensure image URLs with spaces are handled cleanly (AI sometimes adds them)
         const rawUrl = match[2];
-        const imageUrl = rawUrl.startsWith('http') ? rawUrl : rawUrl.replace(/ /g, '%20');
+        const imageUrl = rawUrl.trim().startsWith('http') ? rawUrl.trim() : rawUrl.trim().replace(/ /g, '%20');
 
         parts.push(
             <figure key={`img-${match.index}-${lastIndex}`} className="my-10 rounded-2xl overflow-hidden shadow-xl bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center">

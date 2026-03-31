@@ -36,6 +36,7 @@ const routes = [
     'terms-of-use',
     'medical-disclaimer',
     'editorial-policy',
+    'ai-body-metrics-and-workout-advisor',
     'food-scanner',
     'cookie-policy'
 ];

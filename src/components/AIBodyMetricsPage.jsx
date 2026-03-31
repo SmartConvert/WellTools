@@ -1,28 +1,41 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Heart, Shield, Camera as CameraIcon, Play, RefreshCw, Activity, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Heart, Shield, Camera as CameraIcon, Play, RefreshCw, Activity, ArrowRight, CheckCircle2, Upload, FileImage } from 'lucide-react';
 
 export default function AIBodyMetricsPage({ setCurrentPage, t }) {
   const [phase, setPhase] = useState('objective'); // 'objective', 'capture', 'analyzing', 'results'
   const [objective, setObjective] = useState(null);
-  const [isModelLoading, setIsModelLoading] = useState(false);
-  const [modelError, setModelError] = useState('');
   const [analysisData, setAnalysisData] = useState(null);
-  const [scanProgress, setScanProgress] = useState(0);
+  const [uploadedImage, setUploadedImage] = useState(null);
   
-  const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const streamRef = useRef(null);
+  const imageRef = useRef(null);
   const animFrameRef = useRef(null);
 
   // Draw futuristic scanning overlay on canvas
   const drawScanOverlay = useCallback((ctx, w, h, tick) => {
     ctx.clearRect(0, 0, w, h);
 
-    // Draw dimmed video feed
-    if (videoRef.current && videoRef.current.readyState >= 2) {
+    // Draw dimmed uploaded image
+    if (imageRef.current && imageRef.current.complete) {
       ctx.save();
       ctx.globalAlpha = 0.35;
-      ctx.drawImage(videoRef.current, 0, 0, w, h);
+      
+      const imgAspect = imageRef.current.width / imageRef.current.height;
+      const canvasAspect = w / h;
+      let drawW = w;
+      let drawH = h;
+      let offsetX = 0;
+      let offsetY = 0;
+      
+      if (imgAspect > canvasAspect) {
+        drawW = h * imgAspect;
+        offsetX = -(drawW - w) / 2;
+      } else {
+        drawH = w / imgAspect;
+        offsetY = -(drawH - h) / 2;
+      }
+      
+      ctx.drawImage(imageRef.current, offsetX, offsetY, drawW, drawH);
       ctx.restore();
     }
 
@@ -104,57 +117,42 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
     ctx.shadowBlur = 0;
   }, []);
 
-  // Start camera using native getUserMedia
+  const handleImageUpload = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+          const url = URL.createObjectURL(file);
+          const img = new Image();
+          img.onload = () => {
+              imageRef.current = img;
+              setUploadedImage(url);
+          };
+          img.src = url;
+      }
+  };
+
   useEffect(() => {
-    if (phase !== 'capture') return;
+    if (phase !== 'capture' || !uploadedImage) return;
 
     let isMounted = true;
     let tick = 0;
 
-    const startCamera = async () => {
-      setIsModelLoading(true);
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' }
-        });
-        if (!isMounted) { stream.getTracks().forEach(t => t.stop()); return; }
-        streamRef.current = stream;
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-          await videoRef.current.play();
-        }
-        setIsModelLoading(false);
-
-        // Animate scanning overlay
+    const animate = () => {
+        if (!isMounted) return;
         const canvas = canvasRef.current;
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        const animate = () => {
-          if (!isMounted) return;
-          drawScanOverlay(ctx, canvas.width, canvas.height, tick++);
-          animFrameRef.current = requestAnimationFrame(animate);
-        };
-        animate();
-      } catch (err) {
-        console.error('Camera error:', err);
-        if (isMounted) {
-          setModelError('Camera access was denied or is unavailable. Please allow camera permissions and try again.');
-          setIsModelLoading(false);
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            drawScanOverlay(ctx, canvas.width, canvas.height, tick++);
         }
-      }
+        animFrameRef.current = requestAnimationFrame(animate);
     };
-
-    startCamera();
+    
+    animate();
 
     return () => {
       isMounted = false;
       cancelAnimationFrame(animFrameRef.current);
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach(t => t.stop());
-        streamRef.current = null;
-      }
     };
-  }, [phase, drawScanOverlay]);
+  }, [phase, uploadedImage, drawScanOverlay]);
 
   const handleObjectiveSelect = (sel) => {
     setObjective(sel);
@@ -284,39 +282,33 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
                  <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
                    <Shield className="w-5 h-5 text-emerald-500" /> Local Pose Extraction Engine
                  </h2>
-                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Stand full-body in frame. Imagery is destroyed instantly.</p>
+                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Upload a full-body photo. Imagery is processed locally and destroyed instantly.</p>
                </div>
-               <button onClick={() => setPhase('objective')} className="text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors">
+               <button onClick={() => { setPhase('objective'); setUploadedImage(null); }} className="text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors">
                   Cancel
                </button>
             </div>
 
-            <div className="relative aspect-4/3 bg-black w-full overflow-hidden flex items-center justify-center">
+            <div className="relative aspect-4/3 bg-gray-50 dark:bg-gray-900 w-full overflow-hidden flex items-center justify-center">
               
-              {isModelLoading ? (
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-gray-900/90 backdrop-blur-md text-white">
-                  <div className="w-12 h-12 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin mb-4"></div>
-                  <h3 className="text-lg font-bold tracking-wider uppercase">Loading Secure Engine...</h3>
-                  <p className="text-emerald-400 text-sm mt-2 opacity-80 animate-pulse">Compiling WebAssembly Models</p>
-                </div>
-              ) : modelError ? (
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-gray-900 text-center px-6">
-                   <div className="w-14 h-14 bg-red-500/20 text-red-500 rounded-2xl flex items-center justify-center mb-4"><Shield className="w-7 h-7" /></div>
-                   <h3 className="text-xl font-bold text-white mb-2">Engine Initialization Failed</h3>
-                   <p className="text-gray-400 mb-6 max-w-md">{modelError}</p>
-                   <button onClick={() => { setModelError(''); setPhase('objective'); setTimeout(() => setPhase('capture'), 50); }} className="px-6 py-3 bg-white text-gray-900 rounded-xl font-bold hover:bg-gray-100">Retry Camera</button>
-                </div>
+              {!uploadedImage ? (
+                  <div className="flex flex-col items-center justify-center p-8 text-center animate-in fade-in zoom-in-95 duration-500">
+                      <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/40 rounded-full flex items-center justify-center mb-6 border-4 border-white dark:border-gray-800 shadow-xl">
+                          <Upload className="w-10 h-10 text-emerald-500" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Upload Full-Body Photo</h3>
+                      <p className="text-gray-500 dark:text-gray-400 max-w-sm mb-8 leading-relaxed">Ensure you are standing clearly in frame with good lighting for optimal biostructural analysis.</p>
+                      
+                      <label className="cursor-pointer group relative">
+                          <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                          <div className="absolute inset-0 bg-emerald-500 rounded-2xl blur-md opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                          <div className="relative bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-bold shadow-lg flex items-center gap-3 transition-colors">
+                              <FileImage className="w-5 h-5" /> Select Image from Gallery
+                          </div>
+                      </label>
+                  </div>
               ) : (
-                <>
-                  {/* Video feed — positioned behind canvas, must NOT be display:none */}
-                  <video
-                    ref={videoRef}
-                    playsInline
-                    muted
-                    className="absolute inset-0 w-full h-full object-cover z-0"
-                    style={{ opacity: 0 }}
-                  />
-                  {/* Futuristic scanning canvas overlay */}
+                <div className="relative w-full h-full bg-black animate-in fade-in duration-1000">
                   <canvas
                     ref={canvasRef}
                     className="absolute inset-0 w-full h-full object-cover z-10"
@@ -328,16 +320,22 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
                   <div className="absolute inset-x-0 bottom-8 z-20 flex justify-center pointer-events-none">
                      <div className="bg-gray-900/80 backdrop-blur text-white px-6 py-3 rounded-full border border-gray-700 flex items-center gap-3">
                         <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span className="text-sm font-semibold tracking-wide uppercase">Engine Active - Frame Detected</span>
+                        <span className="text-sm font-semibold tracking-wide uppercase">Engine Active - Frame Analyzing</span>
                      </div>
                   </div>
-                </>
+                </div>
               )}
             </div>
 
-            <div className="p-6 md:p-8 bg-gray-50 dark:bg-gray-800/50 flex justify-end gap-4">
+            <div className="p-6 md:p-8 bg-gray-50 dark:bg-gray-800/50 flex flex-wrap justify-end gap-4">
+               {uploadedImage && (
+                 <label className="cursor-pointer px-6 py-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-2xl font-bold transition-all shadow-sm flex items-center justify-center">
+                    <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                    Replace Image
+                 </label>
+               )}
                <button 
-                 disabled={isModelLoading || !!modelError}
+                 disabled={!uploadedImage}
                  onClick={startAnalysis}
                  className="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-2xl font-bold text-lg transition-all shadow-xl shadow-emerald-500/20 flex items-center gap-3"
                >

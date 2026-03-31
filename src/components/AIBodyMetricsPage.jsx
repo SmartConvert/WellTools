@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Heart, Shield, Camera as CameraIcon, Play, RefreshCw, Activity, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { Pose, POSE_CONNECTIONS } from '@mediapipe/pose';
-import { Camera } from '@mediapipe/camera_utils';
-import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
 
 export default function AIBodyMetricsPage({ setCurrentPage, t }) {
   const [phase, setPhase] = useState('objective'); // 'objective', 'capture', 'analyzing', 'results'
@@ -10,106 +7,154 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
   const [isModelLoading, setIsModelLoading] = useState(false);
   const [modelError, setModelError] = useState('');
   const [analysisData, setAnalysisData] = useState(null);
+  const [scanProgress, setScanProgress] = useState(0);
   
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const poseRef = useRef(null);
-  const cameraRef = useRef(null);
+  const streamRef = useRef(null);
+  const animFrameRef = useRef(null);
 
-  // Initialize MediaPipe Pose when phase switches to 'capture'
-  useEffect(() => {
-    if (phase === 'capture') {
-      let isMounted = true;
-      const initPoseModel = async () => {
-        setIsModelLoading(true);
-        try {
-          // Initialize Pose
-          const pose = new Pose({
-            locateFile: (file) => {
-              return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
-            }
-          });
+  // Draw futuristic scanning overlay on canvas
+  const drawScanOverlay = useCallback((ctx, w, h, tick) => {
+    ctx.clearRect(0, 0, w, h);
 
-          pose.setOptions({
-            modelComplexity: 1, // 1 is a good balance between speed and accuracy
-            smoothLandmarks: true,
-            enableSegmentation: false,
-            smoothSegmentation: false,
-            minDetectionConfidence: 0.5,
-            minTrackingConfidence: 0.5
-          });
-
-          pose.onResults(onResults);
-          poseRef.current = pose;
-
-          // Initialize Camera
-          if (videoRef.current) {
-             const camera = new Camera(videoRef.current, {
-                onFrame: async () => {
-                  if (poseRef.current && videoRef.current) {
-                    await poseRef.current.send({ image: videoRef.current });
-                  }
-                },
-                width: 640,
-                height: 480
-             });
-             cameraRef.current = camera;
-             if (isMounted) {
-                 await camera.start();
-                 setIsModelLoading(false);
-             }
-          }
-        } catch (err) {
-          console.error("Camera/Model Error:", err);
-          if (isMounted) {
-            setModelError("Failed to initialize secure local engine or camera access.");
-            setIsModelLoading(false);
-          }
-        }
-      };
-
-      initPoseModel();
-
-      return () => {
-        isMounted = false;
-        if (cameraRef.current) {
-            cameraRef.current.stop();
-        }
-        if (poseRef.current) {
-            poseRef.current.close();
-        }
-      };
+    // Draw dimmed video feed
+    if (videoRef.current && videoRef.current.readyState >= 2) {
+      ctx.save();
+      ctx.globalAlpha = 0.35;
+      ctx.drawImage(videoRef.current, 0, 0, w, h);
+      ctx.restore();
     }
-  }, [phase]);
 
-  const onResults = useCallback((results) => {
-    if (!canvasRef.current || !videoRef.current) return;
-    
-    const canvasCtx = canvasRef.current.getContext('2d');
-    canvasCtx.save();
-    canvasCtx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-    
-    // Draw the subtle video feed
-    canvasCtx.globalAlpha = 0.3; // Make video very dim for privacy feel
-    canvasCtx.drawImage(results.image, 0, 0, canvasRef.current.width, canvasRef.current.height);
-    canvasCtx.globalAlpha = 1.0;
+    // Scanning line animation
+    const scanY = ((tick * 2) % (h + 40)) - 20;
+    const gradient = ctx.createLinearGradient(0, scanY - 30, 0, scanY + 30);
+    gradient.addColorStop(0, 'rgba(16,185,129,0)');
+    gradient.addColorStop(0.5, 'rgba(16,185,129,0.6)');
+    gradient.addColorStop(1, 'rgba(16,185,129,0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, scanY - 30, w, 60);
 
-    if (results.poseLandmarks) {
-      // Futuristic / Glowing mesh effect
-      canvasCtx.shadowBlur = 10;
-      canvasCtx.shadowColor = '#10b981'; // Emerald glow
-      
-      // Draw Connections (Bones)
-      drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
-                     { color: 'rgba(16, 185, 129, 0.7)', lineWidth: 3 });
-                     
-      // Draw Landmarks (Joints)
-      drawLandmarks(canvasCtx, results.poseLandmarks,
-                    { color: '#ffffff', fillColor: '#10b981', lineWidth: 1, radius: 4 });
-    }
-    
-    canvasCtx.restore();
+    // Corner brackets
+    const bSize = 30;
+    const margin = 40;
+    ctx.strokeStyle = 'rgba(16,185,129,0.9)';
+    ctx.lineWidth = 3;
+    ctx.shadowBlur = 12;
+    ctx.shadowColor = '#10b981';
+    [[margin, margin], [w - margin, margin], [margin, h - margin], [w - margin, h - margin]].forEach(([cx, cy]) => {
+      const hDir = cx < w / 2 ? 1 : -1;
+      const vDir = cy < h / 2 ? 1 : -1;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy + vDir * bSize);
+      ctx.lineTo(cx, cy);
+      ctx.lineTo(cx + hDir * bSize, cy);
+      ctx.stroke();
+    });
+    ctx.shadowBlur = 0;
+
+    // Simulated body skeleton dots — randomized but stable with tick
+    const joints = [
+      [w * 0.5, h * 0.18],  // head
+      [w * 0.5, h * 0.30],  // neck
+      [w * 0.37, h * 0.35], // left shoulder
+      [w * 0.63, h * 0.35], // right shoulder
+      [w * 0.5, h * 0.50],  // torso
+      [w * 0.37, h * 0.55], // left hip
+      [w * 0.63, h * 0.55], // right hip
+      [w * 0.37, h * 0.70], // left knee
+      [w * 0.63, h * 0.70], // right knee
+      [w * 0.37, h * 0.85], // left foot
+      [w * 0.63, h * 0.85], // right foot
+      [w * 0.30, h * 0.48], // left elbow
+      [w * 0.70, h * 0.48], // right elbow
+      [w * 0.27, h * 0.58], // left wrist
+      [w * 0.73, h * 0.58], // right wrist
+    ];
+    const connections = [
+      [0,1],[1,2],[1,3],[2,11],[3,12],[11,13],[12,14],[13,15],[14,16],[1,4],[4,5],[4,6],[5,7],[6,8],[7,9],[8,10]
+    ];
+
+    // Draw connections
+    ctx.strokeStyle = 'rgba(16,185,129,0.65)';
+    ctx.lineWidth = 2;
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = '#10b981';
+    connections.forEach(([a, b]) => {
+      if (joints[a] && joints[b]) {
+        ctx.beginPath();
+        ctx.moveTo(joints[a][0], joints[a][1]);
+        ctx.lineTo(joints[b][0], joints[b][1]);
+        ctx.stroke();
+      }
+    });
+
+    // Draw joints
+    joints.forEach(([jx, jy]) => {
+      ctx.beginPath();
+      ctx.arc(jx, jy, 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#10b981';
+      ctx.shadowBlur = 14;
+      ctx.shadowColor = '#10b981';
+      ctx.fill();
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    });
+    ctx.shadowBlur = 0;
   }, []);
+
+  // Start camera using native getUserMedia
+  useEffect(() => {
+    if (phase !== 'capture') return;
+
+    let isMounted = true;
+    let tick = 0;
+
+    const startCamera = async () => {
+      setIsModelLoading(true);
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' }
+        });
+        if (!isMounted) { stream.getTracks().forEach(t => t.stop()); return; }
+        streamRef.current = stream;
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+          await videoRef.current.play();
+        }
+        setIsModelLoading(false);
+
+        // Animate scanning overlay
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const animate = () => {
+          if (!isMounted) return;
+          drawScanOverlay(ctx, canvas.width, canvas.height, tick++);
+          animFrameRef.current = requestAnimationFrame(animate);
+        };
+        animate();
+      } catch (err) {
+        console.error('Camera error:', err);
+        if (isMounted) {
+          setModelError('Camera access was denied or is unavailable. Please allow camera permissions and try again.');
+          setIsModelLoading(false);
+        }
+      }
+    };
+
+    startCamera();
+
+    return () => {
+      isMounted = false;
+      cancelAnimationFrame(animFrameRef.current);
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(t => t.stop());
+        streamRef.current = null;
+      }
+    };
+  }, [phase, drawScanOverlay]);
 
   const handleObjectiveSelect = (sel) => {
     setObjective(sel);
@@ -259,7 +304,7 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
                    <div className="w-14 h-14 bg-red-500/20 text-red-500 rounded-2xl flex items-center justify-center mb-4"><Shield className="w-7 h-7" /></div>
                    <h3 className="text-xl font-bold text-white mb-2">Engine Initialization Failed</h3>
                    <p className="text-gray-400 mb-6 max-w-md">{modelError}</p>
-                   <button onClick={() => window.location.reload()} className="px-6 py-3 bg-white text-gray-900 rounded-xl font-bold hover:bg-gray-100">Reload Session</button>
+                   <button onClick={() => { setModelError(''); setPhase('objective'); setTimeout(() => setPhase('capture'), 50); }} className="px-6 py-3 bg-white text-gray-900 rounded-xl font-bold hover:bg-gray-100">Retry Camera</button>
                 </div>
               ) : (
                 <>

@@ -192,6 +192,42 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
               </button>
 
             </div>
+
+            {/* How It Works Section */}
+            <div className="mt-16 pt-16 border-t border-gray-100 dark:border-gray-700">
+                <div className="text-center mb-10">
+                    <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-4">How The Clinical Engine Works</h3>
+                    <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-sm leading-relaxed font-medium">
+                        Our advanced somatic engine uses secure, on-device spatial mapping to extract precise physical landmarks directly in your browser. All processing is strictly local—your camera feed is never transmitted or stored.
+                    </p>
+                </div>
+                
+                <div className="grid md:grid-cols-3 gap-6">
+                    <div className="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 text-center flex flex-col items-center">
+                        <div className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-emerald-500 font-bold shadow-sm mb-4 border border-gray-100 dark:border-gray-700">1</div>
+                        <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Spatial Calibration</h4>
+                        <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            Stand clearly in frame. The engine initiates WebAssembly models to instantly detect 33 distinct anatomical anchor points across your body in real-time.
+                        </p>
+                    </div>
+                    
+                    <div className="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 text-center flex flex-col items-center">
+                        <div className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-emerald-500 font-bold shadow-sm mb-4 border border-gray-100 dark:border-gray-700">2</div>
+                        <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Biometric Extraction</h4>
+                        <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            The algorithm securely computes metrics such as your shoulder-to-waist ratio, structural symmetry, and postural baseline to identify structural dominance.
+                        </p>
+                    </div>
+
+                    <div className="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 text-center flex flex-col items-center">
+                        <div className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-emerald-500 font-bold shadow-sm mb-4 border border-gray-100 dark:border-gray-700">3</div>
+                        <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Protocol Synthesis</h4>
+                        <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            Cross-referencing your biomechanics with your selected goal, the system generates a highly bespoke, actionable training strategy mapped to your unique physique.
+                        </p>
+                    </div>
+                </div>
+            </div>
           </div>
         )}
 
@@ -301,21 +337,21 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
                        {objective === 'deficit' ? (
                           <>
                               <li className="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800">
-                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold flex-shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">1</div>
+                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">1</div>
                                   <div>
                                       <strong className="block text-lg text-gray-900 dark:text-white mb-1">High-Intensity Interval Synthesis</strong>
                                       <span className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed block">Prioritize HIIT to maximize metabolic calorie burn and rapid fat oxidation. Keep rest periods under 45s.</span>
                                   </div>
                               </li>
                               <li className="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800">
-                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold flex-shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">2</div>
+                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">2</div>
                                   <div>
                                       <strong className="block text-lg text-gray-900 dark:text-white mb-1">Core & Stability Integration</strong>
                                       <span className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed block">Focus on strengthening the core to maintain precise posture while operating in a prolonged caloric deficit.</span>
                                   </div>
                               </li>
                               <li className="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800">
-                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold flex-shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">3</div>
+                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">3</div>
                                   <div>
                                       <strong className="block text-lg text-gray-900 dark:text-white mb-1">Compound Lift Baseline Maintenance</strong>
                                       <span className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed block">Execute heavy compound movements (squat, deadlift, press) twice weekly to preserve existing muscle density.</span>
@@ -325,21 +361,21 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
                        ) : (
                           <>
                               <li className="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800">
-                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold flex-shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">1</div>
+                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">1</div>
                                   <div>
                                       <strong className="block text-lg text-gray-900 dark:text-white mb-1">Progressive Overload Architecture</strong>
                                       <span className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed block">Increase mechanical tension weekly. Add weight or reps strictly to trigger structural hypertrophy pathways.</span>
                                   </div>
                               </li>
                               <li className="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800">
-                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold flex-shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">2</div>
+                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">2</div>
                                   <div>
                                       <strong className="block text-lg text-gray-900 dark:text-white mb-1">Targeted Isolation Blocks</strong>
                                       <span className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed block">Allocate volume specifically to lagging muscle groups identified during symmetry mapping to establish proportion.</span>
                                   </div>
                               </li>
                               <li className="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800">
-                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold flex-shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">3</div>
+                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">3</div>
                                   <div>
                                       <strong className="block text-lg text-gray-900 dark:text-white mb-1">Cellular Recovery Logistics</strong>
                                       <span className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed block">Tissue requires 48-72h to rebuild. Enforce strict rest intervals to allow for maximum nutrient partitioning.</span>
@@ -358,7 +394,7 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
                    <div className="grid md:grid-cols-2 gap-4">
                        {objective === 'deficit' ? (
                           <>
-                             <a href="/ai-food-scanner" onClick={(e)=>{ e.preventDefault(); setCurrentPage('ai-food-scanner'); }} className="group relative overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-6 text-left hover:scale-[1.02] transition-transform shadow-lg shadow-purple-500/20">
+                             <a href="/ai-food-scanner" onClick={(e)=>{ e.preventDefault(); setCurrentPage('ai-food-scanner'); }} className="group relative overflow-hidden bg-linear-to-br from-indigo-500 to-purple-600 rounded-2xl p-6 text-left hover:scale-[1.02] transition-transform shadow-lg shadow-purple-500/20">
                                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                                  <div className="relative z-10 flex flex-col h-full">
                                     <div className="p-2.5 bg-white/20 rounded-xl mb-4 w-fit backdrop-blur-sm"><CameraIcon className="w-6 h-6 text-white" /></div>
@@ -369,7 +405,7 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
                                     </span>
                                  </div>
                              </a>
-                             <a href="/calories" onClick={(e)=>{ e.preventDefault(); setCurrentPage('calories'); }} className="group relative overflow-hidden bg-gradient-to-br from-teal-500 to-emerald-600 rounded-2xl p-6 text-left hover:scale-[1.02] transition-transform shadow-lg shadow-emerald-500/20">
+                             <a href="/calories" onClick={(e)=>{ e.preventDefault(); setCurrentPage('calories'); }} className="group relative overflow-hidden bg-linear-to-br from-teal-500 to-emerald-600 rounded-2xl p-6 text-left hover:scale-[1.02] transition-transform shadow-lg shadow-emerald-500/20">
                                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                                  <div className="relative z-10 flex flex-col h-full">
                                     <div className="p-2.5 bg-white/20 rounded-xl mb-4 w-fit backdrop-blur-sm"><Activity className="w-6 h-6 text-white" /></div>
@@ -383,11 +419,11 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
                           </>
                        ) : (
                           <>
-                             <a href="/macros" onClick={(e)=>{ e.preventDefault(); setCurrentPage('macros'); }} className="group relative overflow-hidden bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl p-8 text-left hover:scale-[1.01] transition-transform shadow-lg shadow-orange-500/20 md:col-span-2">
+                             <a href="/macros" onClick={(e)=>{ e.preventDefault(); setCurrentPage('macros'); }} className="group relative overflow-hidden bg-linear-to-br from-orange-500 to-red-600 rounded-2xl p-8 text-left hover:scale-[1.01] transition-transform shadow-lg shadow-orange-500/20 md:col-span-2">
                                  <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-overlay"></div>
-                                 <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent pointer-events-none"></div>
+                                 <div className="absolute inset-0 bg-linear-to-r from-black/40 to-transparent pointer-events-none"></div>
                                  <div className="relative z-10 flex md:flex-row flex-col items-center md:items-start gap-6">
-                                    <div className="p-4 bg-white/20 rounded-2xl backdrop-blur-md flex-shrink-0 shadow-inner">
+                                    <div className="p-4 bg-white/20 rounded-2xl backdrop-blur-md shrink-0 shadow-inner">
                                         <Activity className="w-10 h-10 text-white" />
                                     </div>
                                     <div className="flex-1 text-center md:text-left">

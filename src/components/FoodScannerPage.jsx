@@ -328,18 +328,18 @@ function FoodScannerPage() {
 
                 {/* SEO Content: How AI Works */}
                 <div className="bg-slate-800/30 border border-slate-700/50 rounded-3xl p-8 md:p-10 shadow-lg mt-8 mb-4 hover:border-teal-500/30 transition-colors duration-300">
-                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 text-right" dir="rtl">
-                        كيف يحسب <span className="text-transparent bg-clip-text bg-linear-to-r from-teal-400 to-emerald-400">الذكاء الاصطناعي</span> السعرات الحرارية؟
+                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+                        How Does <span className="text-transparent bg-clip-text bg-linear-to-r from-teal-400 to-emerald-400">AI</span> Calculate Calories?
                     </h2>
-                    <div className="space-y-4 text-slate-300 text-lg leading-relaxed text-right font-medium" dir="rtl">
+                    <div className="space-y-4 text-slate-300 text-lg leading-relaxed font-medium">
                         <p>
-                            يعتمد <strong>الماسح الضوئي للطعام</strong> على أحدث تقنيات <strong>الذكاء الاصطناعي</strong> ورؤية الكمبيوتر (Computer Vision) لتحليل صور الوجبات بدقة فائقة. بمجرد التقاط صورة لطعامك، يقوم النظام بعمل مسح ضوئي وتحليل بصري للتعرف على المكونات المختلفة داخل الطبق، وتحديد نوع الطعام، وتقدير حجم الحصص بناءً على الأبعاد المرئية.
+                            Our <strong>Food Scanner</strong> relies on the latest <strong>Artificial Intelligence</strong> and Computer Vision technologies to analyze meal photos with extreme precision. The moment you snap a photo of your food, the system performs a visual scan to recognize the various ingredients within the dish, identify the food type, and estimate portion sizes based on visual dimensions.
                         </p>
                         <p>
-                            بعد تحديد المكونات، يقوم النظام بمطابقة هذه البيانات مع قواعد بيانات غذائية ضخمة وشاملة لاستخراج <strong>القيمة الغذائية</strong> الدقيقة لكل مكون. يتم حساب إجمالي <strong>السعرات الحرارية</strong>، بالإضافة إلى توزيع المغذيات الكبرى الأساسية وهي <strong>البروتين</strong>، <strong>الكربوهيدرات</strong>، و<strong>الدهون</strong>. 
+                            Once the ingredients are identified, the system cross-references this data with massive and comprehensive nutritional databases to extract the precise <strong>nutritional value</strong> for each component. It calculates total <strong>calories</strong>, as well as the breakdown of essential macronutrients: <strong>Protein</strong>, <strong>Carbohydrates</strong>, and <strong>Fats</strong>.
                         </p>
                         <p>
-                            تضمن لك هذه التكنولوجيا المتطورة الحصول على نتائج فورية وموثوقة، مما يسهل عليك مهمة <strong>تتبع نظامك الغذائي</strong>، إدارة استهلاكك اليومي من السعرات، وتحقيق أهدافك الصحية سواء كانت إنقاص الوزن (التخسيس)، الحفاظ على اللياقة، أو بناء العضلات، وذلك بكل سهولة وفعالية دون التفكير في تعقيدات الإدخال اليدوي للمكونات.
+                            This advanced technology guarantees instant and reliable results, making it incredibly simple to <strong>track your diet</strong>, manage your daily caloric intake, and achieve your health objectives—whether that's weight loss, maintaining fitness, or building muscle—efficiently and without the hassle of manually entering ingredients.
                         </p>
                     </div>
                 </div>

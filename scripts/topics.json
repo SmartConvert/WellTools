@@ -7,9 +7,10 @@
             "id": 1001,
             "group": "daily_health_topics",
             "title": "The Ultimate Guide to Calorie Deficiency: Why You're Not Losing Weight Despite Exercising?",
-            "completed": false,
+            "completed": true,
             "requiredCalculator": "Food Scanner",
-            "tone": "Professional, highly medical-focused and authoritative."
+            "tone": "Professional, highly medical-focused and authoritative.",
+            "completedDate": "2026-03-31"
         },
         {
             "id": 1002,

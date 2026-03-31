@@ -1,7 +1,6 @@
 import React from 'react';
 import { Activity, ArrowRightCircle, Sparkles, Lightbulb, HelpCircle } from 'lucide-react';
 import { calculatorContent } from '../data/seoContent';
-import SchemaMarkup from './SchemaMarkup';
 
 const ToolInfoSection = ({ toolId }) => {
     const content = calculatorContent[toolId]?.['en'];
@@ -9,7 +8,6 @@ const ToolInfoSection = ({ toolId }) => {
 
     return (
         <div className="mt-16 space-y-12 animate-fade-in pb-12">
-            <SchemaMarkup toolId={toolId} content={content} />
             {/* What is it? */}
             <section className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-50 dark:border-gray-700">
                 <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-6 flex items-center gap-3">

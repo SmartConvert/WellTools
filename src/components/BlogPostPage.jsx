@@ -61,9 +61,10 @@ const parseMarkdown = (text, ctaBlock) => {
                         className="w-full h-auto object-cover"
                         loading="lazy"
                         onError={(e) => {
+                            const sig = Math.abs(altText.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0));
                             e.target.onerror = null;
-                            e.target.src = '/images/hero_wellness.png'; // Fallback to local wellness hero
-                            e.target.className = "w-full md:w-3/4 h-auto object-contain p-8 opacity-40 mix-blend-multiply dark:mix-blend-lighten grayscale";
+                            e.target.src = `https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=60&w=1200&sig=${sig}`;
+                            e.target.className = "w-full h-auto object-cover transition-all duration-700";
                         }}
                     />
                     {altText && (
@@ -161,9 +162,10 @@ const parseInlineMarkdown = (text) => {
                     className="w-full h-auto object-cover"
                     loading="lazy"
                     onError={(e) => {
+                        const sig = Math.abs(altText.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0));
                         e.target.onerror = null;
-                        e.target.src = '/images/hero_wellness.png';
-                        e.target.className = "w-full md:w-3/4 h-auto object-contain p-8 opacity-40 mix-blend-multiply dark:mix-blend-lighten grayscale";
+                        e.target.src = `https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=60&w=1200&sig=${sig}`;
+                        e.target.className = "w-full h-auto object-cover transition-all duration-700";
                     }}
                 />
                 {altText && (
@@ -410,7 +412,7 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
 
         // Resolve potentially relative image URLs to absolute
         const resolveImageUrl = (url) => {
-            if (!url) return `${SITE_URL}/images/hero_wellness.png`;
+            if (!url) return `https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=60&w=1200`;
             if (url.startsWith('http')) return url;
             return `${SITE_URL}${url.startsWith('/') ? '' : '/'}${url}`;
         };
@@ -592,9 +594,10 @@ const BlogPostPage = ({ post, setCurrentPage, setSelectedPost, t }) => {
                                 alt={post.imageAlt || post.title}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                 onError={(e) => {
+                                    const sig = Math.abs(post.title.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0));
                                     e.target.onerror = null;
-                                    e.target.src = '/images/hero_wellness.png';
-                                    e.target.className = "w-full h-full object-cover opacity-40 grayscale";
+                                    e.target.src = `https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=60&w=1200&sig=${sig}`;
+                                    e.target.className = "w-full h-full object-cover";
                                 }}
                             />
                             <div className="absolute inset-0 bg-linear-to-t from-gray-900/40 to-transparent pointer-events-none" />

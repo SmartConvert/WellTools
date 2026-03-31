@@ -55,9 +55,11 @@ const BlogPage = ({ setCurrentPage, setSelectedPost, t, lang = 'en' }) => {
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                         loading="lazy"
                                         onError={(e) => {
+                                            const keywords = `${post.category || 'wellness'} ${post.title.split(' ').slice(0, 3).join(' ')}`.replace(/\s+/g, ',');
+                                            const sig = Math.abs(post.title.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0));
                                             e.target.onerror = null;
-                                            e.target.src = '/images/hero_wellness.png';
-                                            e.target.className = "w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700";
+                                            e.target.src = `https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=60&w=1200&sig=${sig}`;
+                                            e.target.className = "w-full h-full object-cover transition-all duration-700";
                                         }}
                                     />
                                     <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

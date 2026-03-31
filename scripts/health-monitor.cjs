@@ -26,7 +26,7 @@ const VALID_EXACT_ROUTES = new Set([
     '/', '/blog', '/meal-planner', '/about', '/contact', 
     '/privacy-policy', '/terms', '/editorial-policy',
     '/bmi', '/calories', '/water', '/ideal-weight', 
-    '/sleep', '/body-fat', '/bmr', '/macro', '/1rm', '/fasting',
+    '/sleep', '/body-fat', '/bmr', '/macro', '/1rm', '/fasting', '/food-scanner',
     // Old paths that are redirected
     '/calories-calculator', '/water-intake-calculator', '/sleep-calculator-and-sleep-cycles',
     '/ideal-weight-calculator-healthy-weight', '/body-fat-percentage-calculator-navy-method',

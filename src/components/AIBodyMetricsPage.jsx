@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Heart, Shield, Camera as CameraIcon, Play, RefreshCw, Activity, ArrowRight, CheckCircle2, Upload, FileImage } from 'lucide-react';
+import { Heart, Shield, Camera as CameraIcon, Play, RefreshCw, Activity, ArrowRight, CheckCircle2, Upload, FileImage, Sparkles, Zap, Dumbbell, Flame, TrendingUp, Info } from 'lucide-react';
 import { Pose, POSE_CONNECTIONS } from '@mediapipe/pose';
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
 
+/**
+ * AIBodyMetricsPage - Unified UX/UI Refactor
+ * 1. Removed initial objective selection cards.
+ * 2. Unified Input UI with 100% Client-Side Privacy emphasis.
+ * 3. Dual-Pathway Results Engine (Weight Loss vs. Hypertrophy).
+ */
 export default function AIBodyMetricsPage({ setCurrentPage, t }) {
-  const [phase, setPhase] = useState('objective'); // 'objective', 'capture', 'analyzing', 'results'
-  const [objective, setObjective] = useState(null);
+  const [phase, setPhase] = useState('input'); // 'input', 'analyzing', 'results'
   const [analysisData, setAnalysisData] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [scanError, setScanError] = useState('');
@@ -72,29 +77,17 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
     });
     ctx.shadowBlur = 0;
 
-    // Simulated body skeleton dots — randomized but stable with tick
+    // Simulated skeleton dots
     const joints = [
-      [w * 0.5, h * 0.18],  // head
-      [w * 0.5, h * 0.30],  // neck
-      [w * 0.37, h * 0.35], // left shoulder
-      [w * 0.63, h * 0.35], // right shoulder
-      [w * 0.5, h * 0.50],  // torso
-      [w * 0.37, h * 0.55], // left hip
-      [w * 0.63, h * 0.55], // right hip
-      [w * 0.37, h * 0.70], // left knee
-      [w * 0.63, h * 0.70], // right knee
-      [w * 0.37, h * 0.85], // left foot
-      [w * 0.63, h * 0.85], // right foot
-      [w * 0.30, h * 0.48], // left elbow
-      [w * 0.70, h * 0.48], // right elbow
-      [w * 0.27, h * 0.58], // left wrist
-      [w * 0.73, h * 0.58], // right wrist
+      [w * 0.5, h * 0.18], [w * 0.5, h * 0.30], [w * 0.37, h * 0.35], [w * 0.63, h * 0.35],
+      [w * 0.5, h * 0.50], [w * 0.37, h * 0.55], [w * 0.63, h * 0.55], [w * 0.37, h * 0.70],
+      [w * 0.63, h * 0.70], [w * 0.37, h * 0.85], [w * 0.63, h * 0.85], [w * 0.30, h * 0.48],
+      [w * 0.70, h * 0.48], [w * 0.27, h * 0.58], [w * 0.73, h * 0.58]
     ];
     const connections = [
-      [0,1],[1,2],[1,3],[2,11],[3,12],[11,13],[12,14],[13,15],[14,16],[1,4],[4,5],[4,6],[5,7],[6,8],[7,9],[8,10]
+      [0,1],[1,2],[1,3],[2,11],[3,12],[11,13],[12,14],[1,4],[4,5],[4,6],[5,7],[6,8],[7,9],[8,10]
     ];
 
-    // Draw connections
     ctx.strokeStyle = 'rgba(16,185,129,0.65)';
     ctx.lineWidth = 2;
     ctx.shadowBlur = 8;
@@ -108,7 +101,6 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
       }
     });
 
-    // Draw joints
     joints.forEach(([jx, jy]) => {
       ctx.beginPath();
       ctx.arc(jx, jy, 5, 0, Math.PI * 2);
@@ -131,38 +123,10 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
           img.onload = () => {
               imageRef.current = img;
               setUploadedImage(url);
+              startAnalysis(); // Trigger analysis immediately after upload
           };
           img.src = url;
       }
-  };
-
-  useEffect(() => {
-    if (phase !== 'capture' || !uploadedImage) return;
-
-    let isMounted = true;
-    let tick = 0;
-
-    const animate = () => {
-        if (!isMounted) return;
-        const canvas = canvasRef.current;
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            drawScanOverlay(ctx, canvas.width, canvas.height, tick++);
-        }
-        animFrameRef.current = requestAnimationFrame(animate);
-    };
-    
-    animate();
-
-    return () => {
-      isMounted = false;
-      cancelAnimationFrame(animFrameRef.current);
-    };
-  }, [phase, uploadedImage, drawScanOverlay]);
-
-  const handleObjectiveSelect = (sel) => {
-    setObjective(sel);
-    setPhase('capture');
   };
 
   const startAnalysis = async () => {
@@ -194,14 +158,14 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
               try {
                   await poseRef.current.send({ image: imageRef.current });
               } catch (e) {
-                  setScanError("Failed to process image. Make sure you are online to load the AI model.");
+                  setScanError("Failed to process image locally. Check your internet connection.");
                   setIsScanningActive(false);
               }
           }, 1000);
 
       } catch (err) {
           console.error(err);
-          setScanError("System initialization failed.");
+          setScanError("AI system initialization failed.");
           setIsScanningActive(false);
       }
   };
@@ -269,380 +233,276 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Header Section */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center p-3 bg-emerald-100 dark:bg-emerald-900/40 rounded-2xl mb-4">
-            <Activity className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center justify-center p-4 bg-linear-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/10 rounded-3xl mb-6 shadow-sm">
+            <Activity className="w-10 h-10 text-emerald-600 dark:text-emerald-400" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-6">
-            AI Body Metrics <span className="text-emerald-500">Advisor</span>
+          <h1 className="text-5xl md:text-6xl font-[Outfit] font-black text-gray-900 dark:text-white mb-6 tracking-tight">
+            AI Body Metrics <span className="bg-linear-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent">Advisor</span>
           </h1>
-          <div className="flex items-center justify-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-             <Shield className="w-4 h-4 text-emerald-500" />
-             <span>100% Client-Side Processing • Your camera data never leaves this device</span>
-          </div>
+          <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg">
+             Instant biometric extraction using advanced computer vision. 
+             Optimized for your unique anatomical structure.
+          </p>
         </div>
 
-        {/* Phase 1: Objective Selection */}
-        {phase === 'objective' && (
-          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700 p-8 md:p-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">Define Your Clinical Objective</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              
-              <button 
-                onClick={() => handleObjectiveSelect('deficit')}
-                className="group relative flex flex-col items-start p-8 rounded-2xl border-2 border-gray-100 dark:border-gray-700 hover:border-emerald-500 dark:hover:border-emerald-500 bg-gray-50 hover:bg-emerald-50/50 dark:bg-gray-900/50 dark:hover:bg-emerald-900/20 transition-all text-left"
-              >
-                <div className="w-12 h-12 bg-white dark:bg-gray-800 rounded-xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform">
-                  <Activity className="w-6 h-6 text-emerald-500" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Optimize Weight Loss (Burn Fat)</h3>
-                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6">
-                  Focus on localized fat reduction and metabolic deficit mapping. Best for revealing muscle definition.
-                </p>
-                <div className="mt-auto flex items-center justify-center w-full bg-emerald-500 text-gray-900 font-black text-sm py-3 px-6 rounded-xl hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
-                  Select Protocol <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1" />
-                </div>
-              </button>
+        {/* Phase 1: Unified Input UI */}
+        {phase === 'input' && (
+          <div className="max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700">
+            <div className="group relative bg-white dark:bg-gray-800 rounded-[2.5rem] shadow-2xl border border-gray-100 dark:border-gray-700 p-12 md:p-16 text-center overflow-hidden">
+               {/* Decorative background elements */}
+               <div className="absolute top-0 right-0 -mr-24 -mt-24 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl"></div>
+               <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-64 h-64 bg-teal-500/5 rounded-full blur-3xl"></div>
+               
+               <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-24 h-24 bg-linear-to-br from-emerald-500 to-teal-600 rounded-[2rem] flex items-center justify-center mb-8 shadow-2xl shadow-emerald-500/30 group-hover:scale-110 transition-transform duration-500">
+                      <CameraIcon className="w-10 h-10 text-white" />
+                  </div>
+                  
+                  <h2 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4">Start Your Instant Analysis</h2>
+                  <p className="text-gray-500 dark:text-gray-400 text-lg mb-10 max-w-sm leading-relaxed">
+                      Upload a full-body photo to reveal your biometrical blueprint and dual-pathway roadmap.
+                  </p>
 
-              <button 
-                onClick={() => handleObjectiveSelect('surplus')}
-                className="group relative flex flex-col items-start p-8 rounded-2xl border-2 border-gray-100 dark:border-gray-700 hover:border-emerald-500 dark:hover:border-emerald-500 bg-gray-50 hover:bg-emerald-50/50 dark:bg-gray-900/50 dark:hover:bg-emerald-900/20 transition-all text-left"
-              >
-                <div className="w-12 h-12 bg-white dark:bg-gray-800 rounded-xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform">
-                  <Activity className="w-6 h-6 text-emerald-500" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Facilitate Hypertrophy (Build Muscle)</h3>
-                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6">
-                  Focus on structural symmetry and skeletal muscle potential tracking. Best for muscle mass acquisition.
-                </p>
-                <div className="mt-auto flex items-center justify-center w-full bg-emerald-500 text-gray-900 font-black text-sm py-3 px-6 rounded-xl hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
-                  Select Protocol <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1" />
-                </div>
-              </button>
-
-            </div>
-
-            {/* Visual Proof / Explainer UI */}
-            <div className="mt-16 pt-16 border-t border-gray-100 dark:border-gray-700 text-center animate-in zoom-in-95 duration-700">
-               <div className="inline-flex bg-gray-900 rounded-3xl p-2 md:p-4 mb-4 shadow-2xl border border-gray-800 relative mx-auto group">
-                   <div className="absolute -inset-1 bg-linear-to-r from-emerald-500 to-teal-500 rounded-3xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                   <div className="relative bg-black rounded-2xl aspect-[16/9] w-full min-w-[300px] md:min-w-[400px] max-w-lg flex items-center justify-center overflow-hidden border border-gray-800">
-                        {/* 3D Mesh GIF Placeholder */}
-                        <div className="flex flex-col items-center justify-center text-emerald-500/50">
-                           <Activity className="w-12 h-12 mb-3 animate-pulse" />
-                           <span className="text-xs uppercase tracking-widest font-black text-emerald-500/50 text-center px-4">Mesh GIF Placeholder</span>
-                        </div>
-                   </div>
-               </div>
-               <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 tracking-wide mt-2">
-                   <Shield className="w-3 h-3 inline mr-1 text-emerald-500" />
-                   EXAMPLE OF PRIVACY-PRESERVING 3D MESH OVERLAY IN ACTION
-               </p>
-            </div>
-
-            {/* How It Works Section */}
-            <div className="mt-16">
-                <div className="text-center mb-10">
-                    <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-4">How The Clinical Engine Works</h3>
-                    <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-sm leading-relaxed font-medium">
-                        Our advanced somatic engine uses secure, on-device spatial mapping to extract precise physical landmarks directly in your browser. All processing is strictly local—your imagery is never transmitted or stored.
-                    </p>
-                </div>
-                
-                <div className="grid md:grid-cols-3 gap-6">
-                    <div className="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 text-center flex flex-col items-center">
-                        <div className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-emerald-500 font-bold shadow-sm mb-4 border border-gray-100 dark:border-gray-700">1</div>
-                        <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Spatial Calibration</h4>
-                        <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                            Stand clearly in frame. The engine initiates WebAssembly models to instantly detect 33 distinct anatomical anchor points across your body in real-time.
-                        </p>
-                    </div>
-                    
-                    <div className="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 text-center flex flex-col items-center">
-                        <div className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-emerald-500 font-bold shadow-sm mb-4 border border-gray-100 dark:border-gray-700">2</div>
-                        <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Biometric Extraction</h4>
-                        <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                            The algorithm securely computes metrics such as your shoulder-to-waist ratio, structural symmetry, and postural baseline to identify structural dominance.
-                        </p>
-                    </div>
-
-                    <div className="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 text-center flex flex-col items-center">
-                        <div className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-emerald-500 font-bold shadow-sm mb-4 border border-gray-100 dark:border-gray-700">3</div>
-                        <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Protocol Synthesis</h4>
-                        <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                            Cross-referencing your biomechanics with your selected goal, the system generates a highly bespoke, actionable training strategy mapped to your unique physique.
-                        </p>
-                    </div>
-                </div>
-            </div>
-          </div>
-        )}
-
-        {/* Phase 2: AI Capture & Analysis */}
-        {phase === 'capture' && (
-          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="p-6 md:p-8 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
-               <div>
-                 <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
-                   <Shield className="w-5 h-5 text-emerald-500" /> Local Pose Extraction Engine
-                 </h2>
-                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Upload a full-body photo. Imagery is processed locally and destroyed instantly.</p>
-               </div>
-               <button onClick={() => { setPhase('objective'); setUploadedImage(null); }} className="text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors">
-                  Cancel
-               </button>
-            </div>
-
-            <div className="relative aspect-4/3 bg-gray-50 dark:bg-gray-900 w-full overflow-hidden flex items-center justify-center">
-              
-              {!uploadedImage ? (
-                  <div className="flex flex-col items-center justify-center p-8 text-center animate-in fade-in zoom-in-95 duration-500">
-                      <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/40 rounded-full flex items-center justify-center mb-6 border-4 border-white dark:border-gray-800 shadow-xl">
-                          <Upload className="w-10 h-10 text-emerald-500" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Upload Full-Body Photo</h3>
-                      <p className="text-gray-500 dark:text-gray-400 max-w-sm mb-8 leading-relaxed">Ensure you are standing clearly in frame with good lighting for optimal biostructural analysis.</p>
-                      
-                      <label className="cursor-pointer group relative">
+                  <div className="flex flex-col sm:flex-row items-center gap-6 w-full max-w-lg">
+                      <label className="flex-1 w-full cursor-pointer group/btn relative">
                           <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
-                          <div className="absolute inset-0 bg-emerald-500 rounded-2xl blur-md opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                          <div className="relative bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-bold shadow-lg flex items-center gap-3 transition-colors">
-                              <FileImage className="w-5 h-5" /> Select Image from Gallery
+                          <div className="absolute inset-0 bg-emerald-500 rounded-2xl blur-lg opacity-25 group-hover/btn:opacity-40 transition-opacity"></div>
+                          <div className="relative bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white px-8 py-5 rounded-2xl font-black shadow-lg flex items-center justify-center gap-3 transition-all">
+                              <Upload className="w-6 h-6" /> Upload Body Photo
+                          </div>
+                      </label>
+                      
+                      <label className="flex-1 w-full cursor-pointer group/btn relative">
+                          <input type="file" accept="image/*" capture="environment" onChange={handleImageUpload} className="hidden" />
+                          <div className="absolute inset-0 bg-gray-900 dark:bg-white rounded-2xl blur-lg opacity-10 group-hover/btn:opacity-20 transition-opacity"></div>
+                          <div className="relative bg-white dark:bg-gray-700 border-2 border-gray-100 dark:border-gray-600 hover:border-emerald-500 dark:hover:border-emerald-500 text-gray-900 dark:text-white px-8 py-5 rounded-2xl font-black shadow-sm flex items-center justify-center gap-3 transition-all active:scale-95">
+                              <CameraIcon className="w-6 h-6 text-emerald-500" /> Open Camera
                           </div>
                       </label>
                   </div>
-              ) : (
-                <div className="relative w-full h-full bg-black animate-in fade-in duration-1000">
-                  <canvas
-                    ref={canvasRef}
-                    className="absolute inset-0 w-full h-full object-cover z-10"
-                    width={640}
-                    height={480}
-                  />
-                  
-                  {/* UI Guide Overlay */}
-                  <div className="absolute inset-x-0 bottom-8 z-20 flex justify-center pointer-events-none">
-                     <div className="bg-gray-900/80 backdrop-blur text-white px-6 py-3 rounded-full border border-gray-700 flex items-center gap-3">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span className="text-sm font-semibold tracking-wide uppercase">Engine Active - Frame Analyzing</span>
-                     </div>
-                  </div>
-                </div>
-              )}
-            </div>
 
-            <div className="p-6 md:p-8 bg-gray-50 dark:bg-gray-800/50 flex flex-wrap justify-end gap-4">
-               {uploadedImage && (
-                 <label className="cursor-pointer px-6 py-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-2xl font-bold transition-all shadow-sm flex items-center justify-center">
-                    <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
-                    Replace Image
-                 </label>
-               )}
-               <button 
-                 disabled={!uploadedImage}
-                 onClick={startAnalysis}
-                 className="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-2xl font-bold text-lg transition-all shadow-xl shadow-emerald-500/20 flex items-center gap-3"
-               >
-                  Run Clinical Analysis <Activity className="w-5 h-5" />
-               </button>
+                  {/* Privacy Badge Integrated Inside */}
+                  <div className="mt-12 inline-flex items-center gap-3 px-6 py-3 bg-gray-50 dark:bg-gray-900/40 rounded-full border border-gray-100 dark:border-gray-700 text-sm font-bold text-emerald-600 dark:text-emerald-400 animate-pulse-slow">
+                      <Shield className="w-5 h-5" />
+                      <span>100% Client-Side Processing • Your Data Never Leaves This Device</span>
+                  </div>
+
+                  <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-8 w-full pt-12 border-t border-gray-50 dark:border-gray-700/50">
+                      <div className="flex flex-col items-center gap-1.5 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all">
+                          <Activity className="w-6 h-6 mb-1 text-emerald-500" />
+                          <span className="text-[10px] uppercase tracking-widest font-black text-gray-500 dark:text-gray-400">Skeleton Map</span>
+                      </div>
+                      <div className="flex flex-col items-center gap-1.5 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all">
+                          <CheckCircle2 className="w-6 h-6 mb-1 text-emerald-500" />
+                          <span className="text-[10px] uppercase tracking-widest font-black text-gray-500 dark:text-gray-400">Posture Fix</span>
+                      </div>
+                      <div className="hidden md:flex flex-col items-center gap-1.5 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all">
+                          <Sparkles className="w-6 h-6 mb-1 text-emerald-500" />
+                          <span className="text-[10px] uppercase tracking-widest font-black text-gray-500 dark:text-gray-400">Goal Synthesis</span>
+                      </div>
+                  </div>
+               </div>
             </div>
           </div>
         )}
 
-        {/* Phase 3 & 4 (Mocked for now) */}
+        {/* Phase 2: Analyzing */}
         {phase === 'analyzing' && (
-           <div className="bg-black rounded-3xl overflow-hidden shadow-2xl relative border border-gray-800 w-full max-w-2xl mx-auto flex flex-col items-center justify-center aspect-3/4 md:aspect-[4/3] animate-in fade-in duration-500 min-h-[500px] mt-8">
-               
-               {/* Terminal Stats Overlay */}
-               <div className="absolute top-6 left-6 z-30 font-mono text-xs md:text-sm text-emerald-400 space-y-2 bg-black/60 p-4 rounded-xl backdrop-blur border border-emerald-500/20 shadow-xl">
-                  <p className="opacity-70 animate-pulse">&gt; SYS_INIT: MEDIA_PIPE_WASM</p>
-                  <p>&gt; LOCATING_SKELETAL_NODES: <span className="text-white font-bold">{isScanningActive ? 'PENDING...' : 'CAPTURED'}</span></p>
-                  <p>&gt; ALGORITHMIC_CONFIDENCE: <span className="text-white font-bold">{isScanningActive ? 'TESTING...' : '98.4%'}</span></p>
-               </div>
-               
-               {/* The actual analysis drawing canvas */}
-               <canvas 
-                  ref={analysisCanvasRef} 
-                  className="w-full h-full object-contain absolute inset-0 z-20"
-               ></canvas>
-
-               {/* Background image if canvas hasn't drawn yet */}
-               {uploadedImage && <img src={uploadedImage} alt="Scanning..." className={`w-full h-full object-contain absolute inset-0 z-10 ${isScanningActive ? 'opacity-40 blur-sm flex' : 'opacity-0'} transition-all duration-1000`} />}
-               
-               {/* Scanning Laser Animation */}
-               {isScanningActive && (
-                  <div className="absolute inset-0 z-20 overflow-hidden pointer-events-none">
-                      <div className="w-full h-[3px] bg-emerald-500 shadow-[0_0_20px_6px_rgba(16,185,129,0.8)] absolute top-0 left-0 animate-[scan_2s_ease-in-out_infinite]"></div>
-                  </div>
-               )}
-
-               {scanError ? (
-                  <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-gray-900/90 p-8 text-center backdrop-blur-md">
-                      <div className="w-16 h-16 bg-red-500/20 text-red-500 rounded-2xl flex items-center justify-center mb-6 shadow-red-500/20 shadow-lg"><Activity className="w-8 h-8" /></div>
-                      <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">Analysis Failed</h3>
-                      <p className="text-gray-400 mb-8 max-w-sm leading-relaxed">{scanError}</p>
-                      <button onClick={() => { setPhase('capture'); setScanError(''); setIsScanningActive(false); }} className="px-8 py-4 bg-white text-gray-900 rounded-2xl font-bold hover:bg-gray-100 transition-colors shadow-xl">Upload New Photo</button>
-                  </div>
-               ) : !isScanningActive && analysisData ? (
-                  <div className="absolute bottom-6 inset-x-6 z-30 flex flex-col sm:flex-row items-center justify-between bg-emerald-900/80 backdrop-blur border border-emerald-500/50 p-5 rounded-2xl animate-in fade-in slide-in-from-bottom-8 duration-700 shadow-2xl gap-4">
-                      <div className="flex items-center gap-3">
-                         <div className="bg-emerald-500 rounded-full p-1"><CheckCircle2 className="w-5 h-5 text-emerald-900" /></div>
-                         <span className="font-bold text-white tracking-wide text-lg">Topology Mapped</span>
+           <div className="max-w-2xl mx-auto animate-in fade-in duration-500 mt-8">
+               <div className="bg-black rounded-[3rem] overflow-hidden shadow-2xl relative border border-gray-800 aspect-3/4 md:aspect-[4/3] flex flex-col items-center justify-center min-h-[500px]">
+                   
+                   {/* Terminal Stats Overlay */}
+                   <div className="absolute top-8 left-8 z-30 font-mono text-xs text-emerald-400 space-y-2 bg-black/60 p-5 rounded-2xl backdrop-blur-md border border-emerald-500/20 shadow-2xl">
+                      <p className="opacity-70">&gt; INITIALIZING_LOCAL_AI_CORE...</p>
+                      <p>&gt; MAPPING_JOINT_COORD: <span className="text-white font-bold">{isScanningActive ? 'SEARCHING...' : 'DONE'}</span></p>
+                      <p>&gt; BIOMETRIC_FIDELITY: <span className="text-emerald-500 font-bold">98.9%</span></p>
+                      <div className="w-32 h-1 bg-gray-800 rounded-full mt-4 overflow-hidden">
+                          <div className="h-full bg-emerald-500 animate-[loading_2s_ease-in-out_infinite]"></div>
                       </div>
-                      <span className="text-emerald-200 text-sm font-bold uppercase tracking-widest animate-pulse border border-emerald-500/30 px-4 py-2 rounded-xl bg-emerald-800/40 shadow-inner">Synthesizing...</span>
-                  </div>
-               ) : null}
+                   </div>
+                   
+                   {/* The actual analysis drawing canvas */}
+                   <canvas ref={analysisCanvasRef} className="w-full h-full object-contain absolute inset-0 z-20"></canvas>
+
+                   {/* Scanning Laser Animation */}
+                   {isScanningActive && (
+                      <div className="absolute inset-0 z-20 overflow-hidden pointer-events-none">
+                          <div className="w-full h-[3px] bg-emerald-500 shadow-[0_0_30px_10px_rgba(16,185,129,0.8)] absolute top-0 left-0 animate-[scan_2s_ease-in-out_infinite]"></div>
+                      </div>
+                   )}
+
+                   {scanError ? (
+                      <div className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-gray-900/95 p-12 text-center backdrop-blur-xl">
+                          <div className="w-20 h-20 bg-red-500/20 text-red-500 rounded-3xl flex items-center justify-center mb-8 shadow-lg"><Activity className="w-10 h-10" /></div>
+                          <h3 className="text-3xl font-black text-white mb-4">Topology Error</h3>
+                          <p className="text-gray-400 mb-10 max-w-sm leading-relaxed text-lg">{scanError}</p>
+                          <button onClick={() => { setPhase('input'); setScanError(''); setUploadedImage(null); }} className="px-10 py-5 bg-white text-gray-900 rounded-[1.5rem] font-black hover:bg-gray-100 transition-all shadow-xl active:scale-95">Try Fresh Scan</button>
+                      </div>
+                   ) : !isScanningActive && analysisData ? (
+                      <div className="absolute bottom-8 inset-x-8 z-30 flex flex-col sm:flex-row items-center justify-between bg-emerald-900/80 backdrop-blur-xl border border-emerald-500/40 p-6 rounded-3xl animate-in fade-in slide-in-from-bottom-8 duration-700 shadow-[0_20px_50px_-20px_rgba(16,185,129,0.5)] gap-4">
+                          <div className="flex items-center gap-4">
+                             <div className="bg-emerald-500 rounded-full p-1.5 shadow-lg shadow-emerald-500/50"><CheckCircle2 className="w-6 h-6 text-emerald-900" /></div>
+                             <span className="font-black text-white tracking-wide text-xl">Symmetry Calibrated</span>
+                          </div>
+                          <span className="text-emerald-100 text-sm font-black uppercase tracking-widest animate-pulse border border-emerald-500/20 px-5 py-2.5 rounded-2xl bg-emerald-800/40">Synthesizing Pathways...</span>
+                      </div>
+                   ) : null}
+               </div>
            </div>
         )}
         
+        {/* Phase 3: Results (Dual Pathways) */}
         {phase === 'results' && analysisData && (
-           <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700 p-8 md:p-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-               <div className="flex flex-col items-center text-center mb-10 border-b border-gray-100 dark:border-gray-700 pb-10">
-                   <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mb-4">
-                      <CheckCircle2 className="w-8 h-8 text-emerald-500" />
+           <div className="animate-in fade-in slide-in-from-bottom-8 duration-1000">
+               {/* Body Type Analysis Summary */}
+               <div className="bg-white dark:bg-gray-800 rounded-[3rem] shadow-2xl border border-gray-100 dark:border-gray-700 p-10 md:p-14 mb-8 text-center relative overflow-hidden">
+                   <div className="absolute top-0 left-0 w-32 h-32 bg-emerald-500/5 rounded-full -ml-16 -mt-16 blur-3xl"></div>
+                   <div className="w-20 h-20 bg-linear-to-br from-emerald-500 to-teal-500 rounded-3xl flex items-center justify-center mb-6 mx-auto shadow-xl">
+                      <Sparkles className="w-10 h-10 text-white" />
                    </div>
-                   <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-2">Clinical Analysis Complete</h2>
-                   <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
-                     Biometrics successfully mapped. Posture indicates <span className="font-semibold">{analysisData.postureQuality}</span>.
+                   <h2 className="text-4xl font-black text-gray-900 dark:text-white mb-4">Structure Analysis Complete</h2>
+                   <p className="text-gray-500 dark:text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                     Biometric modeling suggests an <span className="font-black text-emerald-600 dark:text-emerald-400">{analysisData.shape}</span>. 
+                     Based on your shoulder-to-waist ratio of <span className="font-bold text-gray-900 dark:text-white">{analysisData.ratio}</span>, we've developed two distinct evolutionary pathways.
                    </p>
                </div>
 
-               {/* Dynamic Body Analysis Summary */}
-               <div className="mb-10 p-6 bg-emerald-50 dark:bg-emerald-900/10 rounded-2xl border border-emerald-100 dark:border-emerald-800/30 text-left">
-                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                       <Activity className="w-5 h-5 text-emerald-500" /> Biometric Synthesis
-                   </h3>
-                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                       Spatial analysis indicates a <span className="font-semibold text-emerald-600 dark:text-emerald-400">{analysisData.shape}</span> with a shoulder-to-waist ratio of {analysisData.ratio}. 
-                       To optimally execute your <span className="font-semibold">{objective === 'deficit' ? 'weight reduction' : 'hypertrophy'}</span> protocol, we've synthesized the following phase-one strategy:
-                   </p>
-               </div>
+               {/* Dual Pathways Grid */}
+               <div className="grid lg:grid-cols-2 gap-8 mb-12">
+                   
+                   {/* Pathway A: Weight Loss */}
+                   <div className="group bg-white dark:bg-gray-800 rounded-[2.5rem] shadow-xl border-t-8 border-rose-500 p-10 flex flex-col relative overflow-hidden transition-all hover:shadow-rose-500/10 hover:-translate-y-1">
+                       <div className="flex items-center gap-4 mb-10">
+                           <div className="w-14 h-14 bg-rose-100 dark:bg-rose-900/30 rounded-2xl flex items-center justify-center shadow-inner">
+                               <Flame className="w-8 h-8 text-rose-500" />
+                           </div>
+                           <div>
+                               <span className="text-xs font-black text-rose-500 uppercase tracking-widest mb-1 block">Goal Strategy A</span>
+                               <h3 className="text-3xl font-black text-gray-900 dark:text-white">Lose Body Fat</h3>
+                           </div>
+                       </div>
+                       
+                       <div className="space-y-6 mb-12 flex-1">
+                           <div className="p-6 bg-rose-50/50 dark:bg-rose-900/10 rounded-2xl border border-rose-100/50 dark:border-rose-900/20">
+                               <h4 className="font-black text-rose-700 dark:text-rose-400 mb-2 flex items-center gap-2">
+                                  <TrendingUp className="w-4 h-4" /> Metabolic Synthesis
+                               </h4>
+                               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                                  Your detected {analysisData.shape} responds best to high-volume HIIT sessions targeting lower-limb fat oxidation first.
+                               </p>
+                           </div>
+                           
+                           <ul className="space-y-4">
+                               <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-bold">
+                                   <Zap className="w-5 h-5 text-rose-500" /> 20min Morning HIIT Cardio
+                               </li>
+                               <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-bold">
+                                   <Zap className="w-5 h-5 text-rose-500" /> Caloric Deficit Focus (25%)
+                               </li>
+                               <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-bold">
+                                   <Zap className="w-5 h-5 text-rose-500" /> Daily Activity Multiplier
+                               </li>
+                           </ul>
+                       </div>
 
-               {/* Actionable Workout Strategy */}
-               <div className="mb-12 text-left">
-                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Actionable Clinical Strategy</h3>
-                   <ul className="space-y-4">
-                       {objective === 'deficit' ? (
-                          <>
-                              <li className="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800">
-                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">1</div>
-                                  <div>
-                                      <strong className="block text-lg text-gray-900 dark:text-white mb-1">High-Intensity Interval Synthesis</strong>
-                                      <span className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed block">Prioritize HIIT to maximize metabolic calorie burn and rapid fat oxidation. Keep rest periods under 45s.</span>
-                                  </div>
-                              </li>
-                              <li className="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800">
-                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">2</div>
-                                  <div>
-                                      <strong className="block text-lg text-gray-900 dark:text-white mb-1">Core & Stability Integration</strong>
-                                      <span className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed block">Focus on strengthening the core to maintain precise posture while operating in a prolonged caloric deficit.</span>
-                                  </div>
-                              </li>
-                              <li className="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800">
-                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">3</div>
-                                  <div>
-                                      <strong className="block text-lg text-gray-900 dark:text-white mb-1">Compound Lift Baseline Maintenance</strong>
-                                      <span className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed block">Execute heavy compound movements (squat, deadlift, press) twice weekly to preserve existing muscle density.</span>
-                                  </div>
-                              </li>
-                          </>
-                       ) : (
-                          <>
-                              <li className="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800">
-                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">1</div>
-                                  <div>
-                                      <strong className="block text-lg text-gray-900 dark:text-white mb-1">Progressive Overload Architecture</strong>
-                                      <span className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed block">Increase mechanical tension weekly. Add weight or reps strictly to trigger structural hypertrophy pathways.</span>
-                                  </div>
-                              </li>
-                              <li className="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800">
-                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">2</div>
-                                  <div>
-                                      <strong className="block text-lg text-gray-900 dark:text-white mb-1">Targeted Isolation Blocks</strong>
-                                      <span className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed block">Allocate volume specifically to lagging muscle groups identified during symmetry mapping to establish proportion.</span>
-                                  </div>
-                              </li>
-                              <li className="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800">
-                                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0 shadow-sm border border-gray-100 dark:border-gray-700">3</div>
-                                  <div>
-                                      <strong className="block text-lg text-gray-900 dark:text-white mb-1">Cellular Recovery Logistics</strong>
-                                      <span className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed block">Tissue requires 48-72h to rebuild. Enforce strict rest intervals to allow for maximum nutrient partitioning.</span>
-                                  </div>
-                              </li>
-                          </>
-                       )}
-                   </ul>
-               </div>
-
-               {/* The Ecosystem Up-sell */}
-               <div className="pt-10 border-t border-gray-100 dark:border-gray-700">
-                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 text-left flex items-center gap-2">
-                       <Shield className="w-5 h-5 text-emerald-500" /> Mandatory Ecosystem Tools
-                   </h3>
-                   <div className="grid md:grid-cols-2 gap-4">
-                       {objective === 'deficit' ? (
-                          <>
-                             <a href="/ai-food-scanner" onClick={(e)=>{ e.preventDefault(); setCurrentPage('ai-food-scanner'); }} className="group relative overflow-hidden bg-linear-to-br from-indigo-500 to-purple-600 rounded-2xl p-6 text-left hover:scale-[1.02] transition-transform shadow-lg shadow-purple-500/20">
-                                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                                 <div className="relative z-10 flex flex-col h-full">
-                                    <div className="p-2.5 bg-white/20 rounded-xl mb-4 w-fit backdrop-blur-sm"><CameraIcon className="w-6 h-6 text-white" /></div>
-                                    <h4 className="text-xl font-bold text-white mb-2 tracking-tight">AI Food Scanner</h4>
-                                    <p className="text-white/80 text-sm mb-6 leading-relaxed">Fatal error in deficits is miscalculating macros. Instantly log exact caloric impact with computer vision.</p>
-                                    <span className="mt-auto text-white font-semibold flex items-center gap-2 text-sm bg-black/20 w-fit px-4 py-2 rounded-lg group-hover:bg-black/30 transition-colors">
-                                        Deploy Scanner <ArrowRight className="w-4 h-4" />
-                                    </span>
-                                 </div>
-                             </a>
-                             <a href="/calories" onClick={(e)=>{ e.preventDefault(); setCurrentPage('calories'); }} className="group relative overflow-hidden bg-linear-to-br from-teal-500 to-emerald-600 rounded-2xl p-6 text-left hover:scale-[1.02] transition-transform shadow-lg shadow-emerald-500/20">
-                                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                                 <div className="relative z-10 flex flex-col h-full">
-                                    <div className="p-2.5 bg-white/20 rounded-xl mb-4 w-fit backdrop-blur-sm"><Activity className="w-6 h-6 text-white" /></div>
-                                    <h4 className="text-xl font-bold text-white mb-2 tracking-tight">Deficit Tracker</h4>
-                                    <p className="text-white/80 text-sm mb-6 leading-relaxed">Precision logging engine for metabolic basal rates. Ensure you remain strictly in the oxidation zone.</p>
-                                    <span className="mt-auto text-white font-semibold flex items-center gap-2 text-sm bg-black/20 w-fit px-4 py-2 rounded-lg group-hover:bg-black/30 transition-colors">
-                                        Initialize Engine <ArrowRight className="w-4 h-4" />
-                                    </span>
-                                 </div>
-                             </a>
-                          </>
-                       ) : (
-                          <>
-                             <a href="/macros" onClick={(e)=>{ e.preventDefault(); setCurrentPage('macros'); }} className="group relative overflow-hidden bg-linear-to-br from-orange-500 to-red-600 rounded-2xl p-8 text-left hover:scale-[1.01] transition-transform shadow-lg shadow-orange-500/20 md:col-span-2">
-                                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-overlay"></div>
-                                 <div className="absolute inset-0 bg-linear-to-r from-black/40 to-transparent pointer-events-none"></div>
-                                 <div className="relative z-10 flex md:flex-row flex-col items-center md:items-start gap-6">
-                                    <div className="p-4 bg-white/20 rounded-2xl backdrop-blur-md shrink-0 shadow-inner">
-                                        <Activity className="w-10 h-10 text-white" />
-                                    </div>
-                                    <div className="flex-1 text-center md:text-left">
-                                        <h4 className="text-2xl font-black text-white mb-2 tracking-tight">Hypertrophy Macro Engine</h4>
-                                        <p className="text-white/90 text-sm mb-6 max-w-lg leading-relaxed md:mx-0 mx-auto">Absolute surplus caloric intake and exact protein timing are structurally mandatory for your goal. Calculate precise muscle-building macros mapped to your biometric output instantly.</p>
-                                        <div className="flex justify-center md:justify-start">
-                                            <span className="bg-white text-orange-600 px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors shadow-lg">
-                                                Execute Planner <ArrowRight className="w-5 h-5" />
-                                            </span>
-                                        </div>
-                                    </div>
-                                 </div>
-                             </a>
-                          </>
-                       )}
+                       <div className="grid grid-cols-2 gap-4">
+                           <button onClick={() => setCurrentPage('calories')} className="p-4 bg-gray-50 dark:bg-gray-900 rounded-2xl hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-all group/link text-center">
+                               <Flame className="w-6 h-6 text-rose-500 mx-auto mb-2" />
+                               <span className="text-[10px] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest block">Deficit Calculator</span>
+                           </button>
+                           <button onClick={() => setCurrentPage('food-scanner')} className="p-4 bg-gray-50 dark:bg-gray-900 rounded-2xl hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-all group/link text-center">
+                               <CameraIcon className="w-6 h-6 text-rose-500 mx-auto mb-2" />
+                               <span className="text-[10px] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest block">AI Food Scanner</span>
+                           </button>
+                       </div>
                    </div>
+
+                   {/* Pathway B: Gain Weight/Muscle */}
+                   <div className="group bg-white dark:bg-gray-800 rounded-[2.5rem] shadow-xl border-t-8 border-indigo-500 p-10 flex flex-col relative overflow-hidden transition-all hover:shadow-indigo-500/10 hover:-translate-y-1">
+                       <div className="flex items-center gap-4 mb-10">
+                           <div className="w-14 h-14 bg-indigo-100 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center shadow-inner">
+                               <Dumbbell className="w-8 h-8 text-indigo-500" />
+                           </div>
+                           <div>
+                               <span className="text-xs font-black text-indigo-500 uppercase tracking-widest mb-1 block">Goal Strategy B</span>
+                               <h3 className="text-3xl font-black text-gray-900 dark:text-white">Build Muscle Mass</h3>
+                           </div>
+                       </div>
+                       
+                       <div className="space-y-6 mb-12 flex-1">
+                           <div className="p-6 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-2xl border border-indigo-100/50 dark:border-indigo-900/20">
+                               <h4 className="font-black text-indigo-700 dark:text-indigo-400 mb-2 flex items-center gap-2">
+                                  <Sparkles className="w-4 h-4" /> Hypertrophy Focus
+                               </h4>
+                               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                                  Establish a muscular anchor in your mid-back to accentuate the {analysisData.ratio} structural ratio. Focus on heavy compound lifts.
+                               </p>
+                           </div>
+                           
+                           <ul className="space-y-4">
+                               <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-bold">
+                                   <Zap className="w-5 h-5 text-indigo-500" /> Progressive Overload Protocol
+                               </li>
+                               <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-bold">
+                                   <Zap className="w-5 h-5 text-indigo-500" /> Targeted Isolation Training
+                               </li>
+                               <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-bold">
+                                   <Zap className="w-5 h-5 text-indigo-500" /> High Protein Partitioning
+                               </li>
+                           </ul>
+                       </div>
+
+                       <button onClick={() => setCurrentPage('macro')} className="w-full bg-linear-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 text-white rounded-3xl p-6 flex flex-col items-center justify-center gap-2 transition-all shadow-lg shadow-indigo-500/30 active:scale-95 group/btn">
+                           <TrendingUp className="w-8 h-8 text-white/50 group-hover/btn:scale-110 transition-transform" />
+                           <div>
+                              <span className="text-xl font-black block tracking-tight">Open Macro Engine</span>
+                              <span className="text-white/60 text-[10px] font-black uppercase tracking-[0.2em]">Calculate Hypertrophy Needs</span>
+                           </div>
+                       </button>
+                   </div>
+
                </div>
 
-               <div className="mt-12 text-center">
-                   <button onClick={() => setPhase('objective')} className="text-gray-500 dark:text-gray-400 font-medium hover:text-emerald-500 transition-colors flex items-center justify-center gap-2 mx-auto">
-                      <RefreshCw className="w-4 h-4" /> Re-calibrate Baseline Sensors
+               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                   <button onClick={() => { setPhase('input'); setUploadedImage(null); }} className="px-10 py-5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-[1.5rem] font-black shadow-xl hover:scale-105 transition-all flex items-center gap-3 active:scale-95">
+                       <RefreshCw className="w-6 h-6" /> Re-Scan Anatomy
                    </button>
+                   
+                   <div className="p-5 bg-white/50 dark:bg-gray-800/50 backdrop-blur rounded-[1.5rem] border border-gray-100 dark:border-gray-700 flex items-center gap-3">
+                       <Info className="w-5 h-5 text-emerald-500" />
+                       <p className="text-xs font-bold text-gray-500 dark:text-gray-400">Scan data is destroyed locally. Session private.</p>
+                   </div>
                </div>
            </div>
         )}
 
       </div>
+      
+      <style>{`
+        @keyframes scan {
+          0% { top: 0%; opacity: 0.2; }
+          50% { top: 98%; opacity: 1; }
+          100% { top: 0%; opacity: 0.2; }
+        }
+        @keyframes loading {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        .animate-pulse-slow {
+          animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .aspect-4\/3 {
+          aspect-ratio: 4 / 3;
+        }
+        .aspect-3\/4 {
+          aspect-ratio: 3 / 4;
+        }
+      `}</style>
     </div>
   );
 }

@@ -374,82 +374,43 @@ ${existingTitles}
                 }
             }
 
-            // --- POST-PROCESS: Select Unsplash Hero Image ---
-            const topicImages = {
-                'inflammation': 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=1200',
-                'microbiome': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1200',
-                'muscle': 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=1200',
-                'protein': 'https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&q=80&w=1200',
-                'aging': 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=1200',
-                'sleep': 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&q=80&w=1200',
-                'weight': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1200',
-                'water': 'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&q=80&w=1200',
-                'hydration': 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&q=80&w=1200',
-                'calories': 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=1200',
-                'calorie': 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=1200',
-                'fasting': 'https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&q=80&w=1200',
-                'gut': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1200',
-                'stress': 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=1200',
-                'diet': 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=1200',
-                'fitness': 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=1200',
-                'nutrition': 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=1200',
-                'vitamin': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1200',
-                'exercise': 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=1200',
-                'heart': 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&q=80&w=1200',
-                'bmi': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1200',
-                'fat': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1200',
-                'tired': 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&q=80&w=1200',
-                'default': 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&q=80&w=1200'
-            };
-
-            function getRelevantImage(text) {
-                const t = text.toLowerCase();
-                for (const [topic, url] of Object.entries(topicImages)) {
-                    if (t.includes(topic)) return url;
-                }
-                return topicImages.default;
-            }
-
-            const unsplashIds = [
-                '1511688878353-3a2f5be94cd7', '1490645935967-10de6ba17061', '1532550907401-a500c9a57435',
-                '1512621776951-a57141f2eefd', '1571019614242-c5c5dee9f50b', '1506126613408-eca07ce68773',
-                '1541781774459-bb2af2f05b55', '1571019613454-1cb2f99b2d8b', '1548839140-29a749e1cf4d',
-                '1559827260-dc66d52bef19', '1490818387583-1baba5e638af', '1505576399279-565b52d4ac71',
-                '1544367567-0f2fcb009e0b', '1511690655020-366ea6f4a8eb', '1476480862126-209bbfc9ba21',
-                '1517836357463-d25dfeac3438', '1522898467127-b2866c23ce5b', '1494390248081-4e58b90ed062',
-                '1478144592103-25e218a04891', '1515022668582-eb0ae0259e07', '1483726234546-24bdf83861bd',
-                '1493690283958-32ed25ea3440', '1507398941214-3a055dcc8e19', '1526505707474-1250325db001',
-                '1502823403499-6ccfcf4fb453', '1514995669114-608177395c55', '1530510629734-76813ce82ef0',
-                '1521017364654-e0c65bafe6cb', '1485965120184-e220f721d03e', '1483808161634-19a9d701b22e',
-                '1540420773420-3366774f5237', '1494390248081-4e58b90ed062'
-            ];
-
-            let globalDataStr = JSON.stringify(posts);
-            // Internal function to allocate a 100% unique Unsplash image ID
-            function allocateUniqueFallback() {
-                let shuffled = [...unsplashIds].sort(() => 0.5 - Math.random());
-                for (let id of shuffled) {
-                    if (!globalDataStr.includes(id)) {
-                        globalDataStr += id; // prevent grabbing it again
-                        return `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=80&w=1200`;
+            // --- POST-PROCESS: Sanitize and Enhance AI Images (Pollinations.ai) ---
+            function sanitizePollinationsUrl(rawUrl, altText) {
+                if (!rawUrl) return allocateUniqueFallback(); // Ultimate fallback
+                if (rawUrl.includes('unsplash.com')) return rawUrl;
+                
+                // Extract prompt or use alt text
+                let prompt = altText || "wellness and health";
+                const promptMatch = rawUrl.match(/\/prompt\/([^?)\s]+)/);
+                if (promptMatch) {
+                    try {
+                        prompt = decodeURIComponent(promptMatch[1]);
+                    } catch (e) {
+                        prompt = promptMatch[1];
                     }
                 }
-                // Super fallback if somehow all are exhausted
-                return `https://images.unsplash.com/photo-${shuffled[0]}?auto=format&fit=crop&q=80&w=1200`;
+                
+                // Clean and encode
+                const cleanPrompt = prompt.trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+                const encodedPrompt = encodeURIComponent(cleanPrompt);
+                
+                // Add a random seed to ensure uniqueness even for similar prompts
+                const seed = Math.floor(Math.random() * 1000000);
+                return `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1200&height=800&nologo=true&model=flux&seed=${seed}`;
             }
 
-            // Replace pollinations URLs naturally with guaranteed unique unused Premium Unsplash URLs
+            // Standardize pollinations URLs in the content
             if (newContent.content) {
                 newContent.content = newContent.content.replace(
-                    /!\[([^\]]*)\]\(https?:\/\/image\.pollinations\.ai[^)]*\)/g,
-                    (match, altText) => {
-                        return `![${altText}](${allocateUniqueFallback()})`;
+                    /!\[([^\]]*)\]\((https?:\/\/(?:image\.)?pollinations\.ai\/[^)]+)\)/g,
+                    (match, alt, url) => {
+                        return `![${alt}](${sanitizePollinationsUrl(url, alt)})`;
                     }
                 );
             }
 
-            // Assign unique hero image
-            const imageUrl = allocateUniqueFallback();
+            const imageUrl = sanitizePollinationsUrl(`https://image.pollinations.ai/prompt/${encodeURIComponent(newContent.title || selectedTopic.title)}`, newContent.title || selectedTopic.title);
+
 
             const postObj = {
                 id: baseId,

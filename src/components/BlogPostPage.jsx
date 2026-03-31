@@ -151,7 +151,7 @@ const parseInlineMarkdown = (text) => {
         const altText = match[1];
         // Ensure image URLs with spaces are handled cleanly (AI sometimes adds them)
         const rawUrl = match[2];
-        const imageUrl = rawUrl.trim().startsWith('http') ? rawUrl.trim() : rawUrl.trim().replace(/ /g, '%20');
+        const imageUrl = rawUrl.trim().replace(/ /g, '%20');
 
         parts.push(
             <figure key={`img-${match.index}-${lastIndex}`} className="my-10 rounded-2xl overflow-hidden shadow-xl bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center">

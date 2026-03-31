@@ -325,6 +325,24 @@ function FoodScannerPage() {
                         )}
                     </div>
                 )}
+
+                {/* SEO Content: How AI Works */}
+                <div className="bg-slate-800/30 border border-slate-700/50 rounded-3xl p-8 md:p-10 shadow-lg mt-8 mb-4 hover:border-teal-500/30 transition-colors duration-300">
+                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 text-right" dir="rtl">
+                        كيف يحسب <span className="text-transparent bg-clip-text bg-linear-to-r from-teal-400 to-emerald-400">الذكاء الاصطناعي</span> السعرات الحرارية؟
+                    </h2>
+                    <div className="space-y-4 text-slate-300 text-lg leading-relaxed text-right font-medium" dir="rtl">
+                        <p>
+                            يعتمد <strong>الماسح الضوئي للطعام</strong> على أحدث تقنيات <strong>الذكاء الاصطناعي</strong> ورؤية الكمبيوتر (Computer Vision) لتحليل صور الوجبات بدقة فائقة. بمجرد التقاط صورة لطعامك، يقوم النظام بعمل مسح ضوئي وتحليل بصري للتعرف على المكونات المختلفة داخل الطبق، وتحديد نوع الطعام، وتقدير حجم الحصص بناءً على الأبعاد المرئية.
+                        </p>
+                        <p>
+                            بعد تحديد المكونات، يقوم النظام بمطابقة هذه البيانات مع قواعد بيانات غذائية ضخمة وشاملة لاستخراج <strong>القيمة الغذائية</strong> الدقيقة لكل مكون. يتم حساب إجمالي <strong>السعرات الحرارية</strong>، بالإضافة إلى توزيع المغذيات الكبرى الأساسية وهي <strong>البروتين</strong>، <strong>الكربوهيدرات</strong>، و<strong>الدهون</strong>. 
+                        </p>
+                        <p>
+                            تضمن لك هذه التكنولوجيا المتطورة الحصول على نتائج فورية وموثوقة، مما يسهل عليك مهمة <strong>تتبع نظامك الغذائي</strong>، إدارة استهلاكك اليومي من السعرات، وتحقيق أهدافك الصحية سواء كانت إنقاص الوزن (التخسيس)، الحفاظ على اللياقة، أو بناء العضلات، وذلك بكل سهولة وفعالية دون التفكير في تعقيدات الإدخال اليدوي للمكونات.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     );

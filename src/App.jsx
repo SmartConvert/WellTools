@@ -21,6 +21,7 @@ const PAGE_SLUGS = {
   'bmr': 'bmr-calculator-mifflin-st-jeor',
   'macro': 'macro-calculator-for-muscle-gain-and-fat-loss',
   'food-scanner': 'food-scanner',
+  'ai-body-metrics': 'ai-body-metrics-and-workout-advisor',
   '1rm': 'one-rep-max-calculator-for-weightlifting',
   'meal-planner': 'custom-meal-planner-and-nutrition-guide',
   'blog': 'blog-health-and-fitness-tips',
@@ -78,6 +79,7 @@ const BodyFatGuidePage = lazyWithRetry(() => import('./components/BodyFatGuidePa
 const BMRCalculatorPage = lazyWithRetry(() => import('./components/BMRCalculatorPage'));
 const MacroCalculatorPage = lazyWithRetry(() => import('./components/MacroCalculatorPage'));
 const FoodScannerPage = lazyWithRetry(() => import('./components/FoodScannerPage'));
+const AIBodyMetricsPage = lazyWithRetry(() => import('./components/AIBodyMetricsPage'));
 const OneRepMaxCalculatorPage = lazyWithRetry(() => import('./components/OneRepMaxCalculatorPage'));
 const MealPlannerPage = lazyWithRetry(() => import('./components/MealPlannerPage'));
 const BlogPage = lazyWithRetry(() => import('./components/BlogPage'));
@@ -802,6 +804,7 @@ const DailyHealthTools = () => {
       case 'bmr': return <BMRCalculatorPage bmrWeight={bmrWeight} setBmrWeight={setBmrWeight} bmrHeight={bmrHeight} setBmrHeight={setBmrHeight} bmrAge={bmrAge} setBmrAge={setBmrAge} bmrGender={bmrGender} setBmrGender={setBmrGender} calculateBMR={calculateBMR} bmrResult={bmrResult} bmrError={bmrError} setCurrentPage={setCurrentPage} t={t} />;
       case 'macro': return <MacroCalculatorPage macroCalories={macroCalories} setMacroCalories={setMacroCalories} macroDiet={macroDiet} setMacroDiet={setMacroDiet} calculateMacros={calculateMacros} macroResult={macroResult} macroError={macroError} setCurrentPage={setCurrentPage} t={t} />;
       case 'food-scanner': return <FoodScannerPage />;
+      case 'ai-body-metrics': return <AIBodyMetricsPage setCurrentPage={setCurrentPage} t={t} />;
       case '1rm': return <OneRepMaxCalculatorPage ormWeight={ormWeight} setOrmWeight={setOrmWeight} ormReps={ormReps} setOrmReps={setOrmReps} calculateORM={calculateORM} ormResult={ormResult} ormError={ormError} setCurrentPage={setCurrentPage} t={t} />;
       case 'meal-planner': return <MealPlannerPage selectedMealCategory={activeTab} setSelectedMealCategory={setActiveTab} t={t} />;
       case 'fasting': return <FastingSchedulePage setCurrentPage={setCurrentPage} t={t} />;

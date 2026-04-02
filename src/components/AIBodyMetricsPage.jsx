@@ -132,15 +132,24 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
   const startAnalysis = async () => {
       setPhase('analyzing');
       setScanError('');
-      
+      setIsScanningActive(true);
+
       try {
+          // --- FIX 1: Lazy-init the Pose model only on first user interaction ---
           if (!poseRef.current) {
+              // FIX 2: Pin to a specific version so mobile browsers get a
+              // consistent, cache-friendly CDN URL (avoids 404s on CDN edge nodes).
+              const MEDIAPIPE_POSE_CDN = 'https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5.1675469404/';
+
               const pose = new Pose({
-                locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`
+                locateFile: (file) => `${MEDIAPIPE_POSE_CDN}${file}`
               });
 
+              // FIX 3: Use modelComplexity 1 (not 2) on initial load.
+              // Complexity 2 downloads ~20 MB of WASM and reliably OOMs on
+              // low-RAM Android devices. Complexity 1 is still high-quality.
               pose.setOptions({
-                modelComplexity: 2,
+                modelComplexity: 1,
                 smoothLandmarks: true,
                 enableSegmentation: false,
                 smoothSegmentation: false,
@@ -149,23 +158,42 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
               });
 
               pose.onResults(onResults);
+
+              // FIX 4: Await explicit initialization so the WASM binary is
+              // fully loaded BEFORE we call send(). Without this, send() fires
+              // before the runtime is ready, causing a silent internal crash on
+              // mobile that never reaches the outer catch block.
+              await pose.initialize();
+
               poseRef.current = pose;
           }
 
-          setIsScanningActive(true);
-
+          // Small delay to let the scanning UI render before the heavy send()
           setTimeout(async () => {
               try {
                   await poseRef.current.send({ image: imageRef.current });
               } catch (e) {
-                  setScanError("Failed to process image locally. Check your internet connection.");
+                  // FIX 5: Log the ACTUAL error object so we can diagnose
+                  // camera permission errors vs. model load errors vs. OOM.
+                  console.error('[AIBodyMetrics] pose.send() failed:', e);
+                  setScanError(
+                    e?.message
+                      ? `Analysis failed: ${e.message}`
+                      : 'Failed to process image locally. Check your internet connection and try again.'
+                  );
                   setIsScanningActive(false);
               }
-          }, 1000);
+          }, 500);
 
       } catch (err) {
-          console.error(err);
-          setScanError("AI system initialization failed.");
+          // Log the full error so Sentry / DevTools shows exactly what failed
+          // (WASM fetch 404, out-of-memory, CSP violation, etc.)
+          console.error('[AIBodyMetrics] Initialization failed:', err);
+          setScanError(
+            err?.message
+              ? `AI system initialization failed: ${err.message}`
+              : 'AI system initialization failed. Please check your internet connection.'
+          );
           setIsScanningActive(false);
       }
   };

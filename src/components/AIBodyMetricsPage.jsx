@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Heart, Shield, Camera as CameraIcon, Play, RefreshCw, Activity, ArrowRight, CheckCircle2, Upload, FileImage, Sparkles, Zap, Dumbbell, Flame, TrendingUp, Info } from 'lucide-react';
-import { Pose, POSE_CONNECTIONS } from '@mediapipe/pose';
-import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
+// NOTE: @mediapipe/pose and @mediapipe/drawing_utils are loaded via <script> CDN tags
+// in index.html to avoid Vite CommonJS bundler issues ("Pose is not a constructor").
+// They are accessed here as window globals: window.Pose, window.POSE_CONNECTIONS,
+// window.drawConnectors, window.drawLandmarks.
 
 /**
  * AIBodyMetricsPage - Unified UX/UI Refactor
@@ -135,13 +137,24 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
       setIsScanningActive(true);
 
       try {
+          // Guard: ensure the CDN <script> tags have loaded window.Pose.
+          // This handles the race condition where the user uploads a photo
+          // faster than the CDN scripts finish loading.
+          const PoseConstructor = window.Pose;
+          if (typeof PoseConstructor !== 'function') {
+              throw new Error(
+                'MediaPipe CDN scripts have not finished loading yet. ' +
+                'Please wait a moment and try again.'
+              );
+          }
+
           // --- FIX 1: Lazy-init the Pose model only on first user interaction ---
           if (!poseRef.current) {
               // FIX 2: Pin to a specific version so mobile browsers get a
               // consistent, cache-friendly CDN URL (avoids 404s on CDN edge nodes).
               const MEDIAPIPE_POSE_CDN = 'https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5.1675469404/';
 
-              const pose = new Pose({
+              const pose = new PoseConstructor({
                 locateFile: (file) => `${MEDIAPIPE_POSE_CDN}${file}`
               });
 
@@ -218,10 +231,17 @@ export default function AIBodyMetricsPage({ setCurrentPage, t }) {
       if (results.poseLandmarks && results.poseLandmarks.length > 0) {
           const lms = results.poseLandmarks;
           
+          // Use window globals (loaded from CDN <script> tags)
+          const { drawConnectors, drawLandmarks, POSE_CONNECTIONS } = window;
+
           ctx.shadowBlur = 10;
           ctx.shadowColor = '#10b981';
-          drawConnectors(ctx, lms, POSE_CONNECTIONS, { color: 'rgba(16, 185, 129, 0.7)', lineWidth: 4 });
-          drawLandmarks(ctx, lms, { color: '#ffffff', fillColor: '#10b981', lineWidth: 2, radius: 5 });
+          if (drawConnectors && POSE_CONNECTIONS) {
+            drawConnectors(ctx, lms, POSE_CONNECTIONS, { color: 'rgba(16, 185, 129, 0.7)', lineWidth: 4 });
+          }
+          if (drawLandmarks) {
+            drawLandmarks(ctx, lms, { color: '#ffffff', fillColor: '#10b981', lineWidth: 2, radius: 5 });
+          }
           
           const leftShoulder = lms[11];
           const rightShoulder = lms[12];

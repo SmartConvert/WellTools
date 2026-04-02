@@ -71,6 +71,8 @@
   <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
   <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 
   <!-- Preconnect for critical resources -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -155,6 +157,10 @@
       </p>
     </div>
   </noscript>
+  <!-- MediaPipe: loaded via CDN to avoid Vite CommonJS bundler issues -->
+  <!-- The Pose constructor is accessed as window.Pose inside AIBodyMetricsPage -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5.1675469404/pose.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3.1675466124/drawing_utils.js" crossorigin="anonymous"></script>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

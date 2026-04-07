@@ -34,9 +34,10 @@
             "id": 1004,
             "group": "daily_health_topics",
             "title": "The Hidden Reason You're Always Tired: How to Accurately Calculate Your Sleep Cycles.",
-            "completed": false,
+            "completed": true,
             "requiredCalculator": "Sleep Calculator And Sleep Cycles",
-            "tone": "Professional, highly medical-focused and authoritative."
+            "tone": "Professional, highly medical-focused and authoritative.",
+            "completedDate": "2026-04-07"
         },
         {
             "id": 1005,

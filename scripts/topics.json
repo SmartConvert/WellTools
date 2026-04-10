@@ -43,9 +43,10 @@
             "id": 1005,
             "group": "daily_health_topics",
             "title": "Does Drinking More Water Really Help You Lose Weight? A Scientific Explanation.",
-            "completed": false,
+            "completed": true,
             "requiredCalculator": "Daily Water Intake Calculator By Weight",
-            "tone": "Professional, highly medical-focused and authoritative."
+            "tone": "Professional, highly medical-focused and authoritative.",
+            "completedDate": "2026-04-10"
         },
         {
             "id": 1,

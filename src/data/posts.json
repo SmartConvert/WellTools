@@ -1,6 +1,67 @@
 {
     "en": [
         {
+            "id": "welltools-3-1776057607530",
+            "title": "7 Steps to Your Personal Water Intake Calculator",
+            "category": "health_calculators",
+            "excerpt": "Discover your ideal daily hydration with our personal water intake calculator. Learn to calculate daily hydration needs based on your unique body and lifestyle.",
+            "imageAlt": "Glass of water on a table with a person exercising in the background, symbolizing personalized hydration.",
+            "content": "# 7 Steps to Your Personal Water Intake Calculator\n\nDo you ever wonder if you're drinking enough water each day? Many of us hear the simple advice to drink ",
+            "keywords": [
+                "personal water intake calculator",
+                "calculate daily hydration needs",
+                "factors for water intake",
+                "how much water to drink calculator",
+                "customize water intake plan"
+            ],
+            "author": {
+                "name": "Alex Chen",
+                "role": "WellTools Health Editor",
+                "bio": "Alex is a dedicated Health Editor at WellTools, specializing in making complex health information clear and actionable for everyday well-being."
+            },
+            "reviewedBy": {
+                "name": "Dr. Sarah Miller",
+                "credentials": "MD"
+            },
+            "factCheckedBy": {
+                "name": "WellTools Editorial Team"
+            },
+            "faq": [
+                {
+                    "question": "Can I drink too much water?",
+                    "answer": "While less common than dehydration, it is possible to drink too much water, a condition called hyponatremia. This happens when the sodium level in your blood becomes dangerously low due to excessive water intake. For most healthy people, the kidneys can process a large amount of water, but it's important not to force yourself to drink huge quantities in a short time. Always listen to your body and spread your water intake throughout the day."
+                },
+                {
+                    "question": "Do coffee, tea, or soda count towards my daily water intake?",
+                    "answer": "Beverages like coffee and tea do contain water and contribute to your overall fluid intake. However, caffeinated drinks can have a mild diuretic effect, meaning they might make your body lose a little more water. While they're not a direct substitute for pure water, they still contribute to your hydration. Soda, fruit juices, and sugary drinks contribute fluids but also often contain high sugar content, which isn't ideal for overall health."
+                },
+                {
+                    "question": "How quickly should I drink water throughout the day?",
+                    "answer": "It's best to spread your water intake evenly throughout the day rather than drinking large amounts all at once. Sip water regularly, especially between meals and during physical activity. This allows your body to absorb and use the water most effectively without overwhelming your system."
+                },
+                {
+                    "question": "What's the best time to drink water?",
+                    "answer": "There isn't one \"best\" time, but incorporating water at key moments can be helpful. Drink a glass of water first thing in the morning to rehydrate after sleep. Have a glass before each meal to aid digestion and help manage appetite. And, of course, drink before, during, and after exercise. The most important thing is consistent intake throughout your waking hours."
+                }
+            ],
+            "sources": [
+                {
+                    "title": "CDC: Water and Healthier Drinks",
+                    "url": "https://www.cdc.gov/healthyweight/healthy_eating/water-and-healthier-drinks.html"
+                },
+                {
+                    "title": "Mayo Clinic: Water: How much should you drink every day?",
+                    "url": "https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/water/art-20044256"
+                },
+                {
+                    "title": "National Academies of Sciences, Engineering, and Medicine: Dietary Reference Intakes for Water, Potassium, Sodium, Chloride, and Sulfate",
+                    "url": "https://nap.nationalacademies.org/read/10925/chapter/1"
+                }
+            ],
+            "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1200&sig=1049",
+            "date": "2026-04-13"
+        },
+        {
             "id": "welltools-1005-1775796733222",
             "title": "7 Science-Backed Ways Drinking Water Helps Weight Loss",
             "category": "daily_health_topics",

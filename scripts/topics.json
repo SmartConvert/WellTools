@@ -150,7 +150,8 @@
             "id": 5,
             "group": "health_calculators",
             "title": "Sleep Hours Calculator",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-04-22"
         },
         {
             "id": 6,

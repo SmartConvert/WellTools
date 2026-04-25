@@ -157,7 +157,8 @@
             "id": 6,
             "group": "health_calculators",
             "title": "Protein Intake Calculator",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-04-25"
         },
         {
             "id": 7,

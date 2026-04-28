@@ -234,7 +234,8 @@
             "id": 101,
             "group": "daily_health_topics",
             "title": "The Science of Muscle Hypertrophy: How to Build Muscle Naturally",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-04-28"
         },
         {
             "id": 102,

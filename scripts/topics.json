@@ -241,7 +241,8 @@
             "id": 102,
             "group": "daily_health_topics",
             "title": "Understanding Glycemic Index: Foods that Spike Your Blood Sugar",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-05-01"
         },
         {
             "id": 103,

@@ -248,7 +248,8 @@
             "id": 103,
             "group": "daily_health_topics",
             "title": "The Truth About Detox Diets: Do You Really Need to Cleanse?",
-            "completed": false
+            "completed": true,
+            "completedDate": "2026-05-10"
         },
         {
             "id": 104,

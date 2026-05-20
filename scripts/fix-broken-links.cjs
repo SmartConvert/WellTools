@@ -25,7 +25,11 @@ const replacements = {
     '/tools/testosterone-calculator': '/blog',
     '/tools/symptom-tracker': '/blog',
     '/tools/hormone-quiz': '/blog',
-    '/tools/nutrition-planner': '/meal-planner'
+    '/tools/nutrition-planner': '/meal-planner',
+    '/glycemic-index': '/macro',
+    '/protein-intake': '/macro',
+    '/daily-calorie-needs': '/calories',
+    '/protein': '/macro'
 };
 
 for (const [bad, good] of Object.entries(replacements)) {
